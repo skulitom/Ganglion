@@ -217,8 +217,8 @@ def summarize(task, controller, world, errors, rejected):
         if task == "camera":
             result.update(lost=int((lost_at < steps).sum()),
                           lost_after_ms=_spread([t * TICK * 1000 for t in lost_at if t < steps]))
-    result["tracking_error_px"] = {"mean": _finite_mean(tracking), "p95": _finite_percentile(tracking, 95),
-                                   "worst_late": _finite_max(worst_late)}
+    result["tracking_error_px"] = {"mean": _finite(tracking, np.mean), "p95": _finite(tracking, lambda v: np.percentile(v, 95)),
+                                   "worst_late": _finite(worst_late, np.max)}
     if controller == "supervised":
         share = 1 - interventions.sum() / max(1, considered.sum())
         result["interventions"] = {"ticks": int(interventions.sum()), "fraction": float(interventions.sum() / max(1, considered.sum())),
@@ -235,19 +235,10 @@ def _spread(values):
     return {"median": float(np.median(values)), "p90": float(np.percentile(values, 90)), "max": float(max(values))}
 
 
-def _finite_mean(values):
+def _finite(values, reduce):
+    """Reduce the finite entries of an array, or None when an episode never produced one."""
     finite = values[np.isfinite(values)]
-    return float(finite.mean()) if len(finite) else None
-
-
-def _finite_percentile(values, p):
-    finite = values[np.isfinite(values)]
-    return float(np.percentile(finite, p)) if len(finite) else None
-
-
-def _finite_max(values):
-    finite = values[np.isfinite(values)]
-    return float(finite.max()) if len(finite) else None
+    return float(reduce(finite)) if len(finite) else None
 
 
 def table(report):
