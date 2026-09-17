@@ -15,12 +15,15 @@ from .target import TARGET_RGB
 
 def neural_share(events):
     """How many pointer commands the connectome produced versus the supervisor overriding it."""
-    feedback = [e for e in events if e["kind"] == "pointer_feedback" and "controller" in e]
+    feedback = [e for e in events if e["kind"] in ("pointer_feedback", "look_done") and "controller" in e]
     neural = sum(e["controller"] == "connectome" for e in feedback)
     overridden = sum(e["controller"] == "deterministic_override" for e in feedback)
+    stale = sum(e["controller"] == "deterministic_stale" for e in feedback)
+    considered = neural + overridden + stale
     return {"pointer_commands": len(feedback), "connectome_commands": neural,
-            "overridden_commands": overridden,
-            "connectome_share": neural / (neural + overridden) if neural + overridden else None}
+            "overridden_commands": overridden, "stale_commands": stale,
+            "connectome_share": neural / considered if considered else None,
+            "note": "share of commands that used the model; a diagnostic, not task performance"}
 
 
 async def exercise(endpoint, reset, trials, controller="deterministic"):

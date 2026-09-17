@@ -96,7 +96,8 @@ def select_window(hwnd=None, pid=None, title=None):
     return found[0]["hwnd"]
 
 
-def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False, seconds=0, shadow_checkpoint=None):
+def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False, seconds=0, shadow_checkpoint=None,
+             lptc_feed=False):
     from .output import MemoryOutput, ProcessOutput
     endpoint_path = Path(endpoint_path)
     if endpoint_path.exists():
@@ -122,7 +123,8 @@ def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False,
         stack.callback(output.close)
         capture.start()
         stack.callback(capture.stop)
-        runtime = Runtime(time.perf_counter, output, session_id=session_id, shadow_predictor=predictor)
+        runtime = Runtime(time.perf_counter, output, session_id=session_id, shadow_predictor=predictor,
+                          lptc_feed=lptc_feed)
         runner = Runner(runtime, capture, target).start()
         stack.callback(runner.close)
         service = Service(runtime)

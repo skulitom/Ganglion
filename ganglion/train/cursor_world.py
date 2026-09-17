@@ -18,7 +18,7 @@ def teacher_points(cursor, goal, speed, rect, dt=.01):
 
 
 class CursorWorld:
-    def __init__(self, seeds, *, steps=160):
+    def __init__(self, seeds, *, steps=160, jump_every=None):
         self.seeds, self.steps = list(seeds), steps
         self.B = len(self.seeds)
         rngs = [np.random.default_rng(seed) for seed in self.seeds]
@@ -40,8 +40,24 @@ class CursorWorld:
         self.initial = self.cursor.copy()
         self.commands = []
         self.tick = 0
+        # Absolute commands from a stale cursor advance at speed*gain/(delay+1); a jump the
+        # reference covers in about 1.5 s keeps re-acquisition comparable across plants.
+        self.reach_cap = np.minimum(400, self.speed * self.gain / (self.delay + 1) * 1.5)
+        self.jump_every, self.jumps = jump_every, 0
+        self.jump_rngs = [np.random.default_rng(seed + 2_000_003) for seed in self.seeds]
+
+    def jump(self):
+        """Move every target 40 px to its reach cap away, inside the area: a fresh reach from
+        whatever state the controller has reached, which a settled episode never shows it."""
+        self.jumps += 1
+        angles = np.array([r.uniform(-np.pi, np.pi) for r in self.jump_rngs])
+        radii = np.array([r.uniform(40, cap) for r, cap in zip(self.jump_rngs, self.reach_cap)])
+        goal = self.goal + np.stack((np.cos(angles), np.sin(angles)), axis=1) * radii[:, None]
+        self.goal = np.clip(goal, 40, self.rect[:, 2:] - 40)
 
     def step(self, point):
+        if self.jump_every and self.tick and self.tick % self.jump_every == 0:
+            self.jump()
         # Gain perturbs the requested correction once, at issue time. The queued
         # absolute coordinate is later applied directly, as with MoveAbsolute.
         # Scaling an old target's distance from the arrival-time cursor would

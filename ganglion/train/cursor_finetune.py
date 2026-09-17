@@ -50,7 +50,9 @@ def run(args):
               "recurrent_parameters_frozen": True, "reset_readout": args.reset_readout,
               "encoder_lr": args.encoder_lr, "readout_lr": args.readout_lr,
               "torch": torch.__version__, "gpu": torch.cuda.get_device_name(brain.device),
-              "batch": 16, "window_steps": 32, "truncate_steps": 8,
+              "batch": 16, "window_steps": args.window, "truncate_steps": args.truncate,
+              "episode_ticks": args.episode_ticks, "kick_every": args.kick_every or None,
+              "student_max": args.student_max,
               "validation_seeds": list(range(2000, 2016)),
               "test_seeds": list(range(args.test_seed_start, args.test_seed_start+32)),
               "history": [], "validation": [], "promoted": False}
@@ -68,15 +70,16 @@ def run(args):
     print(json.dumps({"stage": "baseline_validation", "score": baseline_score}), flush=True)
     for iteration in range(1, args.iterations+1):
         guard.check(force=True)
-        if world is None or world.tick >= 192:
+        if world is None or world.tick >= args.episode_ticks:
             episode += 1
-            world = CursorWorld(range(100000+episode*16, 100000+(episode+1)*16))
+            world = CursorWorld(range(100000+episode*16, 100000+(episode+1)*16),
+                                jump_every=args.kick_every or None)
             state, previous = brain.init_state(16), None
-        student_fraction = min(.75, max(0, (iteration-20)/(args.iterations-20))*.75)
+        student_fraction = min(args.student_max, max(0, (iteration-20)/(args.iterations-20))*args.student_max)
         students = int(16*student_fraction)
         loss = torch.zeros((), device=brain.device)
-        for tick in range(32):
-            if tick and tick % 8 == 0:
+        for tick in range(args.window):
+            if tick and tick % args.truncate == 0:
                 state = brain.detach_state(state)
             obs, _ = observe(torch, brain, world.senses(previous))
             action, state, _ = brain(obs, state, weights)
@@ -89,7 +92,7 @@ def run(args):
                 driven = np.clip(driven, world.rect[:, :2], world.rect[:, :2]+world.rect[:, 2:]-1)
             previous = world.cursor.copy()
             world.step(driven)
-        loss = loss / 32
+        loss = loss / args.window
         if not torch.isfinite(loss):
             raise FloatingPointError("Non-finite training loss; stop without replacing saved checkpoints")
         optimizer.zero_grad(set_to_none=True)
@@ -132,7 +135,7 @@ def run(args):
         print(json.dumps({"stage": "fresh_test", **score}), flush=True)
     report.update(selected_checkpoint=str(best[1]),
                   selected_checkpoint_sha256=hashlib.sha256(best[1].read_bytes()).hexdigest(), peak_gpu_c=guard.peak,
-                  training_samples=args.iterations*32*16,
+                  training_samples=args.iterations*args.window*16,
                   elapsed_seconds=time.perf_counter()-started)
     (args.out/"report.json").write_text(json.dumps(report, indent=2, allow_nan=False), encoding="utf-8")
     print(json.dumps({"finished": True, "report": str(args.out/"report.json"), "peak_gpu_c": guard.peak}), flush=True)
@@ -149,7 +152,16 @@ def main():
     p.add_argument("--encoder-lr", type=float, default=1e-6)
     p.add_argument("--readout-lr", type=float, default=1e-5)
     p.add_argument("--test-seed-start", type=int, default=5000)
+    p.add_argument("--episode-ticks", type=int, default=192, help="ticks before a fresh batch of episodes")
+    p.add_argument("--window", type=int, default=32, help="ticks per gradient update")
+    p.add_argument("--truncate", type=int, default=8, help="ticks between state detachments inside a window")
+    p.add_argument("--kick-every", type=int, default=0, help="jump the targets every N ticks (0: never)")
+    p.add_argument("--student-max", type=float, default=.75, help="largest model-driven share of the batch")
     args = p.parse_args()
+    if not 96 <= args.episode_ticks <= 4000 or not 8 <= args.window <= 256 or not 1 <= args.truncate <= args.window:
+        p.error("Use episode ticks 96–4000, window 8–256 and truncation 1–window")
+    if not (args.kick_every == 0 or 50 <= args.kick_every <= 2000) or not 0 <= args.student_max <= 1:
+        p.error("Use kick every 0 or 50–2000 ticks and student max 0–1")
     if not 50 <= args.iterations <= 500 or not 30 <= args.seconds <= 1800 or not 50 <= args.max_gpu_temp <= 70:
         p.error("Use iterations 50–500, seconds 30–1800 and temperature 50–70")
     if not 1e-7 <= args.encoder_lr <= 1e-3 or not 1e-7 <= args.readout_lr <= 1e-3:

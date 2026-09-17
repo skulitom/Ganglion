@@ -34,6 +34,8 @@ def main(argv=None) -> int:
     p.add_argument('--synthetic', action='store_true', help='headless Arena; no desktop input')
     p.add_argument('--seconds', type=float, default=0, help='stop after this many seconds; 0 runs until interrupted')
     p.add_argument('--shadow-checkpoint', help='optional Haltere connectome checkpoint; predictions have no control authority')
+    p.add_argument('--lptc-from-flow', action='store_true',
+                   help='feed the newest flow watch summary to the model lptc channel (experimental; training fed zeros)')
     p.add_argument('--log', metavar='PATH', help='append stdout/stderr to this file (for windowless launches such as pythonw)')
 
     p = sub.add_parser('mcp', help='MCP stdio bridge to a running core')
@@ -90,7 +92,7 @@ def main(argv=None) -> int:
             stream = open(a.log, 'a', buffering=1, encoding='utf-8')
             sys.stdout = sys.stderr = stream
         return run_core(a.endpoint, hwnd=a.window, pid=a.pid, title=a.title, synthetic=a.synthetic,
-                        seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint)
+                        seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint, lptc_feed=a.lptc_from_flow)
     if a.cmd == 'mcp':
         from .mcp.server import build
         build(a.endpoint, observer=a.observer, client_id=a.client_id).run()

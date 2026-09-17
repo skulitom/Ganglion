@@ -46,8 +46,10 @@ class Reflex:
 
 
 class Runtime:
-    def __init__(self, clock, output, *, ledger=None, session_id=0, shadow_predictor=None):
+    def __init__(self, clock, output, *, ledger=None, session_id=0, shadow_predictor=None, lptc_feed=False):
         self.clock, self.output = clock, output
+        self.lptc_feed = lptc_feed              # hand the newest wide-field flow to the model's lptc channel
+        self.flow = None                        # newest ego-motion summary from a flow watch
         self.ledger = ledger or Ledger()
         self.session_id = session_id
         self.lock = RLock()
@@ -370,14 +372,24 @@ class Runtime:
                 if candidate is not None:
                     point, intent.last_controller = candidate, "connectome"
                     intent.neural_commands += 1
+                elif velocity is None:
+                    intent.last_controller = "deterministic_stale"
+                    intent.stale_commands += 1
                 else:
                     intent.last_controller = "deterministic_override"
                     intent.overridden_commands += 1
             self.shadow.submit(MotorSample(intent.id, stage, self.layout_rev,
                 evidence.observation_id, evidence.sample_started, now, min(self.expires, intent.expires),
                 tuple(intent.cursor), tuple(goal), tuple(point), tuple(self.layout["rect"]),
-                intent.spec.speed_px_s, dt))
+                intent.spec.speed_px_s, dt, flow=self.lptc()))
         return point
+
+    def lptc(self):
+        """Wide-field flow for the model's lptc channel, only when enabled and a flow watch runs."""
+        if not self.lptc_feed or not self.flow:
+            return None
+        f = self.flow
+        return (f["tx_px_s"], f["ty_px_s"], f["divergence_s"], f["curl_s"])
 
     def _change_energy(self, frame):
         """Cheap whole-view change sense: mean absolute grey difference of the upper 60% of the
@@ -400,6 +412,7 @@ class Runtime:
             return None
         h, w = self.frame.shape[:2]
         return {"id": f"{self.ledger.epoch}:{self.layout_rev}:{self.frame_seq}", "change": self.change,
+                "flow": self.flow,
                 "observation_id": self.frame_seq, "captured_mono": self.frame_time,
                 "capture_source": self.frame_source,
                 "sample_started_mono": self.frame_started,
@@ -517,6 +530,9 @@ class Runtime:
         if watch.spec.kind == "track":
             from ganglion.percepts.track import detect_track
             return detect_track(frame, watch.spec, watch.state)
+        if watch.spec.kind == "flow":
+            from ganglion.percepts.flow import detect_flow
+            return detect_flow(frame, watch.spec, watch.state, captured=captured, moving=moving)
         from ganglion.percepts.color import detect
         return detect(frame, watch.spec, was_present=watch.present)
 
@@ -578,6 +594,8 @@ class Runtime:
                 watch.present, watch.detection = detection is not None, detection
                 watch.captured, watch.observation_id = captured, seq
                 watch.sample_started, watch.source = sample_started, source
+                if watch.spec.kind == "flow":
+                    self.flow = watch.state.get("ego")
                 ready = self.clock()
                 if appeared or vanished:
                     self.ledger.append("appear" if appeared else "vanish", ready, watch_id=wid,

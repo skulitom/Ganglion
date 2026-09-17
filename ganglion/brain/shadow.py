@@ -25,6 +25,7 @@ class MotorSample:
     rect: tuple
     speed: float
     dt: float
+    flow: tuple | None = None    # (tx px/s, ty px/s, divergence 1/s, curl 1/s) wide-field flow, if fed
 
     @property
     def binding(self):
@@ -36,7 +37,7 @@ class ShadowWorker:
         self.predictor, self.ledger, self.clock = predictor, ledger, clock
         self.condition = threading.Condition()
         self.pending = None
-        self.latest = None      # (binding, finished_mono, raw_actions) of the newest valid prediction
+        self.latest = None      # (binding, sampled_mono, raw_actions, finished_mono) of the newest valid prediction
         self.generation = 0
         self.closed = False
         self.failed = None
@@ -61,7 +62,11 @@ class ShadowWorker:
 
     def proposal(self, binding, now, max_age=.05):
         """Velocity (in units of intent speed) proposed by the newest valid prediction for this
-        intent, stage and layout, or None when there is none fresh enough."""
+        intent, stage and layout, or None when there is none fresh enough.
+
+        Freshness is the age of the observation the proposal was computed from, not the time
+        since inference finished: the 50 ms evidence budget applies to what the model saw.
+        """
         with self.condition:
             latest = self.latest
         if latest is None or latest[0] != binding or now - latest[1] > max_age:
@@ -115,18 +120,20 @@ class ShadowWorker:
                     if valid:
                         self.predictions += 1
                         raw = list(prediction.get("raw_actions", []))[:2]
-                        self.latest = (sample.binding, finished, raw) if len(raw) == 2 else None
+                        self.latest = (sample.binding, sample.sampled, raw, finished) if len(raw) == 2 else None
                     else:
                         self.discarded += 1
+                steps = int(prediction.get("neural_steps", 1))   # how far neural time advanced
+                record = {k: v for k, v in prediction.items() if k != "neural_steps"}
                 self.ledger.append("shadow_prediction" if valid else "shadow_discarded", finished,
                     intent_id=sample.intent_id, stage=sample.stage, observation_id=sample.observation_id,
                     sample_started_mono=sample.sampled, submitted_mono=sample.submitted,
                     model_started_mono=started, inference_ms=elapsed_ms,
-                    within_5ms=elapsed_ms <= 5, neural_steps=1, reset=reset,
+                    within_5ms=elapsed_ms <= 5, neural_steps=steps, reset=reset,
                     sensor_input=asdict(sample),
                     actuation_authority=False, reference_point=list(sample.reference),
                     disagreement_px=hypot(point[0]-sample.reference[0], point[1]-sample.reference[1]),
-                    **prediction)
+                    **record)
                 previous = generation, sample
             except Exception as exc:
                 with self.condition:

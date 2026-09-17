@@ -74,6 +74,7 @@ class Reach:
     commands: int = 0
     neural_commands: int = 0
     overridden_commands: int = 0
+    stale_commands: int = 0            # no proposal fresh enough; the reference acted
     last_controller: str = "deterministic"
 
     @property
@@ -87,4 +88,5 @@ class Reach:
                 "commands": self.commands, "task_success_verified": False,
                 "controller": self.spec.controller,
                 "actuation_authority": "supervised_connectome" if self.spec.controller == "connectome" else "deterministic",
-                "neural_commands": self.neural_commands, "overridden_commands": self.overridden_commands}
+                "neural_commands": self.neural_commands, "overridden_commands": self.overridden_commands,
+                "stale_commands": self.stale_commands}

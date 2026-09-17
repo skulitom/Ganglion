@@ -102,13 +102,16 @@ def _step(runtime, intent, watch, error, now, dt):
                            max(-limit, min(limit, candidate[1] - cursor[1])))
                 controller = "connectome"
                 intent.neural_commands += 1
+            elif velocity is None:
+                controller = "deterministic_stale"
+                intent.stale_commands += 1
             else:
                 controller = "deterministic_override"
                 intent.overridden_commands += 1
         runtime.shadow.submit(MotorSample(intent.id, "align", runtime.layout_rev, watch.observation_id,
                                           watch.sample_started, now, min(runtime.expires, intent.expires),
                                           cursor, goal, (cursor[0] + ref[0], cursor[1] + ref[1]), UNBOUNDED,
-                                          spec.speed_px_s, dt))
+                                          spec.speed_px_s, dt, flow=runtime.lptc()))
     dx = max(-spec.max_step, min(spec.max_step, round(step_px[0] * spec.gain)))
     dy = max(-spec.max_step, min(spec.max_step, round(step_px[1] * spec.gain)))
     return dx, dy, controller

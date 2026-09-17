@@ -94,6 +94,14 @@ In Half-Life inside Anode, the core turns the view with relative mouse deltas, h
 continuously, tracks the thing that just moved and fires when aligned, with the connectome
 proposing the view velocity under the same envelope. See the [Half-Life scorecard](docs/bench/HALFLIFE.md).
 
+## Measuring the model
+
+`ganglion.train.suite` scores the deterministic reference, an MLP, the connectome and the
+supervised connectome on identical settling, jump, pursuit and camera episodes;
+`ganglion.arena.compare` scores live reach demos from the ledger the same way. A `flow` watch
+sees what moves on its own while the view itself moves. See [training](docs/bench/TRAINING.md)
+and [the connectome experiment](docs/bench/SHADOW.md).
+
 ## Phase 0 tools
 
 ```bash

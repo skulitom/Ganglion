@@ -44,7 +44,7 @@ class WatchSpec(Model):
     snapshot_id: Identifier
     region: tuple[Pixel, Pixel, Annotated[int, Field(gt=0, le=8192)],
                   Annotated[int, Field(gt=0, le=8192)]]
-    kind: Literal["color", "motion", "track"] = "color"
+    kind: Literal["color", "motion", "track", "flow"] = "color"
     color_rgb: tuple[Channel, Channel, Channel] | None = None
     tolerance: int = Field(default=20, ge=0, le=100)
     min_pixels: int = Field(default=25, ge=1, le=1000000)
@@ -57,6 +57,8 @@ class WatchSpec(Model):
     search_px: int = Field(default=120, ge=4, le=2000)    # track: search radius around the last position
     min_score: float = Field(default=0.55, ge=0.1, le=1.0)
     update: float = Field(default=0.1, ge=0.0, le=1.0)    # track: template adaptation per match
+    flow_scale: int = Field(default=4, ge=1, le=8)        # flow: reduction factor of the flow field
+    flow_threshold: float = Field(default=3.0, ge=0.5, le=100)   # flow: residual px over the lag that counts as independent
     coordinate_space: Literal["screen"] = "screen"
 
     @model_validator(mode="after")

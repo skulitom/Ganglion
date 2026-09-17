@@ -8,13 +8,30 @@ import hashlib
 from math import hypot, tanh
 from pathlib import Path
 
+MAX_NEURAL_STEPS = 5
+
+
+def neural_steps(elapsed: float | None, dt: float = .01, max_steps: int = MAX_NEURAL_STEPS) -> int:
+    """How many fixed neural steps cover the wall time since the previous consumed sample.
+
+    Observations arrive irregularly (capture at 66 Hz, control at 100 Hz, stalls). Stepping the
+    network once per sample would make neural time run at the sampling rate; stepping it by the
+    elapsed wall time keeps its dynamics on the clock the training simulator used. Gaps beyond
+    the reset window are handled by a state reset, so the count is bounded.
+    """
+    if elapsed is None or not (elapsed > 0):
+        return 1
+    return max(1, min(max_steps, int(round(elapsed / dt))))
+
 
 def channels(sample, previous=None, *, version=1):
     """Versioned, application-independent analogues of Haltere's sensory channels.
 
     V1 goal is screen error / 400 px; v2 normalises by 0.3 seconds of intent speed.
     Cursor velocity is normalised by the intent speed in both versions.
-    Flow, attitude, compass, and load channels remain zero: no claim of fly vision.
+    Attitude, compass and load channels remain zero. The lptc (wide-field flow) channel is zero
+    unless the sample carries a flow summary, in which case it holds the view translation in
+    units of intent speed and the expansion and roll rates; training so far fed zeros here.
     """
     if version not in (1, 2):
         raise ValueError("Unknown cursor sensory adapter version")
@@ -25,8 +42,12 @@ def channels(sample, previous=None, *, version=1):
         dt = sample.submitted - previous.submitted
         vx, vy = ((sample.cursor[i] - previous.cursor[i]) / dt / sample.speed for i in range(2))
     velocity = [tanh(vx), tanh(vy), 0.0]
+    lptc = [0.0]*6
+    flow = getattr(sample, "flow", None)
+    if flow is not None:
+        lptc = [tanh(flow[0]/sample.speed), tanh(flow[1]/sample.speed), tanh(flow[2]), tanh(flow[3]), 0.0, 0.0]
     return {"goal": [tanh(dx/scale), tanh(dy/scale), 0.0, tanh(hypot(dx, dy)/scale)],
-            "haltere": velocity, "jo": velocity, "lptc": [0.0]*6,
+            "haltere": velocity, "jo": velocity, "lptc": lptc,
             "ocelli": [0.0]*3, "wing_cs": [0.0]*3, "compass": [0.0]*2}
 
 
@@ -83,16 +104,20 @@ class HaltereCursor:
 
     def predict(self, sample):
         torch = self.torch
+        steps = neural_steps(None if self.previous is None else sample.submitted - self.previous.submitted,
+                             self.brain.cfg.dt)
         with torch.inference_mode():
             values = channels(sample, self.previous, version=self.adapter_version)
             packed = [v for key in self.order for v in values[key]]
             self.host_input.copy_(torch.tensor([packed]))
             self.input.copy_(self.host_input, non_blocking=True)
-            action, self.state, _ = self.brain(self.observations, self.state, self.weights)
+            for _ in range(steps):   # zero-order hold of the observation across the elapsed time
+                action, self.state, _ = self.brain(self.observations, self.state, self.weights)
             values = action[0].cpu().tolist()  # Includes CUDA completion in measured latency.
         self.previous = sample
         x, y, w, h = sample.rect
         dt = min(.02, max(0, sample.dt))
         point = [min(x+w-1, max(x, round(sample.cursor[0] + values[0]*sample.speed*dt))),
                  min(y+h-1, max(y, round(sample.cursor[1] + values[1]*sample.speed*dt)))]
-        return {"point": point, "raw_actions": values, "desktop_trained": self.desktop_trained}
+        return {"point": point, "raw_actions": values, "desktop_trained": self.desktop_trained,
+                "neural_steps": steps}

@@ -1,5 +1,9 @@
 # Ganglion: project assessment and suggestions
 
+For the implemented runtime, training and first-person experiments, see the
+[current progress review](05-progress-review.md). The assessment below records the
+earlier planning-stage review.
+
 Review date: 2026-09-17. These are proposals, not changes to the agreed project plan.
 
 ## My assessment

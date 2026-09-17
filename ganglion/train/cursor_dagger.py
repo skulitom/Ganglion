@@ -35,12 +35,15 @@ def run(args):
     report = {"experiment": "connectome cursor readout DAgger", "base_checkpoint": str(base),
               "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "adapter_version": 2,
               "plant_version": 2, "rounds": [], "promoted": False, "test_seeds": list(range(4000, 4032)),
-              "neurons": brain.N, "edges": int(brain.edge_index.shape[1])}
+              "neurons": brain.N, "edges": int(brain.edge_index.shape[1]),
+              "episode_steps": args.episode_steps, "kick_every": args.kick_every or None,
+              "student_max": args.student_max, "seed_base": args.seed_base}
     best = None
     for round_index in range(1, args.rounds+1):
-        new_seeds = list(range(10000+round_index*100, 10000+round_index*100+32))
-        fraction = min(.75, .25+round_index*.15)
-        new = harvest(torch, brain, new_seeds, guard, steps=400, batch=16, student_fraction=fraction)
+        new_seeds = list(range(args.seed_base+round_index*100, args.seed_base+round_index*100+32))
+        fraction = min(args.student_max, .25+round_index*.15)
+        new = harvest(torch, brain, new_seeds, guard, steps=args.episode_steps, batch=16,
+                      student_fraction=fraction, jump_every=args.kick_every or None)
         train = tuple(torch.cat((old, added)) for old, added in zip(train, new))
         del new
         seeds.extend(new_seeds)
@@ -86,9 +89,17 @@ def main():
     p.add_argument("--neurons", type=int, default=512)
     p.add_argument("--seconds", type=float, default=600)
     p.add_argument("--max-gpu-temp", type=float, default=65)
+    p.add_argument("--episode-steps", type=int, default=400, help="ticks per harvested episode")
+    p.add_argument("--kick-every", type=int, default=0, help="jump the target every N ticks (0: never)")
+    p.add_argument("--student-max", type=float, default=.75, help="largest model-driven share of a round")
+    p.add_argument("--seed-base", type=int, default=10000, help="first harvest seed; keep rounds of different runs apart")
     args = p.parse_args()
     if not 1 <= args.rounds <= 5 or not 32 <= args.neurons <= 2048 or not 30 <= args.seconds <= 1800 or not 50 <= args.max_gpu_temp <= 70:
         p.error("Use rounds 1–5, neurons 32–2048, seconds 30–1800 and temperature 50–70")
+    if not 80 <= args.episode_steps <= 2000 or not (args.kick_every == 0 or 50 <= args.kick_every <= 1000):
+        p.error("Use episode steps 80–2000 and kick every 0 or 50–1000 ticks")
+    if not .25 <= args.student_max <= 1 or not 10000 <= args.seed_base <= 90000:
+        p.error("Use student max 0.25–1 and seed base 10000–90000")
     run(args)
 
 

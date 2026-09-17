@@ -108,6 +108,84 @@ after 192 ticks, much shorter than evaluation; longer on-policy trajectories are
 specific distribution gap to investigate. More imitation samples alone have not
 established stable control or an advantage over the small MLP.
 
+## Fixed suite: settling, jumps, pursuit and camera tracking
+
+`ganglion.train.suite` runs four controllers over identical seeded episodes (32 per task,
+2,000 ticks of 10 ms): the proportional reference (`teacher`), a 24→64→64→2 MLP trained on
+the same 51,200 DAgger samples as the connectome readout, the connectome readout on its own,
+and the same connectome under the runtime's supervising envelope with the reference acting
+whenever a proposal is rejected (`supervised`). *Settle* starts 2–400 px from a static target
+and succeeds when the error stays within 6 px for the final half second. *Jump* moves the
+target every 2.5 s by 40 px up to a plant-dependent cap and scores each of the 256 reaches.
+*Pursuit* follows a bouncing target and succeeds when the mean error after the first second is
+within 12 px. *Camera* is pursuit in an unbounded view with two extra ticks of capture latency,
+where a target more than half a frame away is lost. Settling time is the first tick after which
+the error never leaves tolerance; tracking error is the mean after the first second;
+interventions are ticks on which the envelope rejected the proposal and the reference acted.
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | teacher | 32/32 | 285 | 2.2 | n/a | n/a |
+| settle | mlp | 32/32 | 375 | 3.3 | n/a | n/a |
+| settle | connectome | 3/32 | 1815 | 170.6 | n/a | n/a |
+| settle | supervised | 32/32 | 685 | 3.4 | 20.4% | 79.6% |
+| jump | teacher | 256/256 | 540 | 20.5 | n/a | n/a |
+| jump | mlp | 256/256 | 600 | 22.1 | n/a | n/a |
+| jump | connectome | 28/256 | 855 | 166.4 | n/a | n/a |
+| jump | supervised | 228/256 | 990 | 29.8 | 24.5% | 75.5% |
+| pursuit | teacher | 31/32 | 160 | 5.5 | n/a | n/a |
+| pursuit | mlp | 29/32 | 190 | 6.6 | n/a | n/a |
+| pursuit | connectome | 2/32 | 670 | 192.4 | n/a | n/a |
+| pursuit | supervised | 23/32 | 300 | 11.9 | 31.0% | 69.0% |
+| camera | teacher | 30/32 (lost 0) | 490 | 6.2 | n/a | n/a |
+| camera | mlp | 28/32 (lost 0) | 550 | 7.3 | n/a | n/a |
+| camera | connectome | 0/32 (lost 30) | 1060 | 137.6 | n/a | n/a |
+| camera | supervised | 21/32 (lost 0) | 820 | 11.5 | 40.0% | 60.0% |
+
+Source: [cursor-suite-v1](results/cursor-suite-v1.json) with the DAgger v1 round 3 checkpoint;
+185 s on the RTX 4090, peak 44°C. Jump tracking error includes the reaches themselves.
+
+Read across the rows: the connectome alone settles 3 of 32 static targets and loses 30 of 32
+camera targets. Under supervision it completes every settle episode, but more slowly than the
+reference on its own (685 ms against 285 ms median), with 20–40% of its proposals rejected, and
+it tracks moving targets with about twice the reference's error. The MLP on the same data stays
+within a few percent of the reference everywhere. So the connectome's share of accepted commands
+(60–80%) measures how often the envelope lets it act, not a contribution: on these tasks the
+model currently costs time and accuracy, and the envelope caps the cost. That is the number to
+move before any more application work.
+
+## Longer, kicked, model-driven trajectories
+
+The fine-tuner's episodes were 192 ticks against 2,000-tick evaluations and its gradients
+spanned 32 ticks; DAgger harvested 400-tick episodes. `cursor_world` now takes `jump_every`:
+the target jumps 40 px up to the plant's reach cap, so a trajectory holds fresh reaches from
+whatever state the model reached. `cursor_dagger` takes `--episode-steps`, `--kick-every`,
+`--student-max` and `--seed-base`; `cursor_finetune` takes `--episode-ticks`, `--window`,
+`--truncate`, `--kick-every` and `--student-max`.
+
+The first run of the changed experiment (DAgger v2) added three rounds of 32 episodes of
+1,000 ticks with a kick every 250 ticks and 40–70% model-driven episodes to the v1 cache
+(147,200 samples). Validation static success went 0/8, 0/8, 1/8 across rounds against v1's
+2/8, and on the same fresh test seeds 4000–4031 the selected round settled **1/16** static
+targets with 233.1 px mean terminal error against v1's 3/16 and 260.6 px. The teacher and MLP
+settled 16/16 (2.4 and 2.9 px). Longer, kicked, more model-driven data did not improve a frozen
+ridge readout; the v1 round 3 checkpoint stays the candidate. 176 s, peak 43°C.
+[Full report](results/cursor-dagger-v2.json).
+
+On the fixed suite, with the same MLP baseline and episodes as above, the v2 round 3
+checkpoint scores ([cursor-suite-v2](results/cursor-suite-v2.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 1/32 | 10230 | 104.9 | n/a | n/a |
+| settle | supervised | 32/32 | 965 | 3.7 | 17.2% | 82.8% |
+| jump | connectome | 9/256 | 930 | 116.1 | n/a | n/a |
+| jump | supervised | 225/256 | 1000 | 29.6 | 20.4% | 79.6% |
+| pursuit | connectome | 2/32 | 710 | 111.7 | n/a | n/a |
+| pursuit | supervised | 20/32 | 360 | 11.2 | 31.1% | 68.9% |
+| camera | connectome | 1/32 (lost 28) | 1390 | 113.0 | n/a | n/a |
+| camera | supervised | 16/32 (lost 0) | 755 | 14.8 | 37.1% | 62.9% |
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -119,6 +197,8 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v2 --episodes 64 --steps 200 --features 512 --seconds 600 --max-gpu-temp 65
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v2/cursor-readout.pt --features runs/cursor-readout-v2/features.pt --out runs/cursor-dagger-v1 --rounds 3 --neurons 512 --seconds 600 --max-gpu-temp 65
 .venv/Scripts/python.exe -m ganglion.train.cursor_finetune --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --out runs/cursor-finetune-v2 --iterations 200 --encoder-lr 1e-6 --readout-lr 1e-5 --test-seed-start 6000 --seconds 900 --max-gpu-temp 65
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --features runs/cursor-dagger-v1/features.pt --out runs/cursor-dagger-v2 --rounds 3 --episode-steps 1000 --kick-every 250 --student-max 0.9 --seed-base 30000 --seconds 1700 --max-gpu-temp 65
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v1/features.pt --out runs/suite-v1 --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has

@@ -62,11 +62,11 @@ def observe(torch, brain, senses):
     return obs, packed
 
 
-def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0):
+def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None):
     features, inputs, labels = [], [], []
     weights = brain.weight_matrix().detach()
     for offset in range(0, len(seeds), batch):
-        world = CursorWorld(seeds[offset:offset+batch], steps=steps)
+        world = CursorWorld(seeds[offset:offset+batch], steps=steps, jump_every=jump_every)
         state, previous = brain.init_state(world.B), None
         with torch.inference_mode():
             for _ in range(steps):
@@ -132,11 +132,16 @@ def fit(torch, brain, train, validation, guard, feature_count):
             "validation_mse": best[0], "candidates": trials}
 
 
+def build_mlp(torch):
+    """The non-connectome comparison: the same 24 sensor values to a cursor velocity."""
+    return torch.nn.Sequential(torch.nn.Linear(24, 64), torch.nn.Tanh(),
+                               torch.nn.Linear(64, 64), torch.nn.Tanh(),
+                               torch.nn.Linear(64, 2), torch.nn.Tanh())
+
+
 def train_mlp(torch, train, validation, guard, device):
     torch.manual_seed(734)
-    model = torch.nn.Sequential(torch.nn.Linear(24, 64), torch.nn.Tanh(),
-                                torch.nn.Linear(64, 64), torch.nn.Tanh(),
-                                torch.nn.Linear(64, 2), torch.nn.Tanh()).to(device)
+    model = build_mlp(torch).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=.002)
     _, x, y = train
     x, y = x.to(device), y.to(device)

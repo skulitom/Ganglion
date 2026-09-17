@@ -243,8 +243,15 @@ extend), `look` (relative `delta` in mouse counts, optionally spread over `sprea
 holds mark a self-motion window during which motion watches report nothing.
 
 `ganglion_watch` takes `kind`: `color` (default), `motion` (largest changed blob against a frame
-`lag_ms` older on a brightness-normalised image, after `persist` comparisons) or `track` (a crop
-at `template_region` of the newest frame, followed by correlation within `search_px`).
+`lag_ms` older on a brightness-normalised image, after `persist` comparisons), `track` (a crop
+at `template_region` of the newest frame, followed by correlation within `search_px`) or `flow`
+(the largest region whose optic flow disagrees with the view's own motion). A flow watch is not
+blinded by own turns and walks: a phase correlation finds the translation that moves most of the
+picture, dense flow on the aligned pair and one global affine fit explain the rest, and what
+still disagrees by more than `flow_threshold` px over the lag is reported. Its ego-motion summary
+(translation in px/s, expansion and roll rates) rides along in the detection and in every
+snapshot as `flow`; `ganglion core --lptc-from-flow` hands it to the model's lptc channel, which
+training so far has fed with zeros, so that flag is an experiment, not a default.
 
 `ganglion_intent` with `program: "align"` turns the view until the watched target sits at
 `point` (client centre by default) for `settle_ms`, then holds `fire.button` for `fire.hold_ms`,

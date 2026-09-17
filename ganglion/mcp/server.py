@@ -69,7 +69,9 @@ def build(endpoint, *, observer=False, client_id=None):
     async def ganglion_watch(spec: WatchSpec, request_id: str | None = None) -> CallToolResult:
         """Teach a target in a screen-pixel region bound to look's snapshot_id: a connected RGB
         colour component (kind color), or the largest blob that changed against a frame lag_ms
-        older (kind motion), reported only while no own command is moving the view or player.
+        older (kind motion), reported only while no own command is moving the view or player;
+        or the largest region whose optic flow disagrees with the view's own motion (kind flow),
+        which stays awake during own turns and walks and records the wide-field flow.
         """
         return await call("watch", spec.model_dump(), request_id)
 

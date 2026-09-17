@@ -99,3 +99,21 @@ def test_missing_temperature_stops_training(reading):
     from ganglion.train.cursor_readout import Guard
     with pytest.raises(RuntimeError, match="temperature unavailable"):
         Guard(10, temperature_reader=lambda: reading)
+
+
+def test_target_kicks_happen_on_schedule_within_the_plant_reach_cap():
+    world = CursorWorld(range(40, 52, 2), jump_every=100)      # even seeds: static targets
+    goals = [world.goal.copy()]
+    for _ in range(250):
+        world.step(world.teacher())
+        goals.append(world.goal.copy())
+    moved = [i for i in range(250) if not np.array_equal(goals[i], goals[i + 1])]
+    assert moved == [100, 200] and world.jumps == 2
+    for i in moved:
+        distance = np.linalg.norm(goals[i + 1] - goals[i], axis=1)
+        assert (distance <= world.reach_cap + 1e-6).all() and (world.reach_cap <= 400).all()
+        assert (goals[i + 1] >= 40).all() and (goals[i + 1] <= world.rect[:, 2:] - 40).all()
+    quiet = CursorWorld(range(40, 52, 2))
+    for _ in range(250):
+        quiet.step(quiet.teacher())
+    assert quiet.jumps == 0 and np.array_equal(quiet.goal, goals[0])

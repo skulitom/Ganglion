@@ -49,6 +49,36 @@ reduce live inference jitter, and add the fly visual front-end so goals stop com
 colour components. No checkpoint has been released to Hugging Face; the candidate does not yet
 control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.md).
 
+## Measuring what the model contributes
+
+- **Timing.** Proposal reuse is bounded by the age of the observation it came from, not by
+  when inference finished; steps with no fresh proposal are counted as stale, apart from
+  envelope rejections. The adapter advances neural time by the elapsed wall time (up to five
+  10 ms steps per sample) and the ledger records it. Both are regression-tested.
+- **Fixed suite.** `ganglion.train.suite` compares the reference, an MLP, the connectome and the
+  supervised connectome on identical settling, jump, pursuit and camera episodes. With the
+  DAgger v1 checkpoint the supervised connectome completes every settle episode but takes
+  685 ms median against the reference's 285 ms, tracks moving targets with about twice the
+  error, and has 20–40% of its proposals rejected; the connectome alone settles 3/32 and loses
+  30/32 camera targets; the MLP matches the reference within a few percent. The accepted share
+  (60–80%) is a diagnostic, not a contribution. [Details](docs/bench/TRAINING.md).
+- **Training change.** Target kicks, longer model-driven episodes and longer gradient windows
+  are now options of the world, DAgger and fine-tuning scripts. The first run (DAgger v2:
+  1,000-tick episodes, kicks every 250 ticks, up to 70% model-driven, 147,200 samples) settled
+  1/16 fresh static targets against v1's 3/16; the v1 round 3 checkpoint stays the candidate.
+- **Fly-style motion perception.** A `flow` watch cancels the view's own motion (phase
+  correlation, dense flow on the aligned pair, one robust affine fit) and reports what still
+  moves, awake during own turns and walks; its wide-field summary (translation, expansion,
+  roll) is in every snapshot and can feed the lptc channel behind `--lptc-from-flow`, which
+  training has not yet used. About 9 ms per 1280×720 frame at quarter scale. Flyvis is the
+  reference for a learned front-end.
+- **Controlled transfer.** The Arena reach demo in the Anode seat, deterministic against
+  supervised connectome on the same trial seeds: 8/8 and 8/8 reaches completed, mean 0.42 s
+  against 0.52 s, first within 6 px at median 0.29 s against 0.41 s, interventions 15.6%,
+  stale 13.1%, accepted 71.3%. [Details](docs/bench/SHADOW.md).
+- The suite passes **146 tests** (four optional checks skipped). Application-specific
+  work is capped until the model's contribution moves on these measures.
+
 ## First-person control in Half-Life
 
 - The core gained bounded key holds, relative look deltas and button holds, motion and

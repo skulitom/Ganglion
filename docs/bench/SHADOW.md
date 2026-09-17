@@ -116,6 +116,18 @@ Reproduce (the live command inside Anode):
 .venv/Scripts/python.exe -m ganglion.cli drag-demo --environment synthetic --trials 2 --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --controller connectome --json runs/neural-drag.json
 ```
 
+## Evidence age and neural time
+
+Two timing faults came out of the live sessions. A proposal stayed usable for 50 ms counted
+from the end of inference, so one computed from an 80 ms-old observation could still drive a
+step; reuse is now bounded by the age of the observation the proposal was computed from, and
+steps with no proposal fresh enough are counted apart from steps the envelope rejected
+(`stale_commands`, controller `deterministic_stale`, in intent status and ledger shares). The
+adapter also stepped the network once per consumed sample whatever the wall time between
+samples, so neural time ran at the sampling rate; it now advances the network by
+round(elapsed / 10 ms) steps, at most five, holding the observation, and the ledger records
+`neural_steps`. Regression tests pin both behaviours.
+
 ## First person
 
 The same envelope now drives a first-person view: [Half-Life](HALFLIFE.md) drags the align
@@ -123,6 +135,29 @@ program's virtual cursor and goal through the connectome each tick. Across the r
 session the model produced 80.4% of the view commands (5,071 against 1,233 overrides), fired
 15 aligned bursts and killed four grunts without damage taken; its share fell against targets
 that strafed fast, where the envelope overrode most proposals.
+
+## Controlled transfer in the seat
+
+The Arena reach demo (a target moving on a sinusoid, eight paired trial seeds, 1,200 px/s,
+6 px tolerance, click on arrival) ran inside the Anode seat first with the deterministic
+controller and then with the DAgger v1 checkpoint under supervised authority, on the same
+machine and Windows session. `ganglion.arena.compare` scores both from the ledger: time to
+complete, time until the measured cursor first came within tolerance, mean error over the
+whole reach (approach included), interventions (steps the envelope handed to the reference),
+stale steps (no proposal fresh enough) and the accepted share.
+
+| Controller | Completed | Hits | Mean time (s) | First within 6 px (median s) | Tracking error (mean px) | Interventions | Stale | Accepted |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| deterministic | 8/8 | 8/8 | 0.42 | 0.29 | 139.5 | n/a | n/a | n/a |
+| connectome | 8/8 | 8/8 | 0.52 | 0.41 | 130.7 | 15.6% | 13.1% | 71.3% |
+
+Sources: [deterministic](results/transfer-seat-deterministic.json),
+[connectome](results/transfer-seat-connectome.json), [comparison](results/transfer-seat.json).
+Inference during the connectome run: p50 5.1 ms, p95 15.7 ms, p99 44.2 ms, with 13% of the
+steps stale under the corrected freshness rule; lost ledger events 0 and 0.
+The live picture matches the suite: the envelope completes every reach either way, and the
+model's share of steps says how often it was allowed to act, while the time-to-tolerance and
+tracking-error columns say what that cost.
 
 ## Validation and next work
 
