@@ -7,6 +7,7 @@ No direct sensory bypass or deterministic correction is added to these proposals
 import hashlib
 from math import hypot, tanh
 from pathlib import Path
+import time
 
 MAX_NEURAL_STEPS = 2     # measured live: three catch-up steps took 40-54 ms and were stale before they finished
 
@@ -111,7 +112,7 @@ class HaltereCursor:
             event = self.torch.cuda.Event()
             event.record()
             while not event.query():
-                pass
+                time.sleep(0)        # yield the interpreter lock to the runtime's other threads
 
     def reset(self):
         self.state = self.brain.init_state(1)
