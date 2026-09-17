@@ -252,9 +252,12 @@ blinded by own turns and walks: a phase correlation finds the translation that m
 picture, dense flow on the aligned pair and one global affine fit explain the rest, and what
 still disagrees by more than `flow_threshold` px over the lag is reported. Its ego-motion summary
 (translation in px/s, expansion and roll rates) rides along in the detection and in every
-snapshot as `flow`; `ganglion core --lptc-from-flow` hands it to the model's lptc channel. Only
-adapter version 4 checkpoints take it (they were trained with the slip of turning views in that
-channel); older versions ignore the flow, so the flag is safe but idle with them.
+snapshot as `flow`, with `credible` false when the alignment was outside the percept's range
+(about a third of the field over the lag) or fewer than half the sampled vectors agreed with
+the fitted motion; `ganglion core --lptc-from-flow` hands a credible summary to the model's
+lptc channel and zeros otherwise. Only adapter version 4 checkpoints take it (they were trained
+with the slip of turning views in that channel); older versions ignore the flow, so the flag is
+safe but idle with them.
 
 `ganglion_intent` with `program: "align"` turns the view until the watched target sits at
 `point` (client centre by default) for `settle_ms`, then holds `fire.button` for `fire.hold_ms`,

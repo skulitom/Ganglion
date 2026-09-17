@@ -21,6 +21,15 @@ class PilotError(RuntimeError):
     pass
 
 
+def align_max_step(c, *, default_turn_px_s=2500.0):
+    """Mouse counts per tick for an align spec: an explicit `max_step`, else the counts that move
+    the view `max_turn_px_s` in one 10 ms tick at the spec's gain."""
+    if c.get("max_step") is not None:
+        return int(c["max_step"])
+    gain = float(c.get("gain", 1.2))
+    return max(1, int(round(float(c.get("max_turn_px_s", default_turn_px_s)) * .01 * gain)))
+
+
 class Pilot:
     def __init__(self, endpoint: str, directory: Path, *, lease_seconds: float = 45):
         self.endpoint, self.directory = endpoint, directory
@@ -209,7 +218,11 @@ class Pilot:
                 self.armed_at[name] = time.perf_counter()
 
     async def cmd_engage(self, c):
-        """Watch motion in a region and arm an align-and-fire reflex on it in one step."""
+        """Watch motion in a region and arm an align-and-fire reflex on it in one step.
+
+        The align step is capped by `max_turn_px_s` (default 2500 px/s, where the flow percept
+        still reports about 0.8 of the turn; it breaks near 7000) unless `max_step` is given.
+        """
         region = c.get("region", [160, 60, 960, 440])
         watch = {"op": "watch", "name": c.get("name", "motion"), "kind": "motion", "region": region,
                  "min_pixels": int(c.get("min_pixels", 400)), "max_pixels": c.get("max_pixels", 200000),
@@ -220,7 +233,7 @@ class Pilot:
                "ttl_seconds": 60,
                "align": {"controller": c.get("controller", "deterministic"), "speed_px_s": float(c.get("speed_px_s", 1200)),
                          "tolerance_px": float(c.get("tolerance_px", 14)), "settle_ms": int(c.get("settle_ms", 20)),
-                         "gain": float(c.get("gain", 1.2)), "max_step": int(c.get("max_step", 80)),
+                         "gain": float(c.get("gain", 1.2)), "max_step": align_max_step(c),
                          "absence_ms": int(c.get("absence_ms", 350)), "timeout_seconds": float(c.get("timeout_seconds", 4)),
                          "fire": {"button": "left", "hold_ms": int(c.get("fire_ms", 300)),
                                   "repeat": int(c.get("repeat", 4)), "interval_ms": int(c.get("interval_ms", 80))}}}
@@ -369,6 +382,65 @@ class Pilot:
             await asyncio.sleep(0.15)
         await self.cmd_stop({})
         return {"outcome": "lost_or_timeout", "align": align}
+
+    async def cmd_calibrate(self, c):
+        """Sweep the view at known rates and sample the flow watch: the percept's scale, lag and
+        valid range against the turn the runtime applied.
+
+        {"rates": [300, 600, 1000, 1500, 2500], "seconds": 0.6, "counts_per_px": 1.067, "pause": 0.4}
+        Each rate is swept right then left as one spread `look`; the snapshot's flow summary is
+        sampled about every 20 ms during the sweep and for a while after it. Writes
+        calibration.json beside the events and returns a per-sweep summary.
+        """
+        import numpy as np
+        await self._pointer_free()
+        rates = [float(r) for r in c.get("rates", [300, 600, 1000, 1500, 2500])]
+        seconds = float(c.get("seconds", 0.6))
+        cpp = float(c.get("counts_per_px", 1.067))
+        pause = float(c.get("pause", 0.4))
+        samples, sweeps = [], []
+
+        async def sample_until(until, sweep, expected):
+            while time.perf_counter() < until:
+                s = await self.status()
+                snap = s.get("snapshot") or {}
+                samples.append({"t": time.perf_counter(), "captured": snap.get("captured_mono"), "sweep": sweep,
+                                "expected_px_s": expected, "flow": snap.get("flow")})
+                await asyncio.sleep(0.015)
+
+        for rate in rates:
+            for sign in (1, -1):
+                counts = int(round(sign * rate * cpp * seconds))
+                expected = -sign * rate                     # the picture moves against the view
+                index = len(sweeps)
+                sweep = {"rate_px_s": rate, "direction": sign, "counts": counts, "spread_ms": int(seconds * 1000)}
+                sweeps.append(sweep)
+                started = time.perf_counter()
+                await self._call("input", {"spec": {"action": "look", "snapshot_id": self.snapshot["id"],
+                                                    "delta": [counts, 0], "spread_ms": int(seconds * 1000)}})
+                sweep["started"] = started
+                await sample_until(started + seconds + 0.2, index, expected)
+                await self.wait(["look_done", "input_cancelled", "input_failed"], 1.0)
+                sweep["ended"] = time.perf_counter()
+                await sample_until(time.perf_counter() + pause, index, 0.0)
+                await self.drain()
+        for i, sweep in enumerate(sweeps):
+            steady = [x for x in samples if x["sweep"] == i and x["flow"]
+                      and sweep["started"] + 0.15 <= x["t"] <= sweep["started"] + seconds]
+            tx = [x["flow"]["tx_px_s"] for x in steady]
+            expected = -sweep["direction"] * sweep["rate_px_s"]
+            sweep["samples"] = len(steady)
+            sweep["flow_tx_median"] = float(np.median(tx)) if tx else None
+            sweep["ratio"] = float(np.median(tx) / expected) if tx else None
+            sweep["inlier_median"] = float(np.median([x["flow"]["inlier_fraction"] for x in steady])) if steady else None
+            sweep["response_median"] = float(np.median([x["flow"].get("phase_response", 0) for x in steady])) if steady else None
+            onset = next((x["t"] - sweep["started"] for x in samples
+                          if x["sweep"] == i and x["flow"] and abs(x["flow"]["tx_px_s"]) > 0.5 * sweep["rate_px_s"]), None)
+            sweep["onset_s"] = onset
+        report = {"counts_per_px": cpp, "sweeps": sweeps, "samples": samples}
+        path = self.directory / "calibration.json"
+        path.write_text(json.dumps(report, indent=1), encoding="utf-8")
+        return {"path": str(path), "sweeps": [{k: v for k, v in sw.items() if k not in ("started", "ended")} for sw in sweeps]}
 
     async def cmd_stop(self, c):
         s = await self.status()

@@ -111,9 +111,12 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **The motion channel fed live, once.** In a second Half-Life engagement with the v4
   checkpoint and the flow watch feeding lptc, inference stayed at p99 10 ms through
   4,686 view commands (out-of-process worker, polling wait), but the live flow
-  measured 0.22 of the applied turn in a dark point-blank scene, so the
-  channel's live value is untested until a calibration turn in a textured area.
-  [Details](docs/bench/HALFLIFE.md).
+  measured 0.22 of the applied turn in a dark point-blank scene. A calibration turn then showed
+  the percept itself is sound: it reports 0.8 to 0.9 of a known turn up to 2,500 px/s with the
+  timing the training world assumes, and breaks near 7,000 px/s; the fight's shortfall was the
+  grunts filling the view. The summary now says when it is credible, the runtime feeds the
+  channel only then, and the pilot caps the turn rate. The channel's live value is still to be
+  measured. [Details](docs/bench/HALFLIFE.md).
 - The suite passes **154 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 

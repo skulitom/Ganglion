@@ -73,6 +73,35 @@ def test_independent_motion_is_found_while_the_view_pans_and_not_when_only_the_v
              for i in range(8)]
     assert all(d is None for d in quiet)
     assert state2["ego"]["inlier_fraction"] > .9 and state2["ego"]["tx_px_s"] > 250
+    assert state2["ego"]["credible"]                          # a pan well inside the percept's range
+
+
+def test_the_summary_is_not_credible_beyond_the_alignment_range_or_without_agreement():
+    rng = np.random.default_rng(5)
+    background = textured(rng, 200, 320)
+    state, s = {}, spec()
+    # 30 px per 15 ms frame is 120 px over the 60 ms lag, more than a third of the 320 px field:
+    # the phase correlation's shift is discarded and the dense flow alone cannot follow it.
+    for i in range(8):
+        detect_flow(scene(background, (30 * i, 0), (-100, -100)), s, state, captured=i * .015, moving=True)
+    assert state["ego"]["credible"] is False
+    # The fit alone, on a field the view's motion (3, 0) shares with a mover at (-12, 6).
+    # Seeded with the alignment, the fit keeps the background and reports how much agreed;
+    # unseeded, the least-squares start sits between the two and never separates them.
+    field = np.full((60, 100, 2), (3.0, 0.0), dtype=np.float32) + rng.normal(0, .3, (60, 100, 2)).astype(np.float32)
+    field[:, :45] = (-12.0, 6.0)                              # a mover over 45 % of the field
+    seeded = fit_ego_motion(field, seed=(3.0, 0.0))
+    assert abs(seeded["a"][0] - 3) < .1 and abs(seeded["b"][0]) < .1 and .5 < seeded["inlier_fraction"] < .6
+    assert wide_field(seeded, scale=2, lag_seconds=.06)["credible"] is True
+    unseeded = fit_ego_motion(field)
+    assert abs(unseeded["a"][0] - 3) > 2                     # dragged by the mover
+    field[:, :60] = (-12.0, 6.0)                              # the mover fills 60 %: the alignment is the minority
+    minority = fit_ego_motion(field, seed=(3.0, 0.0))
+    assert minority["inlier_fraction"] < .5
+    assert wide_field(minority, scale=2, lag_seconds=.06)["credible"] is False
+    steady = np.full((60, 100, 2), (3.0, 0.0), dtype=np.float32)
+    assert wide_field(fit_ego_motion(steady), scale=2, lag_seconds=.06)["credible"] is True
+    assert wide_field(fit_ego_motion(steady), scale=2, lag_seconds=.06, aligned=False)["credible"] is False
 
 
 def test_persistence_and_size_limits_apply_and_a_missing_region_is_ignored():

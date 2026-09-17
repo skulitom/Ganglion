@@ -85,9 +85,55 @@ with the grunts filling the view leaves the phase correlation and the dense flow
 texture, and the flow's comparison window straddles the fast turns the align program makes
 (up to 80 counts per tick). The v4 readout, trained on a slip that tracks the view exactly, was
 overridden more than the first session's readout; whether that is the mismatch or the readout
-cannot be told apart here. The next step is a calibration turn in a textured, open area with
-the slip logged against the applied deltas, before any conclusion about the channel's live
-value.
+cannot be told apart here. The calibration turn below settles what the percept reports.
+
+## Calibration: what the flow percept reports for a known turn
+
+The next day, in the same elevator with the doors open, the pilot's `calibrate` op swept the
+view right then left at each of eight rates (a spread `look` of half a second, a quarter above
+2,500 px/s), sampling the snapshot's flow summary about every 20 ms during and after each
+sweep, with the flow watch over the upper 1280×560 at eighth and at quarter scale
+([results](results/halflife/flow-calibration-2026-09-18.json)). "Applied" is the rate the
+counts should produce at 1.067 counts per pixel, the figure the pilot's aim uses.
+
+| Turn (px/s) | Reported / applied, scale 8 | Phase response, scale 8 | Reported / applied, scale 4 | Phase response, scale 4 |
+|---:|---:|---:|---:|---:|
+| 300 | 0.85 (0.80 to 0.89) | 0.93 | 0.92 (0.92 to 0.93) | 0.95 |
+| 600 | 0.88 (0.88 to 0.88) | 0.94 | 0.93 (0.92 to 0.93) | 0.85 |
+| 1,000 | 0.86 (0.86 to 0.86) | 0.88 | 0.91 (0.90 to 0.91) | 0.71 |
+| 1,500 | 0.84 (0.83 to 0.85) | 0.89 | 0.87 (0.86 to 0.89) | 0.72 |
+| 2,500 | 0.80 (0.79 to 0.81) | 0.75 | 0.82 (0.81 to 0.84) | 0.46 |
+| 4,000 | 0.72 (0.70 to 0.75) | 0.64 | 0.75 (0.66 to 0.83) | 0.47 |
+| 6,000 | 0.70 (0.69 to 0.71) | 0.22 | 0.65 (0.64 to 0.66) | 0.25 |
+| 8,000 | 0.28 (0.11 to 0.45) | 0.10 | 0.43 (0.20 to 0.67) | 0.07 |
+
+Three things follow. **Timing matches training.** The flow at a sample time is best explained
+by a 60 ms box of view motion ending 20 ms before the sample (correlation
+0.994), which is exactly the training world's model of the percept (a 60 ms window seen
+two ticks late). Half the response arrives 92 ms after the command
+(p90 107 ms), the box's half width plus the command's own dispatch.
+**Scale is the projection, not the percept.** The reported motion is 0.8 to 0.9 of "applied"
+at the rates that matter, and the shortfall is in the applied figure: 1.067 counts per pixel
+spreads 90° evenly over 1,280 px, but in a 90° perspective view the centre moves about 0.79
+times as far per count as that average, and the percept measures the picture. No scale
+correction was applied. **The range ends near 7,000 px/s.** The percept holds about 0.7 of the
+turn at 4,000 to 6,000 px/s, then breaks: a third of the field over the lag is the phase
+correlation's alignment limit, and the dense flow alone cannot follow such a shift.
+
+Re-reading the fight's ledger by the rate applied in the 60 ms before each sample shows the
+live flow was poor at every rate, not only the fast ones (median reported / applied 0.56 at
+100 to 500 px/s, 0.45 at 1,000 to 2,000, 0.19 at 4,000 to 7,000; the best lag window on that
+ledger correlates at 0.22), and it reported up to 500 px/s (90th percentile) while nothing was
+applied. That is the scene: two grunts filling a point-blank view are the majority of the
+picture, and their motion, not the view's, is what the fit followed. Three changes came out of
+this. The flow summary now carries a `credible` flag (the alignment inside the percept's range
+and at least half the sampled vectors agreeing with it), the affine fit is seeded with the
+phase correlation's shift so a large mover cannot drag it, and the runtime hands the lptc
+channel only a credible summary (zeros otherwise, the value the cursor episodes trained with).
+The pilot's `engage` op caps the align step at 2,500 px/s of view motion (30 counts a tick at
+its gain) instead of 80 counts (6,700 px/s), inside both the percept's range and the training
+world's speeds. What the channel is worth live is still the open question; the next run is an
+engagement with these changes against the same checkpoint with the channel off.
 
 ## Limits and next work
 
@@ -105,7 +151,13 @@ Inside Anode with the game running and Steam launched through the seat:
 .venv/Scripts/python.exe -m ganglion.cli core --pid <game pid> --seconds 1750 --endpoint runs/hl.endpoint.json --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt
 .venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot serve --endpoint runs/hl.endpoint.json --dir runs/hl/pilot --session 2
 .venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot "{\"op\":\"engage\",\"response\":\"track\",\"controller\":\"connectome\"}"
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot "{\"op\":\"watch\",\"name\":\"flow\",\"kind\":\"flow\",\"region\":[0,0,1280,560],\"flow_scale\":8}"
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot --timeout 90 "{\"op\":\"calibrate\",\"seconds\":0.5}"
 ```
+
+The calibration needs the game in the foreground when the core starts (it halts on a target
+that is not the foreground window) and a scene with texture; `r_fullbright 1` did nothing in
+this build.
 
 `valve/ganglion.cfg` in the game folder sets raw input, fast weapon switching and a `level`
 alias bound to End. The grave key must be sent by scan code on non-US layouts.

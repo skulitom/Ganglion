@@ -154,6 +154,20 @@ def test_color_detector_selects_real_pixel_not_empty_centroid(rig):
     assert frame[result["y"], result["x"]].tolist() == [120, 220, 40]
 
 
+def test_lptc_feed_hands_over_only_a_credible_flow_summary():
+    clock = Clock()
+    runtime = Runtime(clock, MemoryOutput(clock), lptc_feed=True)
+    assert runtime.lptc() is None                             # no flow watch has reported yet
+    runtime.flow = {"tx_px_s": -800.0, "ty_px_s": 5.0, "divergence_s": .1, "curl_s": -.2,
+                    "inlier_fraction": .95, "credible": True}
+    assert runtime.lptc() == (-800.0, 5.0, .1, -.2)
+    runtime.flow["credible"] = False                          # the view outran the percept, or the scene disagreed
+    assert runtime.lptc() is None
+    quiet = Runtime(clock, MemoryOutput(clock))
+    quiet.flow = dict(runtime.flow, credible=True)
+    assert quiet.lptc() is None                               # the feed is off by default
+
+
 def test_input_failure_does_not_clear_failed_release_tracking():
     from ganglion.core.actuators import Actuators
     a = Actuators()

@@ -364,8 +364,10 @@ class Runtime:
         return point
 
     def lptc(self):
-        """Wide-field flow for the model's lptc channel, only when enabled and a flow watch runs."""
-        if not self.lptc_feed or not self.flow:
+        """Wide-field flow for the model's lptc channel: only when enabled, a flow watch runs and
+        its newest summary is credible (the view within the percept's range, the scene mostly
+        agreeing with one motion); otherwise None, which the adapter feeds as zeros."""
+        if not self.lptc_feed or not self.flow or not self.flow.get("credible", True):
             return None
         f = self.flow
         return (f["tx_px_s"], f["ty_px_s"], f["divergence_s"], f["curl_s"])
