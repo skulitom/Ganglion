@@ -18,8 +18,10 @@ def teacher_points(cursor, goal, speed, rect, dt=.01):
 
 
 class CursorWorld:
-    def __init__(self, seeds, *, steps=160, jump_every=None):
-        self.seeds, self.steps = list(seeds), steps
+    def __init__(self, seeds, *, steps=160, jump_every=None, sense_version=2):
+        if sense_version not in (2, 3):
+            raise ValueError("The training world speaks sensory adapter versions 2 and 3")
+        self.seeds, self.steps, self.sense_version = list(seeds), steps, sense_version
         self.B = len(self.seeds)
         rngs = [np.random.default_rng(seed) for seed in self.seeds]
         self.rect = np.array([[0, 0, r.integers(480, 1921), r.integers(320, 1081)] for r in rngs], dtype=float)
@@ -78,8 +80,11 @@ class CursorWorld:
         return teacher_points(self.cursor, self.goal, self.speed, self.rect)
 
     def senses(self, previous=None):
+        """The runtime adapter's channels for every episode: goal error scaled by 0.3 s of intent
+        speed, and (version 2 only) the cursor's own velocity in units of that speed."""
         delta = (self.goal - self.cursor) / (self.speed[:, None]*.3)
-        velocity = np.zeros_like(delta) if previous is None else (self.cursor-previous)/(.01*self.speed[:, None])
+        still = previous is None or self.sense_version == 3
+        velocity = np.zeros_like(delta) if still else (self.cursor-previous)/(.01*self.speed[:, None])
         zeros = lambda n: np.zeros((self.B, n), dtype=np.float32)
         motion = np.concatenate((np.tanh(velocity), zeros(1)), axis=1).astype(np.float32)
         return {"goal": np.concatenate((np.tanh(delta), zeros(1), np.tanh(np.linalg.norm(delta, axis=1))[:, None]), axis=1).astype(np.float32),

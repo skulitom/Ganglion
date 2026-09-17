@@ -72,6 +72,13 @@ def experiment(environment, world_factory, *, scenario="reach", shadow_predictor
             def reset(trial):
                 staging = trial_file.with_suffix(".tmp")
                 staging.write_text(json.dumps(trial))
+                for attempt in range(50):
+                    try:
+                        staging.replace(trial_file)
+                        return
+                    except PermissionError:
+                        # The fixture polls the file; Windows refuses the swap while it is open.
+                        time.sleep(.01)
                 staging.replace(trial_file)
         stack.callback(output.close)
         capture.start()

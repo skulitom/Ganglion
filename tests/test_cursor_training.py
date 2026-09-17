@@ -117,3 +117,62 @@ def test_target_kicks_happen_on_schedule_within_the_plant_reach_cap():
     for _ in range(250):
         quiet.step(quiet.teacher())
     assert quiet.jumps == 0 and np.array_equal(quiet.goal, goals[0])
+
+
+def test_fine_tuning_groups_freeze_everything_else_and_select_on_the_suite():
+    from ganglion.train.cursor_finetune import parameter_groups, selection_key
+
+    class Parameter:
+        def __init__(self, n):
+            self.n, self.grad = n, None
+
+        def requires_grad_(self, flag):
+            self.grad = flag
+
+        def numel(self):
+            return self.n
+
+    class Brain:
+        def __init__(self):
+            self.params = [("encoders.goal__goal.weight", Parameter(4)), ("readout.weight", Parameter(8)),
+                           ("readout.bias", Parameter(2)), ("log_edge_gain", Parameter(100)),
+                           ("log_gain", Parameter(10)), ("bias", Parameter(10)), ("log_tau", Parameter(10)),
+                           ("sign_free", Parameter(3))]
+
+        def named_parameters(self):
+            return iter(self.params)
+
+    brain = Brain()
+    groups = parameter_groups(brain, ["encoders", "readout", "edges"])
+    assert [p.n for p in groups["edges"]] == [100] and [p.n for p in groups["readout"]] == [8, 2]
+    flags = {name: p.grad for name, p in brain.params}
+    assert flags["log_edge_gain"] and flags["readout.bias"] and flags["encoders.goal__goal.weight"]
+    assert not flags["bias"] and not flags["log_tau"] and not flags["sign_free"]
+    groups = parameter_groups(brain, ["neurons"])
+    assert sorted(p.n for p in groups["neurons"]) == [10, 10, 10]
+    assert not {name: p.grad for name, p in brain.params}["readout.bias"]
+    with pytest.raises(ValueError):
+        parameter_groups(brain, ["synapses"])
+    worse = {"settle/connectome": {"episodes": 16, "success": 3}, "pursuit/connectome": {"tracking_error_px": {"mean": 50.0}}}
+    better = {"settle/connectome": {"episodes": 16, "success": 5}, "pursuit/connectome": {"tracking_error_px": {"mean": 90.0}}}
+    lost = {"settle/connectome": {"episodes": 16, "success": 5}, "pursuit/connectome": {"tracking_error_px": {"mean": None}}}
+    assert selection_key(better) < selection_key(worse) and selection_key(better) < selection_key(lost)
+
+
+def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
+    world = CursorWorld([1000, 1001, 1002], sense_version=3)
+    previous = world.cursor.copy()
+    world.step(world.teacher())
+    observed = world.senses(previous)
+    assert not observed["haltere"].any() and not observed["jo"].any()
+    for i in range(world.B):
+        old = MotorSample("i", "reach", 1, 1, 0, 0, 10, tuple(previous[i]), tuple(world.goal[i]),
+                          (0, 0), tuple(world.rect[i]), world.speed[i], .01)
+        current = MotorSample("i", "reach", 1, 2, .01, .01, 10, tuple(world.cursor[i]), tuple(world.goal[i]),
+                              (0, 0), tuple(world.rect[i]), world.speed[i], .01)
+        expected = channels(current, old, version=3)
+        for key in expected:
+            np.testing.assert_allclose(observed[key][i], expected[key], atol=1e-7)
+        np.testing.assert_allclose(expected["goal"], channels(current, old, version=2)["goal"])
+    with pytest.raises(ValueError):
+        CursorWorld([1000], sense_version=4)

@@ -65,18 +65,36 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **Training change.** Target kicks, longer model-driven episodes and longer gradient windows
   are now options of the world, DAgger and fine-tuning scripts. The first run (DAgger v2:
   1,000-tick episodes, kicks every 250 ticks, up to 70% model-driven, 147,200 samples) settled
-  1/16 fresh static targets against v1's 3/16; the v1 round 3 checkpoint stays the candidate.
+  1/16 fresh static targets against v1's 3/16.
+- **Gradient fine-tuning is not the lever.** The fine-tuner now selects on the suite and can
+  train encoders, readout, per-edge gains and neuron parameters. Two 300-update runs (encoders
+  and readout; plus 2.8 million edge gains under the connectome prior) both diverged, with the
+  imitation loss rising tenfold and gradients through the recurrence exploding; selection kept
+  the source both times. The ridge readout weights average 0.02, so any Adam rate that moves
+  them rewrites them as noise.
+- **The own-velocity input was a shortcut.** Adapter v3 feeds the goal error only. Its readout
+  settles 12/32 suite targets on its own against 3/32 for v2, with a third of the error, and the
+  envelope rejects 0.4% of its proposals against 20%; but it is slow (supervised settling
+  1,070 ms median against 685 ms) and worse on moving targets (pursuit 10/32 against 23/32
+  supervised).
+- **All motor neurons moved the supervised number.** A readout over all 3,913 motor neurons
+  settles nothing on its own but tracks with half the error, and under the envelope it is the
+  best supervised controller so far: settling 460 ms median (reference 285, previous 685),
+  pursuit 28/32 at 7.6 px (reference 5.5, previous 11.9), camera 27/32 at 8.0 px. It is the
+  new supervised candidate; nothing is promoted to autonomy. [Details](docs/bench/TRAINING.md).
 - **Fly-style motion perception.** A `flow` watch cancels the view's own motion (phase
   correlation, dense flow on the aligned pair, one robust affine fit) and reports what still
   moves, awake during own turns and walks; its wide-field summary (translation, expansion,
   roll) is in every snapshot and can feed the lptc channel behind `--lptc-from-flow`, which
   training has not yet used. About 9 ms per 1280×720 frame at quarter scale. Flyvis is the
   reference for a learned front-end.
-- **Controlled transfer.** The Arena reach demo in the Anode seat, deterministic against
-  supervised connectome on the same trial seeds: 8/8 and 8/8 reaches completed, mean 0.42 s
-  against 0.52 s, first within 6 px at median 0.29 s against 0.41 s, interventions 15.6%,
-  stale 13.1%, accepted 71.3%. [Details](docs/bench/SHADOW.md).
-- The suite passes **146 tests** (four optional checks skipped). Application-specific
+- **Controlled transfer.** The Arena reach demo in the Anode seat on the same trial seeds:
+  the reference completed 8/8 reaches at mean 0.42 s (first within 6 px at median 0.29 s);
+  the 512-neuron connectome readout under supervision 8/8 at 0.52 s (0.41 s, interventions
+  15.6%, stale 13.1%); the all-motor readout 8/8 at 0.42 s (0.29 s, interventions 16.4%,
+  stale 29.5%), so the live loop runs at the reference's pace with the model acting on about
+  half of the steps and inference p95 at 30 ms. [Details](docs/bench/SHADOW.md).
+- The suite passes **148 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

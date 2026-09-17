@@ -325,8 +325,174 @@
         "p99": 44.20667599992165
       },
       "within_5ms_fraction": 0.487012987012987
+    },
+    "connectome-all-motor": {
+      "controller": "connectome",
+      "environment": "arena",
+      "session_id": 2,
+      "trials": 8,
+      "completed": 8,
+      "hits": 8,
+      "false_actions": 0,
+      "mean_elapsed_seconds": 0.4168827874998442,
+      "first_within_tolerance_s": {
+        "median": 0.29230365000057645,
+        "max": 0.46874729999944975,
+        "trials": 8
+      },
+      "tracking_error_px": {
+        "mean": 151.37957781097947,
+        "worst": 461.73802095993784
+      },
+      "commands": 252,
+      "interventions": {
+        "ticks": 40,
+        "fraction": 0.16393442622950818
+      },
+      "stale": {
+        "ticks": 72,
+        "fraction": 0.29508196721311475
+      },
+      "accepted_share": 0.5409836065573771,
+      "lost_events": 0,
+      "trials_detail": [
+        {
+          "id": "reach-1",
+          "seed": 1,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.5870544999997946,
+          "commands": 48,
+          "mean_error_px": 219.86916467360643,
+          "max_error_px": 461.73802095993784,
+          "first_within_tolerance_s": 0.46874729999944975,
+          "connectome": 39,
+          "overridden": 7,
+          "stale": 1,
+          "accepted_share": 0.8297872340425532
+        },
+        {
+          "id": "reach-2",
+          "seed": 2,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.44775659999868367,
+          "commands": 32,
+          "mean_error_px": 190.62718007716649,
+          "max_error_px": 398.55363503548676,
+          "first_within_tolerance_s": 0.3146928000005573,
+          "connectome": 4,
+          "overridden": 8,
+          "stale": 19,
+          "accepted_share": 0.12903225806451613
+        },
+        {
+          "id": "reach-3",
+          "seed": 3,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.2768759000009595,
+          "commands": 20,
+          "mean_error_px": 91.2227586644963,
+          "max_error_px": 212.3982109152523,
+          "first_within_tolerance_s": 0.1652708999990864,
+          "connectome": 3,
+          "overridden": 5,
+          "stale": 11,
+          "accepted_share": 0.15789473684210525
+        },
+        {
+          "id": "reach-4",
+          "seed": 4,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.2935084000000643,
+          "commands": 20,
+          "mean_error_px": 54.9966266742774,
+          "max_error_px": 146.23952953972466,
+          "first_within_tolerance_s": 0.17009540000071866,
+          "connectome": 14,
+          "overridden": 4,
+          "stale": 1,
+          "accepted_share": 0.7368421052631579
+        },
+        {
+          "id": "reach-5",
+          "seed": 5,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.3864398000005167,
+          "commands": 29,
+          "mean_error_px": 126.19424981193156,
+          "max_error_px": 277.94963572561124,
+          "first_within_tolerance_s": 0.2699145000005956,
+          "connectome": 14,
+          "overridden": 4,
+          "stale": 10,
+          "accepted_share": 0.5
+        },
+        {
+          "id": "reach-6",
+          "seed": 6,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.5422808999992412,
+          "commands": 44,
+          "mean_error_px": 200.9932730056111,
+          "max_error_px": 434.2913768427828,
+          "first_within_tolerance_s": 0.430238000000827,
+          "connectome": 34,
+          "overridden": 6,
+          "stale": 3,
+          "accepted_share": 0.7906976744186046
+        },
+        {
+          "id": "reach-7",
+          "seed": 7,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.4639874999993481,
+          "commands": 37,
+          "mean_error_px": 202.05989199502466,
+          "max_error_px": 445.3818586336898,
+          "first_within_tolerance_s": 0.35273249999954714,
+          "connectome": 20,
+          "overridden": 4,
+          "stale": 12,
+          "accepted_share": 0.5555555555555556
+        },
+        {
+          "id": "reach-8",
+          "seed": 8,
+          "completed": true,
+          "hit": true,
+          "false_actions": 0,
+          "elapsed_seconds": 0.3371587000001455,
+          "commands": 22,
+          "mean_error_px": 125.073477585722,
+          "max_error_px": 283.0282671395209,
+          "first_within_tolerance_s": 0.2299990000010439,
+          "connectome": 4,
+          "overridden": 2,
+          "stale": 15,
+          "accepted_share": 0.19047619047619047
+        }
+      ],
+      "inference_ms": {
+        "p50": 4.928800000016054,
+        "p95": 30.28899000019008,
+        "p99": 45.86502199939788
+      },
+      "within_5ms_fraction": 0.5096153846153846
     }
   },
-  "table": "| Controller | Completed | Hits | Mean time (s) | First within 6 px (median s) | Tracking error (mean px) | Interventions | Stale | Accepted |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|\n| deterministic | 8/8 | 8/8 | 0.42 | 0.29 | 139.5 | n/a | n/a | n/a |\n| connectome | 8/8 | 8/8 | 0.52 | 0.41 | 130.7 | 15.6% | 13.1% | 71.3% |",
+  "table": "| Controller | Completed | Hits | Mean time (s) | First within 6 px (median s) | Tracking error (mean px) | Interventions | Stale | Accepted |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|\n| deterministic | 8/8 | 8/8 | 0.42 | 0.29 | 139.5 | n/a | n/a | n/a |\n| connectome | 8/8 | 8/8 | 0.52 | 0.41 | 130.7 | 15.6% | 13.1% | 71.3% |\n| connectome-all-motor | 8/8 | 8/8 | 0.42 | 0.29 | 151.4 | 16.4% | 29.5% | 54.1% |",
   "note": "same fixture and trial seeds; interventions are steps the envelope handed to the reference, stale steps had no proposal fresh enough; the accepted share is a diagnostic, not a score"
 }

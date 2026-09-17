@@ -14,9 +14,9 @@ def test_trained_checkpoint_runtime_matches_training_forward_and_reset():
     from ganglion.train.cursor_world import CursorWorld
 
     adapter = HaltereCursor(os.environ["GANGLION_CURSOR_CHECKPOINT"])
-    assert adapter.adapter_version == 2 and adapter.desktop_trained
+    assert adapter.adapter_version in (2, 3) and adapter.desktop_trained
     assert adapter.metadata["training"]["control_authority"] is False
-    world = CursorWorld([7000])
+    world = CursorWorld([7000], sense_version=adapter.adapter_version)
     previous = None
     state = adapter.brain.init_state(1)
     first = first_proposal = None

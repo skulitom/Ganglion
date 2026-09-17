@@ -139,9 +139,10 @@ that strafed fast, where the envelope overrode most proposals.
 ## Controlled transfer in the seat
 
 The Arena reach demo (a target moving on a sinusoid, eight paired trial seeds, 1,200 px/s,
-6 px tolerance, click on arrival) ran inside the Anode seat first with the deterministic
-controller and then with the DAgger v1 checkpoint under supervised authority, on the same
-machine and Windows session. `ganglion.arena.compare` scores both from the ledger: time to
+6 px tolerance, click on arrival) ran inside the Anode seat with the deterministic
+controller, with the DAgger v1 checkpoint under supervised authority, and then with the
+all-motor-neuron readout (DAgger v1b) under the same authority, on the same machine and
+Windows session. `ganglion.arena.compare` scores both from the ledger: time to
 complete, time until the measured cursor first came within tolerance, mean error over the
 whole reach (approach included), interventions (steps the envelope handed to the reference),
 stale steps (no proposal fresh enough) and the accepted share.
@@ -150,14 +151,22 @@ stale steps (no proposal fresh enough) and the accepted share.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | deterministic | 8/8 | 8/8 | 0.42 | 0.29 | 139.5 | n/a | n/a | n/a |
 | connectome | 8/8 | 8/8 | 0.52 | 0.41 | 130.7 | 15.6% | 13.1% | 71.3% |
+| connectome-all-motor | 8/8 | 8/8 | 0.42 | 0.29 | 151.4 | 16.4% | 29.5% | 54.1% |
 
 Sources: [deterministic](results/transfer-seat-deterministic.json),
-[connectome](results/transfer-seat-connectome.json), [comparison](results/transfer-seat.json).
+[connectome](results/transfer-seat-connectome.json),
+[connectome, all motor neurons](results/transfer-seat-connectome-all-motor.json),
+[comparison](results/transfer-seat.json).
 Inference during the connectome run: p50 5.1 ms, p95 15.7 ms, p99 44.2 ms, with 13% of the
 steps stale under the corrected freshness rule; lost ledger events 0 and 0.
-The live picture matches the suite: the envelope completes every reach either way, and the
-model's share of steps says how often it was allowed to act, while the time-to-tolerance and
-tracking-error columns say what that cost.
+The live picture matches the suite: the envelope completes every reach either way, the
+model's share of steps says how often it was allowed to act, and the time-to-tolerance and
+tracking-error columns say what that cost. The all-motor readout reached tolerance at a median
+0.29 s against 0.41 s for the
+512-neuron readout and 0.29 s for the reference, with
+16.4% interventions and 29.5% stale steps: its inference ran at p50 4.9 ms but p95 30 ms,
+so the corrected freshness rule handed nearly a third of the steps to the reference, and the
+reference's pace is what the table shows.
 
 ## Validation and next work
 

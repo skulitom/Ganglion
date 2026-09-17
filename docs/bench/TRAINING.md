@@ -108,6 +108,29 @@ after 192 ticks, much shorter than evaluation; longer on-policy trajectories are
 specific distribution gap to investigate. More imitation samples alone have not
 established stable control or an advantage over the small MLP.
 
+## Gradient fine-tuning selected on the suite
+
+`cursor_finetune` now selects candidates on the fixed suite (settling and pursuit on validation
+episodes 40000–40015 and 41000–41015, the connectome acting alone, 1,000 ticks) instead of the
+old terminal-error score, keeps the unchanged source as a candidate, and scores the selected
+checkpoint on the suite's test episodes alone and under supervision. `--train` chooses the
+parameter groups: `encoders` and `readout` as before, `edges` for the 2,767,698 per-edge
+log-gains under the connectome prior (structure and signs stay fixed), `neurons` for the
+per-neuron gains, biases and time constants. Learning rates are per group.
+
+Two runs from the DAgger v1 checkpoint used 1,000-tick episodes with kicks every 250 ticks,
+96-tick updates truncated every 32 ticks, up to 90% model-driven episodes and 300 updates.
+Encoders and readout at 1e-5 and 1e-4 ([v3](results/cursor-finetune-v3.json)): the imitation
+loss rose from 0.042 to 0.43 with gradient norms near 12 before clipping, validation static
+success fell from 3/16 to 0/16, and selection kept the source (465 s, peak 49°C). Adding the
+edge gains at 1e-4 ([v4](results/cursor-finetune-v4.json)) did the same: loss 0.042 to 0.36,
+0–1/16, source kept (494 s, peak 62°C). The scales explain it: the ridge readout's weights
+average 0.02, so an Adam rate of 1e-4 rewrites them within a few hundred steps whatever the
+gradient says, and the gradients through 32 ticks of the 30,000-neuron recurrence explode, so
+the rewrite is noise. Smaller rates (the earlier 1e-6/1e-5 run) leave the least-squares optimum
+where it is. Gradient training through this network, as set up, is not the lever; the
+representation the readout sees is.
+
 ## Fixed suite: settling, jumps, pursuit and camera tracking
 
 `ganglion.train.suite` runs four controllers over identical seeded episodes (32 per task,
@@ -186,6 +209,87 @@ checkpoint scores ([cursor-suite-v2](results/cursor-suite-v2.json)):
 | camera | connectome | 1/32 (lost 28) | 1390 | 113.0 | n/a | n/a |
 | camera | supervised | 16/32 (lost 0) | 755 | 14.8 | 37.1% | 62.9% |
 
+## What the readout sees: dropping the own-velocity input
+
+The reference controller is memoryless: its command is a function of the goal error alone.
+The own-velocity channels (haltere and Johnston's organ analogues) that adapter v2 feeds the
+network are therefore not evidence about the goal; in teacher-driven imitation data they are a
+lagged copy of the teacher's own action, a shortcut a readout can lean on that fails in closed
+loop. Adapter **v3** is v2 without those channels; the training world, the runtime adapter and
+the suite all speak it, and a checkpoint records which version it was trained on.
+
+Trained the same way as the v2 lineage (readout on 12,800 teacher samples, then three DAgger
+rounds), the v3 readout settled 6/16 held-out static targets straight after the first fit
+where v2 settled 0/16, and its DAgger rounds validated at 5/8, 4/8 and 4/8 against v1's 0/8,
+1/8 and 2/8 ([readout v3](results/cursor-readout-v3.json), [DAgger v3](results/cursor-dagger-v3.json)).
+On the fixed suite, with an MLP trained on the same v3 samples
+([cursor-suite-v3](results/cursor-suite-v3.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | mlp | 32/32 | 320 | 3.0 | n/a | n/a |
+| settle | connectome | 12/32 | 555 | 50.4 | n/a | n/a |
+| settle | supervised | 32/32 | 1070 | 5.6 | 0.4% | 99.6% |
+| jump | connectome | 44/256 | 400 | 141.3 | n/a | n/a |
+| jump | supervised | 197/256 | 1030 | 28.5 | 6.1% | 93.9% |
+| pursuit | mlp | 31/32 | 180 | 5.8 | n/a | n/a |
+| pursuit | connectome | 1/32 | 390 | 178.1 | n/a | n/a |
+| pursuit | supervised | 10/32 | 325 | 19.1 | 17.5% | 82.5% |
+| camera | mlp | 31/32 (lost 0) | 495 | 6.4 | n/a | n/a |
+| camera | connectome | 0/32 (lost 30) | 1200 | 115.0 | n/a | n/a |
+| camera | supervised | 8/32 (lost 0) | 1525 | 22.3 | 24.8% | 75.2% |
+
+Against the v1 rows above, the velocity-free readout settles four times as many static targets
+on its own (12/32 against 3/32) with a third of the error, and the envelope almost never has
+to reject it (0.4% against 20%); but it is slow, so the supervised settling median rises from
+685 to 1,070 ms, and on moving targets it is worse both alone and supervised (pursuit 10/32
+against 23/32, camera 8/32 against 21/32). The MLP on the same velocity-free inputs matches the
+reference on every task. So the shortcut was real and removing it helps settling, while the
+readout still lacks the gain and the anticipation that tracking needs. Neither lineage is a
+candidate for promotion; both are recorded.
+
+The third velocity-free DAgger round, which the old selection passed over for round 1 despite
+its lower terminal error, scores on the suite ([cursor-suite-v3r3](results/cursor-suite-v3r3.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 18/32 | 395 | 54.5 | n/a | n/a |
+| settle | supervised | 32/32 | 380 | 3.7 | 4.5% | 95.5% |
+| jump | connectome | 33/256 | 690 | 147.8 | n/a | n/a |
+| jump | supervised | 226/256 | 665 | 23.0 | 8.5% | 91.5% |
+| pursuit | connectome | 4/32 | 280 | 135.4 | n/a | n/a |
+| pursuit | supervised | 20/32 | 225 | 11.5 | 16.8% | 83.2% |
+| camera | connectome | 2/32 (lost 28) | 575 | 85.6 | n/a | n/a |
+| camera | supervised | 18/32 (lost 0) | 545 | 12.3 | 21.2% | 78.8% |
+
+## Reading out all motor neurons
+
+The v2 lineage's readout uses 512 motor neurons chosen by label correlation. Refitting the
+DAgger v1 cache plus one fresh round on all 3,913 motor neurons with the lightest ridge
+(1e-5) improves the imitation fit (validation MSE 0.0141 against 0.0244) and, on its own,
+controls worse: validation static success 0/8 and fresh held-out 0/16 with 160 px terminal
+error against 3/16 for the 512-neuron readout ([DAgger v1b](results/cursor-dagger-v1b.json)).
+On the suite ([cursor-suite-v1b](results/cursor-suite-v1b.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 0/32 | 19945 | 80.5 | n/a | n/a |
+| settle | supervised | 32/32 | 460 | 2.9 | 7.0% | 93.0% |
+| jump | connectome | 8/256 | 1650 | 100.1 | n/a | n/a |
+| jump | supervised | 255/256 | 660 | 23.3 | 18.1% | 81.9% |
+| pursuit | connectome | 4/32 | 225 | 106.8 | n/a | n/a |
+| pursuit | supervised | 28/32 | 210 | 7.6 | 34.9% | 65.1% |
+| camera | connectome | 1/32 (lost 26) | 580 | 98.5 | n/a | n/a |
+| camera | supervised | 27/32 (lost 0) | 570 | 8.0 | 42.0% | 58.0% |
+
+Alone, this readout is fast and imprecise: it settles nothing but tracks with half the error of
+the 512-neuron readout and acquires moving targets sooner. Under the envelope that is the best
+supervised controller measured so far: settling 460 ms median against 685 ms (reference 285),
+every jump but one, pursuit 28/32 with 7.6 px against 23/32 with 11.9 px (reference 5.5), camera
+27/32 with 8.0 px against 21/32 with 11.5 px. The envelope's share of the work is visible in the
+interventions column (7% on settle, 35–42% on moving targets), so this is a supervised result,
+not autonomy; but it is the first change that moved the number the runtime actually uses.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -199,6 +303,10 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_finetune --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --out runs/cursor-finetune-v2 --iterations 200 --encoder-lr 1e-6 --readout-lr 1e-5 --test-seed-start 6000 --seconds 900 --max-gpu-temp 65
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --features runs/cursor-dagger-v1/features.pt --out runs/cursor-dagger-v2 --rounds 3 --episode-steps 1000 --kick-every 250 --student-max 0.9 --seed-base 30000 --seconds 1700 --max-gpu-temp 65
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v1/features.pt --out runs/suite-v1 --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_finetune --checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --out runs/cursor-finetune-v4 --iterations 300 --train encoders,readout,edges --encoder-lr 1e-5 --readout-lr 1e-4 --edge-lr 1e-4 --episode-ticks 1000 --window 96 --truncate 32 --kick-every 250 --student-max 0.9 --seconds 1700
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v3 --episodes 64 --steps 200 --features 512 --seconds 900 --adapter-version 3
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v3/cursor-readout.pt --features runs/cursor-readout-v3/features.pt --out runs/cursor-dagger-v3 --rounds 3 --neurons 512 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v3/round-01/cursor-readout.pt --mlp-features runs/cursor-dagger-v3/features.pt --out runs/suite-v3 --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has

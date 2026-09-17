@@ -95,13 +95,15 @@ def compare(results):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("results", nargs="+", type=Path, help="reach-demo JSON files, one per controller")
+    p.add_argument("results", nargs="+", help="reach-demo JSON files, one per controller, optionally label=path")
     p.add_argument("--out", type=Path)
     args = p.parse_args()
     loaded = {}
-    for path in args.results:
+    for item in args.results:
+        label, _, given = item.rpartition("=")
+        path = Path(given)
         result = json.loads(path.read_text(encoding="utf-8"))
-        label = result.get("controller", {}).get("mode", path.stem)
+        label = label or result.get("controller", {}).get("mode", path.stem)
         loaded[label if label not in loaded else path.stem] = result
     report = compare(loaded)
     if args.out:

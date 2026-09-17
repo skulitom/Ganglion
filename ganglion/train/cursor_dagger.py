@@ -23,8 +23,9 @@ def run(args):
     if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN":
         raise ValueError("Requires the actual CUDA connectome")
     original = torch.load(base, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
-    if original.get("adapter_version") != 2:
-        raise ValueError("DAgger requires a cursor adapter-v2 checkpoint")
+    version = original.get("adapter_version")
+    if version not in (2, 3):
+        raise ValueError("DAgger requires a cursor adapter version 2 or 3 checkpoint")
     brain.eval()
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
@@ -33,7 +34,7 @@ def run(args):
     seeds = list(cache["splits"]["train"])
     validation_seeds = list(cache["splits"]["validation"])
     report = {"experiment": "connectome cursor readout DAgger", "base_checkpoint": str(base),
-              "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "adapter_version": 2,
+              "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "adapter_version": version,
               "plant_version": 2, "rounds": [], "promoted": False, "test_seeds": list(range(4000, 4032)),
               "neurons": brain.N, "edges": int(brain.edge_index.shape[1]),
               "episode_steps": args.episode_steps, "kick_every": args.kick_every or None,
@@ -43,15 +44,15 @@ def run(args):
         new_seeds = list(range(args.seed_base+round_index*100, args.seed_base+round_index*100+32))
         fraction = min(args.student_max, .25+round_index*.15)
         new = harvest(torch, brain, new_seeds, guard, steps=args.episode_steps, batch=16,
-                      student_fraction=fraction, jump_every=args.kick_every or None)
+                      student_fraction=fraction, jump_every=args.kick_every or None, sense_version=version)
         train = tuple(torch.cat((old, added)) for old, added in zip(train, new))
         del new
         seeds.extend(new_seeds)
         fitted = fit(torch, brain, train, validation, guard, args.neurons)
-        score = evaluate(torch, brain, validation_seeds, guard, policy="connectome")
+        score = evaluate(torch, brain, validation_seeds, guard, policy="connectome", sense_version=version)
         folder = args.out/f"round-{round_index:02d}"
         folder.mkdir()
-        metadata = {"adapter_version": 2, "trained": True, "training_domain": "synthetic cursor episodes",
+        metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
                     "method": "frozen connectome, DAgger ridge motor readout", "control_authority": False,
                     "training_seeds": seeds.copy(), "validation_seeds": validation_seeds,
                     "readout_fit": fitted, "parent_sha256": report["base_sha256"]}
@@ -71,7 +72,7 @@ def run(args):
     mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, selected.device)
     report["held_out"] = []
     for policy in ("teacher", "mlp", "connectome"):
-        score = evaluate(torch, selected, report["test_seeds"], guard, policy=policy, mlp=mlp)
+        score = evaluate(torch, selected, report["test_seeds"], guard, policy=policy, mlp=mlp, sense_version=version)
         report["held_out"].append(score)
         print(json.dumps({"stage": "fresh_test", **score}), flush=True)
     report.update(selected_checkpoint=str(best[1]), peak_gpu_c=guard.peak,
@@ -94,8 +95,8 @@ def main():
     p.add_argument("--student-max", type=float, default=.75, help="largest model-driven share of a round")
     p.add_argument("--seed-base", type=int, default=10000, help="first harvest seed; keep rounds of different runs apart")
     args = p.parse_args()
-    if not 1 <= args.rounds <= 5 or not 32 <= args.neurons <= 2048 or not 30 <= args.seconds <= 1800 or not 50 <= args.max_gpu_temp <= 70:
-        p.error("Use rounds 1–5, neurons 32–2048, seconds 30–1800 and temperature 50–70")
+    if not 1 <= args.rounds <= 5 or not 32 <= args.neurons <= 4096 or not 30 <= args.seconds <= 1800 or not 50 <= args.max_gpu_temp <= 70:
+        p.error("Use rounds 1–5, neurons 32–4096, seconds 30–1800 and temperature 50–70")
     if not 80 <= args.episode_steps <= 2000 or not (args.kick_every == 0 or 50 <= args.kick_every <= 1000):
         p.error("Use episode steps 80–2000 and kick every 0 or 50–1000 ticks")
     if not .25 <= args.student_max <= 1 or not 10000 <= args.seed_base <= 90000:

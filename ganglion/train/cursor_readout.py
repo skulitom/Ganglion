@@ -62,11 +62,11 @@ def observe(torch, brain, senses):
     return obs, packed
 
 
-def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None):
+def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None, sense_version=2):
     features, inputs, labels = [], [], []
     weights = brain.weight_matrix().detach()
     for offset in range(0, len(seeds), batch):
-        world = CursorWorld(seeds[offset:offset+batch], steps=steps, jump_every=jump_every)
+        world = CursorWorld(seeds[offset:offset+batch], steps=steps, jump_every=jump_every, sense_version=sense_version)
         state, previous = brain.init_state(world.B), None
         with torch.inference_mode():
             for _ in range(steps):
@@ -165,8 +165,8 @@ def train_mlp(torch, train, validation, guard, device):
     return model, {"validation_mse": best, "iterations": 600}
 
 
-def evaluate(torch, brain, seeds, guard, *, policy, mlp=None, steps=2000):
-    world = CursorWorld(seeds, steps=steps)
+def evaluate(torch, brain, seeds, guard, *, policy, mlp=None, steps=2000, sense_version=2):
+    world = CursorWorld(seeds, steps=steps, sense_version=sense_version)
     state, previous = brain.init_state(world.B), None
     weights = brain.weight_matrix().detach()
     errors = []
@@ -231,30 +231,31 @@ def run(args):
         parameter.requires_grad_(False)
     splits = {"train": list(range(1000, 1000+args.episodes)), "validation": list(range(2000, 2016)),
               "test": list(range(3000, 3032))}
+    version = args.adapter_version
     report = {"experiment": "frozen-connectome cursor readout", "base_checkpoint": str(base),
               "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "neurons": brain.N,
               "edges": int(brain.edge_index.shape[1]), "torch": torch.__version__,
-              "adapter_version": 2, "splits": splits, "training_steps": args.steps,
+              "adapter_version": version, "splits": splits, "training_steps": args.steps,
               "plant_version": 2, "reach_radius_px": [2, 400],
               "motion_limit": "min(150, speed*gain/(delay_ticks+1)*0.2) per axis",
               "application_win_verified": False, "promoted": False}
     (args.out/"config.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
-    train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16)
-    validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16)
+    train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16, sense_version=version)
+    validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16, sense_version=version)
     torch.save({"train": train, "validation": validation, "splits": splits}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
     report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
-    metadata = {"adapter_version": 2, "trained": True, "training_domain": "synthetic cursor episodes",
+    metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
                 "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
                 "control_authority": False, "training_seeds": splits["train"],
                 "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
     checkpoint = save_checkpoint(torch, brain, cfg, args.out, metadata)
     print(json.dumps({"stage": "checkpoint", "path": str(checkpoint), "fit": report["readout_fit"]}), flush=True)
     mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, brain.device)
-    torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": 2}, args.out/"mlp-baseline.pt")
+    torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": version}, args.out/"mlp-baseline.pt")
     report["held_out"] = []
     for policy in ("teacher", "mlp", "connectome"):
-        score = evaluate(torch, brain, splits["test"], guard, policy=policy, mlp=mlp)
+        score = evaluate(torch, brain, splits["test"], guard, policy=policy, mlp=mlp, sense_version=version)
         report["held_out"].append(score)
         print(json.dumps({"stage": "evaluate", **score}), flush=True)
     report.update(elapsed_seconds=time.perf_counter()-started, peak_gpu_c=guard.peak,
@@ -273,10 +274,12 @@ def main():
     p.add_argument("--features", type=int, default=512)
     p.add_argument("--seconds", type=float, default=600)
     p.add_argument("--max-gpu-temp", type=float, default=65)
+    p.add_argument("--adapter-version", type=int, default=2, choices=(2, 3),
+                   help="2: goal error and own velocity; 3: goal error only")
     args = p.parse_args()
-    if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 2048
+    if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 4096
             and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
-        p.error("Use bounded episodes 16–256, steps 80–500, features 32–2048, seconds 10–1800, temperature 50–70")
+        p.error("Use bounded episodes 16–256, steps 80–500, features 32–4096, seconds 10–1800, temperature 50–70")
     run(args)
 
 
