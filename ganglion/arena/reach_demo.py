@@ -164,7 +164,7 @@ def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None)
             completed = [e for e in result["events"] if e["kind"] in ("shadow_prediction", "shadow_discarded")]
             result["shadow_score"] = {"predictions": len(predictions), "completed_inferences": len(completed),
                 "promoted": False, "actuation_authority": False,
-                "desktop_trained": False,
+                "desktop_trained": predictor.metadata["desktop_trained"],
                 "inference_ms": {f"p{p}": float(np.percentile([e["inference_ms"] for e in completed], p))
                                  for p in (50, 95, 99)} if completed else {},
                 "within_5ms_fraction": sum(e["within_5ms"] for e in completed)/len(completed) if completed else None,

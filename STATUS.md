@@ -25,7 +25,17 @@ drag, through an optional worker with a one-item mailbox. Model results enter th
 cannot submit input. Exceptions and stalls leave the existing controller running. The recorded
 sensor inputs can be replayed without a desktop.
 
-Next: train and compare generic reach/track readouts, resolve live inference jitter, and add the
+The repository is public on [GitHub](https://github.com/skulitom/Ganglion) under MIT, and the
+Windows CI workflow has passed remotely. Generic cursor training now runs through the actual
+connectome, with headless latency/gain variation, held-out trajectories, deterministic and MLP
+comparisons, and a GPU temperature guard. See [training results](docs/bench/TRAINING.md).
+The deterministic suite passes **103 tests**. Three browser checks and one trained-CUDA-model
+check are optional; the trained-model check was also run separately and passed.
+Readout DAgger settled 3/16 static targets on one held-out set and 4/16 on a fresh set.
+Two 200-update encoder/readout runs did not beat it on validation. Checkpoints remain local
+and experimental; no model has been released to Hugging Face. Training peaked at 46°C.
+
+Next: improve closed-loop cursor stability, resolve live inference jitter, and add the
 fly visual front-end. Solitaire remains an application transfer test directed by the agent.
 The flight checkpoint has not earned desktop-control authority, and no full Solitaire win is
 claimed. See [the connectome experiment](docs/bench/SHADOW.md).
@@ -70,7 +80,7 @@ claimed. See [the connectome experiment](docs/bench/SHADOW.md).
   console run exposed sampling gaps, deadline rejection, and verification settling errors; its
   failing trace is retained alongside the corrected results.
 - Locked dependency resolution and the wheel build pass; both HTML fixtures are packaged. CI
-  now includes synthetic drag. Remote GitHub Actions execution has not been performed here.
+  includes synthetic drag and has subsequently passed on GitHub.
 
 ## Gate C reach validation
 
@@ -89,8 +99,8 @@ claimed. See [the connectome experiment](docs/bench/SHADOW.md).
 - [Scorecard, traces, commands, and limitations](docs/bench/REACH.md). Raw `reach-*.json` reports
   contain both policies and independent application truth. Browser control uses pixels and
   Windows input; Playwright is confined to fixture setup and evaluator truth.
-- The wheel builds and includes its browser fixture. CI now also runs synthetic reach; remote
-  GitHub Actions execution has not been performed in this task.
+- The wheel builds and includes its browser fixture. CI also runs synthetic reach and has
+  subsequently passed on GitHub.
 
 ## Gate B validation
 
@@ -108,8 +118,8 @@ claimed. See [the connectome experiment](docs/bench/SHADOW.md).
   Capture-available to input-submitted median: **2.52 ms**, observed maximum **14.38 ms** (18 samples).
   Event-scheduled to application-received median: **31.29 ms**, observed maximum **49.65 ms**
   (17 newly appearing targets). These are short smoke measurements, not guaranteed bounds.
-- A Windows GitHub Actions workflow is configured for tests and the synthetic demo. It has not
-  been executed remotely in this task.
+- A Windows GitHub Actions workflow runs tests and the synthetic demos; it has subsequently
+  passed on GitHub.
 
 Actual presentation/physical scanout is not measured. The Arena records rendering submission;
 reports distinguish it from capture availability and application receipt. Targets already visible

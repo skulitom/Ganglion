@@ -10,7 +10,9 @@ Status: Gate C demonstrated; Gate D connectome shadow experiments started. See [
 The control path uses deterministic colour perception and cursor-feedback reach/drag.
 Haltere's actual 30,000-neuron model can now receive the same motor observations in a separate
 shadow worker, with predictions, timing and replay data in the ledger. It has no actuation
-authority and its flight checkpoint is not trained for desktop control. Read [PLAN.md](PLAN.md) for
+authority. Generic cursor training now adapts the fly model's motor readout and sensory encoders;
+the candidates are still experimental. See [training results](docs/bench/TRAINING.md).
+Read [PLAN.md](PLAN.md) for
 the design, the target set and the phases; `suggestions/` holds an external review of the plan
 that shaped its runtime contracts and delivery gates.
 
@@ -96,6 +98,8 @@ ganglion/percepts  application-independent colour-component detection
 ganglion/mcp       thin MCP stdio bridge to the resident core
 ganglion/arena     headless and real-window target worlds, MCP demo, timing flasher
 ganglion/evaluation opt-in application checks from explicitly taught profiles, through MCP
+ganglion/brain     optional actual-connectome shadow inference and frozen replay
+ganglion/train     headless cursor imitation, DAgger and encoder/readout training
 ganglion/bench     the measurements that decide tick rates and latency compensation
 ganglion/doctor.py what is installed and which session we are in
 docs/census        census of the local male-CNS connectome (scripts and outputs)

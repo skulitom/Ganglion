@@ -5,8 +5,9 @@ observations used by Ganglion's reach/drag controller. The loaded flight checkpo
 30,000 neurons and 2,767,698 edges. Its identity and SHA-256 are recorded in every report.
 
 This starts Gate D. The model has no input authority. All successful reaches below were
-executed by the existing proportional controller. There is no trained desktop readout or fly
-visual front-end yet, and no Solitaire win is claimed.
+executed by the existing proportional controller. These initial measurements used a flight
+readout. Subsequent [generic cursor training](TRAINING.md) has produced experimental readouts,
+but no candidate has earned input authority. There is no fly visual front-end or Solitaire win.
 
 ## Live results and frozen replay
 
@@ -50,6 +51,8 @@ to the deterministic reference checks; `shadow_score.promoted` remains false.
 - Target error maps to the existing goal population, and cursor velocity maps to the haltere
   and Johnston's-organ channels. Other sensory channels, including optic flow, are zero.
   Flight outputs 0 and 1 are interpreted as hypothetical cursor velocities for comparison.
+  Cursor-trained checkpoints declare adapter v2, scaling goal error by intent speed; old
+  checkpoints and recordings retain adapter v1. Training provenance is included in the ledger.
   There is no deterministic correction added to those neural proposals.
 - Each consumed sample advances the neural state by one 10 ms step. New intents/stages/layouts
   and observation gaps over 50 ms reset it. This is an explicit experimental time contract;

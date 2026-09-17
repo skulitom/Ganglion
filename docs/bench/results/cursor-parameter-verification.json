@@ -1,0 +1,27 @@
+{
+  "base_checkpoint": "runs\\cursor-dagger-v1\\round-03\\cursor-readout.pt",
+  "candidate_checkpoint": "runs\\cursor-finetune-v2\\iteration-0200\\cursor-readout.pt",
+  "base_sha256": "c455ec5387de8dbce0ab1039581d7462e6c26f107c9dec964172b59755551f22",
+  "candidate_sha256": "3efea58f35ab1a2b61f7ec6411bf096083c0a33d483a4396554d9d6b6a8d515c",
+  "changed_tensors": [
+    "encoders.haltere__haltere.U",
+    "encoders.haltere__haltere.log_gain",
+    "encoders.haltere__haltere.threshold",
+    "encoders.ocelli__ocelli.threshold",
+    "encoders.lptc__lptc.threshold",
+    "encoders.jo__jo.U",
+    "encoders.jo__jo.log_gain",
+    "encoders.jo__jo.threshold",
+    "encoders.wing_cs__wing_cs.threshold",
+    "encoders.compass__compass.threshold",
+    "encoders.goal__goal.U",
+    "encoders.goal__goal.log_gain",
+    "encoders.goal__goal.threshold",
+    "readout.weight",
+    "readout.bias"
+  ],
+  "only_encoder_and_readout_changed": true,
+  "all_tensors_finite": true,
+  "unchanged_tensor_count": 16,
+  "promoted": false
+}

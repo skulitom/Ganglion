@@ -1,0 +1,101 @@
+import numpy as np
+import pytest
+
+from ganglion.brain.haltere_cursor import channels
+from ganglion.brain.shadow import MotorSample
+from ganglion.core.reach import step
+from ganglion.train.cursor_world import CursorWorld, teacher_points
+
+
+def test_training_teacher_matches_resident_controller_at_boundaries_and_varied_speeds():
+    rng = np.random.default_rng(710)
+    rect = np.array([[25, 40, 640, 360]]*100, dtype=float)
+    cursor = rng.uniform([-100, -100], [900, 600], (100, 2))
+    goal = rng.uniform([25, 40], [664, 399], (100, 2))
+    speed = rng.uniform(100, 5000, 100)
+    for dt in (0, .01, .02, 1):
+        batched = teacher_points(cursor, goal, speed, rect, dt)
+        reference = np.array([step(c, g, dt, s, r) for c, g, s, r in zip(cursor, goal, speed, rect)])
+        np.testing.assert_array_equal(batched, reference)
+
+
+def test_training_senses_match_runtime_adapter_and_use_only_observed_state():
+    world = CursorWorld([1000, 1001, 1002])
+    previous = world.cursor.copy()
+    world.step(world.teacher())
+    observed = world.senses(previous)
+    for i in range(world.B):
+        old = MotorSample("i", "reach", 1, 1, 0, 0, 10, tuple(previous[i]), tuple(world.goal[i]),
+                          (0, 0), tuple(world.rect[i]), world.speed[i], .01)
+        current = MotorSample("i", "reach", 1, 2, .01, .01, 10, tuple(world.cursor[i]), tuple(world.goal[i]),
+                              (0, 0), tuple(world.rect[i]), world.speed[i], .01)
+        expected = channels(current, old, version=2)
+        for key in expected:
+            np.testing.assert_allclose(observed[key][i], expected[key], atol=1e-7)
+
+
+def test_episode_seed_is_independent_of_batch_composition():
+    batch = CursorWorld([1000, 1001, 1002])
+    single = CursorWorld([1001])
+    for _ in range(30):
+        batch.step(batch.teacher())
+        single.step(single.teacher())
+        np.testing.assert_array_equal(batch.cursor[1], single.cursor[0])
+        np.testing.assert_array_equal(batch.goal[1], single.goal[0])
+
+
+def test_delay_defers_effect_and_domain_randomisation_stays_bounded():
+    world = CursorWorld(range(40))
+    initial = world.cursor.copy()
+    point = world.teacher()
+    world.step(point)
+    np.testing.assert_array_equal(world.cursor[world.delay > 0], initial[world.delay > 0])
+    assert np.all((.6 <= world.gain) & (world.gain <= 1.4))
+    assert set(world.delay) == set(range(7))
+    for _ in range(100):
+        world.step(world.teacher())
+    assert np.all(world.cursor >= world.rect[:, :2])
+    assert np.all(world.cursor <= world.rect[:, :2]+world.rect[:, 2:]-1)
+
+
+def test_delayed_absolute_input_applies_the_coordinate_computed_at_issue_time():
+    world = CursorWorld([1000])
+    world.cursor[:] = [100, 100]
+    world.initial = world.cursor.copy()
+    world.gain[:] = 1.2
+    world.delay[:] = 1
+    world.step(np.array([[110, 120]]))
+    np.testing.assert_array_equal(world.cursor, [[100, 100]])
+    world.step(np.array([[120, 110]]))
+    np.testing.assert_allclose(world.cursor, [[112, 124]])
+    world.step(np.array([[130, 130]]))
+    np.testing.assert_allclose(world.cursor, [[124, 112]])
+
+
+def test_reference_controller_settles_static_targets_across_randomised_delays():
+    world = CursorWorld(range(3000, 3032))
+    for _ in range(2000):
+        world.step(world.teacher())
+    static = np.linalg.norm(world.velocity, axis=1) == 0
+    assert np.max(np.linalg.norm(world.goal[static]-world.cursor[static], axis=1)) <= 3
+
+
+def test_thermal_guard_pauses_until_cool_and_enforces_wall_time():
+    from ganglion.train.cursor_readout import Guard
+    class Clock:
+        now = 0
+        def __call__(self): return self.now
+        def sleep(self, seconds): self.now += seconds
+    clock = Clock()
+    readings = iter([68, 61, 57])
+    guard = Guard(10, clock=clock, sleep=clock.sleep, temperature_reader=lambda: next(readings))
+    assert guard.peak == 68 and clock.now >= 2
+    with pytest.raises(TimeoutError):
+        Guard(.5, clock=clock, sleep=clock.sleep, temperature_reader=lambda: 68)
+
+
+@pytest.mark.parametrize("reading", [None, float("nan")])
+def test_missing_temperature_stops_training(reading):
+    from ganglion.train.cursor_readout import Guard
+    with pytest.raises(RuntimeError, match="temperature unavailable"):
+        Guard(10, temperature_reader=lambda: reading)

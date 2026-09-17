@@ -1,0 +1,279 @@
+"""Fit a cursor readout on the actual frozen Haltere connectome, then test closed loop.
+
+No application-specific data or direct sensory-to-output bypass is used by the
+connectome candidate. This is a reservoir/readout experiment, not full BPTT.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from math import isfinite
+from pathlib import Path
+import time
+
+import numpy as np
+
+from .cursor_world import CursorWorld
+
+
+class Guard:
+    def __init__(self, seconds, temperature=65, pace=.003, *, clock=time.perf_counter,
+                 sleep=time.sleep, temperature_reader=None):
+        self.clock, self.sleep = clock, sleep
+        if temperature_reader is None:
+            from haltere.train.thermal import gpu_temperature
+            temperature_reader = gpu_temperature
+        self.temperature_reader = temperature_reader
+        self.deadline = clock() + seconds
+        self.limit, self.pace, self.peak = temperature, pace, 0
+        self.ticks = 0
+        self.check(force=True)
+
+    def check(self, *, force=False):
+        if self.clock() >= self.deadline:
+            raise TimeoutError("Training wall-time budget exhausted")
+        self.ticks += 1
+        if force or self.ticks % 20 == 0:
+            temp = self.temperature_reader()
+            if temp is None or not isfinite(temp):
+                raise RuntimeError("GPU temperature unavailable; stop training")
+            self.peak = max(self.peak, temp)
+            if temp > self.limit:
+                print(f"Pausing at {temp:.0f} C; resume below {self.limit-8:.0f} C", flush=True)
+                while temp > self.limit-8:
+                    if self.clock() >= self.deadline:
+                        raise TimeoutError("Temperature pause exhausted training budget")
+                    self.sleep(1)
+                    temp = self.temperature_reader()
+                    if temp is None or not isfinite(temp):
+                        raise RuntimeError("GPU temperature unavailable while paused")
+                    self.peak = max(self.peak, temp)
+        self.sleep(self.pace)
+
+
+def observe(torch, brain, senses):
+    keys = tuple(brain.channel_dims)
+    packed = torch.from_numpy(np.concatenate([senses[k] for k in keys], axis=1)).to(brain.device)
+    obs, offset = {}, 0
+    for key in keys:
+        obs[key] = packed[:, offset:offset+brain.channel_dims[key]]
+        offset += brain.channel_dims[key]
+    return obs, packed
+
+
+def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0):
+    features, inputs, labels = [], [], []
+    weights = brain.weight_matrix().detach()
+    for offset in range(0, len(seeds), batch):
+        world = CursorWorld(seeds[offset:offset+batch], steps=steps)
+        state, previous = brain.init_state(world.B), None
+        with torch.inference_mode():
+            for _ in range(steps):
+                guard.check()
+                obs, packed = observe(torch, brain, world.senses(previous))
+                action, state, _ = brain(obs, state, weights)
+                rates = brain.cfg.rate_max * torch.sigmoid(state["v"][brain.motor_idx]).T
+                target = world.teacher()
+                command = (target-world.cursor)/(world.speed[:, None]*.01)
+                features.append(rates.cpu())
+                inputs.append(packed.cpu())
+                labels.append(torch.from_numpy(np.clip(command, -1, 1).astype(np.float32)))
+                previous = world.cursor.copy()
+                driven = target.copy()
+                students = int(world.B*student_fraction)
+                if students:
+                    driven[:students] = np.rint(world.cursor[:students] + action[:students, :2].cpu().numpy()*world.speed[:students, None]*.01)
+                    driven = np.clip(driven, world.rect[:, :2], world.rect[:, :2]+world.rect[:, 2:]-1)
+                world.step(driven)
+        print(json.dumps({"stage": "harvest", "episodes": min(offset+batch, len(seeds)),
+                          "total_episodes": len(seeds), "peak_gpu_c": guard.peak}), flush=True)
+    return tuple(torch.cat(values).clone() for values in (features, inputs, labels))
+
+
+def install_head(torch, brain, mean, variance, selected, weights, bias):
+    with torch.no_grad():
+        brain.motor_norm.running_mean.copy_(mean.to(brain.device))
+        brain.motor_norm.running_var.copy_(variance.to(brain.device))
+        brain.readout.weight.zero_()
+        brain.readout.bias.zero_()
+        brain.readout.weight[:2, selected.to(brain.device)] = weights.T.to(brain.device)
+        brain.readout.bias[:2].copy_(bias.to(brain.device))
+    brain.cfg.action_tau = brain.cfg.dt
+
+
+def fit(torch, brain, train, validation, guard, feature_count):
+    raw, _, target = train
+    val_raw, _, val_target = validation
+    mean, variance = raw.mean(0), raw.var(0, unbiased=False)
+    std = (variance+brain.motor_norm.eps).sqrt()
+    x = (raw-mean)/std
+    centered = target-target.mean(0)
+    # Select responsive motor neurons using training labels only. Validation and
+    # test samples never participate in feature selection or normalisation.
+    correlation = (x.T @ centered).abs() / centered.square().sum(0).sqrt().clamp_min(1e-6)
+    selected = correlation.amax(1).topk(min(feature_count, x.shape[1])).indices.sort().values
+    x = x[:, selected].to(brain.device, dtype=torch.float64)
+    val_x = ((val_raw-mean)/std)[:, selected].to(brain.device)
+    y = torch.atanh(target.clamp(-.995, .995)).to(brain.device, dtype=torch.float64)
+    bias = y.mean(0)
+    gram, rhs = x.T @ x / len(x), x.T @ (y-bias) / len(x)
+    trials, best = [], None
+    for penalty in (1e-5, 1e-4, 1e-3, 1e-2, 1e-1):
+        guard.check(force=True)
+        weights = torch.linalg.solve(gram + penalty*torch.eye(len(selected), device=brain.device, dtype=torch.float64), rhs).float()
+        prediction = torch.tanh(val_x @ weights + bias.float()).cpu()
+        mse = float((prediction-val_target).square().mean())
+        trials.append({"ridge": penalty, "validation_mse": mse})
+        if best is None or mse < best[0]:
+            best = mse, penalty, weights.cpu(), bias.float().cpu()
+    install_head(torch, brain, mean, variance, selected, best[2], best[3])
+    return {"selected_motor_neurons": len(selected), "ridge": best[1],
+            "validation_mse": best[0], "candidates": trials}
+
+
+def train_mlp(torch, train, validation, guard, device):
+    torch.manual_seed(734)
+    model = torch.nn.Sequential(torch.nn.Linear(24, 64), torch.nn.Tanh(),
+                                torch.nn.Linear(64, 64), torch.nn.Tanh(),
+                                torch.nn.Linear(64, 2), torch.nn.Tanh()).to(device)
+    opt = torch.optim.Adam(model.parameters(), lr=.002)
+    _, x, y = train
+    x, y = x.to(device), y.to(device)
+    vx, vy = validation[1].to(device), validation[2].to(device)
+    best, saved = float("inf"), None
+    for i in range(600):
+        guard.check()
+        indices = torch.randint(len(x), (min(512, len(x)),), device=device)
+        loss = (model(x[indices])-y[indices]).square().mean()
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        if (i+1) % 100 == 0:
+            with torch.no_grad():
+                mse = float((model(vx)-vy).square().mean())
+            if mse < best:
+                best = mse
+                saved = {k: v.detach().clone() for k, v in model.state_dict().items()}
+    model.load_state_dict(saved)
+    model.eval()
+    return model, {"validation_mse": best, "iterations": 600}
+
+
+def evaluate(torch, brain, seeds, guard, *, policy, mlp=None, steps=2000):
+    world = CursorWorld(seeds, steps=steps)
+    state, previous = brain.init_state(world.B), None
+    weights = brain.weight_matrix().detach()
+    errors = []
+    with torch.inference_mode():
+        for _ in range(steps):
+            guard.check()
+            if policy == "teacher":
+                point = world.teacher()
+            else:
+                obs, packed = observe(torch, brain, world.senses(previous))
+                if policy == "connectome":
+                    action, state, _ = brain(obs, state, weights)
+                    action = action[:, :2]
+                else:
+                    action = mlp(packed)
+                point = np.rint(world.cursor + action.cpu().numpy()*world.speed[:, None]*.01)
+                point = np.clip(point, world.rect[:, :2], world.rect[:, :2]+world.rect[:, 2:]-1)
+            previous = world.cursor.copy()
+            world.step(point)
+            errors.append(np.linalg.norm(world.goal-world.cursor, axis=1))
+    errors = np.array(errors)
+    terminal = errors[-30:].mean(0)
+    static = np.linalg.norm(world.velocity, axis=1) == 0
+    return {"policy": policy, "episodes": world.B, "seeds": list(seeds), "steps": steps,
+            "static_settled_within_6px": int((np.max(errors[-10:, static], axis=0) <= 6).sum()),
+            "static_episodes": int(static.sum()), "mean_terminal_error_px": float(terminal.mean()),
+            "p95_terminal_error_px": float(np.percentile(terminal, 95)),
+            "moving_mean_last_100_error_px": float(errors[-100:, ~static].mean()),
+            "per_episode_terminal_error_px": terminal.tolist()}
+
+
+def save_checkpoint(torch, brain, cfg, output, metadata):
+    from haltere.train.export import export_slim
+    # Retain Haltere's compatible checkpoint shape, with Ganglion's sensory contract.
+    full = output / "cursor-full.tmp.pt"
+    cfg.brain.action_tau = brain.cfg.action_tau
+    torch.save({"model": brain.state_dict(), "config": cfg.to_dict(), "iter": metadata.get("iteration", 1),
+                "graph": str(Path(cfg.train.graph).resolve()), "channels": brain.channel_dims}, full)
+    destination = output / "cursor-readout.pt"
+    export_slim(full, destination)
+    ck = torch.load(destination, map_location="cpu", weights_only=True)
+    ck["ganglion_cursor"] = metadata
+    torch.save(ck, destination)
+    full.unlink()  # This function's own temporary file only.
+    return destination
+
+
+def run(args):
+    import torch
+    from haltere.train.bptt import load_checkpoint
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is required for the full-connectome training experiment")
+    args.out.mkdir(parents=True, exist_ok=False)
+    started = time.perf_counter()
+    guard = Guard(args.seconds, temperature=args.max_gpu_temp)
+    base = args.checkpoint.resolve()
+    brain, cfg, _ = load_checkpoint(base, "cuda")
+    if brain.__class__.__name__ != "ConnectomeRNN" or brain.motor_norm is None:
+        raise ValueError("Requires a Haltere connectome with motor whitening")
+    brain.eval()
+    for parameter in brain.parameters():
+        parameter.requires_grad_(False)
+    splits = {"train": list(range(1000, 1000+args.episodes)), "validation": list(range(2000, 2016)),
+              "test": list(range(3000, 3032))}
+    report = {"experiment": "frozen-connectome cursor readout", "base_checkpoint": str(base),
+              "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "neurons": brain.N,
+              "edges": int(brain.edge_index.shape[1]), "torch": torch.__version__,
+              "adapter_version": 2, "splits": splits, "training_steps": args.steps,
+              "plant_version": 2, "reach_radius_px": [2, 400],
+              "motion_limit": "min(150, speed*gain/(delay_ticks+1)*0.2) per axis",
+              "application_win_verified": False, "promoted": False}
+    (args.out/"config.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16)
+    validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16)
+    torch.save({"train": train, "validation": validation, "splits": splits}, args.out/"features.pt")
+    print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
+    report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
+    metadata = {"adapter_version": 2, "trained": True, "training_domain": "synthetic cursor episodes",
+                "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
+                "control_authority": False, "training_seeds": splits["train"],
+                "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
+    checkpoint = save_checkpoint(torch, brain, cfg, args.out, metadata)
+    print(json.dumps({"stage": "checkpoint", "path": str(checkpoint), "fit": report["readout_fit"]}), flush=True)
+    mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, brain.device)
+    torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": 2}, args.out/"mlp-baseline.pt")
+    report["held_out"] = []
+    for policy in ("teacher", "mlp", "connectome"):
+        score = evaluate(torch, brain, splits["test"], guard, policy=policy, mlp=mlp)
+        report["held_out"].append(score)
+        print(json.dumps({"stage": "evaluate", **score}), flush=True)
+    report.update(elapsed_seconds=time.perf_counter()-started, peak_gpu_c=guard.peak,
+                  checkpoint=str(checkpoint), checkpoint_sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest())
+    (args.out/"report.json").write_text(json.dumps(report, indent=2, allow_nan=False), encoding="utf-8")
+    print(json.dumps({"finished": True, "report": str(args.out/"report.json"),
+                      "elapsed_seconds": report["elapsed_seconds"], "peak_gpu_c": guard.peak}), flush=True)
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--checkpoint", required=True, type=Path)
+    p.add_argument("--out", required=True, type=Path)
+    p.add_argument("--episodes", type=int, default=64)
+    p.add_argument("--steps", type=int, default=200)
+    p.add_argument("--features", type=int, default=512)
+    p.add_argument("--seconds", type=float, default=600)
+    p.add_argument("--max-gpu-temp", type=float, default=65)
+    args = p.parse_args()
+    if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 2048
+            and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
+        p.error("Use bounded episodes 16–256, steps 80–500, features 32–2048, seconds 10–1800, temperature 50–70")
+    run(args)
+
+
+if __name__ == "__main__":
+    main()
