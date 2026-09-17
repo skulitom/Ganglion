@@ -108,7 +108,13 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **The fly's motion channel is fed.** Adapter v4 trains with view episodes whose visual slip
   goes to the lptc channel, and the runtime feeds that channel from the flow watch for v4
   checkpoints. Training with the slip gives the best supervised camera tracking so far (30/32 at 7.5 px, with the model acting on three quarters of the steps) at a cost on the cursor tasks alone, where half the harvest is now view episodes (settle 18/32 at 61 px against v3b's 19/32 at 15 px). [Details](docs/bench/TRAINING.md).
-- The suite passes **153 tests** (four optional checks skipped). Application-specific
+- **The motion channel fed live, once.** In a second Half-Life engagement with the v4
+  checkpoint and the flow watch feeding lptc, inference stayed at p99 10 ms through
+  4,686 view commands (out-of-process worker, polling wait), but the live flow
+  measured 0.22 of the applied turn in a dark point-blank scene, so the
+  channel's live value is untested until a calibration turn in a textured area.
+  [Details](docs/bench/HALFLIFE.md).
+- The suite passes **154 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

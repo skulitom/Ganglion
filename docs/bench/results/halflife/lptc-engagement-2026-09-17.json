@@ -1,0 +1,57 @@
+{
+  "events": 15285,
+  "kinds": {
+    "lease_claimed": 1,
+    "watch_added": 43,
+    "appear": 612,
+    "vanish": 595,
+    "reflex_armed": 3,
+    "input_requested": 52,
+    "keys_held": 52,
+    "intent_started": 41,
+    "reflex_fired": 41,
+    "keys_released": 52,
+    "look_done": 4686,
+    "shadow_prediction": 4682,
+    "observation_dropped": 4,
+    "reflex_rejected": 4244,
+    "intent_failed": 32,
+    "watch_removed": 40,
+    "output_halted": 32,
+    "input_submitted": 30,
+    "input_released": 30,
+    "intent_completed": 8,
+    "shadow_discarded": 3,
+    "reflex_disarmed": 2
+  },
+  "view_commands": 4686,
+  "controller_shares": {
+    "deterministic_stale": 289,
+    "connectome": 2629,
+    "deterministic_override": 1768
+  },
+  "connectome_share": 0.5610328638497653,
+  "stale_share": 0.061673068715322236,
+  "override_share": 0.3772940674349125,
+  "align_outcomes": {
+    "timeout": 14,
+    "target_lost": 18,
+    "target_lost_after_fire": 6,
+    "aligned_and_fired": 2
+  },
+  "reflex_fired": 41,
+  "observations_dropped": 4,
+  "inference_ms": {
+    "p50": 4.60199999906763,
+    "p95": 8.77479500049958,
+    "p99": 10.126995999853527
+  },
+  "samples_with_flow": 4682,
+  "flow_against_applied_turn": {
+    "samples": 4303,
+    "slope_flow_per_expected": 0.22493377616117752,
+    "correlation": 0.2172547852663232,
+    "expected_px_s_median": 1083.3333333333335,
+    "flow_px_s_median": 512.4114874520174
+  }
+}

@@ -55,6 +55,40 @@ under the level's red emergency lighting, so they were disarmed. Traversal is st
 agent's: the pilot's explore/seek behaviour bumps and turns on the change sense and stops on a
 goal or motion, which got it out of the elevator but not through the level.
 
+## Second engagement: the motion channel fed live
+
+Same corridor, later the same day, with the adapter-v4 checkpoint (the visual slip of a turning
+view trained into the lptc channel), the model in its own process with the polling wait, and a
+flow watch over the upper view feeding that channel live (`core --shadow-process
+--lptc-from-flow`). Another session had Liftoff loaded in the same seat; with it rendering in
+the background the first attempt's capture stalled and the core halted before the fight (127
+dropped observations in forty seconds). Minimising it and running the flow at eighth scale gave
+a clean run: 4 dropped observations in 4,686 view
+commands. Two grunts were spawned against the player in the elevator, so the fight was
+point-blank ([ledger summary](results/halflife/lptc-engagement-2026-09-17.json)).
+
+| Measurement | This session | First session |
+|---|---:|---:|
+| View commands | 4,686 | 6,304 |
+| From the model / overridden / stale | 56.1% / 37.7% / 6.2% | 80.4% / 19.6% / not counted |
+| Reflex firings, align intents that fired | 41, 8 | 58, 15 |
+| Inference p50 / p95 / p99 | 4.6 / 8.8 / 10.1 ms | not in the scorecard |
+| Damage taken | none | none |
+
+Two findings. Inference stayed inside the evidence budget throughout the fight, so the
+out-of-process worker and the polling wait hold up in a game, not only in the Arena. And the
+live flow did not match the simulated slip: over 4,303 samples with turns above
+100 px/s, the flow's translation was 0.22 of the turn the runtime
+had applied 60 ms earlier (median 512 px/s against 1083),
+with a correlation of 0.22. The scene explains most of it: a dark elevator
+with the grunts filling the view leaves the phase correlation and the dense flow little
+texture, and the flow's comparison window straddles the fast turns the align program makes
+(up to 80 counts per tick). The v4 readout, trained on a slip that tracks the view exactly, was
+overridden more than the first session's readout; whether that is the mismatch or the readout
+cannot be told apart here. The next step is a calibration turn in a textured, open area with
+the slip logged against the applied deltas, before any conclusion about the channel's live
+value.
+
 ## Limits and next work
 
 No level was completed. Cheats supplied the loadout and the test enemies; the fights are a
