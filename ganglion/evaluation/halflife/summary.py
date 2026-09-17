@@ -57,7 +57,8 @@ def summarise(rows, *, counts_per_px=1.2, lag_s=.06):
     fit = None
     if len(moving) >= 5:
         slope = float(np.polyfit(moving[:, 0], moving[:, 1], 1)[0])
-        corr = float(np.corrcoef(moving[:, 0], moving[:, 1])[0, 1])
+        spread = moving.std(axis=0)
+        corr = float(np.corrcoef(moving[:, 0], moving[:, 1])[0, 1]) if (spread > 0).all() else None
         fit = {"samples": int(len(moving)), "slope_flow_per_expected": slope, "correlation": corr,
                "expected_px_s_median": float(np.median(np.abs(moving[:, 0]))),
                "flow_px_s_median": float(np.median(np.abs(moving[:, 1])))}

@@ -31,3 +31,5 @@ def test_summary_counts_shares_outcomes_and_relates_flow_to_turns(tmp_path):
     assert report["inference_ms"]["p50"] == 6.5 and report["samples_with_flow"] == 6
     fit = report["flow_against_applied_turn"]
     assert fit["samples"] == 6 and fit["expected_px_s_median"] > 0 and fit["flow_px_s_median"] == 5000
+    assert fit["correlation"] is None                      # a constant flow has no correlation, and no NaN
+    json.dumps(report, allow_nan=False)                    # the report must serialise as the command line writes it
