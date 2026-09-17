@@ -5,44 +5,18 @@ Tests use a fake clock and output to exercise the same state transitions.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from math import hypot
 from threading import RLock
 from uuid import uuid4
 
+from .errors import RuntimeErrorWithCode  # noqa: F401  (re-exported for callers and tests)
 from .ledger import Ledger
+from .perception import ChangeSense, Reflex, Watch, new_watch, observe
 from .schema import ArmSpec, WatchSpec, IntentSpec, InputSpec
 from .reach import Reach, step, supervise
 from .drag import Drag, drive_drag, drag_event
 from .aim import Align, drive_align, align_event
 from .locomotion import Move, drive_move, finish_move
-
-
-class RuntimeErrorWithCode(ValueError):
-    def __init__(self, code, message):
-        super().__init__(message)
-        self.code = code
-
-
-@dataclass
-class Watch:
-    spec: WatchSpec
-    present: bool = False
-    detection: dict | None = None
-    last_command: str | None = None
-    captured: float = 0.0
-    observation_id: int = 0
-    sample_started: float = 0.0
-    source: str = "provided"
-    state: dict = field(default_factory=dict)
-
-
-@dataclass
-class Reflex:
-    spec: ArmSpec
-    expires: float
-    fires: int = 0
-    last_fire: float = float("-inf")
 
 
 class Runtime:
@@ -75,7 +49,7 @@ class Runtime:
         self.layout_rev = 0
         self.dropped_frames = 0
         self.change = None            # mean grey change of the upper frame against the previous one
-        self._change_gray = None
+        self.change_sense = ChangeSense()
         self.ledger.append("core_ready", clock(), critical=True)
         self.shadow = None
         if shadow_predictor is not None:
@@ -391,22 +365,6 @@ class Runtime:
         f = self.flow
         return (f["tx_px_s"], f["ty_px_s"], f["divergence_s"], f["curl_s"])
 
-    def _change_energy(self, frame):
-        """Cheap whole-view change sense: mean absolute grey difference of the upper 60% of the
-        frame at 64x36, against the previous frame. Near zero while the view is static, whatever
-        the pointer or a weapon model at the bottom does."""
-        try:
-            import cv2
-            h = frame.shape[0]
-            small = cv2.resize(cv2.cvtColor(frame[:int(h * 0.6), :, :3], cv2.COLOR_BGR2GRAY), (64, 36),
-                               interpolation=cv2.INTER_AREA).astype("float32")
-        except Exception:
-            return None
-        previous, self._change_gray = self._change_gray, small
-        if previous is None:
-            return None
-        return float(abs(small - previous).mean())
-
     def snapshot(self):
         if self.frame is None:
             return None
@@ -523,163 +481,12 @@ class Runtime:
                                critical=True, id=ident)
             return {"removed": ident}
 
-    def _detect(self, watch, frame, captured, moving):
-        if watch.spec.kind == "motion":
-            from ganglion.percepts.motion import detect_motion
-            return detect_motion(frame, watch.spec, watch.state, captured=captured, moving=moving)
-        if watch.spec.kind == "track":
-            from ganglion.percepts.track import detect_track
-            return detect_track(frame, watch.spec, watch.state)
-        if watch.spec.kind == "flow":
-            from ganglion.percepts.flow import detect_flow
-            return detect_flow(frame, watch.spec, watch.state, captured=captured, moving=moving)
-        from ganglion.percepts.color import detect
-        return detect(frame, watch.spec, was_present=watch.present)
-
     def _new_watch(self, spec: WatchSpec):
-        """Register a watch under the lock; a track watch cuts its template from the newest frame."""
-        if len(self.watches) >= 16:
-            self._error("watch_budget", "At most 16 watches; unwatch one first.")
-        watch = Watch(spec)
-        if spec.kind == "track":
-            from ganglion.percepts.track import init_track
-            tx, ty, tw, th = spec.template_region
-            x, y, w, h = self.layout["rect"]
-            if not (x <= tx and y <= ty and tx + tw <= x + w and ty + th <= y + h):
-                self._error("region_outside_target", "The template must lie inside the target client area.")
-            try:
-                watch.state = init_track(self.frame, spec.template_region, spec)
-            except ValueError as exc:
-                self._error("template_unusable", str(exc))
-        wid = uuid4().hex
-        self.watches[wid] = watch
-        self.ledger.append("watch_added", self.clock(), critical=True, watch_id=wid, name=spec.name, watch_kind=spec.kind)
-        return wid
+        return new_watch(self, spec)
 
     def observe(self, frame, captured, seq, layout, *, source="provided", sample_started=None):
-        """Run detectors outside the state lock so halt/lease checks cannot wait on vision."""
-        sample_started = captured if sample_started is None else sample_started
-        with self.lock:
-            if seq <= self.frame_seq:
-                return
-            self.dropped_frames += max(0, seq - self.frame_seq - 1) if self.frame_seq else 0
-            if layout != self.layout:
-                if self.layout is not None and self.owner is not None:
-                    self.halt("target_layout_changed", degraded=True)
-                self.layout, self.layout_rev = layout, self.layout_rev + 1
-            self.frame, self.frame_seq, self.frame_time = frame, seq, captured
-            self.change = self._change_energy(frame)
-            self.frame_source = source
-            self.frame_started = sample_started
-            self.source_counts[source] = self.source_counts.get(source, 0) + 1
-            watches = list(self.watches.items())
-            revision = self.layout_rev
-            moving = self.clock() < self.motion_until
-        observations = [(wid, watch, self._detect(watch, frame, captured, moving))
-                        for wid, watch in watches]
-        with self.lock:
-            self.tick(drive=False)
-            if revision != self.layout_rev or seq != self.frame_seq:
-                return
-            if self.clock() - sample_started > 0.05:
-                self.dropped_frames += 1
-                self.ledger.append("observation_dropped", self.clock(), observation_id=seq,
-                                   reason="older_than_50_ms")
-                return
-            for wid, watch, detection in observations:
-                if self.watches.get(wid) is not watch:
-                    continue
-                appeared = detection is not None and not watch.present
-                vanished = detection is None and watch.present
-                watch.present, watch.detection = detection is not None, detection
-                watch.captured, watch.observation_id = captured, seq
-                watch.sample_started, watch.source = sample_started, source
-                if watch.spec.kind == "flow":
-                    self.flow = watch.state.get("ego")
-                ready = self.clock()
-                if appeared or vanished:
-                    self.ledger.append("appear" if appeared else "vanish", ready, watch_id=wid,
-                                       observation_id=seq, captured_mono=captured, detection=detection)
-                if vanished and watch.last_command:
-                    self.ledger.append("effect_observed", ready, critical=True, watch_id=wid,
-                                       command_id=watch.last_command, observation_id=seq,
-                                       condition="watched_target_absent", task_success_verified=False)
-                    watch.last_command = None
-                if detection is None or self.owner is None:
-                    continue
-                # Evidence age bounds are independent of a static desktop's capture health.
-                if ready - sample_started > 0.05:
-                    continue
-                for rid, reflex in list(self.reflexes.items()):
-                    spec = reflex.spec
-                    if spec.watch_id != wid or (spec.trigger == "appear" and not appeared):
-                        continue
-                    if (reflex.fires >= spec.max_fires or ready >= reflex.expires
-                            or ready - reflex.last_fire < spec.cooldown_ms / 1000):
-                        continue
-                    if spec.response in ("click", "align", "track") and (self.pending or (self.intent and self.intent.active)):
-                        self.ledger.append("reflex_rejected", ready, critical=True, reflex_id=rid,
-                                           observation_id=seq, reason="pointer_busy")
-                        continue
-                    cid = uuid4().hex
-                    details = {"reflex_id": rid, "watch_id": wid, "observation_id": seq,
-                               "captured_mono": captured, "percept_ready_mono": ready,
-                               "capture_source": source, "sample_started_mono": sample_started}
-                    if spec.response in ("align", "track"):
-                        options = spec.align.model_dump()
-                        target_wid, cleanup = wid, None
-                        if spec.response == "track":
-                            # Follow the thing that just moved: a template cut around its blob,
-                            # tracked every frame so the turn itself no longer blinds the program.
-                            bx, by, bw, bh = detection["bbox"]
-                            grow = 8
-                            track_spec = WatchSpec(name=f"track:{watch.spec.name}", snapshot_id=self.snapshot()["id"],
-                                                   region=layout["rect"], kind="track",
-                                                   template_region=(max(layout["rect"][0], bx - grow),
-                                                                    max(layout["rect"][1], by - grow),
-                                                                    min(bw + 2 * grow, 1024), min(bh + 2 * grow, 1024)))
-                            try:
-                                target_wid = cleanup = self._new_watch(track_spec)
-                            except RuntimeErrorWithCode as exc:
-                                self.ledger.append("reflex_rejected", ready, critical=True, reflex_id=rid,
-                                                   observation_id=seq, reason=exc.code)
-                                continue
-                        intent_spec = IntentSpec(program="align", watch_id=target_wid, **options)
-                        self.intent = Align(uuid4().hex, intent_spec, ready, ready + intent_spec.timeout_seconds)
-                        self.intent.cleanup_watch = cleanup
-                        self.state = "running"
-                        details["intent_id"] = self.intent.id
-                        self.ledger.append("intent_started", ready, critical=True, reflex_id=rid, **self.intent.status())
-                    elif spec.response == "key":
-                        deadline = min(self.expires, reflex.expires, sample_started + 0.05)
-                        self.key_pending[cid] = details
-                        try:
-                            self.output.key({"command_id": cid, "target": layout, "deadline": deadline,
-                                             "keys": [spec.key], "hold_until": min(self.expires, ready + spec.hold_ms / 1000)})
-                        except Exception as exc:
-                            self.key_pending.pop(cid, None)
-                            self.halt(f"submit_failed: {exc}", degraded=True)
-                            break
-                        if spec.key in ("w", "a", "s", "d", "space", "ctrl", "lshift"):
-                            self.note_self_motion(ready + spec.hold_ms / 1000 + 0.35)
-                    if spec.response == "click":
-                        # The helper rechecks target identity, foreground, bounds, and this deadline.
-                        deadline = min(self.expires, reflex.expires, sample_started + 0.05)
-                        self.pending[cid] = details
-                        try:
-                            self.output.submit({"command_id": cid, "x": detection["x"], "y": detection["y"],
-                                                "target": layout, "deadline": deadline,
-                                                "hold_ms": spec.hold_ms})
-                        except Exception as exc:
-                            self.pending.pop(cid, None)
-                            self.halt(f"submit_failed: {exc}", degraded=True)
-                            break
-                        watch.last_command = cid
-                    reflex.fires += 1
-                    reflex.last_fire = ready
-                    self.ledger.append("notify" if spec.response == "notify" else "reflex_fired",
-                                       ready, critical=True, command_id=cid, response=spec.response, **details)
-            self._tick_intent(self.clock())
+        """Apply one captured frame: detectors, ledger events and armed reflexes (see perception)."""
+        observe(self, frame, captured, seq, layout, source=source, sample_started=sample_started)
 
     def status(self):
         with self.lock:
