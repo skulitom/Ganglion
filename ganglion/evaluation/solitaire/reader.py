@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from ganglion.percepts.templates import ink_bbox, ink_mask, iou, locate, mean_ink_colour
+from ganglion.percepts.templates import ink_bbox, iou, locate, mean_ink_colour
 from .cards import Card, RANKS, SUITS
 from .layout import (CARD_H, CARD_W, CELL_SEARCH, COLUMN_X, COLUMN_Y, FOUNDATIONS, PITCH_Y, RANK_W, STOCK,
                      STRIP_H, WASTE_BAND, Slot)

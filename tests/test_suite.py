@@ -1,6 +1,5 @@
 """The fixed suite: identical episodes, an envelope twin of the runtime, and honest metrics."""
 import numpy as np
-import pytest
 
 from ganglion.core.reach import supervise
 from ganglion.train.suite import (JUMP_EVERY, SuiteWorld, TASKS, proposed_points, run_task, settle_tick,
