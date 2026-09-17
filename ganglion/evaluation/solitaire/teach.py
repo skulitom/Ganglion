@@ -27,7 +27,7 @@ def crops(frame, columns, waste, reader, foundations=()):
     boxes = reader.white_cards(frame, WASTE_BAND, min_height=90)
     if len(boxes) != len(waste):
         raise ValueError(f"{len(boxes)} waste cards found, {len(waste)} labelled")
-    for k, (card, (x, y, w, h)) in enumerate(zip(waste, boxes)):
+    for k, (card, (x, y, w, _)) in enumerate(zip(waste, boxes)):
         yield card, x, y, k < len(waste) - 1, min(w, RANK_W)
     for slot, label in zip(FOUNDATIONS, foundations):
         if not label:
