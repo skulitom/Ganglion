@@ -18,12 +18,11 @@ import time
 
 import numpy as np
 
-from ..core.aim import UNBOUNDED
-from .cursor_world import CursorWorld, teacher_points
+from .cursor_world import VIEW_LATENCY_TICKS, CursorWorld
 
 TICK = .01
 TOLERANCE_PX = 6.0
-CAMERA_LATENCY_TICKS = 2          # frames between a view delta and its effect in the capture
+CAMERA_LATENCY_TICKS = VIEW_LATENCY_TICKS
 JUMP_EVERY = 250                  # ticks between target jumps in the jump task (2.5 s)
 TASKS = ("settle", "jump", "pursuit", "camera")
 CONTROLLERS = ("teacher", "mlp", "connectome", "supervised")
@@ -41,7 +40,7 @@ class SuiteWorld(CursorWorld):
         if task not in TASKS:
             raise ValueError(f"Unknown suite task {task!r}")
         super().__init__(seeds, steps=steps, jump_every=JUMP_EVERY if task == "jump" else None,
-                         sense_version=sense_version)
+                         sense_version=sense_version, view=(task == "camera"))
         self.task = task
         rngs = [np.random.default_rng(seed + 1_000_003) for seed in self.seeds]
         if task in ("settle", "jump"):
@@ -50,44 +49,16 @@ class SuiteWorld(CursorWorld):
             limits = np.minimum(150, self.speed * self.gain / (self.delay + 1) * .2)
             self.velocity = np.array([r.uniform(-limit, limit, 2) for r, limit in zip(rngs, limits)])
             self.velocity[np.linalg.norm(self.velocity, axis=1) < 1] = 20   # every pursuit target moves
-        if task == "camera":
-            # The plant is a view turned by relative deltas: unbounded, seen through the capture with
-            # extra latency, and the target must start inside the frame or there is nothing to track.
-            self.delay = self.delay + CAMERA_LATENCY_TICKS
-            self._cap_start(np.minimum(self.rect[:, 2], self.rect[:, 3]) / 2 - 60)
         if task == "jump":
             self._cap_start(self.reach_cap)      # the first reach is sized like the jumps
         self.lost = np.zeros(self.B, dtype=bool)
         self.lost_at = np.full(self.B, steps)     # tick index at which the target left the view
 
-    @property
-    def bounds(self):
-        """The rect the controllers and the envelope work in: the client area, or none for a view."""
-        if self.task == "camera":
-            return np.tile(np.array(UNBOUNDED, dtype=float), (self.B, 1))
-        return self.rect
-
-    def teacher(self):
-        return teacher_points(self.cursor, self.goal, self.speed, self.bounds, TICK)
-
     def step(self, point):
         point = np.asarray(point, dtype=float)
-        if self.jump_every and self.tick and self.tick % self.jump_every == 0:
-            self.jump()
         if self.task == "camera":
             point = np.where(self.lost[:, None], self.cursor, point)   # a lost target gets no commands
-        self.commands.append(self.cursor + self.gain[:, None] * (point - self.cursor))
-        indices = self.tick - self.delay
-        desired = np.array([self.commands[t][i] if t >= 0 else self.initial[i] for i, t in enumerate(indices)])
-        self.cursor = desired.copy()
-        if self.task != "camera":
-            self.cursor = np.clip(self.cursor, self.rect[:, :2], self.rect[:, :2] + self.rect[:, 2:] - 1)
-        self.goal += self.velocity * TICK
-        low, high = np.full_like(self.goal, 35), self.rect[:, 2:] - 35
-        bounced = (self.goal < low) | (self.goal > high)
-        self.velocity[bounced] *= -1
-        self.goal = np.clip(self.goal, low, high)
-        self.tick += 1
+        super().step(point)
         if self.task == "camera":
             error = self.goal - self.cursor
             gone = (np.abs(error[:, 0]) > self.rect[:, 2] / 2) | (np.abs(error[:, 1]) > self.rect[:, 3] / 2)
@@ -296,9 +267,9 @@ def run(args):
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
     provenance = torch.load(checkpoint, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
-    version = provenance.get("adapter_version", 2)
-    if version not in (2, 3):
-        raise ValueError("The suite speaks sensory adapter versions 2 and 3")
+    version = args.sense_version or provenance.get("adapter_version", 2)
+    if version not in (2, 3, 4):
+        raise ValueError("The suite speaks sensory adapter versions 2, 3 and 4")
     mlp = build_mlp(torch).to(brain.device)
     if args.mlp:
         saved = torch.load(args.mlp, map_location="cpu", weights_only=True)
@@ -318,7 +289,8 @@ def run(args):
     report = {"suite": "cursor-suite-v1", "measured_at": datetime.now(timezone.utc).isoformat(),
               "checkpoint": {"path": str(checkpoint), "sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
                              "training": provenance}, "mlp": mlp_source,
-              "adapter_version": version, "steps": args.steps, "tick_seconds": TICK, "tolerance_px": TOLERANCE_PX,
+              "adapter_version": version, "checkpoint_adapter_version": provenance.get("adapter_version", 2),
+              "steps": args.steps, "tick_seconds": TICK, "tolerance_px": TOLERANCE_PX,
               "camera_latency_ticks": CAMERA_LATENCY_TICKS, "jump_every_ticks": JUMP_EVERY,
               "torch": torch.__version__, "gpu": torch.cuda.get_device_name(brain.device),
               "controllers": list(CONTROLLERS), "tasks": {}, "promoted": False, "actuation_authority": False}
@@ -351,6 +323,8 @@ def main():
     p.add_argument("--mlp", type=Path, help="MLP baseline state to load (else trained from --mlp-features)")
     p.add_argument("--mlp-features", type=Path, help="feature cache to train the MLP baseline from")
     p.add_argument("--steps", type=int, default=2000)
+    p.add_argument("--sense-version", type=int, choices=(2, 3, 4),
+                   help="feed the world's channels of this adapter version instead of the checkpoint's own")
     p.add_argument("--seconds", type=float, default=900)
     p.add_argument("--max-gpu-temp", type=float, default=65)
     args = p.parse_args()

@@ -76,8 +76,8 @@ def run(args):
     brain, cfg, _ = load_checkpoint(base, "cuda")
     source = torch.load(base, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
     version = source.get("adapter_version")
-    if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN" or version not in (2, 3):
-        raise ValueError("Requires an adapter version 2 or 3 cursor ConnectomeRNN on CUDA")
+    if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN" or version not in (2, 3, 4):
+        raise ValueError("Requires an adapter version 2, 3 or 4 cursor ConnectomeRNN on CUDA")
     # Keep whitening fixed while learning, so batch composition never subtracts
     # the signal. Structure and signs stay those of the connectome.
     brain.eval()

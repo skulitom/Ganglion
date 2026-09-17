@@ -24,8 +24,9 @@ def run(args):
         raise ValueError("Requires the actual CUDA connectome")
     original = torch.load(base, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
     version = original.get("adapter_version")
-    if version not in (2, 3):
-        raise ValueError("DAgger requires a cursor adapter version 2 or 3 checkpoint")
+    if version not in (2, 3, 4):
+        raise ValueError("DAgger requires a cursor adapter version 2, 3 or 4 checkpoint")
+    view_fraction = args.view_fraction if args.view_fraction is not None else float(original.get("view_fraction", 0.0))
     brain.eval()
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
@@ -38,13 +39,14 @@ def run(args):
               "plant_version": 2, "rounds": [], "promoted": False, "test_seeds": list(range(4000, 4032)),
               "neurons": brain.N, "edges": int(brain.edge_index.shape[1]),
               "episode_steps": args.episode_steps, "kick_every": args.kick_every or None,
-              "student_max": args.student_max, "seed_base": args.seed_base}
+              "student_max": args.student_max, "seed_base": args.seed_base, "view_fraction": view_fraction}
     best = None
     for round_index in range(1, args.rounds+1):
         new_seeds = list(range(args.seed_base+round_index*100, args.seed_base+round_index*100+32))
         fraction = min(args.student_max, .25+round_index*.15)
         new = harvest(torch, brain, new_seeds, guard, steps=args.episode_steps, batch=16,
-                      student_fraction=fraction, jump_every=args.kick_every or None, sense_version=version)
+                      student_fraction=fraction, jump_every=args.kick_every or None, sense_version=version,
+                      view_fraction=view_fraction)
         train = tuple(torch.cat((old, added)) for old, added in zip(train, new))
         del new
         seeds.extend(new_seeds)
@@ -53,6 +55,7 @@ def run(args):
         folder = args.out/f"round-{round_index:02d}"
         folder.mkdir()
         metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
+                    "view_fraction": view_fraction,
                     "method": "frozen connectome, DAgger ridge motor readout", "control_authority": False,
                     "training_seeds": seeds.copy(), "validation_seeds": validation_seeds,
                     "readout_fit": fitted, "parent_sha256": report["base_sha256"]}
@@ -94,7 +97,10 @@ def main():
     p.add_argument("--kick-every", type=int, default=0, help="jump the target every N ticks (0: never)")
     p.add_argument("--student-max", type=float, default=.75, help="largest model-driven share of a round")
     p.add_argument("--seed-base", type=int, default=10000, help="first harvest seed; keep rounds of different runs apart")
+    p.add_argument("--view-fraction", type=float, help="share of view episodes per round (default: the checkpoint's)")
     args = p.parse_args()
+    if args.view_fraction is not None and not 0 <= args.view_fraction <= 1:
+        p.error("Use a view fraction between 0 and 1")
     if not 1 <= args.rounds <= 5 or not 32 <= args.neurons <= 4096 or not 30 <= args.seconds <= 1800 or not 50 <= args.max_gpu_temp <= 70:
         p.error("Use rounds 1–5, neurons 32–4096, seconds 30–1800 and temperature 50–70")
     if not 80 <= args.episode_steps <= 2000 or not (args.kick_every == 0 or 50 <= args.kick_every <= 1000):

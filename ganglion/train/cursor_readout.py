@@ -62,11 +62,14 @@ def observe(torch, brain, senses):
     return obs, packed
 
 
-def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None, sense_version=2):
+def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None, sense_version=2,
+            view_fraction=0.0):
     features, inputs, labels = [], [], []
     weights = brain.weight_matrix().detach()
     for offset in range(0, len(seeds), batch):
-        world = CursorWorld(seeds[offset:offset+batch], steps=steps, jump_every=jump_every, sense_version=sense_version)
+        chunk = seeds[offset:offset+batch]
+        view = np.arange(len(chunk)) < int(round(len(chunk) * view_fraction))   # the first ones are views
+        world = CursorWorld(chunk, steps=steps, jump_every=jump_every, sense_version=sense_version, view=view)
         state, previous = brain.init_state(world.B), None
         with torch.inference_mode():
             for _ in range(steps):
@@ -84,7 +87,8 @@ def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jum
                 students = int(world.B*student_fraction)
                 if students:
                     driven[:students] = np.rint(world.cursor[:students] + action[:students, :2].cpu().numpy()*world.speed[:students, None]*.01)
-                    driven = np.clip(driven, world.rect[:, :2], world.rect[:, :2]+world.rect[:, 2:]-1)
+                    bounds = world.bounds
+                    driven = np.clip(driven, bounds[:, :2], bounds[:, :2]+bounds[:, 2:]-1)
                 world.step(driven)
         print(json.dumps({"stage": "harvest", "episodes": min(offset+batch, len(seeds)),
                           "total_episodes": len(seeds), "peak_gpu_c": guard.peak}), flush=True)
@@ -235,17 +239,21 @@ def run(args):
     report = {"experiment": "frozen-connectome cursor readout", "base_checkpoint": str(base),
               "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "neurons": brain.N,
               "edges": int(brain.edge_index.shape[1]), "torch": torch.__version__,
-              "adapter_version": version, "splits": splits, "training_steps": args.steps,
+              "adapter_version": version, "view_fraction": args.view_fraction, "splits": splits,
+              "training_steps": args.steps,
               "plant_version": 2, "reach_radius_px": [2, 400],
               "motion_limit": "min(150, speed*gain/(delay_ticks+1)*0.2) per axis",
               "application_win_verified": False, "promoted": False}
     (args.out/"config.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
-    train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16, sense_version=version)
-    validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16, sense_version=version)
+    train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16, sense_version=version,
+                    view_fraction=args.view_fraction)
+    validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16, sense_version=version,
+                         view_fraction=args.view_fraction)
     torch.save({"train": train, "validation": validation, "splits": splits}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
     report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
     metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
+                "view_fraction": args.view_fraction,
                 "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
                 "control_authority": False, "training_seeds": splits["train"],
                 "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
@@ -274,9 +282,13 @@ def main():
     p.add_argument("--features", type=int, default=512)
     p.add_argument("--seconds", type=float, default=600)
     p.add_argument("--max-gpu-temp", type=float, default=65)
-    p.add_argument("--adapter-version", type=int, default=2, choices=(2, 3),
-                   help="2: goal error and own velocity; 3: goal error only")
+    p.add_argument("--adapter-version", type=int, default=2, choices=(2, 3, 4),
+                   help="2: goal error and own velocity; 3: goal error only; 4: goal error and the visual slip of views")
+    p.add_argument("--view-fraction", type=float, default=0.0,
+                   help="share of harvested episodes that are views (unbounded, capture latency, slip in lptc)")
     args = p.parse_args()
+    if not 0 <= args.view_fraction <= 1:
+        p.error("Use a view fraction between 0 and 1")
     if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 4096
             and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
         p.error("Use bounded episodes 16–256, steps 80–500, features 32–4096, seconds 10–1800, temperature 50–70")

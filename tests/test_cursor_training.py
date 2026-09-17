@@ -175,4 +175,30 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
             np.testing.assert_allclose(observed[key][i], expected[key], atol=1e-7)
         np.testing.assert_allclose(expected["goal"], channels(current, old, version=2)["goal"])
     with pytest.raises(ValueError):
-        CursorWorld([1000], sense_version=4)
+        CursorWorld([1000], sense_version=5)
+
+
+def test_adapter_version_4_feeds_the_visual_slip_of_view_episodes_and_matches_the_world():
+    from ganglion.core.aim import UNBOUNDED
+    world = CursorWorld([1000, 1001, 1002, 1003], sense_version=4, view=[True, True, False, False])
+    plain = CursorWorld([1000, 1001, 1002, 1003], sense_version=4)
+    assert world.delay.tolist() == (plain.delay + [2, 2, 0, 0]).tolist()
+    assert (world.bounds[:2] == np.array(UNBOUNDED, dtype=float)).all() and (world.bounds[2:] == world.rect[2:]).all()
+    assert not world.senses().get("lptc").any()                     # nothing has moved yet
+    for _ in range(20):
+        world.step(world.cursor + [500, 0])                          # turn the view hard to the right
+    assert (world.cursor[:2, 0] > world.rect[:2, 2]).all()           # a view is unbounded
+    assert (world.cursor[2:, 0] <= world.rect[2:, 2] - 1).all()      # a cursor is not
+    senses = world.senses(world.cursor.copy())
+    assert not senses["haltere"].any() and not senses["jo"].any()
+    assert (senses["lptc"][:2, 0] < 0).all()                         # the picture slips left
+    assert not senses["lptc"][2:].any() and not senses["lptc"][:, 2:].any()
+    for i in range(2):
+        slip = world.slip()[i]
+        sample = MotorSample("i", "align", 1, 2, .01, .01, 10, tuple(world.cursor[i]), tuple(world.goal[i]),
+                             (0, 0), UNBOUNDED, world.speed[i], .01, flow=(slip[0], slip[1], 0.0, 0.0))
+        expected = channels(sample, None, version=4)
+        np.testing.assert_allclose(senses["lptc"][i], expected["lptc"], atol=1e-6)
+        assert channels(sample, None, version=3)["lptc"] == [0.0] * 6   # older versions ignore the flow
+    world.view[:] = False
+    assert not world.senses().get("lptc").any()                     # no view, no slip

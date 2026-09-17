@@ -34,22 +34,25 @@ def channels(sample, previous=None, *, version=1):
     Cursor velocity is normalised by the intent speed in both versions. V3 is v2 without the
     own-velocity channels: the reference controller it imitates is memoryless, and a copy of
     the recent motion is a shortcut in imitation data rather than evidence about the goal.
+    V4 is v3 plus the wide-field flow in the lptc channel when the sample carries one: the
+    image translation in units of intent speed and the expansion and roll rates, which for a
+    turning view is the visual slip the fly's lobula-plate cells report.
     Attitude, compass and load channels remain zero. The lptc (wide-field flow) channel is zero
     unless the sample carries a flow summary, in which case it holds the view translation in
     units of intent speed and the expansion and roll rates; training so far fed zeros here.
     """
-    if version not in (1, 2, 3):
+    if version not in (1, 2, 3, 4):
         raise ValueError("Unknown cursor sensory adapter version")
     scale = 400 if version == 1 else sample.speed * .3
     dx, dy = (sample.goal[i] - sample.cursor[i] for i in range(2))
     vx = vy = 0.0
-    if version != 3 and previous is not None and .001 <= sample.submitted - previous.submitted <= .05:
+    if version in (1, 2) and previous is not None and .001 <= sample.submitted - previous.submitted <= .05:
         dt = sample.submitted - previous.submitted
         vx, vy = ((sample.cursor[i] - previous.cursor[i]) / dt / sample.speed for i in range(2))
     velocity = [tanh(vx), tanh(vy), 0.0]
     lptc = [0.0]*6
     flow = getattr(sample, "flow", None)
-    if flow is not None:
+    if version == 4 and flow is not None:
         lptc = [tanh(flow[0]/sample.speed), tanh(flow[1]/sample.speed), tanh(flow[2]), tanh(flow[3]), 0.0, 0.0]
     return {"goal": [tanh(dx/scale), tanh(dy/scale), 0.0, tanh(hypot(dx, dy)/scale)],
             "haltere": velocity, "jo": velocity, "lptc": lptc,
@@ -66,7 +69,7 @@ class HaltereCursor:
         checkpoint = Path(checkpoint).resolve()
         cursor_training = torch.load(checkpoint, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
         self.adapter_version = cursor_training.get("adapter_version", 1)
-        if self.adapter_version not in (1, 2, 3):
+        if self.adapter_version not in (1, 2, 3, 4):
             raise ValueError("Unknown cursor sensory adapter version")
         self.desktop_trained = bool(cursor_training.get("trained", False))
         self.brain, _, _ = load_checkpoint(checkpoint, "cuda")
