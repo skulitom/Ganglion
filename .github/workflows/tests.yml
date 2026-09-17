@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: uv sync --locked --extra dev
+      - run: uv run --no-sync ruff check --select F,E9 ganglion tests
       - run: uv run --no-sync python -m pytest -q
       - run: uv run --no-sync ganglion demo --synthetic --seconds 5
       - run: uv run --no-sync ganglion reach-demo --environment synthetic --trials 2
