@@ -105,7 +105,10 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   own process (`--shadow-process`) took it to 14.9%; polling the CUDA completion event instead
   of blocking, with 1 ms timer resolution, took live inference to p95 9.7 ms and p99 16.3 ms
   and the stale share to 5.7%, with 76% of steps accepted from the model.
-- The suite passes **152 tests** (four optional checks skipped). Application-specific
+- **The fly's motion channel is fed.** Adapter v4 trains with view episodes whose visual slip
+  goes to the lptc channel, and the runtime feeds that channel from the flow watch for v4
+  checkpoints. Training with the slip gives the best supervised camera tracking so far (30/32 at 7.5 px, with the model acting on three quarters of the steps) at a cost on the cursor tasks alone, where half the harvest is now view episodes (settle 18/32 at 61 px against v3b's 19/32 at 15 px). [Details](docs/bench/TRAINING.md).
+- The suite passes **153 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

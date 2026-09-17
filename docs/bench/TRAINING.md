@@ -335,6 +335,47 @@ targets with 149 px terminal error. On the suite
 
 More on-policy data with the stronger readout did not help either: settling alone rose to 21/32 but with 81 px error, moving targets got worse alone (jump 64/256, pursuit 1/32), and under the envelope every task moved by a few percent either way. The single refit (v3b) stays the candidate, and the pattern across v2, v3c and the gradient runs is consistent: with this frozen network, what the readout sees decides more than how much on-policy data it gets.
 
+## Feeding the fly's motion channel: adapter v4
+
+The lptc channel is the connectome's wide-field motion input, and until now training fed it
+zeros. Adapter **v4** is v3 (goal error only) plus, for a *view* episode, what the flow percept
+reports when the view turns: the image translation over the last 60 ms seen two frames late,
+which is minus the view's own motion, in units of intent speed, plus the expansion and roll
+rates (zero for a turn). The training world runs view episodes (unbounded, two frames of
+capture latency, target starting inside the frame) beside cursor episodes; the harvest mixes
+them half and half; the suite's camera task is a view episode; and `ganglion core
+--lptc-from-flow` hands a v4 checkpoint the live flow summary, which older versions ignore.
+
+Readout on 12,800 samples from all 3,913 motor neurons ([readout v4](results/cursor-readout-v4.json)):
+6/16 held-out static targets with
+213 px terminal error (MLP 16/16).
+Three DAgger rounds ([DAgger v4](results/cursor-dagger-v4.json); validation 4/8; 4/8; 4/8; round-02 selected):
+8/16 with 159 px.
+On the suite, with an MLP trained on the same v4 samples ([cursor-suite-v4](results/cursor-suite-v4.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 18/32 | 390 | 60.7 | n/a | n/a |
+| settle | supervised | 32/32 | 490 | 4.2 | 3.4% | 96.6% |
+| jump | connectome | 51/256 | 580 | 159.9 | n/a | n/a |
+| jump | supervised | 225/256 | 750 | 24.1 | 7.2% | 92.8% |
+| pursuit | connectome | 3/32 | 230 | 201.4 | n/a | n/a |
+| pursuit | supervised | 20/32 | 225 | 12.4 | 17.1% | 82.9% |
+| camera | connectome | 3/32 (lost 29) | 575 | 87.9 | n/a | n/a |
+| camera | supervised | 30/32 (lost 0) | 505 | 7.5 | 25.0% | 75.0% |
+
+A second question the channel lets us ask: does the flight-trained network already do
+something with visual slip? The v3b checkpoint, whose readout never saw a non-zero lptc, scored
+on the camera task with the slip fed in ([cursor-suite-v3b-slip](results/cursor-suite-v3b-slip.json))
+against its own rows above:
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| camera | connectome | 0/32 (lost 32) | 600 | 247.6 | n/a | n/a |
+| camera | supervised | 31/32 (lost 0) | 490 | 4.4 | 96.5% | 3.5% |
+
+Training with the slip gives the best supervised camera tracking so far (30/32 at 7.5 px, with the model acting on three quarters of the steps) at a cost on the cursor tasks alone, where half the harvest is now view episodes (settle 18/32 at 61 px against v3b's 19/32 at 15 px). The untrained network has no usable innate response to slip through the readout: fed to v3b, the slip makes it lose every camera target alone and the envelope rejects 96% of its proposals, so the near-reference row there is the reference's work. Both of the fly's self-motion channels now exist in training and at runtime; which one a task should get, and whether the live flow matches the simulated slip, is the next measurement, on a turning view in the seat.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -352,6 +393,9 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v3 --episodes 64 --steps 200 --features 512 --seconds 900 --adapter-version 3
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v3/cursor-readout.pt --features runs/cursor-readout-v3/features.pt --out runs/cursor-dagger-v3 --rounds 3 --neurons 512 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v3/round-01/cursor-readout.pt --mlp-features runs/cursor-dagger-v3/features.pt --out runs/suite-v3 --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v4 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 4 --view-fraction 0.5
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v4/cursor-readout.pt --features runs/cursor-readout-v4/features.pt --out runs/cursor-dagger-v4 --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v3b/round-01/cursor-readout.pt --sense-version 4 --mlp runs/suite-v3/mlp-baseline.pt --out runs/suite-v3b-slip --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has
