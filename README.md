@@ -24,7 +24,10 @@ that shaped its runtime contracts and delivery gates.
 ```bash
 uv sync --locked --extra dev
 .venv/Scripts/python.exe -m pytest -q
+.venv/Scripts/python.exe -m ruff check ganglion tests
 ```
+
+CI runs the same lint and test commands on every push; the lint rules live in `pyproject.toml`.
 
 The deterministic runtime needs no torch, Haltere assets, GPU, or gamepad driver. Install those
 separately for the optional brain benchmark and shadow experiments; direct `.venv` commands preserve such extra packages.
