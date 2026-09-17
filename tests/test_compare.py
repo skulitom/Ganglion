@@ -41,3 +41,22 @@ def test_compare_tables_both_controllers_with_deterministic_having_no_interventi
     assert s["inference_ms"]["p50"] == 3.0
     assert "| deterministic | 1/1 | 1/1 |" in report["table"] and "| connectome | 1/1 | 1/1 |" in report["table"]
     assert summarize(det)["tracking_error_px"]["mean"] == 20
+
+
+def test_command_line_labels_files_explicitly_or_by_controller_mode(tmp_path, monkeypatch, capsys):
+    import json
+    from ganglion.arena.compare import main
+    det = demo("deterministic", [([100, 100], [100, 100], "deterministic")])
+    one = demo("connectome", [([100, 100], [100, 100], "connectome")])
+    two = demo("connectome", [([100, 100], [90, 100], "deterministic_override")])
+    paths = []
+    for name, result in (("det", det), ("one", one), ("two", two)):
+        path = tmp_path / f"{name}.json"
+        path.write_text(json.dumps(result), encoding="utf-8")
+        paths.append(path)
+    out = tmp_path / "compare.json"
+    monkeypatch.setattr("sys.argv", ["compare", str(paths[0]), str(paths[1]), f"all-motor={paths[2]}", "--out", str(out)])
+    main()
+    report = json.loads(out.read_text(encoding="utf-8"))
+    assert list(report["controllers"]) == ["deterministic", "connectome", "all-motor"]
+    assert "| all-motor | 1/1 |" in capsys.readouterr().out
