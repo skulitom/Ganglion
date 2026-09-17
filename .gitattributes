@@ -1,6 +1,9 @@
 * text=auto eol=lf
+*.ps1 text eol=crlf
 *.png -text
 *.jpg -text
 *.jpeg -text
 *.pt -text
 *.npz -text
+# Preserve printed table output, including its column-padding spaces.
+docs/census/*.out.txt whitespace=-blank-at-eol
