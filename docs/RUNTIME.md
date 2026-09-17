@@ -144,6 +144,8 @@ area; moving/resizing/replacing that window invalidates its old bindings.
 `core --shadow-checkpoint PATH` loads the actual Haltere ConnectomeRNN on CUDA before exposing
 the service. The ordinary deterministic install does not import torch or require Haltere.
 `reach-demo --shadow-checkpoint PATH` measures the model alongside the existing controller.
+`--shadow-process` on `core` and `reach-demo` runs the model in its own process behind the same
+one-item mailbox, which is what keeps live inference under the evidence budget.
 
 The model receives each eligible reach/drag correction's cursor, goal, rectangle, speed,
 observation timestamp and reference point. A separate worker retains at most one pending

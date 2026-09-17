@@ -157,12 +157,16 @@ stale steps (no proposal fresh enough) and the accepted share.
 | connectome-all-motor | 8/8 | 8/8 | 0.42 | 0.29 | 151.4 | 16.4% | 29.5% | 54.1% |
 | connectome-all-motor-cap2 | 8/8 | 8/8 | 0.46 | 0.33 | 143.0 | 15.7% | 19.9% | 64.4% |
 | connectome-v3b | 8/8 | 8/8 | 0.42 | 0.31 | 136.0 | 21.9% | 27.1% | 51.0% |
+| connectome-all-motor-process | 8/8 | 8/8 | 0.47 | 0.33 | 138.0 | 18.8% | 14.9% | 66.3% |
+| connectome-all-motor-process-spin | 8/8 | 8/8 | 0.46 | 0.34 | 142.1 | 18.4% | 5.7% | 76.0% |
 
 Sources: [deterministic](results/transfer-seat-deterministic.json),
 [connectome](results/transfer-seat-connectome.json),
 [connectome, all motor neurons](results/transfer-seat-connectome-all-motor.json),
 [the same readout with the two-step catch-up cap](results/transfer-seat-connectome-all-motor-cap2.json),
 [velocity-free all-motor readout](results/transfer-seat-connectome-v3b.json),
+[all-motor readout in its own process](results/transfer-seat-connectome-all-motor-process.json),
+[the same with the polling wait and fine timer](results/transfer-seat-connectome-all-motor-process-spin.json),
 [comparison](results/transfer-seat.json).
 Inference during the connectome run: p50 5.1 ms, p95 15.7 ms, p99 44.2 ms, with 13% of the
 steps stale under the corrected freshness rule; lost ledger events 0 and 0.
@@ -185,9 +189,20 @@ paces the same adapter at 10 ms like the reach loop, and measures p50 2.0 ms, p9
 session, p50 1.9 ms, p95 3.1 ms, p99 4.1 ms inside the seat, p50 2.8 ms, p95 4.7 ms, p99 6.9 ms beside a busy Python thread, and p50 1.9 ms, p95 3.2 ms, p99 6.0 ms
 while a separate process runs the desktop capture ([console](results/shadow-latency-console.json),
 [seat](results/shadow-latency-seat.json), [seat with capture](results/shadow-latency-seat-capture.json)).
-So the p95 the ledger records comes from inside the runtime process, where the shadow worker
-thread shares the interpreter with capture, detection, the tick and the service. The remedy
-is inference in its own process behind the same one-item mailbox; that is the next change.
+A pygame window rendering at 60 Hz beside the bench changed nothing either
+([seat with flasher](results/shadow-latency-seat-flasher.json)).
+
+Two changes followed, both measured on the all-motor readout over the same trial seeds.
+`ganglion core --shadow-process` (and `reach-demo --shadow-process`) runs the model in its own
+process behind the same one-item mailbox (`ganglion.brain.shadow_process`): median inference
+fell from 5.4 to 4.2 ms and the stale share from 19.9% to 14.9%, but p95 only from 25.6 to
+21.3 ms. The slow predictions were the ones arriving 15–100 ms after the previous sample, and
+their sizes sat near the 15.6 ms Windows timer quantum: a blocking CUDA wait that outlasts the
+driver's spin window is woken by the OS timer. The adapter now polls the completion event
+instead of blocking, and the inference process asks for 1 ms timer resolution. With both, the
+live inference is p50 5.0 ms, p95 9.7 ms, p99 16.3 ms, and the stale share is 5.7% of steps
+with 76% of them accepted from the model. The in-process worker remains the default; the flag
+is the measured choice for live runs.
 
 ## Validation and next work
 

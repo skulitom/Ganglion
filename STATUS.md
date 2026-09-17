@@ -99,11 +99,13 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   15.6%, stale 13.1%); the all-motor readout 8/8 at 0.42 s (0.29 s, interventions 16.4%,
   stale 29.5%), so the live loop runs at the reference's pace with the model acting on about
   half of the steps and inference p95 at 30 ms. [Details](docs/bench/SHADOW.md).
-- **Live jitter located.** The model alone runs at p95 3 ms in the seat, with or without a
-  busy thread or the desktop capture beside it; the p95 of 25–30 ms the ledger records comes
-  from interpreter contention inside the runtime process. Capping the neural catch-up at two
-  steps cut the stale share from 29.5% to 19.9%; moving inference into its own process is next.
-- The suite passes **149 tests** (four optional checks skipped). Application-specific
+- **Live jitter located and mostly removed.** The model alone runs at p95 3 ms in the seat,
+  with or without a busy thread, the desktop capture or a rendering window beside it. Capping
+  the neural catch-up at two steps cut the stale share from 29.5% to 19.9%; the model in its
+  own process (`--shadow-process`) took it to 14.9%; polling the CUDA completion event instead
+  of blocking, with 1 ms timer resolution, took live inference to p95 9.7 ms and p99 16.3 ms
+  and the stale share to 5.7%, with 76% of steps accepted from the model.
+- The suite passes **152 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

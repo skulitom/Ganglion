@@ -97,16 +97,20 @@ def select_window(hwnd=None, pid=None, title=None):
 
 
 def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False, seconds=0, shadow_checkpoint=None,
-             lptc_feed=False):
+             lptc_feed=False, shadow_process=False):
     from .output import MemoryOutput, ProcessOutput
     endpoint_path = Path(endpoint_path)
     if endpoint_path.exists():
         raise ValueError("Endpoint file exists; choose a new path or remove a confirmed stale endpoint.")
     with ExitStack() as stack:
-        predictor = None
+        predictor = factory = None
         if shadow_checkpoint:
             from ganglion.brain.haltere_cursor import HaltereCursor
-            predictor = HaltereCursor(shadow_checkpoint)
+            if shadow_process:
+                from functools import partial
+                factory = partial(HaltereCursor, shadow_checkpoint)
+            else:
+                predictor = HaltereCursor(shadow_checkpoint)
         if synthetic:
             from ganglion.arena.target import SyntheticArena
             capture = SyntheticArena()
@@ -124,7 +128,9 @@ def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False,
         capture.start()
         stack.callback(capture.stop)
         runtime = Runtime(time.perf_counter, output, session_id=session_id, shadow_predictor=predictor,
-                          lptc_feed=lptc_feed)
+                          shadow_factory=factory, lptc_feed=lptc_feed)
+        if runtime.shadow is not None:
+            stack.callback(runtime.shadow.close)
         runner = Runner(runtime, capture, target).start()
         stack.callback(runner.close)
         service = Service(runtime)

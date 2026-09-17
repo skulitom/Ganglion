@@ -152,17 +152,22 @@ def summarize(result, truth):
     return result
 
 
-def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None, controller="deterministic"):
+def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None, controller="deterministic",
+        process=False):
     if not 1 <= trials <= 8:
         raise ValueError("Use 1–8 trials per policy")
     if controller == "connectome" and not shadow_checkpoint:
         raise ValueError("The connectome controller needs --shadow-checkpoint")
     from .harness import experiment
-    predictor = None
+    predictor = factory = None
     if shadow_checkpoint:
         from ganglion.brain.haltere_cursor import HaltereCursor
-        predictor = HaltereCursor(shadow_checkpoint)
-    with experiment(environment, ReachWorld, shadow_predictor=predictor) as host:
+        if process:
+            from functools import partial
+            factory = partial(HaltereCursor, shadow_checkpoint)
+        else:
+            predictor = HaltereCursor(shadow_checkpoint)
+    with experiment(environment, ReachWorld, shadow_predictor=predictor, shadow_factory=factory) as host:
         result = asyncio.run(exercise(host.endpoint, host.reset, trials, controller))
         result.update({"environment": environment, "session_id": host.session_id,
             "measured_at": datetime.now(timezone.utc).isoformat(), "dependencies": dependency_versions(),
@@ -173,14 +178,15 @@ def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None,
             "browser_version": host.browser_version})
         result = summarize(result, host.finish())
         result["shadow"] = host.shadow_status()
-        if predictor:
+        if shadow_checkpoint:
             import numpy as np
             predictions = [e for e in result["events"] if e["kind"] == "shadow_prediction"]
             completed = [e for e in result["events"] if e["kind"] in ("shadow_prediction", "shadow_discarded")]
             result["shadow_score"] = {"predictions": len(predictions), "completed_inferences": len(completed),
                 "promoted": False, "actuation_authority": "supervised_connectome" if controller == "connectome" else False,
                 "neural_share": neural_share(result["events"]),
-                "desktop_trained": predictor.metadata["desktop_trained"],
+                "desktop_trained": result["shadow"]["model"].get("desktop_trained"),
+                "shadow_process": process,
                 "inference_ms": {f"p{p}": float(np.percentile([e["inference_ms"] for e in completed], p))
                                  for p in (50, 95, 99)} if completed else {},
                 "within_5ms_fraction": sum(e["within_5ms"] for e in completed)/len(completed) if completed else None,

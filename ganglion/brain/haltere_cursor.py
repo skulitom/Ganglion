@@ -56,7 +56,7 @@ def channels(sample, previous=None, *, version=1):
 
 
 class HaltereCursor:
-    def __init__(self, checkpoint):
+    def __init__(self, checkpoint, *, spin_sync=True):
         import torch
         from haltere.train.bptt import load_checkpoint
         if not torch.cuda.is_available():
@@ -77,6 +77,7 @@ class HaltereCursor:
         if self.brain.channel_dims != expected or self.brain.cfg.n_actions != 4:
             raise ValueError("Checkpoint sensory/action contract does not match the cursor adapter")
         self.brain.eval()
+        self.spin_sync = spin_sync
         self.weights = self.brain.weight_matrix().detach()
         # One host-to-device copy instead of seven tiny transfers per observation.
         self.order = tuple(expected)
@@ -102,6 +103,16 @@ class HaltereCursor:
             torch.cuda.synchronize()
         self.reset()
 
+    def _wait(self):
+        """Poll for GPU completion instead of blocking on it: a blocking wait that outlasts the
+        driver's spin window is woken by the OS timer, whose default granularity on Windows is
+        15.6 ms and showed up as the live p95. Polling costs one core for about two milliseconds."""
+        if self.spin_sync:
+            event = self.torch.cuda.Event()
+            event.record()
+            while not event.query():
+                pass
+
     def reset(self):
         self.state = self.brain.init_state(1)
         self.previous = None
@@ -117,6 +128,7 @@ class HaltereCursor:
             self.input.copy_(self.host_input, non_blocking=True)
             for _ in range(steps):   # zero-order hold of the observation across the elapsed time
                 action, self.state, _ = self.brain(self.observations, self.state, self.weights)
+            self._wait()
             values = action[0].cpu().tolist()  # Includes CUDA completion in measured latency.
         self.previous = sample
         x, y, w, h = sample.rect

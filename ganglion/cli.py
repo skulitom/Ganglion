@@ -34,6 +34,8 @@ def main(argv=None) -> int:
     p.add_argument('--synthetic', action='store_true', help='headless Arena; no desktop input')
     p.add_argument('--seconds', type=float, default=0, help='stop after this many seconds; 0 runs until interrupted')
     p.add_argument('--shadow-checkpoint', help='optional Haltere connectome checkpoint; predictions have no control authority')
+    p.add_argument('--shadow-process', action='store_true',
+                   help='run the connectome in its own process, away from the core interpreter')
     p.add_argument('--lptc-from-flow', action='store_true',
                    help='feed the newest flow watch summary to the model lptc channel (experimental; training fed zeros)')
     p.add_argument('--log', metavar='PATH', help='append stdout/stderr to this file (for windowless launches such as pythonw)')
@@ -53,6 +55,7 @@ def main(argv=None) -> int:
     p.add_argument('--trials', type=int, default=4, help='paired seeds per policy, 1–8')
     p.add_argument('--json', metavar='PATH')
     p.add_argument('--shadow-checkpoint', help='compare real connectome predictions with live reach decisions')
+    p.add_argument('--shadow-process', action='store_true', help='run the connectome in its own process')
     p.add_argument('--controller', choices=['deterministic', 'connectome'], default='deterministic',
                    help='connectome: its proposals drive the cursor when they pass the supervising envelope')
 
@@ -92,7 +95,8 @@ def main(argv=None) -> int:
             stream = open(a.log, 'a', buffering=1, encoding='utf-8')
             sys.stdout = sys.stderr = stream
         return run_core(a.endpoint, hwnd=a.window, pid=a.pid, title=a.title, synthetic=a.synthetic,
-                        seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint, lptc_feed=a.lptc_from_flow)
+                        seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint, lptc_feed=a.lptc_from_flow,
+                        shadow_process=a.shadow_process)
     if a.cmd == 'mcp':
         from .mcp.server import build
         build(a.endpoint, observer=a.observer, client_id=a.client_id).run()
@@ -105,7 +109,8 @@ def main(argv=None) -> int:
     if a.cmd == 'reach-demo':
         from .arena.reach_demo import run
         result = run(environment=a.environment, trials=a.trials, path=a.json,
-                     shadow_checkpoint=a.shadow_checkpoint, controller=a.controller)
+                     shadow_checkpoint=a.shadow_checkpoint, controller=a.controller,
+                     process=a.shadow_process)
         print(json.dumps({k: v for k, v in result.items() if k not in ('events', 'truth', 'trials')}, indent=2))
         return 0 if result['passed'] else 1
     if a.cmd == 'drag-demo':

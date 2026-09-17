@@ -17,7 +17,7 @@ from .target import SyntheticArena
 
 
 @contextmanager
-def experiment(environment, world_factory, *, scenario="reach", shadow_predictor=None):
+def experiment(environment, world_factory, *, scenario="reach", shadow_predictor=None, shadow_factory=None):
     if environment not in ("synthetic", "arena", "browser"):
         raise ValueError("Choose synthetic, arena, or browser")
     with tempfile.TemporaryDirectory(prefix="ganglion-experiment-") as directory, ExitStack() as stack:
@@ -83,7 +83,10 @@ def experiment(environment, world_factory, *, scenario="reach", shadow_predictor
         stack.callback(output.close)
         capture.start()
         stack.callback(capture.stop)
-        runtime = Runtime(time.perf_counter, output, session_id=session_id, shadow_predictor=shadow_predictor)
+        runtime = Runtime(time.perf_counter, output, session_id=session_id, shadow_predictor=shadow_predictor,
+                          shadow_factory=shadow_factory)
+        if runtime.shadow is not None:
+            stack.callback(runtime.shadow.close)
         runner = Runner(runtime, capture, target).start()
         stack.callback(runner.close)
         service = Service(runtime)

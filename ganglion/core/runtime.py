@@ -20,7 +20,8 @@ from .locomotion import Move, drive_move, finish_move
 
 
 class Runtime:
-    def __init__(self, clock, output, *, ledger=None, session_id=0, shadow_predictor=None, lptc_feed=False):
+    def __init__(self, clock, output, *, ledger=None, session_id=0, shadow_predictor=None, shadow_factory=None,
+                 lptc_feed=False):
         self.clock, self.output = clock, output
         self.lptc_feed = lptc_feed              # hand the newest wide-field flow to the model's lptc channel
         self.flow = None                        # newest ego-motion summary from a flow watch
@@ -52,7 +53,11 @@ class Runtime:
         self.change_sense = ChangeSense()
         self.ledger.append("core_ready", clock(), critical=True)
         self.shadow = None
-        if shadow_predictor is not None:
+        if shadow_factory is not None:
+            # A picklable callable that builds the predictor in a child process, away from this interpreter.
+            from ganglion.brain.shadow_process import ShadowProcess
+            self.shadow = ShadowProcess(shadow_factory, self.ledger, clock=clock)
+        elif shadow_predictor is not None:
             from ganglion.brain.shadow import ShadowWorker
             self.shadow = ShadowWorker(shadow_predictor, self.ledger, clock=clock)
 
