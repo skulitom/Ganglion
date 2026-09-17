@@ -273,10 +273,11 @@ def run(args):
     mlp = build_mlp(torch).to(brain.device)
     if args.mlp:
         saved = torch.load(args.mlp, map_location="cpu", weights_only=True)
-        if saved.get("adapter_version", 2) != version:
+        if saved.get("adapter_version", 2) != version and not args.sense_version:
             raise ValueError("The MLP baseline was trained on another sensory adapter version than the checkpoint")
         mlp.load_state_dict(saved["model"])
-        mlp_source = {"path": str(args.mlp), "sha256": hashlib.sha256(Path(args.mlp).read_bytes()).hexdigest()}
+        mlp_source = {"path": str(args.mlp), "sha256": hashlib.sha256(Path(args.mlp).read_bytes()).hexdigest(),
+                      "adapter_version": saved.get("adapter_version", 2)}
     else:
         cache = torch.load(args.mlp_features, map_location="cpu", weights_only=True)
         mlp, fit = train_mlp(torch, cache["train"], cache["validation"], guard, brain.device)
