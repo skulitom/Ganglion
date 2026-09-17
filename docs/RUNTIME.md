@@ -54,6 +54,10 @@ core inside the application's Windows session:
 .venv/Scripts/python.exe -m ganglion.cli core --window 123456 --endpoint runs/core.endpoint.json
 ```
 
+`--pid 12345` or `--title "Solitaire"` selects the process or title instead; the core refuses
+to guess when several visible top-level windows match. `--log PATH` appends stdout/stderr to a
+file for windowless launches (for example `pythonw.exe` through a seat launcher).
+
 The core does not activate arbitrary target applications. Focus the intended target before
 claiming control. Window identity, client bounds, foreground, and click-point occlusion are
 rechecked. Layout/focus/capture failures halt control; rebind after recovery or restart the core
@@ -155,9 +159,18 @@ boundaries and gaps above 50 ms. This does not yet align neural time with variab
 
 The current adapter maps target error and cursor velocity to existing sensory populations.
 Unimplemented visual-flow and other channels are zero. Interpreting the flight readout's first
-two axes as hypothetical cursor velocity is an untrained transfer experiment. All shadow
-results explicitly have `actuation_authority: false`; neither a successful Arena trial nor a
-completed motor program establishes neural control or a game win. See [measurements](bench/SHADOW.md).
+two axes as hypothetical cursor velocity is an untrained transfer experiment. Shadow results
+have `actuation_authority: false`; neither a successful Arena trial nor a completed motor
+program establishes neural control or a game win. See [measurements](bench/SHADOW.md).
+
+An intent may set `controller: "connectome"` on a core started with a checkpoint. Each control
+tick then applies the newest fresh proposal (at most 50 ms old, same intent, stage and layout)
+only when its step, clamped to the speed limit and client area, brings the cursor closer to the
+goal or holds position within tolerance; otherwise the deterministic step is used and counted as
+an override. `pointer_feedback` records `controller` per command; the intent reports
+`neural_commands`, `overridden_commands` and `actuation_authority: "supervised_connectome"`.
+Completion still needs measured arrival. Without a loaded model the request fails with
+`controller_unavailable`.
 
 `appear` fires only on absent-to-present evidence after arming. `present` may fire again on a
 fresh frame after cooldown; use it when the target is already visible. Reusing a frame never

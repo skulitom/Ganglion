@@ -13,7 +13,17 @@ from .reach_world import ReachWorld
 from .target import TARGET_RGB
 
 
-async def exercise(endpoint, reset, trials):
+def neural_share(events):
+    """How many pointer commands the connectome produced versus the supervisor overriding it."""
+    feedback = [e for e in events if e["kind"] == "pointer_feedback" and "controller" in e]
+    neural = sum(e["controller"] == "connectome" for e in feedback)
+    overridden = sum(e["controller"] == "deterministic_override" for e in feedback)
+    return {"pointer_commands": len(feedback), "connectome_commands": neural,
+            "overridden_commands": overridden,
+            "connectome_share": neural / (neural + overridden) if neural + overridden else None}
+
+
+async def exercise(endpoint, reset, trials, controller="deterministic"):
     from mcp import Client
     from mcp.client.stdio import StdioServerParameters
     spec = StdioServerParameters(command=sys.executable, args=["-m", "ganglion.mcp", "--endpoint", str(endpoint)])
@@ -72,7 +82,7 @@ async def exercise(endpoint, reset, trials):
                 first_call, started = calls, time.perf_counter()
                 if mode == "reach":
                     intent = await call("intent", {"spec": {"watch_id": wid, "click": True,
-                                                            "timeout_seconds": 3}})
+                                                            "timeout_seconds": 3, "controller": controller}})
                     await call("wait", {"cursor": status["next_cursor"], "timeout": 3.5,
                         "kinds": ["intent_completed", "intent_failed", "intent_cancelled"]})
                     status = await read()
@@ -139,20 +149,22 @@ def summarize(result, truth):
     return result
 
 
-def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None):
+def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None, controller="deterministic"):
     if not 1 <= trials <= 8:
         raise ValueError("Use 1–8 trials per policy")
+    if controller == "connectome" and not shadow_checkpoint:
+        raise ValueError("The connectome controller needs --shadow-checkpoint")
     from .harness import experiment
     predictor = None
     if shadow_checkpoint:
         from ganglion.brain.haltere_cursor import HaltereCursor
         predictor = HaltereCursor(shadow_checkpoint)
     with experiment(environment, ReachWorld, shadow_predictor=predictor) as host:
-        result = asyncio.run(exercise(host.endpoint, host.reset, trials))
+        result = asyncio.run(exercise(host.endpoint, host.reset, trials, controller))
         result.update({"environment": environment, "session_id": host.session_id,
             "measured_at": datetime.now(timezone.utc).isoformat(), "dependencies": dependency_versions(),
             "python": sys.version.split()[0],
-            "controller": {"gain_per_second": 35, "speed_px_s": 1200, "tolerance_px": 6,
+            "controller": {"mode": controller, "gain_per_second": 35, "speed_px_s": 1200, "tolerance_px": 6,
                            "settle_ms": 30, "timeout_seconds": 3},
             "baseline": {"decision_delay_ms": 250, "minimum_cadence_ms": 500, "max_attempts": 6},
             "browser_version": host.browser_version})
@@ -163,7 +175,8 @@ def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None)
             predictions = [e for e in result["events"] if e["kind"] == "shadow_prediction"]
             completed = [e for e in result["events"] if e["kind"] in ("shadow_prediction", "shadow_discarded")]
             result["shadow_score"] = {"predictions": len(predictions), "completed_inferences": len(completed),
-                "promoted": False, "actuation_authority": False,
+                "promoted": False, "actuation_authority": "supervised_connectome" if controller == "connectome" else False,
+                "neural_share": neural_share(result["events"]),
                 "desktop_trained": predictor.metadata["desktop_trained"],
                 "inference_ms": {f"p{p}": float(np.percentile([e["inference_ms"] for e in completed], p))
                                  for p in (50, 95, 99)} if completed else {},

@@ -1,0 +1,360 @@
+{
+ "measured_at": "2026-09-17T11:43:42.873712+00:00",
+ "python": "3.13.2",
+ "dependencies": {
+  "mcp": "2.2.0",
+  "numpy": "2.5.3",
+  "opencv-python": "5.0.0.93",
+  "pygame": "2.6.1",
+  "dxcam": "0.3.0",
+  "playwright": null
+ },
+ "endpoint": "runs/solitaire-live.endpoint.json",
+ "deal_count": 3,
+ "steps": [
+  {
+   "index": 0,
+   "move": "c5[3] -> c2",
+   "kind": "column",
+   "plan": [
+    "c5[3] -> c2",
+    "c6[3] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 12,
+   "plan_seconds": 0.002,
+   "board_before": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h Th 9c 8d\nc6: Jc 4h 8h 6c 5h 4c 3h",
+   "watches": {
+    "source": "ca1fded9b8bb4d4f9c05feb8705d7733",
+    "landing": "28d608eb832f47c3977e6231687c2a47",
+    "source_rect": [
+     835,
+     344,
+     73,
+     16
+    ],
+    "grab_region": [
+     901,
+     345,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    68,
+    7
+   ],
+   "destination": [
+    643,
+    351
+   ],
+   "intent": {
+    "intent_id": "aeb8d324c6fa49e980916a6137b90a45",
+    "program": "drag",
+    "watch_id": "ca1fded9b8bb4d4f9c05feb8705d7733",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 3459.9057333,
+    "expires_mono": 3467.9057333,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     643,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "28d608eb832f47c3977e6231687c2a47",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     650,
+     351
+    ],
+    "commands": 71,
+    "released_mono": 3460.9454839
+   },
+   "drag_seconds": 1.1758089999998447,
+   "board_after": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h\nc6: Jc 4h 8h 6c 5h 4c 3h",
+   "accepted": true,
+   "seconds": 2.037
+  },
+  {
+   "index": 1,
+   "move": "c6[3] -> c5",
+   "kind": "column",
+   "plan": [
+    "c6[3] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 8,
+   "plan_seconds": 0.001,
+   "board_before": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h\nc6: Jc 4h 8h 6c 5h 4c 3h",
+   "watches": {
+    "source": "fe66291e246b41aab96762759c1fe805",
+    "landing": "f667e9bb020f47b08b7559844c1303a7",
+    "source_rect": [
+     921,
+     344,
+     73,
+     16
+    ],
+    "grab_region": [
+     987,
+     345,
+     6,
+     14
+    ],
+    "landing_region": [
+     843,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    68,
+    7
+   ],
+   "destination": [
+    903,
+    351
+   ],
+   "intent": {
+    "intent_id": "83aeb6a99e004a48b12d2cb137951591",
+    "program": "drag",
+    "watch_id": "fe66291e246b41aab96762759c1fe805",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 3461.9230933,
+    "expires_mono": 3469.9230933,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     903,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f667e9bb020f47b08b7559844c1303a7",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     913,
+     351
+    ],
+    "commands": 50,
+    "released_mono": 3462.6583856
+   },
+   "drag_seconds": 0.8562838000002557,
+   "board_after": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h 6c 5h 4c 3h\nc6: Jc 4h 8h",
+   "accepted": true,
+   "seconds": 1.726
+  },
+  {
+   "index": 2,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 4,
+   "plan_seconds": 0.001,
+   "board_before": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h 6c 5h 4c 3h\nc6: Jc 4h 8h",
+   "click": {
+    "command_id": "34dbdf3591254b17bd8d112020cf6f90"
+   },
+   "board_after": "stock 12  waste [Kh 2s Kc Jh 2c 9d 3d Td]  foundations {'s': 1, 'h': 0, 'd': 2, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h 6c 5h 4c 3h\nc6: Jc 4h 8h",
+   "accepted": false,
+   "seconds": 1.425,
+   "unchanged": false,
+   "note": "board changed differently than planned; continuing from what is visible"
+  },
+  {
+   "index": 3,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 4,
+   "plan_seconds": 0.001,
+   "board_before": "stock 12  waste [Kh 2s Kc Jh 2c 9d 3d Td]  foundations {'s': 1, 'h': 0, 'd': 2, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s\nc2: Ks Qr Js Th 9c 8d\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h 6c 5h 4c 3h\nc6: Jc 4h 8h",
+   "click": {
+    "command_id": "75be136c3735454dba2f46b953cee2c2"
+   },
+   "error": "board did not settle: [\"foundation 1: unreadable suit glyph at (285, 277): no template matches (best ('h', 0.6421052813529968))\"]"
+  }
+ ],
+ "events": "1178 events omitted from the published copy; the full ledger stays in runs/",
+ "lost_events": 6814,
+ "images": [
+  "start.png",
+  "mismatch-002.png",
+  "error-003.png"
+ ],
+ "passed": false,
+ "losses": [
+  {
+   "call": "look",
+   "lost": 4076,
+   "seconds": 0.042,
+   "step": 0
+  },
+  {
+   "call": "look",
+   "lost": 2235,
+   "seconds": 0.029,
+   "step": 0
+  },
+  {
+   "call": "look",
+   "lost": 503,
+   "seconds": 0.032,
+   "step": 0
+  }
+ ],
+ "target": {
+  "hwnd": 66766,
+  "pid": 29860,
+  "class": "SDL_app",
+  "rect": [
+   0,
+   0,
+   1280,
+   720
+  ]
+ },
+ "session_id": 2,
+ "initial_board": "stock 15  waste [Kh 2s Kc Jh 2c 9d]  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4s\nc1: 6h 5c 4d 3s 2d\nc2: Ks Qr Js\nc3: Ts Ac 9h 6d 5s\nc4: 9s 6s Kd\nc5: 8c 2h 7h Th 9c 8d\nc6: Jc 4h 8h 6c 5h 4c 3h",
+ "final_cards": {
+  "columns": [
+   [
+    "4s"
+   ],
+   [
+    "6h",
+    "5c",
+    "4d",
+    "3s"
+   ],
+   [
+    "Ks",
+    "Qr",
+    "Js",
+    "Th",
+    "9c",
+    "8d"
+   ],
+   [
+    "Ts",
+    "Ac",
+    "9h",
+    "6d",
+    "5s"
+   ],
+   [
+    "9s",
+    "6s",
+    "Kd"
+   ],
+   [
+    "8c",
+    "2h",
+    "7h",
+    "6c",
+    "5h",
+    "4c",
+    "3h"
+   ],
+   [
+    "Jc",
+    "4h",
+    "8h"
+   ]
+  ],
+  "waste": [
+   "Kh",
+   "2s",
+   "Kc",
+   "Jh",
+   "2c",
+   "9d",
+   "3d",
+   "Td"
+  ],
+  "stock": 12,
+  "foundations": [
+   1,
+   0,
+   2,
+   0
+  ],
+  "cell": null,
+  "deal_count": 3
+ },
+ "mismatches": 1,
+ "error": "PlayError: board did not settle: [\"foundation 1: unreadable suit glyph at (285, 277): no template matches (best ('h', 0.6421052813529968))\"]",
+ "final_state": "halted",
+ "pending_commands": [],
+ "capture_sources": {
+  "dxgi": 150579,
+  "gdi_refresh": 82
+ },
+ "dropped_frames": 0,
+ "event_counts": {
+  "intent_started": 56,
+  "drag_started": 50,
+  "input_released": 58,
+  "intent_completed": 47,
+  "watch_removed": 109,
+  "input_requested": 77,
+  "watch_added": 107,
+  "input_submitted": 8,
+  "halted": 5,
+  "lease_claimed": 5,
+  "intent_failed": 9,
+  "output_halted": 9,
+  "pointer_feedback": 617,
+  "vanish": 4,
+  "appear": 17
+ }
+}

@@ -12,7 +12,7 @@ from uuid import uuid4
 
 from .ledger import Ledger
 from .schema import ArmSpec, WatchSpec, IntentSpec, InputSpec
-from .reach import Reach, step
+from .reach import Reach, step, supervise
 from .drag import Drag, drive_drag, drag_event
 
 
@@ -191,6 +191,9 @@ class Runtime:
                         self._error("point_outside_target", "Drag destination must be inside the bound client area.")
             if self.pending or (self.intent and self.intent.active):
                 self._error("pointer_busy", "Cancel the active intent and wait for pending output to drain.")
+            if spec.controller == "connectome" and self.shadow is None:
+                self._error("controller_unavailable",
+                            "Start the core with --shadow-checkpoint to grant the connectome supervised authority.")
             now = self.clock()
             factory = Drag if spec.program == "drag" else Reach
             self.intent = factory(uuid4().hex, spec, now, now + spec.timeout_seconds)
@@ -283,7 +286,7 @@ class Runtime:
         cid = uuid4().hex
         self.pending[cid] = {"intent_id": intent.id, "watch_id": intent.spec.watch_id,
                              "observation_id": watch.observation_id, "captured_mono": watch.captured,
-                             "percept_ready_mono": now, "goal": list(goal)}
+                             "percept_ready_mono": now, "goal": list(goal), "controller": intent.last_controller}
         self.pending[cid].update(capture_source=watch.source, sample_started_mono=watch.sample_started)
         command = {"command_id": cid, "target": self.layout,
                    "deadline": min(self.expires, intent.expires, watch.sample_started + 0.05)}
@@ -301,10 +304,26 @@ class Runtime:
             self.halt(f"submit_failed: {exc}", degraded=True)
 
     def _pointer_step(self, intent, goal, dt, now, evidence):
+        """One correction: the deterministic reference, or a connectome proposal that passes the
+        supervising envelope when the intent asked for that controller. Every step stays inside
+        the same speed limit and client bounds; completion still needs measured arrival."""
         point = step(intent.cursor, goal, dt, intent.spec.speed_px_s, self.layout["rect"])
+        intent.last_controller = "deterministic"
         if self.shadow is not None:
             from ganglion.brain.shadow import MotorSample
-            self.shadow.submit(MotorSample(intent.id, getattr(intent, "stage", "reach"), self.layout_rev,
+            stage = getattr(intent, "stage", "reach")
+            if intent.spec.controller == "connectome":
+                velocity = self.shadow.proposal((intent.id, stage, self.layout_rev), now)
+                candidate = None if velocity is None else supervise(
+                    intent.cursor, goal, velocity, dt, intent.spec.speed_px_s, self.layout["rect"],
+                    intent.spec.tolerance_px)
+                if candidate is not None:
+                    point, intent.last_controller = candidate, "connectome"
+                    intent.neural_commands += 1
+                else:
+                    intent.last_controller = "deterministic_override"
+                    intent.overridden_commands += 1
+            self.shadow.submit(MotorSample(intent.id, stage, self.layout_rev,
                 evidence.observation_id, evidence.sample_started, now, min(self.expires, intent.expires),
                 tuple(intent.cursor), tuple(goal), tuple(point), tuple(self.layout["rect"]),
                 intent.spec.speed_px_s, dt))

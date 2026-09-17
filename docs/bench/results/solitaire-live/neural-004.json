@@ -1,0 +1,3225 @@
+{
+ "measured_at": "2026-09-17T12:05:17.832831+00:00",
+ "python": "3.13.2",
+ "dependencies": {
+  "mcp": "2.2.0",
+  "numpy": "2.5.3",
+  "opencv-python": "5.0.0.93",
+  "pygame": "2.6.1",
+  "dxcam": "0.3.0",
+  "playwright": null
+ },
+ "endpoint": "runs/solitaire-neural3.endpoint.json",
+ "deal_count": 3,
+ "controller": "connectome",
+ "steps": [
+  {
+   "index": 0,
+   "move": "w -> c3",
+   "kind": "column",
+   "plan": [
+    "w -> c3",
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 24,
+   "plan_seconds": 0.002,
+   "board_before": "stock 21  waste [7d 6d Kh]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: \nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "a04114fa17574ca2822e8c737765edad",
+    "landing": "a1b6a82c53e94b518fb85f9d51f6e10d",
+    "source_rect": [
+     525,
+     171,
+     74,
+     98
+    ],
+    "grab_region": [
+     526,
+     172,
+     17,
+     14
+    ],
+    "landing_region": [
+     669,
+     287,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    10,
+    8
+   ],
+   "destination": [
+    671,
+    292
+   ],
+   "intent": {
+    "intent_id": "b5d63210ade24deeba258adc2cf981e0",
+    "program": "drag",
+    "watch_id": "a04114fa17574ca2822e8c737765edad",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4755.935363,
+    "expires_mono": 4763.935363,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     671,
+     292
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "a1b6a82c53e94b518fb85f9d51f6e10d",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     667,
+     293
+    ],
+    "commands": 182,
+    "released_mono": 4757.8820816,
+    "controller": "connectome",
+    "neural_commands": 162,
+    "overridden_commands": 17
+   },
+   "drag_seconds": 2.0675170000004073,
+   "board_after": "stock 21  waste [7d 6d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 4.126
+  },
+  {
+   "index": 1,
+   "move": "c5[5] -> c3",
+   "kind": "column",
+   "plan": [
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 6,
+   "plan_seconds": 0.0,
+   "board_before": "stock 21  waste [7d 6d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "f82a38da8b444f83a9b573d303e58d76",
+    "landing": "147a46e6efdf4da7862be8410e11d355",
+    "source_rect": [
+     835,
+     384,
+     73,
+     16
+    ],
+    "grab_region": [
+     836,
+     385,
+     17,
+     14
+    ],
+    "landing_region": [
+     669,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    14,
+    7
+   ],
+   "destination": [
+    675,
+    311
+   ],
+   "intent": {
+    "intent_id": "c1861c68da264f89986f94675cb4fec8",
+    "program": "drag",
+    "watch_id": "f82a38da8b444f83a9b573d303e58d76",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4759.9822592,
+    "expires_mono": 4767.9822592,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     675,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "147a46e6efdf4da7862be8410e11d355",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     845,
+     386
+    ],
+    "commands": 69,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 64,
+    "overridden_commands": 4
+   },
+   "drag_seconds": 0.8110559000006106,
+   "board_after": "stock 21  waste [7d 6d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": false,
+   "seconds": 2.756,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 2,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 6,
+   "plan_seconds": 0.0,
+   "board_before": "stock 21  waste [7d 6d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "click": {
+    "command_id": "f7a94ef8ec2f4f6b84d3584db8a21ace"
+   },
+   "board_after": "stock 18  waste [7d 6d 5s 3d 9c]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 0.984
+  },
+  {
+   "index": 3,
+   "move": "w -> c2",
+   "kind": "column",
+   "plan": [
+    "w -> c2",
+    "w -> c0",
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 18,
+   "plan_seconds": 0.003,
+   "board_before": "stock 18  waste [7d 6d 5s 3d 9c]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "7027b36214ea4a18b3e7ab8b48093261",
+    "landing": "1fc2cd61e4324ba0939e3e5d659e2e80",
+    "source_rect": [
+     564,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     598,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     447,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    611,
+    371
+   ],
+   "intent": {
+    "intent_id": "5601e7b8ec7e46d486148837f1526b3d",
+    "program": "drag",
+    "watch_id": "7027b36214ea4a18b3e7ab8b48093261",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4762.7350283,
+    "expires_mono": 4770.7350283,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     611,
+     371
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "1fc2cd61e4324ba0939e3e5d659e2e80",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     585,
+     380
+    ],
+    "commands": 159,
+    "released_mono": 4764.4587572,
+    "controller": "connectome",
+    "neural_commands": 142,
+    "overridden_commands": 14
+   },
+   "drag_seconds": 1.8535477000004903,
+   "board_after": "stock 18  waste [7d 6d 5s 3d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 2.737
+  },
+  {
+   "index": 4,
+   "move": "w -> c0",
+   "kind": "column",
+   "plan": [
+    "w -> c0",
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 12,
+   "plan_seconds": 0.001,
+   "board_before": "stock 18  waste [7d 6d 5s 3d]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "945cc28ab28941ec9466a4655de062ba",
+    "landing": "6554372c9e77475a95a5b19c242d277c",
+    "source_rect": [
+     544,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     578,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     409,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    37,
+    6
+   ],
+   "destination": [
+    438,
+    310
+   ],
+   "intent": {
+    "intent_id": "5edbd874539c44a081b8eca437ef2caa",
+    "program": "drag",
+    "watch_id": "945cc28ab28941ec9466a4655de062ba",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4765.475301,
+    "expires_mono": 4773.475301,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     438,
+     310
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "6554372c9e77475a95a5b19c242d277c",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     436,
+     309
+    ],
+    "commands": 161,
+    "released_mono": 4767.2050143,
+    "controller": "connectome",
+    "neural_commands": 144,
+    "overridden_commands": 14
+   },
+   "drag_seconds": 1.8518700999993598,
+   "board_after": "stock 18  waste [7d 6d 5s]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 2.732
+  },
+  {
+   "index": 5,
+   "move": "c5[5] -> c3",
+   "kind": "column",
+   "plan": [
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 6,
+   "plan_seconds": 0.001,
+   "board_before": "stock 18  waste [7d 6d 5s]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "f733589f1b7143ad99e1898b333731ff",
+    "landing": "f33f664d8500491290d24cd0d9e87aa6",
+    "source_rect": [
+     835,
+     384,
+     73,
+     16
+    ],
+    "grab_region": [
+     836,
+     385,
+     17,
+     14
+    ],
+    "landing_region": [
+     669,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    14,
+    7
+   ],
+   "destination": [
+    675,
+    311
+   ],
+   "intent": {
+    "intent_id": "8d7a299a8eec4d598f541266bdf7f1ad",
+    "program": "drag",
+    "watch_id": "f733589f1b7143ad99e1898b333731ff",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4769.2091837,
+    "expires_mono": 4777.2091837,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     675,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f33f664d8500491290d24cd0d9e87aa6",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     844,
+     386
+    ],
+    "commands": 69,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 64,
+    "overridden_commands": 4
+   },
+   "drag_seconds": 0.800376099999994,
+   "board_after": "stock 18  waste [7d 6d 5s]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": false,
+   "seconds": 2.702,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 6,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 6,
+   "plan_seconds": 0.001,
+   "board_before": "stock 18  waste [7d 6d 5s]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "click": {
+    "command_id": "7ecbb5f9f18041e38db06d24767788b7"
+   },
+   "board_after": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 1.314
+  },
+  {
+   "index": 7,
+   "move": "c5[5] -> c3",
+   "kind": "column",
+   "plan": [
+    "c5[5] -> c3",
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 6,
+   "plan_seconds": 0.0,
+   "board_before": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "8aecdbd392c2405db89b5e99353e1522",
+    "landing": "694a669d6bb34506b16924345a92aa33",
+    "source_rect": [
+     835,
+     384,
+     73,
+     16
+    ],
+    "grab_region": [
+     836,
+     385,
+     17,
+     14
+    ],
+    "landing_region": [
+     669,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    14,
+    7
+   ],
+   "destination": [
+    675,
+    311
+   ],
+   "intent": {
+    "intent_id": "6c852d33f6524714b2721a5c97469695",
+    "program": "drag",
+    "watch_id": "8aecdbd392c2405db89b5e99353e1522",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4773.4575257,
+    "expires_mono": 4781.4575257,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     675,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "694a669d6bb34506b16924345a92aa33",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     661,
+     299
+    ],
+    "commands": 117,
+    "released_mono": 4774.7186568,
+    "controller": "connectome",
+    "neural_commands": 102,
+    "overridden_commands": 12
+   },
+   "drag_seconds": 1.3908426999996664,
+   "board_after": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 3.408
+  },
+  {
+   "index": 8,
+   "move": "c2[2] -> c5",
+   "kind": "column",
+   "plan": [
+    "c2[2] -> c5",
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 5,
+   "plan_seconds": 0.0,
+   "board_before": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Js Th 9c\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "3157f64abce24029841722c7da438110",
+    "landing": "99317652a9b84daea703318cc94161a8",
+    "source_rect": [
+     575,
+     324,
+     73,
+     16
+    ],
+    "grab_region": [
+     576,
+     325,
+     17,
+     14
+    ],
+    "landing_region": [
+     843,
+     467,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    11,
+    8
+   ],
+   "destination": [
+    846,
+    392
+   ],
+   "intent": {
+    "intent_id": "f6efac19b7f64f0ab12452cd55ef9a10",
+    "program": "drag",
+    "watch_id": "3157f64abce24029841722c7da438110",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4776.8639827,
+    "expires_mono": 4784.8639827,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     846,
+     392
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "99317652a9b84daea703318cc94161a8",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     806,
+     427
+    ],
+    "commands": 157,
+    "released_mono": 4778.5189908,
+    "controller": "connectome",
+    "neural_commands": 141,
+    "overridden_commands": 13
+   },
+   "drag_seconds": 1.790461100000357,
+   "board_after": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": true,
+   "seconds": 3.83
+  },
+  {
+   "index": 9,
+   "move": "c6[6] -> c2",
+   "kind": "column",
+   "plan": [
+    "c6[6] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4,
+   "plan_seconds": 0.0,
+   "board_before": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "82cb41e15fce4bca97e584f0650929ae",
+    "landing": "daccce7f71634726bc7a2e7c6faa99bd",
+    "source_rect": [
+     921,
+     404,
+     73,
+     99
+    ],
+    "grab_region": [
+     922,
+     405,
+     17,
+     14
+    ],
+    "landing_region": [
+     583,
+     407,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    12,
+    8
+   ],
+   "destination": [
+    587,
+    332
+   ],
+   "intent": {
+    "intent_id": "7af16e754b4441e1a4afac9faa18a88d",
+    "program": "drag",
+    "watch_id": "82cb41e15fce4bca97e584f0650929ae",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4780.5970111,
+    "expires_mono": 4788.5970111,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     587,
+     332
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "daccce7f71634726bc7a2e7c6faa99bd",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     600,
+     334
+    ],
+    "commands": 118,
+    "released_mono": 4781.8708857,
+    "controller": "connectome",
+    "neural_commands": 104,
+    "overridden_commands": 11
+   },
+   "drag_seconds": 1.3656315999996878,
+   "board_after": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 3.275
+  },
+  {
+   "index": 10,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 1,
+   "plan_seconds": 0.0,
+   "board_before": "stock 15  waste [7d 6d 5s Ac 7s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "click": {
+    "command_id": "ed33e0011b4c4149ae6857b5d6fd51c6"
+   },
+   "board_after": "stock 12  waste [7d 6d 5s Ac 7s 5c 4s Ts]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 0.958
+  },
+  {
+   "index": 11,
+   "move": "w -> c2",
+   "kind": "column",
+   "plan": [
+    "w -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 3,
+   "plan_seconds": 0.0,
+   "board_before": "stock 12  waste [7d 6d 5s Ac 7s 5c 4s Ts]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "b7e5eb1a843d4fd3930759de98e90312",
+    "landing": "2d2302867bed4c05b621048411a7064c",
+    "source_rect": [
+     620,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     654,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    611,
+    351
+   ],
+   "intent": {
+    "intent_id": "1228470283944dbba419a78e96827d0c",
+    "program": "drag",
+    "watch_id": "b7e5eb1a843d4fd3930759de98e90312",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4783.8322369,
+    "expires_mono": 4791.8322369,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     611,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "2d2302867bed4c05b621048411a7064c",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     576,
+     361
+    ],
+    "commands": 150,
+    "released_mono": 4785.4287229,
+    "controller": "connectome",
+    "neural_commands": 132,
+    "overridden_commands": 15
+   },
+   "drag_seconds": 1.7453202000006058,
+   "board_after": "stock 12  waste [7d 6d 5s Ac 7s 5c 4s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.635
+  },
+  {
+   "index": 12,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 2,
+   "plan_seconds": 0.0,
+   "board_before": "stock 12  waste [7d 6d 5s Ac 7s 5c 4s]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "click": {
+    "command_id": "81629786b1864c74be83b765a7461efa"
+   },
+   "board_after": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 0.972
+  },
+  {
+   "index": 13,
+   "move": "w -> c6",
+   "kind": "column",
+   "plan": [
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 816,
+   "plan_seconds": 0.213,
+   "board_before": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "a80ab7dc9cd24d9682ff9faa14d6e898",
+    "landing": "c64ee4dff511405c9bd049d66fa77d13",
+    "source_rect": [
+     657,
+     171,
+     74,
+     98
+    ],
+    "grab_region": [
+     691,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     929,
+     487,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    957,
+    411
+   ],
+   "intent": {
+    "intent_id": "7fed2721e2db4f57a541b96fd8cbd103",
+    "program": "drag",
+    "watch_id": "a80ab7dc9cd24d9682ff9faa14d6e898",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4787.6683718,
+    "expires_mono": 4795.6683718,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     957,
+     411
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "c64ee4dff511405c9bd049d66fa77d13",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     689,
+     174
+    ],
+    "commands": 102,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 98,
+    "overridden_commands": 3
+   },
+   "drag_seconds": 1.1513790999997582,
+   "board_after": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": false,
+   "seconds": 2.015,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 14,
+   "move": "c2[3] -> c3",
+   "kind": "column",
+   "plan": [
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 816,
+   "plan_seconds": 0.225,
+   "board_before": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd Ts\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "464d4456a76a4a5d8665c73b1f8b35f2",
+    "landing": "8abad25c7fb94b15a87ca6e602d92311",
+    "source_rect": [
+     575,
+     344,
+     73,
+     99
+    ],
+    "grab_region": [
+     609,
+     345,
+     6,
+     14
+    ],
+    "landing_region": [
+     669,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    697,
+    351
+   ],
+   "intent": {
+    "intent_id": "58ddc9b41f7448e5ae3d9c8dcdc23b76",
+    "program": "drag",
+    "watch_id": "464d4456a76a4a5d8665c73b1f8b35f2",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4789.9412323,
+    "expires_mono": 4797.9412323,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     697,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "8abad25c7fb94b15a87ca6e602d92311",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     677,
+     357
+    ],
+    "commands": 122,
+    "released_mono": 4791.2613094,
+    "controller": "connectome",
+    "neural_commands": 106,
+    "overridden_commands": 13
+   },
+   "drag_seconds": 1.4480309000000489,
+   "board_after": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.28
+  },
+  {
+   "index": 15,
+   "move": "w -> c6",
+   "kind": "column",
+   "plan": [
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 816,
+   "plan_seconds": 0.202,
+   "board_before": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "77bc1125364747de8e6f0dfadc98489d",
+    "landing": "7781ba2a76cc426c94b25fd0f876af57",
+    "source_rect": [
+     657,
+     171,
+     74,
+     98
+    ],
+    "grab_region": [
+     691,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     929,
+     487,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    957,
+    411
+   ],
+   "intent": {
+    "intent_id": "dbf94edf9aec47608bf68ed5ec6911d6",
+    "program": "drag",
+    "watch_id": "77bc1125364747de8e6f0dfadc98489d",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4792.4849998,
+    "expires_mono": 4800.4849998,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     957,
+     411
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "7781ba2a76cc426c94b25fd0f876af57",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     692,
+     176
+    ],
+    "commands": 103,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 97,
+    "overridden_commands": 5
+   },
+   "drag_seconds": 1.1799498000000312,
+   "board_after": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": false,
+   "seconds": 2.059,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 16,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 816,
+   "plan_seconds": 0.2,
+   "board_before": "stock 9  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "click": {
+    "command_id": "3685db6a16ed41bba89034535805039b"
+   },
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 2d 9h]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 1.003
+  },
+  {
+   "index": 17,
+   "move": "w -> c3",
+   "kind": "column",
+   "plan": [
+    "w -> c3",
+    "c0[1] -> f",
+    "c1[1] -> f",
+    "w -> c2",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c3",
+    "c2[0] -> c5",
+    "c5[2] -> c3",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c3[9] -> c1",
+    "c3[8] -> f",
+    "c5[1] -> c3"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4590,
+   "plan_seconds": 1.5,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 2d 9h]  foundations {'s': 1, 'h': 1, 'd': 1, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "e505c718ac12409eac9d05b5027ec7ef",
+    "landing": "6ec3eca4201c42be9fba460a8a342917",
+    "source_rect": [
+     715,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     749,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     669,
+     447,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    697,
+    371
+   ],
+   "intent": {
+    "intent_id": "b40b26247b8646449fbcb07e750daf3e",
+    "program": "drag",
+    "watch_id": "e505c718ac12409eac9d05b5027ec7ef",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4797.3633374,
+    "expires_mono": 4805.3633374,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     697,
+     371
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "6ec3eca4201c42be9fba460a8a342917",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     654,
+     383
+    ],
+    "commands": 140,
+    "released_mono": 4798.8827449,
+    "controller": "connectome",
+    "neural_commands": 124,
+    "overridden_commands": 13
+   },
+   "drag_seconds": 1.6644685999999638,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 2, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.555
+  },
+  {
+   "index": 18,
+   "move": "c0[1] -> f",
+   "kind": "foundation",
+   "plan": [
+    "c0[1] -> f",
+    "c1[1] -> f",
+    "w -> c2",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c3",
+    "c2[0] -> c5",
+    "c5[2] -> c3",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c3[9] -> c1",
+    "c3[8] -> f",
+    "c5[1] -> c3"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4461,
+   "plan_seconds": 1.5,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 2, 'c': 0}  cell None\nc0: 4c 3d\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "2a37f0fb29be4acf907628d6fbcf50d4",
+    "landing": null,
+    "source_rect": [
+     401,
+     304,
+     73,
+     99
+    ],
+    "grab_region": [
+     435,
+     305,
+     6,
+     14
+    ],
+    "landing_region": [
+     291,
+     314,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    6
+   ],
+   "destination": [
+    319,
+    281
+   ],
+   "intent": {
+    "intent_id": "f994222d06fc4ff19efb1cf3ba104291",
+    "program": "drag",
+    "watch_id": "2a37f0fb29be4acf907628d6fbcf50d4",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4801.3785269,
+    "expires_mono": 4809.3785269,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     319,
+     281
+    ],
+    "destination_watch_id": null,
+    "until": null
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "cursor_confirmed_drag_released",
+    "stage": "verifying",
+    "condition_verified": false,
+    "cursor": [
+     319,
+     281
+    ],
+    "commands": 174,
+    "released_mono": 4803.2863164,
+    "controller": "connectome",
+    "neural_commands": 153,
+    "overridden_commands": 18
+   },
+   "drag_seconds": 1.9745606999995289,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 3, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.826
+  },
+  {
+   "index": 19,
+   "move": "c1[1] -> f",
+   "kind": "foundation",
+   "plan": [
+    "c1[1] -> f",
+    "w -> c2",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c3",
+    "c2[0] -> c5",
+    "c5[2] -> c3",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c3[9] -> c1",
+    "c3[8] -> f",
+    "c5[1] -> c3"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4299,
+   "plan_seconds": 1.502,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 3, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "cddf3f420b1f44aabde2dcab1624b5d2",
+    "landing": null,
+    "source_rect": [
+     488,
+     304,
+     73,
+     99
+    ],
+    "grab_region": [
+     522,
+     305,
+     6,
+     14
+    ],
+    "landing_region": [
+     291,
+     314,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    319,
+    282
+   ],
+   "intent": {
+    "intent_id": "8f94fc92c8fe43049e863448cad9489b",
+    "program": "drag",
+    "watch_id": "cddf3f420b1f44aabde2dcab1624b5d2",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4805.7487635,
+    "expires_mono": 4813.7487635,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     319,
+     282
+    ],
+    "destination_watch_id": null,
+    "until": null
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "cursor_confirmed_drag_released",
+    "stage": "verifying",
+    "condition_verified": false,
+    "cursor": [
+     319,
+     282
+    ],
+    "commands": 172,
+    "released_mono": 4807.6048651,
+    "controller": "connectome",
+    "neural_commands": 153,
+    "overridden_commands": 16
+   },
+   "drag_seconds": 1.9264176000006046,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.787
+  },
+  {
+   "index": 20,
+   "move": "w -> c2",
+   "kind": "column",
+   "plan": [
+    "w -> c2",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c3",
+    "c2[0] -> c5",
+    "c5[2] -> c3",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c3[9] -> c1",
+    "c3[8] -> f",
+    "c5[1] -> c3"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4186,
+   "plan_seconds": 1.502,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "4caf757d0ea74982a4bed429a7ded43b",
+    "landing": "44cbb7cc62744c939884d6eab27aa0d9",
+    "source_rect": [
+     676,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     710,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    611,
+    351
+   ],
+   "intent": {
+    "intent_id": "5fd5b6e3e3484de39ffdb4176bc51ab3",
+    "program": "drag",
+    "watch_id": "4caf757d0ea74982a4bed429a7ded43b",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4810.0760929,
+    "expires_mono": 4818.0760929,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     611,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "44cbb7cc62744c939884d6eab27aa0d9",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     709,
+     175
+    ],
+    "commands": 102,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 98,
+    "overridden_commands": 3
+   },
+   "drag_seconds": 1.1443659999995361,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": false,
+   "seconds": 2.064,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 21,
+   "move": "c3[3] -> c2",
+   "kind": "column",
+   "plan": [
+    "w -> c2",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c3",
+    "c2[0] -> c5",
+    "c5[2] -> c3",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c3[9] -> c1",
+    "c3[8] -> f",
+    "c5[1] -> c3"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4130,
+   "plan_seconds": 1.5,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "b6a9d85c84b9475cb2f967aa20265452",
+    "landing": "de0cd1ed34eb488dba6af382c545de52",
+    "source_rect": [
+     661,
+     344,
+     73,
+     16
+    ],
+    "grab_region": [
+     695,
+     345,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    611,
+    351
+   ],
+   "intent": {
+    "intent_id": "e419bddfaf3e4c319134c2bc73f14448",
+    "program": "drag",
+    "watch_id": "b6a9d85c84b9475cb2f967aa20265452",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4813.6892613,
+    "expires_mono": 4821.6892613,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     611,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "de0cd1ed34eb488dba6af382c545de52",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     645,
+     338
+    ],
+    "commands": 108,
+    "released_mono": 4814.8538958,
+    "controller": "connectome",
+    "neural_commands": 94,
+    "overridden_commands": 11
+   },
+   "drag_seconds": 1.285450899999887,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.153
+  },
+  {
+   "index": 22,
+   "move": "w -> c3",
+   "kind": "column",
+   "plan": [
+    "w -> c3",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c0",
+    "c2[0] -> c5",
+    "c5[2] -> c0",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c0[9] -> c1",
+    "c0[8] -> f",
+    "c5[1] -> c0"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4050,
+   "plan_seconds": 1.5,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "c7daf90bcf8743dfa22be6848af107f0",
+    "landing": "0137b9dce1e5421b8cda6e016e2cf3b8",
+    "source_rect": [
+     676,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     710,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     669,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    697,
+    351
+   ],
+   "intent": {
+    "intent_id": "9933d91c86fc48afaee9480ac55fc64d",
+    "program": "drag",
+    "watch_id": "c7daf90bcf8743dfa22be6848af107f0",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4817.3717812,
+    "expires_mono": 4825.3717812,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     697,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "0137b9dce1e5421b8cda6e016e2cf3b8",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     710,
+     173
+    ],
+    "commands": 100,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 95,
+    "overridden_commands": 4
+   },
+   "drag_seconds": 1.1317670999997063,
+   "board_after": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": false,
+   "seconds": 2.038,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 23,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "w -> c3",
+    "w -> c6",
+    "c0[0] -> c6",
+    "w -> c0",
+    "c2[1] -> c0",
+    "c2[0] -> c5",
+    "c6[5] -> c2",
+    "c5[4] -> c6",
+    "c5[3] -> c0",
+    "c2[0] -> c5",
+    "c5[2] -> c0",
+    "w -> c2",
+    "w -> c5",
+    "w -> c1",
+    "w -> c6",
+    "c1[0] -> c6",
+    "c4[4] -> c6",
+    "c4[3] -> c6",
+    "c0[9] -> c1",
+    "c0[8] -> f",
+    "c5[1] -> c0"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4236,
+   "plan_seconds": 1.5,
+   "board_before": "stock 6  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "click": {
+    "command_id": "215a3783ed5e45df8c55479a1ddb7e54"
+   },
+   "board_after": "stock 3  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s 2h 3s]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 1.024
+  },
+  {
+   "index": 24,
+   "move": "w -> c4",
+   "kind": "column",
+   "plan": [
+    "w -> c4"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4,
+   "plan_seconds": 0.001,
+   "board_before": "stock 3  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s 2h 3s]  foundations {'s': 1, 'h': 1, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "watches": {
+    "source": "55474ed6ea484a1c8fcb795d519fd803",
+    "landing": "f97a4854bf0f481493cc625dd70ae931",
+    "source_rect": [
+     733,
+     171,
+     74,
+     98
+    ],
+    "grab_region": [
+     767,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     756,
+     467,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    6
+   ],
+   "destination": [
+    784,
+    390
+   ],
+   "intent": {
+    "intent_id": "cd8b19523977405e96dfd54ef2c80f01",
+    "program": "drag",
+    "watch_id": "55474ed6ea484a1c8fcb795d519fd803",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4822.0391404,
+    "expires_mono": 4830.0391404,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     784,
+     390
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f97a4854bf0f481493cc625dd70ae931",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     754,
+     395
+    ],
+    "commands": 138,
+    "released_mono": 4823.5340581,
+    "controller": "connectome",
+    "neural_commands": 118,
+    "overridden_commands": 17
+   },
+   "drag_seconds": 1.634396100000231,
+   "board_after": "stock 3  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 2, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "accepted": true,
+   "seconds": 2.517
+  },
+  {
+   "index": 25,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 2,
+   "plan_seconds": 0.0,
+   "board_before": "stock 3  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 2, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kb 6c",
+   "click": {
+    "command_id": "5fa9b1e34e524ed5ab88ca9f02cff782"
+   },
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c 3h]  foundations {'s': 1, 'h': 2, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 0.996
+  },
+  {
+   "index": 26,
+   "move": "w -> f",
+   "kind": "foundation",
+   "plan": [
+    "w -> f",
+    "c0[0] -> cell",
+    "w -> c0",
+    "c1[0] -> c0",
+    "w -> c1",
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4277,
+   "plan_seconds": 1.5,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c 3h]  foundations {'s': 1, 'h': 2, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "1ad2c044c5bb452f9aa05b6656f2e59c",
+    "landing": null,
+    "source_rect": [
+     752,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     786,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     291,
+     434,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    6
+   ],
+   "destination": [
+    319,
+    401
+   ],
+   "intent": {
+    "intent_id": "1b827aa807724019852090aea4089596",
+    "program": "drag",
+    "watch_id": "1ad2c044c5bb452f9aa05b6656f2e59c",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4837.1254236,
+    "expires_mono": 4845.1254236,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     319,
+     401
+    ],
+    "destination_watch_id": null,
+    "until": null
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "cursor_confirmed_drag_released",
+    "stage": "verifying",
+    "condition_verified": false,
+    "cursor": [
+     319,
+     401
+    ],
+    "commands": 177,
+    "released_mono": 4839.0442282,
+    "controller": "connectome",
+    "neural_commands": 153,
+    "overridden_commands": 21
+   },
+   "drag_seconds": 1.9758277000000817,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 2.824
+  },
+  {
+   "index": 27,
+   "move": "c0[0] -> cell",
+   "kind": "cell",
+   "plan": [
+    "c0[0] -> cell",
+    "w -> c0",
+    "c1[0] -> c0",
+    "w -> c1",
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 4480,
+   "plan_seconds": 1.501,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell None\nc0: 4c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "3d4d7b1d05ea4d3c9f65f2ac6a9ab399",
+    "landing": "5892c9ea74334ebdaebf541c93e527d9",
+    "source_rect": [
+     401,
+     284,
+     73,
+     99
+    ],
+    "grab_region": [
+     435,
+     285,
+     6,
+     14
+    ],
+    "landing_region": [
+     409,
+     211,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    437,
+    178
+   ],
+   "intent": {
+    "intent_id": "a3493c5847a84970bf6d2facb4136748",
+    "program": "drag",
+    "watch_id": "3d4d7b1d05ea4d3c9f65f2ac6a9ab399",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4851.6117665,
+    "expires_mono": 4859.6117665,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     437,
+     178
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "5892c9ea74334ebdaebf541c93e527d9",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     445,
+     207
+    ],
+    "commands": 155,
+    "released_mono": 4853.2912769,
+    "controller": "connectome",
+    "neural_commands": 138,
+    "overridden_commands": 14
+   },
+   "drag_seconds": 1.8075273000004017,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: \nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 2.717
+  },
+  {
+   "index": 28,
+   "move": "w -> c0",
+   "kind": "column",
+   "plan": [
+    "w -> c0",
+    "c1[0] -> c0",
+    "w -> c1",
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 3696,
+   "plan_seconds": 1.503,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks 7c]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: \nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "66657b12c24c4eda8693271c136cb549",
+    "landing": "414073a6fb464fdbbc6d872e655ababc",
+    "source_rect": [
+     733,
+     171,
+     74,
+     98
+    ],
+    "grab_region": [
+     767,
+     172,
+     6,
+     14
+    ],
+    "landing_region": [
+     409,
+     287,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    437,
+    291
+   ],
+   "intent": {
+    "intent_id": "3245805d09d24874bc6c45ff3ec3ec7f",
+    "program": "drag",
+    "watch_id": "66657b12c24c4eda8693271c136cb549",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4865.9248339,
+    "expires_mono": 4873.9248339,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     437,
+     291
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "414073a6fb464fdbbc6d872e655ababc",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     456,
+     289
+    ],
+    "commands": 147,
+    "released_mono": 4867.5800163,
+    "controller": "connectome",
+    "neural_commands": 130,
+    "overridden_commands": 13
+   },
+   "drag_seconds": 1.7701028999999835,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 2.691
+  },
+  {
+   "index": 29,
+   "move": "c1[0] -> c0",
+   "kind": "column",
+   "plan": [
+    "c1[0] -> c0",
+    "w -> c1",
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 3230,
+   "plan_seconds": 1.502,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c\nc1: 6h\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "784de3ba5b3349a7ae127c06cb80c5d2",
+    "landing": "48466993b55443409c8aec391d2de37a",
+    "source_rect": [
+     488,
+     284,
+     73,
+     99
+    ],
+    "grab_region": [
+     522,
+     285,
+     6,
+     14
+    ],
+    "landing_region": [
+     409,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    437,
+    311
+   ],
+   "intent": {
+    "intent_id": "8a440c3533e341d19b6081fb8502bb43",
+    "program": "drag",
+    "watch_id": "784de3ba5b3349a7ae127c06cb80c5d2",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4880.2249295,
+    "expires_mono": 4888.2249295,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     437,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "48466993b55443409c8aec391d2de37a",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     437,
+     311
+    ],
+    "commands": 142,
+    "released_mono": 4881.7462133,
+    "controller": "connectome",
+    "neural_commands": 120,
+    "overridden_commands": 19
+   },
+   "drag_seconds": 1.6672151000002486,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: \nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 2.542
+  },
+  {
+   "index": 30,
+   "move": "w -> c1",
+   "kind": "column",
+   "plan": [
+    "w -> c1",
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 2481,
+   "plan_seconds": 1.5,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s Ks]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: \nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "912f706c935d40a7bdba5d2a92eed40e",
+    "landing": "e375616b260c4da3acc41297835f63b3",
+    "source_rect": [
+     715,
+     171,
+     73,
+     98
+    ],
+    "grab_region": [
+     716,
+     172,
+     17,
+     14
+    ],
+    "landing_region": [
+     496,
+     287,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    12,
+    8
+   ],
+   "destination": [
+    500,
+    292
+   ],
+   "intent": {
+    "intent_id": "83e792998f244934acd858d9370dfbbb",
+    "program": "drag",
+    "watch_id": "912f706c935d40a7bdba5d2a92eed40e",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4895.5059911,
+    "expires_mono": 4903.5059911,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     500,
+     292
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "e375616b260c4da3acc41297835f63b3",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     512,
+     274
+    ],
+    "commands": 138,
+    "released_mono": 4896.9901555,
+    "controller": "connectome",
+    "neural_commands": 117,
+    "overridden_commands": 18
+   },
+   "drag_seconds": 1.6571515999994517,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 3.706
+  },
+  {
+   "index": 31,
+   "move": "c5[4] -> c1",
+   "kind": "column",
+   "plan": [
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 2501,
+   "plan_seconds": 1.5,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "d85e6c2341bd449bb19510d81891473d",
+    "landing": "27d3d5e1713c46b5ac7333857b3d1f77",
+    "source_rect": [
+     835,
+     364,
+     73,
+     16
+    ],
+    "grab_region": [
+     836,
+     365,
+     17,
+     14
+    ],
+    "landing_region": [
+     496,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    14,
+    7
+   ],
+   "destination": [
+    502,
+    311
+   ],
+   "intent": {
+    "intent_id": "c54faddb74b149e59d319061dab63284",
+    "program": "drag",
+    "watch_id": "d85e6c2341bd449bb19510d81891473d",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4910.7542032,
+    "expires_mono": 4918.7542032,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     502,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "27d3d5e1713c46b5ac7333857b3d1f77",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     843,
+     368
+    ],
+    "commands": 74,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 66,
+    "overridden_commands": 7
+   },
+   "drag_seconds": 0.8885768000000098,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": false,
+   "seconds": 2.864,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  },
+  {
+   "index": 32,
+   "move": "c2[3] -> c3",
+   "kind": "column",
+   "plan": [
+    "c5[4] -> c1",
+    "c5[3] -> c2",
+    "c6[5] -> c5",
+    "c5[2] -> c2",
+    "cell -> c5",
+    "c5[1] -> c2",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c3",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 2422,
+   "plan_seconds": 1.501,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd Ts 9h\nc3: Kh Qs Jh\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "6842b698f2a74baaa9bd1e71968a2ed6",
+    "landing": "5711cd8b38e34ec09f1472e89c822463",
+    "source_rect": [
+     575,
+     344,
+     73,
+     16
+    ],
+    "grab_region": [
+     609,
+     345,
+     6,
+     14
+    ],
+    "landing_region": [
+     669,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    697,
+    351
+   ],
+   "intent": {
+    "intent_id": "6fee62f9c6164a489afeb25c9752d991",
+    "program": "drag",
+    "watch_id": "6842b698f2a74baaa9bd1e71968a2ed6",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4924.1961342,
+    "expires_mono": 4932.1961342,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     697,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "5711cd8b38e34ec09f1472e89c822463",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     677,
+     355
+    ],
+    "commands": 121,
+    "released_mono": 4925.5036214,
+    "controller": "connectome",
+    "neural_commands": 104,
+    "overridden_commands": 14
+   },
+   "drag_seconds": 1.4394242999997005,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": true,
+   "seconds": 2.315
+  },
+  {
+   "index": 33,
+   "move": "c5[4] -> c1",
+   "kind": "column",
+   "plan": [
+    "c5[4] -> c1",
+    "c5[3] -> c3",
+    "c6[5] -> c5",
+    "c5[2] -> c3",
+    "cell -> c5",
+    "c5[1] -> c3",
+    "c5[0] -> cell",
+    "c2[1] -> c5",
+    "c0[0] -> c2",
+    "c2[0] -> c1",
+    "w -> c0",
+    "w -> c5",
+    "w -> f",
+    "w -> c2",
+    "c5[0] -> c2",
+    "w -> c6",
+    "c4[5] -> c5",
+    "c4[4] -> f"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 2550,
+   "plan_seconds": 1.507,
+   "board_before": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "watches": {
+    "source": "36189b6c9a3d4d80ab95405b20196f6e",
+    "landing": "f53cd160b0ae4129a1fba1e5c95bf6e2",
+    "source_rect": [
+     835,
+     364,
+     73,
+     16
+    ],
+    "grab_region": [
+     836,
+     365,
+     17,
+     14
+    ],
+    "landing_region": [
+     496,
+     387,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    14,
+    7
+   ],
+   "destination": [
+    502,
+    311
+   ],
+   "intent": {
+    "intent_id": "55350263017147409291cdbc1da625da",
+    "program": "drag",
+    "watch_id": "36189b6c9a3d4d80ab95405b20196f6e",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4939.2088558,
+    "expires_mono": 4947.2088558,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     502,
+     311
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f53cd160b0ae4129a1fba1e5c95bf6e2",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "failed",
+    "reason": "target_lost",
+    "stage": "approaching",
+    "condition_verified": false,
+    "cursor": [
+     838,
+     360
+    ],
+    "commands": 70,
+    "released_mono": 0.0,
+    "controller": "connectome",
+    "neural_commands": 63,
+    "overridden_commands": 6
+   },
+   "drag_seconds": 0.8269329999993715,
+   "board_after": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+   "accepted": false,
+   "seconds": 2.801,
+   "unchanged": true,
+   "note": "application rejected the move; it is excluded at this position"
+  }
+ ],
+ "events": "7164 events omitted from the published copy; the full ledger stays in runs/",
+ "lost_events": 0,
+ "images": [
+  "start.png",
+  "mismatch-001.png",
+  "mismatch-005.png",
+  "mismatch-013.png",
+  "mismatch-015.png",
+  "mismatch-020.png",
+  "mismatch-022.png",
+  "mismatch-031.png",
+  "mismatch-033.png",
+  "end.png"
+ ],
+ "passed": true,
+ "target": {
+  "hwnd": 66766,
+  "pid": 29860,
+  "class": "SDL_app",
+  "rect": [
+   0,
+   0,
+   1280,
+   720
+  ]
+ },
+ "session_id": 2,
+ "initial_board": "stock 21  waste [7d 6d Kh]  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: \nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+ "final_cards": {
+  "columns": [
+   [
+    "7c",
+    "6h"
+   ],
+   [
+    "Ks"
+   ],
+   [
+    "8h",
+    "Qc",
+    "Jd"
+   ],
+   [
+    "Kh",
+    "Qs",
+    "Jh",
+    "Ts",
+    "9h"
+   ],
+   [
+    "9d",
+    "8d",
+    "Td",
+    "3c",
+    "4h",
+    "3s"
+   ],
+   [
+    "8c",
+    "5h",
+    "7h",
+    "8s",
+    "Qd",
+    "Js",
+    "Th",
+    "9c"
+   ],
+   [
+    "2c",
+    "2s",
+    "6s",
+    "Jc",
+    "Kc",
+    "6c"
+   ]
+  ],
+  "waste": [
+   "7d",
+   "6d",
+   "5s",
+   "Ac",
+   "7s",
+   "5c",
+   "4s",
+   "Qh",
+   "Kd",
+   "5d",
+   "Tc",
+   "9s"
+  ],
+  "stock": 0,
+  "foundations": [
+   1,
+   3,
+   4,
+   0
+  ],
+  "cell": "4c",
+  "deal_count": 3
+ },
+ "mismatches": 8,
+ "solver": [
+  {
+   "step": 26,
+   "reason": "budget",
+   "nodes": 34936,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 27,
+   "reason": "budget",
+   "nodes": 33623,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 28,
+   "reason": "budget",
+   "nodes": 31437,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 29,
+   "reason": "budget",
+   "nodes": 28299,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 30,
+   "reason": "budget",
+   "nodes": 29994,
+   "seconds": 10.001,
+   "length": 0
+  },
+  {
+   "step": 31,
+   "reason": "budget",
+   "nodes": 31016,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 32,
+   "reason": "budget",
+   "nodes": 29946,
+   "seconds": 10.002,
+   "length": 0
+  },
+  {
+   "step": 33,
+   "reason": "budget",
+   "nodes": 30109,
+   "seconds": 10.0,
+   "length": 0
+  },
+  {
+   "step": 34,
+   "reason": "budget",
+   "nodes": 29512,
+   "seconds": 10.0,
+   "length": 0
+  }
+ ],
+ "result": "stuck",
+ "final_board": "stock 0  waste [7d 6d 5s Ac 7s 5c 4s Qh Kd 5d Tc 9s]  foundations {'s': 1, 'h': 3, 'd': 4, 'c': 0}  cell 4c\nc0: 7c 6h\nc1: Ks\nc2: 8h Qc Jd\nc3: Kh Qs Jh Ts 9h\nc4: 9d 8d Td 3c 4h 3s\nc5: 8c 5h 7h 8s Qd Js Th 9c\nc6: 2c 2s 6s Jc Kc 6c",
+ "moves": 34,
+ "won": false,
+ "final_state": "halted",
+ "pending_commands": [],
+ "capture_sources": {
+  "dxgi": 21318,
+  "gdi_refresh": 21
+ },
+ "dropped_frames": 1,
+ "event_counts": {
+  "lease_claimed": 1,
+  "input_requested": 42,
+  "pointer_feedback": 3464,
+  "watch_added": 60,
+  "watch_removed": 60,
+  "appear": 61,
+  "intent_started": 27,
+  "shadow_prediction": 3305,
+  "shadow_discarded": 30,
+  "drag_started": 19,
+  "input_released": 26,
+  "intent_completed": 19,
+  "vanish": 26,
+  "intent_failed": 8,
+  "output_halted": 8,
+  "input_submitted": 7,
+  "observation_dropped": 1
+ },
+ "inference_ms": {
+  "p50": 3.400800000235904,
+  "p95": 8.306910000101198,
+  "p99": 19.900725999613996
+ },
+ "inference_within_5ms_fraction": 0.7655172413793103,
+ "mean_disagreement_px": 1.8206556236799845
+}

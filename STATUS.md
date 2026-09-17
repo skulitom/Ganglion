@@ -20,10 +20,12 @@ once-per-observation triggers, snapshot/window bindings, pointer arbitration, se
 action/perception rings, observer capabilities, request deduplication, and an independent input
 process that releases clicks and bounded drag holds when the producer stalls or exits.
 
-The actual Haltere ConnectomeRNN now receives generic cursor/goal observations during reach and
-drag, through an optional worker with a one-item mailbox. Model results enter the ledger and
-cannot submit input. Exceptions and stalls leave the existing controller running. The recorded
-sensor inputs can be replayed without a desktop.
+The actual Haltere ConnectomeRNN receives generic cursor/goal observations during reach and
+drag through an optional worker with a one-item mailbox. Its results enter the ledger, and an
+intent may now grant it **supervised authority**: a proposal drives the pointer only when its
+bounded step brings the cursor closer to the goal, the deterministic controller acts otherwise,
+and completion still needs measured arrival. Exceptions and stalls leave the existing controller
+running. The recorded sensor inputs can be replayed without a desktop.
 
 The repository is public on [GitHub](https://github.com/skulitom/Ganglion) under MIT, and the
 Windows CI workflow has passed remotely. Generic cursor training now runs through the actual
@@ -35,10 +37,32 @@ Readout DAgger settled 3/16 static targets on one held-out set and 4/16 on a fre
 Two 200-update encoder/readout runs did not beat it on validation. Checkpoints remain local
 and experimental; no model has been released to Hugging Face. Training peaked at 46°C.
 
-Next: improve closed-loop cursor stability, resolve live inference jitter, and add the
-fly visual front-end. Solitaire remains an application transfer test directed by the agent.
-The flight checkpoint has not earned desktop-control authority, and no full Solitaire win is
-claimed. See [the connectome experiment](docs/bench/SHADOW.md).
+The suite now passes **116 tests** (four optional checks skipped). With the DAgger cursor
+checkpoint, the connectome proposed 90.6% of the pointer commands accepted during 33 live
+Solitaire drags, and 73–77% in the synthetic reach/drag demos, all completing under the
+envelope. Real-time Solitaire play runs as an evaluation harness: 108 verified steps with the
+deterministic controller and 40 with the connectome, no wins. Card reading, rules and planning
+live in `ganglion/evaluation/solitaire`, outside the core.
+
+Next: make the model earn its share unsupervised (settling, long-horizon stability), measure and
+reduce live inference jitter, and add the fly visual front-end so goals stop coming from taught
+colour components. No checkpoint has been released to Hugging Face; the candidate does not yet
+control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.md).
+
+## Real-time Solitaire with the connectome in the loop
+
+- A live loop reads the Sawayama board from captured frames, picks a move, executes it through
+  the public MCP tools as a taught drag or stock click, and verifies by reading again.
+  Deterministic runs: 93 drags started, 89 accepted, 14/15 deals, mean 2.32 s per step.
+  Connectome runs: 33 drags, 22 accepted (eight lost the grab target before pickup and were
+  retried, one refused), 7/7 deals, 3,778 connectome commands against 394 overrides.
+- Inference during live drags: p50 3.4 ms, p95 8.3 ms, p99 19.9 ms, 76.6% within 5 ms, mean
+  disagreement 1.82 px from the reference. The envelope, not the model, guarantees completion.
+- The reader uses per-phase glyph templates taught from five labelled frames; unreadable frames
+  stop the run. The game auto-plays aces and twos; higher ranks are assumed safe-rule only.
+- Both deals ended in positions proven dead from the visible cards. Winning was not the aim,
+  and the card logic is a harness, not a product feature.
+- [Scorecard, images, reports and reproduction](docs/bench/SOLITAIRE.md).
 
 ## Solitaire transfer validation
 

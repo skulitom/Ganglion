@@ -152,7 +152,8 @@ def _send(runtime, intent, operation, now, watches, *, point=None, goal=None):
     runtime.pending[cid] = {"intent_id": intent.id, "watch_id": intent.spec.watch_id,
         "observation_id": evidence.observation_id, "captured_mono": evidence.captured,
         "sample_started_mono": proof, "capture_source": evidence.source,
-        "percept_ready_mono": now, "goal": list(goal) if goal else None}
+        "percept_ready_mono": now, "goal": list(goal) if goal else None,
+        "controller": intent.last_controller if point is not None else "none"}
     command = {"command_id": cid, "target": runtime.layout,
         "deadline": min(runtime.expires, intent.expires, proof + .05), "point": point}
     if intent.held or operation in ("begin_drag", "end_drag"):

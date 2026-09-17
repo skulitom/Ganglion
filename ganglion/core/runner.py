@@ -82,7 +82,21 @@ class Runner:
             self.runtime.shadow.close()
 
 
-def run_core(endpoint_path, *, hwnd=None, synthetic=False, seconds=0, shadow_checkpoint=None):
+def select_window(hwnd=None, pid=None, title=None):
+    """Resolve exactly one visible top-level window; ambiguity is an error, never a guess."""
+    from .window import describe, find
+    if hwnd is not None:
+        return describe(hwnd)["hwnd"]
+    if pid is None and title is None:
+        raise ValueError("Live core requires --window HWND, --pid, or --title; use --synthetic for a headless run.")
+    found = find(pid=pid, title=title)
+    if len(found) != 1:
+        raise ValueError(f"Expected exactly one matching window, found {len(found)}: "
+                         + ", ".join(f"{w['hwnd']} {w['title']!r} pid {w['pid']}" for w in found))
+    return found[0]["hwnd"]
+
+
+def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False, seconds=0, shadow_checkpoint=None):
     from .output import MemoryOutput, ProcessOutput
     endpoint_path = Path(endpoint_path)
     if endpoint_path.exists():
@@ -101,8 +115,7 @@ def run_core(endpoint_path, *, hwnd=None, synthetic=False, seconds=0, shadow_che
             from .capture import Capture
             from .session import current
             from .window import describe
-            if hwnd is None:
-                raise ValueError("Live core requires --window HWND; use --synthetic for a headless run.")
+            hwnd = select_window(hwnd, pid, title)
             info = current()
             capture, output = Capture(refresh_static=True), ProcessOutput()
             target, session_id = lambda: describe(hwnd), info.session_id

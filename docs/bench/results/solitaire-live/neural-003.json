@@ -1,0 +1,330 @@
+{
+ "measured_at": "2026-09-17T12:03:39.294658+00:00",
+ "python": "3.13.2",
+ "dependencies": {
+  "mcp": "2.2.0",
+  "numpy": "2.5.3",
+  "opencv-python": "5.0.0.93",
+  "pygame": "2.6.1",
+  "dxcam": "0.3.0",
+  "playwright": null
+ },
+ "endpoint": "runs/solitaire-neural3.endpoint.json",
+ "deal_count": 3,
+ "controller": "connectome",
+ "steps": [
+  {
+   "index": 0,
+   "move": "c3[3] -> c5",
+   "kind": "column",
+   "plan": [
+    "c3[3] -> c5"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 3,
+   "plan_seconds": 0.0,
+   "board_before": "stock 24  waste []  foundations {'s': 0, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js\nc3: Ar Th Ab Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "15c2a33a5cbf4338af980a0a221cc04c",
+    "landing": "7599edfd19ba418ab9b5d85ccd294269",
+    "source_rect": [
+     661,
+     344,
+     73,
+     99
+    ],
+    "grab_region": [
+     662,
+     345,
+     17,
+     14
+    ],
+    "landing_region": [
+     843,
+     487,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    12,
+    8
+   ],
+   "destination": [
+    847,
+    412
+   ],
+   "intent": {
+    "intent_id": "82e531f3d6f1449fb3c5b32d75ddaf19",
+    "program": "drag",
+    "watch_id": "15c2a33a5cbf4338af980a0a221cc04c",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4657.3978923,
+    "expires_mono": 4665.3978923,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     847,
+     412
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "7599edfd19ba418ab9b5d85ccd294269",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     822,
+     433
+    ],
+    "commands": 132,
+    "released_mono": 4658.8079998,
+    "controller": "connectome",
+    "neural_commands": 117,
+    "overridden_commands": 12
+   },
+   "drag_seconds": 1.5450713999998698,
+   "board_after": "stock 24  waste []  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js\nc3: Ar Th\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": false,
+   "seconds": 3.551,
+   "unchanged": false,
+   "note": "board changed differently than planned; continuing from what is visible"
+  },
+  {
+   "index": 1,
+   "move": "c3[1] -> c2",
+   "kind": "column",
+   "plan": [
+    "c3[1] -> c2"
+   ],
+   "plan_reason": "improves",
+   "plan_nodes": 2,
+   "plan_seconds": 0.0,
+   "board_before": "stock 24  waste []  foundations {'s': 1, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js\nc3: Ar Th\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "watches": {
+    "source": "3a24dd15335644abb8f4cfe70bdc7b0e",
+    "landing": "6c98f60774c04f5e9041c6ce72684b3c",
+    "source_rect": [
+     661,
+     304,
+     73,
+     99
+    ],
+    "grab_region": [
+     695,
+     305,
+     6,
+     14
+    ],
+    "landing_region": [
+     583,
+     427,
+     57,
+     12
+    ]
+   },
+   "grab_offset": [
+    36,
+    7
+   ],
+   "destination": [
+    611,
+    351
+   ],
+   "intent": {
+    "intent_id": "82dffd02a1d34ca989440a84b515224a",
+    "program": "drag",
+    "watch_id": "3a24dd15335644abb8f4cfe70bdc7b0e",
+    "phase": "running",
+    "reason": null,
+    "started_mono": 4659.9108173,
+    "expires_mono": 4667.9108173,
+    "cursor": null,
+    "error_px": null,
+    "commands": 0,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 0,
+    "overridden_commands": 0,
+    "stage": "approaching",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     611,
+     351
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "6c98f60774c04f5e9041c6ce72684b3c",
+     "present": true
+    }
+   },
+   "outcome": {
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "stage": "verifying",
+    "condition_verified": true,
+    "cursor": [
+     610,
+     348
+    ],
+    "commands": 116,
+    "released_mono": 4661.1718797,
+    "controller": "connectome",
+    "neural_commands": 101,
+    "overridden_commands": 12
+   },
+   "drag_seconds": 1.363169199999902,
+   "board_after": "stock 24  waste []  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: \nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "accepted": false,
+   "seconds": 2.252,
+   "unchanged": false,
+   "note": "board changed differently than planned; continuing from what is visible"
+  },
+  {
+   "index": 2,
+   "move": "deal",
+   "kind": "deal",
+   "plan": [
+    "deal"
+   ],
+   "plan_reason": "deal",
+   "plan_nodes": 18,
+   "plan_seconds": 0.001,
+   "board_before": "stock 24  waste []  foundations {'s': 1, 'h': 1, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js Th\nc3: \nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs Jh\nc6: 2c 2s 6s Jc Kb 6c Jd",
+   "click": {
+    "command_id": "0177ccd434c84001ac0df34a7dd6a271"
+   },
+   "error": "board did not settle: ['waste[1]: unreadable rank at (507, 171): ambiguous between 6 0.86 and 8 0.81']"
+  }
+ ],
+ "events": "522 events omitted from the published copy; the full ledger stays in runs/",
+ "lost_events": 0,
+ "images": [
+  "start.png",
+  "mismatch-000.png",
+  "mismatch-001.png",
+  "error-002.png"
+ ],
+ "passed": false,
+ "target": {
+  "hwnd": 66766,
+  "pid": 29860,
+  "class": "SDL_app",
+  "rect": [
+   0,
+   0,
+   1280,
+   720
+  ]
+ },
+ "session_id": 2,
+ "initial_board": "stock 24  waste []  foundations {'s': 0, 'h': 0, 'd': 0, 'c': 0}  cell None\nc0: 4c\nc1: 6h 4d\nc2: 8h Qc Js\nc3: Ar Th Ab Jh\nc4: 9d 8d Td 3c 4h\nc5: 8c 5h 7h 8s Qr Qs\nc6: 2c 2s 6s Jc Kb 6c Jd",
+ "mismatches": 2,
+ "final_cards": {
+  "columns": [
+   [
+    "4c"
+   ],
+   [
+    "6h",
+    "4d"
+   ],
+   [
+    "8h",
+    "Qc",
+    "Js",
+    "Th"
+   ],
+   [],
+   [
+    "9d",
+    "8d",
+    "Td",
+    "3c",
+    "4h"
+   ],
+   [
+    "8c",
+    "5h",
+    "7h",
+    "8s",
+    "Qr",
+    "Qs",
+    "Jh"
+   ],
+   [
+    "2c",
+    "2s",
+    "6s",
+    "Jc",
+    "Kb",
+    "6c",
+    "Jd"
+   ]
+  ],
+  "waste": [],
+  "stock": 24,
+  "foundations": [
+   1,
+   1,
+   0,
+   0
+  ],
+  "cell": null,
+  "deal_count": 3
+ },
+ "error": "PlayError: board did not settle: ['waste[1]: unreadable rank at (507, 171): ambiguous between 6 0.86 and 8 0.81']",
+ "final_state": "halted",
+ "pending_commands": [],
+ "capture_sources": {
+  "dxgi": 2403
+ },
+ "dropped_frames": 0,
+ "event_counts": {
+  "lease_claimed": 1,
+  "input_requested": 5,
+  "pointer_feedback": 248,
+  "watch_added": 5,
+  "watch_removed": 5,
+  "appear": 4,
+  "intent_started": 2,
+  "shadow_prediction": 242,
+  "drag_started": 2,
+  "input_released": 3,
+  "intent_completed": 2,
+  "vanish": 2,
+  "input_submitted": 1
+ },
+ "inference_ms": {
+  "p50": 3.21364999990692,
+  "p95": 7.864785000447227,
+  "p99": 9.799021000089851
+ },
+ "inference_within_5ms_fraction": 0.768595041322314,
+ "mean_disagreement_px": 1.9391078747684245
+}

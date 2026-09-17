@@ -36,6 +36,7 @@ class ShadowWorker:
         self.predictor, self.ledger, self.clock = predictor, ledger, clock
         self.condition = threading.Condition()
         self.pending = None
+        self.latest = None      # (binding, finished_mono, raw_actions) of the newest valid prediction
         self.generation = 0
         self.closed = False
         self.failed = None
@@ -56,6 +57,16 @@ class ShadowWorker:
         with self.condition:
             self.generation += 1
             self.pending = None
+            self.latest = None
+
+    def proposal(self, binding, now, max_age=.05):
+        """Velocity (in units of intent speed) proposed by the newest valid prediction for this
+        intent, stage and layout, or None when there is none fresh enough."""
+        with self.condition:
+            latest = self.latest
+        if latest is None or latest[0] != binding or now - latest[1] > max_age:
+            return None
+        return latest[2]
 
     def status(self):
         with self.condition:
@@ -103,6 +114,8 @@ class ShadowWorker:
                              and finished <= sample.expires and finished - sample.sampled <= .05)
                     if valid:
                         self.predictions += 1
+                        raw = list(prediction.get("raw_actions", []))[:2]
+                        self.latest = (sample.binding, finished, raw) if len(raw) == 2 else None
                     else:
                         self.discarded += 1
                 self.ledger.append("shadow_prediction" if valid else "shadow_discarded", finished,
@@ -119,6 +132,7 @@ class ShadowWorker:
                 with self.condition:
                     self.failed = f"{type(exc).__name__}: {exc}"
                     self.pending = None
+                    self.latest = None
                 self.ledger.append("shadow_failed", self.clock(), critical=True,
                                    error=self.failed, actuation_authority=False)
                 return

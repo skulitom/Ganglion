@@ -39,6 +39,36 @@ def describe(hwnd: int) -> dict:
             "rect": [origin.x, origin.y, rect.right, rect.bottom]}
 
 
+def find(*, pid: int | None = None, title: str | None = None) -> list[dict]:
+    """Visible, unowned top-level windows of a process or with a title substring (never focuses)."""
+    if pid is None and title is None:
+        raise ValueError("select windows by pid or title")
+    u = api()
+    callback = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    u.EnumWindows.argtypes = [callback, wintypes.LPARAM]
+    u.GetWindowTextW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+    u.GetWindow.argtypes = [wintypes.HWND, wintypes.UINT]
+    u.GetWindow.restype = wintypes.HWND
+    matches = []
+
+    def visit(hwnd, _):
+        if not u.IsWindowVisible(hwnd) or u.GetWindow(hwnd, 4):  # GW_OWNER: skip owned popups
+            return True
+        owner = wintypes.DWORD()
+        u.GetWindowThreadProcessId(hwnd, ctypes.byref(owner))
+        text = ctypes.create_unicode_buffer(256)
+        u.GetWindowTextW(hwnd, text, 256)
+        if (pid is None or owner.value == pid) and (title is None or title.lower() in text.value.lower()):
+            try:
+                matches.append(describe(hwnd) | {"title": text.value})
+            except (ValueError, OSError):
+                pass
+        return True
+
+    u.EnumWindows(callback(visit), 0)
+    return matches
+
+
 def validate(target: dict, x=None, y=None, *, foreground=True):
     u = api()
     if describe(target["hwnd"]) != target:

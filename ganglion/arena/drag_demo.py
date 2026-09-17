@@ -12,7 +12,7 @@ from .manipulation import ManipulationWorld, DESTINATION_RGB, CONDITION_RGB
 from .target import TARGET_RGB
 
 
-async def exercise(endpoint, reset, trials):
+async def exercise(endpoint, reset, trials, controller="deterministic"):
     from mcp import Client
     from mcp.client.stdio import StdioServerParameters
     transport = StdioServerParameters(command=sys.executable, args=["-m", "ganglion.mcp", "--endpoint", str(endpoint)])
@@ -69,7 +69,8 @@ async def exercise(endpoint, reset, trials):
                     raise RuntimeError("Fixture controls not observed on a quiet screen")
                 before = cursor
                 spec = {"program": "reach" if mode == "static_reach" else "drag",
-                        "watch_id": watches["source"], "timeout_seconds": 5, "settle_ms": 80}
+                        "watch_id": watches["source"], "timeout_seconds": 5, "settle_ms": 80,
+                        "controller": controller}
                 if mode == "static_reach":
                     spec["click"] = True
                 else:
@@ -139,15 +140,26 @@ def summarize(result, truth):
     return result
 
 
-def run(*, environment="synthetic", trials=2, path=None):
+def run(*, environment="synthetic", trials=2, path=None, shadow_checkpoint=None, controller="deterministic"):
     if not 1 <= trials <= 4:
         raise ValueError("Use 1–4 seeds")
-    with experiment(environment, ManipulationWorld, scenario="manipulation") as host:
-        result = asyncio.run(exercise(host.endpoint, host.reset, trials))
+    if controller == "connectome" and not shadow_checkpoint:
+        raise ValueError("The connectome controller needs --shadow-checkpoint")
+    predictor = None
+    if shadow_checkpoint:
+        from ganglion.brain.haltere_cursor import HaltereCursor
+        predictor = HaltereCursor(shadow_checkpoint)
+    with experiment(environment, ManipulationWorld, scenario="manipulation", shadow_predictor=predictor) as host:
+        result = asyncio.run(exercise(host.endpoint, host.reset, trials, controller))
         result.update(environment=environment, session_id=host.session_id, browser_version=host.browser_version,
                       measured_at=datetime.now(timezone.utc).isoformat(), dependencies=dependency_versions(),
-                      python=sys.version.split()[0])
+                      python=sys.version.split()[0], controller={"mode": controller})
         result = summarize(result, host.finish())
+        if predictor:
+            from .reach_demo import neural_share
+            result["shadow"] = host.shadow_status()
+            result["shadow_score"] = {"actuation_authority": "supervised_connectome" if controller == "connectome" else False,
+                                      "promoted": False, "neural_share": neural_share(result["events"])}
     if path:
         destination = Path(path)
         destination.parent.mkdir(parents=True, exist_ok=True)

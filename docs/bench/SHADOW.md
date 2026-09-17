@@ -80,6 +80,42 @@ Replay requires no desktop or input:
 .venv/Scripts/python.exe -m ganglion.brain.replay docs/bench/results/shadow-connectome-seat-recorded.json --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/shadow-replay.json
 ```
 
+## Supervised authority
+
+Later on 2026-09-17 the shadow gained a bounded way to act. An intent may name
+`controller: "connectome"`; the core then consults the newest valid proposal for that intent,
+stage and layout (at most 50 ms old) on every control tick and applies its velocity **only if**
+the resulting step, clamped to the intent speed limit and the client area, brings the cursor
+closer to the goal (or holds position within tolerance). Otherwise the deterministic controller
+acts for that tick and the override is counted. Completion still requires measured cursor
+arrival; every pointer command records which controller produced it; a core without a loaded
+model refuses the request. The regression tests drive the supervision with fake proposers that
+help, sabotage, or are ignored, and a stalled model still cannot change actual commands.
+
+| Measurement | Synthetic reach, 4 trials | Synthetic drag, 10 cases | Live Solitaire, 33 drags |
+|---|---:|---:|---:|
+| Task outcome | 4/4 completed, 0 false actions | 10/10 cases passed | 22 accepted by the game |
+| Connectome commands / overridden | 108 / 33 (76.6%) | 451 / 169 (72.7%) | 3,778 / 394 (90.6%) |
+| Inference p50 / p95 / p99 | 4.21 / 8.50 / 10.28 ms | — | 3.40 / 8.31 / 19.90 ms |
+| Within 5 ms | 58.6% | — | 76.6% |
+| Mean proposal/reference disagreement | 3.87 px | — | 1.82 px |
+
+Sources: [reach](results/solitaire-live/neural-reach-synthetic.json),
+[drag](results/solitaire-live/neural-drag-synthetic.json), and the
+[Solitaire runs](SOLITAIRE.md#real-time-play-through-the-reactive-loop-second-pass-2026-09-17).
+The model is the DAgger round-3 cursor readout from [training](TRAINING.md), which settles only
+3–4 of 16 static targets on its own; the envelope, not the model, guarantees completion. The
+share therefore measures how often the fly model's proposal was acceptable, not that it could
+have finished the reach unaided. The live runs used the deterministic taught colour perception
+for goals; there is still no fly visual front-end. `promoted` remains false everywhere.
+
+Reproduce (the live command inside Anode):
+
+```powershell
+.venv/Scripts/python.exe -m ganglion.cli reach-demo --environment synthetic --trials 4 --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --controller connectome --json runs/neural-reach.json
+.venv/Scripts/python.exe -m ganglion.cli drag-demo --environment synthetic --trials 2 --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --controller connectome --json runs/neural-drag.json
+```
+
 ## Validation and next work
 
 The full suite passes 97 tests including the three optional browser checks. New regressions

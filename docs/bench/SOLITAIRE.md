@@ -4,6 +4,78 @@ On 2026-09-17, Ganglion's existing drag primitive handled a legal move and a rej
 **The Zachtronics Solitaire Collection / Sawayama** inside Anode session 3, at 1280×720.
 The game was build 24998607 (Steam app 1988540). The resident core needed no changes.
 
+## Real-time play through the reactive loop (second pass, 2026-09-17)
+
+The same day, the check grew into a live loop: read the board from a captured frame, choose a
+move, execute it as a taught drag or a stock click through the public MCP tools, read again and
+verify. The card logic exists only to keep real drags flowing without an LLM turn per move; it
+is an evaluation harness, not the product. Nothing card-specific entered the core.
+
+| Runs | Steps | Deals accepted | Drags started / accepted by the game | Mean step | Mean drag |
+|---|---:|---:|---:|---:|---:|
+| Deterministic controller, games 1 and 2 (four runs) | 108 | 14 / 15 | 93 / 89 | 2.32 s | 1.54 s |
+| Connectome under supervision, game 3 (three runs) | 40 | 7 / 7 | 33 / 22 | 2.53 s | 1.53 s |
+
+Every run ended halted with no pending output, no input failures and no ledger loss once the
+reader started its cursor at the ledger frontier. The longest single run made 43 consecutive
+verified moves ([game 2](results/solitaire-live/game-002.json)); game 1 reached 66 moves over
+three runs ([last run](results/solitaire-live/game-001c.json)). No game was won: both deals
+ended in positions the exact search proved dead from the visible cards, and the heuristic play
+before the stock ran out was not strong. Winning was never the point of this pass.
+
+The four deterministic drags the game refused were drops of a card grabbed at its right edge
+onto an empty column; grabbing nearer the middle fixed that. In the connectome runs eight drags
+failed before pickup with `target_lost`, because the narrow grab band lost its white component
+under the pointer sprite during the approach, and were retried; one face card dropped on an
+empty column was refused; two moves landed while an ace the reader could only see by colour
+went up on its own.
+
+With `--controller connectome` on a core started with the DAgger cursor checkpoint, the actual
+30,000-neuron ConnectomeRNN proposed the pointer velocity for the drags. The supervising
+envelope in the core accepted **3,778 proposals and overrode 394 (90.6%)**; 3,335 inferences
+ran at p50 3.4 ms, p95 8.3 ms, p99 19.9 ms, 76.6% within 5 ms, with a mean disagreement of
+1.82 px from the deterministic reference. Every accepted step stayed inside the same speed limit
+and client bounds, completion still needed measured cursor arrival, and the reader confirmed
+each move afterwards. See [the supervised-authority section](SHADOW.md#supervised-authority).
+
+![Game 3 before the connectome runs](results/solitaire-live/neural-004-start.jpg)
+![Game 3 after 34 connectome-driven steps](results/solitaire-live/neural-004-end.jpg)
+
+### Reading the board
+
+`ganglion.evaluation.solitaire.reader` reads a 1280×720 client frame: seven tableau columns at a
+20 px stacking pitch, a horizontally fanned waste, four foundation slots, the deck and the free
+cell. Rank and suit come from ink masks of the corner index glyphs compared with a taught pack
+(`ganglion/evaluation/solitaire/pack`) by intersection over union. The game scales its pixel
+art by 4/3, so a glyph's pixels depend on the card's sub-pixel position; templates are stored
+per position phase, and an untaught phase falls back to normalised correlation with a required
+margin, recording confident results. Covered number cards give their suit through the first pip
+row; covered face cards and aces keep only their colour until they are uncovered, deduced by
+elimination, or remembered from an earlier reading. Five labelled frames read exactly
+([sources](../../ganglion/evaluation/solitaire/pack/sources.json)); reading a frame takes about
+40 ms and every unreadable frame stops the run rather than guessing.
+
+Observed rules that the harness models: three cards per deal, no redeal, any card or run onto
+an empty column, the empty deck slot holds one card, exposed aces and twos go to the foundation
+by themselves (higher ranks are assumed to follow the usual safe rule; a wrong assumption shows
+up as a verification mismatch and the harness continues from what is visible).
+
+### Reproduce
+
+Start a core bound to the game inside Anode (a `python.exe` job; `pythonw.exe` died on its first
+input command), then run the harness from either session:
+
+```powershell
+.venv/Scripts/python.exe -m ganglion.cli core --pid 29860 --seconds 1750 --endpoint runs/solitaire.endpoint.json --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt
+.venv/Scripts/python.exe -m ganglion.evaluation.solitaire.player --endpoint runs/solitaire.endpoint.json --out runs/solitaire-play/example --session 2 --dry-run
+.venv/Scripts/python.exe -m ganglion.evaluation.solitaire.player --endpoint runs/solitaire.endpoint.json --out runs/solitaire-play/example-live --session 2 --max-moves 60 --controller connectome
+```
+
+`--dry-run` reads and plans without claiming control. Output directories must be new. The
+checkpoint is a local experimental artifact (see [training](TRAINING.md)); without it, omit
+`--shadow-checkpoint` and `--controller`. The pack was taught from the frames listed in
+`sources.json`; rebuild it with `python -m ganglion.evaluation.solitaire.teach --sources ...`.
+
 ## Recorded outcomes
 
 | Case | Observed application result | Core result | Wall time from intent call |

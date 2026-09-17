@@ -78,6 +78,7 @@ class IntentSpec(Model):
     destination_watch_id: Identifier | None = None
     until: ConditionSpec | None = None
     verification_seconds: float = Field(default=1, ge=0.1, le=5)
+    controller: Literal["deterministic", "connectome"] = "deterministic"
 
     @model_validator(mode="after")
     def check_program(self):

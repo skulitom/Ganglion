@@ -802,6 +802,10 @@ Calendar estimates above are guesses; these gates are the reviewable outcomes, i
   prediction disagreement and frozen replay. Its flight checkpoint remains untrained for
   desktop control; no neural promotion or fly visual front-end is claimed. The next work is
   generic perception/control adaptation and latency, with application tests measuring transfer.
+  *Later the same day:* intents may grant the connectome supervised authority (a proposal acts
+  only when it brings the cursor closer; the deterministic controller acts otherwise), and the
+  DAgger cursor readout produced 90.6% of accepted pointer commands during live Sawayama drags.
+  Solitaire runs as an evaluation harness outside the core; see `docs/bench/SOLITAIRE.md`.
 
 First regression cases to keep green from Gate B on: lease expiry during a wait and renewal by
 another client; lost response then retry of the same mutating request; simultaneous drag and

@@ -1,0 +1,5843 @@
+{
+ "trials": [
+  {
+   "id": "periodic-1",
+   "seed": 1,
+   "mode": "periodic",
+   "policy_calls": 12,
+   "elapsed_seconds": 3.1605773999999656,
+   "outcome": {
+    "attempts": 6,
+    "target_absent": false
+   },
+   "hits": 0,
+   "false_actions": 6
+  },
+  {
+   "id": "reach-1",
+   "seed": 1,
+   "mode": "reach",
+   "policy_calls": 3,
+   "elapsed_seconds": 0.6178909999998723,
+   "outcome": {
+    "intent_id": "79e18f26c91e482d8e2bee30536d8e61",
+    "program": "reach",
+    "watch_id": "aedf187eb360418a8e1204d89a462168",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4327.6298579,
+    "expires_mono": 4330.6298579,
+    "cursor": [
+     485,
+     152
+    ],
+    "error_px": 2.23606797749979,
+    "commands": 56,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 49,
+    "overridden_commands": 6
+   },
+   "hits": 1,
+   "false_actions": 0
+  },
+  {
+   "id": "periodic-2",
+   "seed": 2,
+   "mode": "periodic",
+   "policy_calls": 12,
+   "elapsed_seconds": 3.135206400000243,
+   "outcome": {
+    "attempts": 6,
+    "target_absent": true
+   },
+   "hits": 1,
+   "false_actions": 5
+  },
+  {
+   "id": "reach-2",
+   "seed": 2,
+   "mode": "reach",
+   "policy_calls": 3,
+   "elapsed_seconds": 0.49464549999993324,
+   "outcome": {
+    "intent_id": "d35f1b43b3b14c9681ae7dc3cd937eac",
+    "program": "reach",
+    "watch_id": "aedf187eb360418a8e1204d89a462168",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4332.0410214,
+    "expires_mono": 4335.0410214,
+    "cursor": [
+     370,
+     105
+    ],
+    "error_px": 3.0,
+    "commands": 42,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 33,
+    "overridden_commands": 8
+   },
+   "hits": 1,
+   "false_actions": 0
+  },
+  {
+   "id": "periodic-3",
+   "seed": 3,
+   "mode": "periodic",
+   "policy_calls": 8,
+   "elapsed_seconds": 2.0820800000001327,
+   "outcome": {
+    "attempts": 4,
+    "target_absent": true
+   },
+   "hits": 1,
+   "false_actions": 3
+  },
+  {
+   "id": "reach-3",
+   "seed": 3,
+   "mode": "reach",
+   "policy_calls": 3,
+   "elapsed_seconds": 0.2882563000002847,
+   "outcome": {
+    "intent_id": "9ffff323138d44e3a5767ddabc4cab9e",
+    "program": "reach",
+    "watch_id": "aedf187eb360418a8e1204d89a462168",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4335.2670015,
+    "expires_mono": 4338.2670015,
+    "cursor": [
+     208,
+     126
+    ],
+    "error_px": 2.23606797749979,
+    "commands": 25,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 14,
+    "overridden_commands": 10
+   },
+   "hits": 1,
+   "false_actions": 0
+  },
+  {
+   "id": "periodic-4",
+   "seed": 4,
+   "mode": "periodic",
+   "policy_calls": 12,
+   "elapsed_seconds": 3.133099399999992,
+   "outcome": {
+    "attempts": 6,
+    "target_absent": false
+   },
+   "hits": 0,
+   "false_actions": 6
+  },
+  {
+   "id": "reach-4",
+   "seed": 4,
+   "mode": "reach",
+   "policy_calls": 3,
+   "elapsed_seconds": 0.3137008000003334,
+   "outcome": {
+    "intent_id": "8363a3e68e4e4e0ca2f74efb6252e65e",
+    "program": "reach",
+    "watch_id": "aedf187eb360418a8e1204d89a462168",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4339.3711411,
+    "expires_mono": 4342.3711411,
+    "cursor": [
+     157,
+     209
+    ],
+    "error_px": 2.23606797749979,
+    "commands": 26,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 13,
+    "overridden_commands": 12
+   },
+   "hits": 1,
+   "false_actions": 0
+  }
+ ],
+ "events": "408 events omitted from the published copy; the full ledger stays in runs/",
+ "lost_events": 0,
+ "final_state": "halted",
+ "pending_commands": [],
+ "dropped_frames": 0,
+ "environment": "synthetic",
+ "session_id": 0,
+ "measured_at": "2026-09-17T11:58:25.178979+00:00",
+ "dependencies": {
+  "mcp": "2.2.0",
+  "numpy": "2.5.3",
+  "opencv-python": "5.0.0.93",
+  "pygame": "2.6.1",
+  "dxcam": "0.3.0",
+  "playwright": null
+ },
+ "python": "3.13.2",
+ "controller": {
+  "mode": "connectome",
+  "gain_per_second": 35,
+  "speed_px_s": 1200,
+  "tolerance_px": 6,
+  "settle_ms": 30,
+  "timeout_seconds": 3
+ },
+ "baseline": {
+  "decision_delay_ms": 250,
+  "minimum_cadence_ms": 500,
+  "max_attempts": 6
+ },
+ "browser_version": null,
+ "score": {
+  "periodic": {
+   "trials": 4,
+   "successes": 2,
+   "false_actions": 20,
+   "policy_calls": 44,
+   "mean_elapsed_seconds": 2.8777408000000833
+  },
+  "reach": {
+   "trials": 4,
+   "successes": 4,
+   "false_actions": 0,
+   "policy_calls": 12,
+   "mean_elapsed_seconds": 0.4286234000001059
+  }
+ },
+ "truth": [
+  {
+   "kind": "render_submitted",
+   "t_mono": 4322.1696488,
+   "target_id": 0,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4323.9878699,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "seed": 1
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4323.9957658,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.0140554,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.0321717,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.0508145,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.0687378,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.0861384,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.1043725,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.1223275,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.1403783,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.1585051,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.176737,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.1954931,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.214412,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.2327852,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.2512477,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.2696561,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.287578,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.3057316,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.323555,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.3421224,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.3609374,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.3787646,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4324.3790265,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 482,
+   "y": 199,
+   "box": [
+    472,
+    160,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4324.379028,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 482,
+   "y": 199
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.3969151,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.4153293,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.4331313,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.4513001,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.4705055,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.4887211,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.507075,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.5248596,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.5428241,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.560636,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.5789347,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.596734,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.6146883,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.6325534,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.6503878,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.6681815,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.6864559,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7049765,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7232025,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7415805,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7601361,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7789976,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.7979811,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.8160678,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.8341355,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.8531589,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.870552,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.8883928,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.9059797,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4324.9215434,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 486,
+   "y": 156,
+   "box": [
+    457,
+    119,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4324.9215446,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 486,
+   "y": 156
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.9238427,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.9417994,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.9594388,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.977581,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4324.9955432,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.0133767,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.0311494,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.0490242,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.0666678,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.0845358,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.102512,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.120177,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.1382951,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.1565671,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.1746143,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.1924415,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.2109841,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.2292615,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.2473617,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.265754,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.2840031,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.3017612,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.3206881,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.3391395,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.357707,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.3758821,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.3947534,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.4136113,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.4314847,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.4499641,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.4679448,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4325.4728204,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 451,
+   "y": 119,
+   "box": [
+    404,
+    91,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4325.4728224,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 451,
+   "y": 119
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.4860849,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5041842,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5217768,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5396871,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5580082,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5756204,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.5938137,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.6128084,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.6314361,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.6491404,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.6670155,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.6850876,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7031203,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7219777,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7404425,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7584942,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7768658,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.7951167,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.8135391,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.8319218,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.8496132,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.8679247,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.8853971,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9032818,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9207428,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9386576,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9568697,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9747147,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4325.9930302,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4326.0023599,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 384,
+   "y": 104,
+   "box": [
+    330,
+    89,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4326.0023613,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 384,
+   "y": 104
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.0116262,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.0293148,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.0471614,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.0659473,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.0840189,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1025123,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1200526,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1382868,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1566499,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1746936,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.1929977,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.211077,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.22861,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.2471967,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.2653646,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.2832477,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3013593,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3190726,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3372897,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3548705,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3726326,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.3904532,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.4080328,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.4256825,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.4440568,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.462725,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.4806164,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.4986715,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.517812,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4326.523555,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 306,
+   "y": 114,
+   "box": [
+    251,
+    110,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4326.5235563,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 306,
+   "y": 114
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.5362437,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.5538514,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.5715457,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.5895492,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.607583,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.6258411,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.6437586,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.6621346,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.6801072,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.6980081,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.7160613,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.7338229,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.7518893,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.7688515,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.7864353,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8045752,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8223761,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8405938,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8593359,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8772342,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.8957065,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.9139313,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.9310592,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.9489542,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.9674889,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4326.9855146,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.0043658,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.0226253,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4327.0316018,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 233,
+   "y": 144,
+   "box": [
+    185,
+    147,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4327.0316029,
+   "target_id": 1,
+   "trial_id": "periodic-1",
+   "x": 233,
+   "y": 144
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.0405455,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.0588916,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.077242,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.0958584,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.1141776,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.1328267,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.1501688,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.1684216,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.1862336,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.2044626,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.2222527,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.2407432,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.2590689,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.276794,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.2955894,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.3137428,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.3315201,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.3490632,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.3668768,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.3847847,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4027303,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4205382,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4382505,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4570644,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4752903,
+   "target_id": 1,
+   "visible": true
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4327.4790408,
+   "target_id": 2,
+   "trial_id": "reach-1",
+   "seed": 1
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.4934095,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.5110245,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.5287063,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.5469838,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.5650957,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.5833664,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6013831,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6194979,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6379083,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6559649,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6740555,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.6924364,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.7104931,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.7290804,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.747656,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.7659713,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.7841828,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8019297,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8198275,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8376917,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8558252,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8740486,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.8919692,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.909768,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.92801,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.9464276,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.9650843,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4327.9829115,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0006057,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0187838,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0371261,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0554589,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0734501,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.0916779,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.1090206,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.126691,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.1450802,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.1633818,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.1814902,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.1997232,
+   "target_id": 2,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4328.2104628,
+   "target_id": 2,
+   "trial_id": "reach-1",
+   "x": 485,
+   "y": 152,
+   "box": [
+    467,
+    133,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4328.2104641,
+   "target_id": 2,
+   "trial_id": "reach-1",
+   "x": 485,
+   "y": 152
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.2180977,
+   "target_id": 2,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4328.4421938,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "seed": 2
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.4513558,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.4694611,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.4875664,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.5058565,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.5237081,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.542022,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.5597084,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.5777091,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.5961924,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.6136854,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.6317916,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.6499942,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.6678791,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.6853547,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.702673,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.7201777,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.7385148,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.7570341,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.7747255,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.7928313,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.8111751,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.8289877,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4328.8349103,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 426,
+   "y": 119,
+   "box": [
+    377,
+    92,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4328.8349118,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 426,
+   "y": 119
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.8470395,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.8647453,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.8823819,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9004096,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9195405,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9370519,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9554258,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9736117,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4328.9917385,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0100737,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0283105,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0461409,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0637494,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0812928,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.0991725,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.1173053,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.1355063,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.1539556,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.1724372,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.1911755,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2091882,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2274755,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2459941,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2641434,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2821664,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.2999014,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.3180696,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.3362667,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.3541809,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4329.3547475,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 357,
+   "y": 104,
+   "box": [
+    299,
+    89,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4329.3547488,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 357,
+   "y": 104
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.3721113,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.3896994,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4079244,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4266545,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4448683,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4631025,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4811217,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.4995336,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.5179459,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.5360676,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.5536795,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.5716201,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.5896248,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.6078943,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.6255093,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.643177,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.6610928,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.6791919,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.6969181,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.7153552,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.7330982,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.7509578,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.7687101,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.7869542,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.8054492,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.8241823,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.842588,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.8605882,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.8787124,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4329.8952263,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 277,
+   "y": 112,
+   "box": [
+    222,
+    109,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4329.8952279,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 277,
+   "y": 112
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.8967848,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.9146283,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.932897,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.9510177,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.9692791,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4329.9863598,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0040044,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0218481,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0391736,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0568442,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0751929,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.0939833,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.112615,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.1305287,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.1485289,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.1666704,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.1846901,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2027803,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2207642,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2384979,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2563643,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2745774,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.2929702,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.3109511,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.3293546,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.3470148,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.3653418,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.3836298,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4016299,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4198055,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4330.4263771,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 203,
+   "y": 145,
+   "box": [
+    161,
+    147,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4330.4263787,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 203,
+   "y": 145
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4377455,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4555316,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4739099,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.4914708,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.5095183,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.527504,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.5456703,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.5640673,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.5816037,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.5999877,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.6180398,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.6361865,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.6545414,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.6727354,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.6902659,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.7088707,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.7270774,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.7450349,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.7633332,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.780919,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.7991446,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.8172013,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.8352384,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.8534667,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.8716193,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.8894323,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.9073571,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.9252389,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.9434017,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4330.952008,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 160,
+   "y": 185,
+   "box": [
+    133,
+    190,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4330.9520092,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 160,
+   "y": 185
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.961114,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.9788935,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4330.9970365,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.0149167,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.0329597,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.0507011,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.0684494,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.0865265,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1041838,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1221547,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1401519,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1581442,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1764569,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.1953397,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.2142072,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.2322134,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.2504561,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.2689542,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.2870496,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3045339,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3224019,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3407045,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3585108,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3761563,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.3936062,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.4115693,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.4294773,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.4471406,
+   "target_id": 3,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4331.4612154,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 150,
+   "y": 225,
+   "box": [
+    141,
+    222,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4331.461217,
+   "target_id": 3,
+   "trial_id": "periodic-2",
+   "x": 150,
+   "y": 225
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.4649429,
+   "target_id": 3,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4331.9029948,
+   "target_id": 4,
+   "trial_id": "reach-2",
+   "seed": 2
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.9164155,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.9342872,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.9521009,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.9698737,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4331.9883674,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.0067458,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.0254885,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.0434231,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.061028,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.0791017,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.0974778,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.1153358,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.1332608,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.1521754,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.1703798,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.1883684,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2064324,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2243296,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2417939,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2591349,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2768924,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.2952894,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.3137457,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.3321141,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.3502607,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.3687886,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.3864255,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.4045296,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.422337,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.4404831,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.4594337,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.4764915,
+   "target_id": 4,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4332.4862859,
+   "target_id": 4,
+   "trial_id": "reach-2",
+   "x": 370,
+   "y": 105,
+   "box": [
+    350,
+    88,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4332.4862877,
+   "target_id": 4,
+   "trial_id": "reach-2",
+   "x": 370,
+   "y": 105
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.4950356,
+   "target_id": 4,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4332.7279782,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "seed": 3
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.7329955,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.7509836,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.7689077,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.7873828,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8052955,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8240767,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8424287,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8604687,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8791158,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.8974961,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.9157545,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.9341454,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.9521795,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.9704606,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4332.9880318,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0058578,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0243005,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0423391,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0606851,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0784915,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.0968722,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.1146648,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4333.1259071,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 242,
+   "y": 113,
+   "box": [
+    190,
+    109,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4333.1259085,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 242,
+   "y": 113
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.1329699,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.1508833,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.1689477,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.1873783,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2056836,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2240037,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2414314,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2599659,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2779433,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.2967645,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.3145794,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.3326503,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.3508928,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.3689424,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.3869076,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.4050445,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.4226517,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.4413142,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.458903,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.4761663,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.4940114,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.5121312,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.5302301,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.5487336,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.5664134,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.584489,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6017525,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6194383,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4333.6333356,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 181,
+   "y": 143,
+   "box": [
+    145,
+    145,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4333.6333372,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 181,
+   "y": 143
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6370834,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6556269,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6745282,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.6926517,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.7099847,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.7278853,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.7461227,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.7646082,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.782803,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8003737,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8189488,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8369961,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8558169,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8728837,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.8910924,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.9092822,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.9270631,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.9454567,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.9633914,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.981443,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4333.9994206,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.0180164,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.0360976,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.0540631,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.0718783,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.0903156,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.1081193,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.1261305,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.1449072,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4334.1589026,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 151,
+   "y": 185,
+   "box": [
+    132,
+    188,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4334.1589038,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 151,
+   "y": 185
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.1636266,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.1818539,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2001851,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2185199,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2368023,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2556555,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2743134,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.2923987,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.3108472,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.3291483,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.34737,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.3653268,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.383066,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4008283,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4197254,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4379136,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4557738,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4741359,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.4918666,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5095961,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5278405,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5457445,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5636653,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5815114,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.5994322,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.6180135,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.6365819,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.6551919,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.6730763,
+   "target_id": 5,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4334.6805673,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 158,
+   "y": 225,
+   "box": [
+    157,
+    222,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4334.6805685,
+   "target_id": 5,
+   "trial_id": "periodic-3",
+   "x": 158,
+   "y": 225
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4334.6917674,
+   "target_id": 5,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4335.1072596,
+   "target_id": 6,
+   "trial_id": "reach-3",
+   "seed": 3
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.1114429,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.1309531,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.1486684,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.1668922,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.1854675,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2031543,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2214532,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2397119,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2583803,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2766643,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.2940404,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.3119424,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.3291351,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.347024,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.3656265,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.3846962,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4029873,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4208015,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4389225,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4563489,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4745998,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.4927273,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.5110792,
+   "target_id": 6,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4335.5189749,
+   "target_id": 6,
+   "trial_id": "reach-3",
+   "x": 208,
+   "y": 126,
+   "box": [
+    189,
+    110,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4335.5189764,
+   "target_id": 6,
+   "trial_id": "reach-3",
+   "x": 208,
+   "y": 126
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.5297029,
+   "target_id": 6,
+   "visible": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4335.7437717,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "seed": 4
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.7475355,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.7654375,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.7836381,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8018407,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8201513,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8381552,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8562019,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8741702,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.8922784,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.9106094,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.9290426,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.9478135,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.965878,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4335.9845274,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0029008,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0211125,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0394618,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0573733,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0755258,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.0936668,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.1110201,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.1287779,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.1464911,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4336.1545517,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 150,
+   "y": 187,
+   "box": [
+    141,
+    192,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4336.1545531,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 150,
+   "y": 187
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.1642941,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.1820779,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2003937,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2188797,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2372143,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2552425,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2727653,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.2912006,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.3095624,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.3274664,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.345197,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.3642966,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.3818298,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.3994137,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.4180292,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.4360812,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.4538842,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.4726011,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.4913085,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.5101035,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.5283919,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.5467722,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.564927,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.5836062,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6018625,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6207183,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6387038,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6568833,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6751946,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4336.6752249,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 175,
+   "y": 227,
+   "box": [
+    184,
+    225,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4336.6752269,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 175,
+   "y": 227
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.6929507,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.7114577,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.7294231,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.7473312,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.7649985,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.7834263,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.8021016,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.820261,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.8385511,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.856608,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.8746806,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.8923882,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.9107359,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.9291724,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.9480457,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.9659933,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4336.9842828,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.0025305,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.021,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.038784,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.0572902,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.0749151,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.0935405,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.1108609,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.1289955,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.1470249,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.1652326,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.1837817,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4337.1847991,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 230,
+   "y": 250,
+   "box": [
+    250,
+    237,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4337.1848007,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 230,
+   "y": 250
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.2017299,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.2195304,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.2373043,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.2557012,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.2741198,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.292668,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.3105251,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.3287643,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.3470735,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.3653756,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.3833065,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4014191,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4193301,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4371701,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4549134,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4727104,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.4907593,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.5085436,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.5267023,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.5451516,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.5639942,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.5831564,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.601524,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.6197477,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.6375634,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.6556973,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.6736873,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.6914828,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7098581,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4337.7166261,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 305,
+   "y": 252,
+   "box": [
+    330,
+    226,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4337.7166282,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 305,
+   "y": 252
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7276276,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7448155,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7634224,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7813228,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.7996982,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.8179786,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.8355942,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.8540226,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.8726026,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.8910649,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.909069,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.9276334,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.9455415,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.9643546,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4337.9816794,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.0000734,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.0183485,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.0368934,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.0547759,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.072995,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.0910166,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.1093591,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.1272397,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.1453681,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.1636026,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.1824291,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.2001597,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.217807,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.2358577,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4338.2485879,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 387,
+   "y": 228,
+   "box": [
+    403,
+    194,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4338.2486266,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 387,
+   "y": 228
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.2538097,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.2714839,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.2904563,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3086469,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3267823,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3448613,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3633915,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3810698,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.3985546,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.4162685,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.4333508,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.4514018,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.4695905,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.4885231,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.5063543,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.5244716,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.542872,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.5610544,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.5787792,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.5969733,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.614293,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.6330338,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.65123,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.6691358,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.6870854,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7047365,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7226975,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7407902,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7588983,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4338.7589129,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 448,
+   "y": 191,
+   "box": [
+    454,
+    151,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "false_action",
+   "t_mono": 4338.7589148,
+   "target_id": 7,
+   "trial_id": "periodic-4",
+   "x": 448,
+   "y": 191
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7766358,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.7951137,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.8127838,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.8309996,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.8492148,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.8670409,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.8855343,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.9038786,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.9222329,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.9404202,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.9586696,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.9764381,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4338.994365,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.0129657,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.0311201,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.0494525,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.0682183,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.0863461,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1049698,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1234034,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1410581,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1595858,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1776844,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.1962408,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.2146471,
+   "target_id": 7,
+   "visible": true
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4339.2190088,
+   "target_id": 8,
+   "trial_id": "reach-4",
+   "seed": 4
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.2327839,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.2509029,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.2688215,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.2871112,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.3052979,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.3238121,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.3417055,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.359999,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.378387,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.3962535,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.4148747,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.4332994,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.4520599,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.4703589,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.4890506,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.5076269,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.5258499,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.5438311,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.5625412,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.580733,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.5993554,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.617067,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.6350841,
+   "target_id": 8,
+   "visible": true
+  },
+  {
+   "kind": "input_received",
+   "t_mono": 4339.6443661,
+   "target_id": 8,
+   "trial_id": "reach-4",
+   "x": 157,
+   "y": 209,
+   "box": [
+    142,
+    193,
+    36,
+    36
+   ]
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4339.6443676,
+   "target_id": 8,
+   "trial_id": "reach-4",
+   "x": 157,
+   "y": 209
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4339.6534895,
+   "target_id": 8,
+   "visible": false
+  }
+ ],
+ "passed": true,
+ "notes": "Paired trajectory seeds; six discrete attempts or one three-second reach per trial. Periodic baseline models 250 ms decision latency / 500 ms cadence, not measured LLM latency. Both policies use the public MCP interface and identical taught color perception. Fixture resets and ground truth are evaluator-only. Browser DOM is never a policy sensor. Elapsed time includes MCP overhead and completion observation; browser truth uses its own performance clock. Synthetic capture/output does not measure Windows latency. These are small fixture smoke tests, not evidence of general web navigation or a sub-tick tracking bound.",
+ "shadow": {
+  "mode": "shadow",
+  "actuation_authority": false,
+  "state": "closed",
+  "error": null,
+  "submitted": 145,
+  "replaced": 0,
+  "predictions": 143,
+  "discarded": 2,
+  "model": {
+   "type": "Haltere ConnectomeRNN",
+   "checkpoint": "C:\\DEV\\Ganglion\\runs\\cursor-dagger-v1\\round-03\\cursor-readout.pt",
+   "sha256": "c455ec5387de8dbce0ab1039581d7462e6c26f107c9dec964172b59755551f22",
+   "adapter_version": 2,
+   "neurons": 30000,
+   "edges": 2767698,
+   "device": "cuda:0",
+   "neural_dt_seconds": 0.01,
+   "desktop_trained": true,
+   "training": {
+    "adapter_version": 2,
+    "trained": true,
+    "training_domain": "synthetic cursor episodes",
+    "method": "frozen connectome, DAgger ridge motor readout",
+    "control_authority": false,
+    "training_seeds": [
+     1000,
+     1001,
+     1002,
+     1003,
+     1004,
+     1005,
+     1006,
+     1007,
+     1008,
+     1009,
+     1010,
+     1011,
+     1012,
+     1013,
+     1014,
+     1015,
+     1016,
+     1017,
+     1018,
+     1019,
+     1020,
+     1021,
+     1022,
+     1023,
+     1024,
+     1025,
+     1026,
+     1027,
+     1028,
+     1029,
+     1030,
+     1031,
+     1032,
+     1033,
+     1034,
+     1035,
+     1036,
+     1037,
+     1038,
+     1039,
+     1040,
+     1041,
+     1042,
+     1043,
+     1044,
+     1045,
+     1046,
+     1047,
+     1048,
+     1049,
+     1050,
+     1051,
+     1052,
+     1053,
+     1054,
+     1055,
+     1056,
+     1057,
+     1058,
+     1059,
+     1060,
+     1061,
+     1062,
+     1063,
+     10100,
+     10101,
+     10102,
+     10103,
+     10104,
+     10105,
+     10106,
+     10107,
+     10108,
+     10109,
+     10110,
+     10111,
+     10112,
+     10113,
+     10114,
+     10115,
+     10116,
+     10117,
+     10118,
+     10119,
+     10120,
+     10121,
+     10122,
+     10123,
+     10124,
+     10125,
+     10126,
+     10127,
+     10128,
+     10129,
+     10130,
+     10131,
+     10200,
+     10201,
+     10202,
+     10203,
+     10204,
+     10205,
+     10206,
+     10207,
+     10208,
+     10209,
+     10210,
+     10211,
+     10212,
+     10213,
+     10214,
+     10215,
+     10216,
+     10217,
+     10218,
+     10219,
+     10220,
+     10221,
+     10222,
+     10223,
+     10224,
+     10225,
+     10226,
+     10227,
+     10228,
+     10229,
+     10230,
+     10231,
+     10300,
+     10301,
+     10302,
+     10303,
+     10304,
+     10305,
+     10306,
+     10307,
+     10308,
+     10309,
+     10310,
+     10311,
+     10312,
+     10313,
+     10314,
+     10315,
+     10316,
+     10317,
+     10318,
+     10319,
+     10320,
+     10321,
+     10322,
+     10323,
+     10324,
+     10325,
+     10326,
+     10327,
+     10328,
+     10329,
+     10330,
+     10331
+    ],
+    "validation_seeds": [
+     2000,
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "readout_fit": {
+     "selected_motor_neurons": 512,
+     "ridge": 0.1,
+     "validation_mse": 0.02779717743396759,
+     "candidates": [
+      {
+       "ridge": 1e-05,
+       "validation_mse": 0.029817529022693634
+      },
+      {
+       "ridge": 0.0001,
+       "validation_mse": 0.03095254860818386
+      },
+      {
+       "ridge": 0.001,
+       "validation_mse": 0.030992619693279266
+      },
+      {
+       "ridge": 0.01,
+       "validation_mse": 0.028757791966199875
+      },
+      {
+       "ridge": 0.1,
+       "validation_mse": 0.02779717743396759
+      }
+     ]
+    },
+    "parent_sha256": "61bd3add4dc72ab197a833e1eded27c952a9d6a6e581aec4fbf22ee181795dd0"
+   },
+   "visual_frontend": "deterministic taught colour components",
+   "readout_interpretation": "trained cursor velocity"
+  }
+ },
+ "shadow_score": {
+  "predictions": 143,
+  "completed_inferences": 145,
+  "promoted": false,
+  "actuation_authority": "supervised_connectome",
+  "neural_share": {
+   "pointer_commands": 145,
+   "connectome_commands": 108,
+   "overridden_commands": 33,
+   "connectome_share": 0.7659574468085106
+  },
+  "desktop_trained": true,
+  "inference_ms": {
+   "p50": 4.208899999866844,
+   "p95": 8.502979999684609,
+   "p99": 10.282592000476143
+  },
+  "within_5ms_fraction": 0.5862068965517241,
+  "mean_disagreement_px": 3.874102905689277
+ },
+ "event_counts": {
+  "core_ready": 1,
+  "lease_claimed": 1,
+  "watch_added": 1,
+  "input_requested": 30,
+  "pointer_feedback": 153,
+  "appear": 6,
+  "input_submitted": 26,
+  "input_released": 26,
+  "intent_started": 4,
+  "shadow_prediction": 143,
+  "intent_completed": 4,
+  "vanish": 6,
+  "effect_observed": 4,
+  "shadow_discarded": 2,
+  "halted": 1
+ },
+ "inference_ms": {
+  "p50": 4.208899999866844,
+  "p95": 8.502979999684609,
+  "p99": 10.282592000476143
+ },
+ "inference_within_5ms_fraction": 0.5862068965517241,
+ "mean_disagreement_px": 3.874102905689277
+}

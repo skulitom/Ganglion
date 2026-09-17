@@ -1,0 +1,3900 @@
+{
+ "trials": [
+  {
+   "id": "static_reach-1",
+   "mode": "static_reach",
+   "seed": 1,
+   "elapsed_seconds": 0.29224539999995613,
+   "outcome": {
+    "intent_id": "818aa35a6cbe46fa879c37a0c327327f",
+    "program": "reach",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4363.3561241,
+    "expires_mono": 4368.3561241,
+    "cursor": [
+     99,
+     154
+    ],
+    "error_px": 0.0,
+    "commands": 23,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 12,
+    "overridden_commands": 10
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 145
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 1,
+    "drop_accepted": 0,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "drag_until-1",
+   "mode": "drag_until",
+   "seed": 1,
+   "elapsed_seconds": 0.8640667000008762,
+   "outcome": {
+    "intent_id": "5d53641419c04ea4a500e15bf922ddcd",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "started_mono": 4364.4440912,
+    "expires_mono": 4369.4440912,
+    "cursor": [
+     339,
+     168
+    ],
+    "error_px": 186.3866948041088,
+    "commands": 68,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 50,
+    "overridden_commands": 15,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": true,
+    "released_mono": 4365.1628456,
+    "verification_observation_id": 227,
+    "condition_sample_started_mono": 4365.2679944,
+    "condition_stable_since_mono": 4365.175438,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 235
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 1,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "drop-1",
+   "mode": "drop",
+   "seed": 1,
+   "elapsed_seconds": 1.522182900000189,
+   "outcome": {
+    "intent_id": "5b46501bab034288954253a3b5fd73cd",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "started_mono": 4366.0821219,
+    "expires_mono": 4371.0821219,
+    "cursor": [
+     519,
+     179
+    ],
+    "error_px": 0.0,
+    "commands": 122,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 97,
+    "overridden_commands": 22,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": true,
+    "released_mono": 4367.3796368,
+    "verification_observation_id": 349,
+    "condition_sample_started_mono": 4367.4873759,
+    "condition_stable_since_mono": 4367.3957158,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 361
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 1,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "reject-1",
+   "mode": "reject",
+   "seed": 1,
+   "elapsed_seconds": 1.3565543000004254,
+   "outcome": {
+    "intent_id": "8d431a1b574a4cb5bb15e9342c504491",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "failed",
+    "reason": "condition_not_observed",
+    "started_mono": 4368.3566146,
+    "expires_mono": 4373.3566146,
+    "cursor": [
+     331,
+     169
+    ],
+    "error_px": 194.25756098540927,
+    "commands": 68,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 53,
+    "overridden_commands": 12,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 4369.0817907,
+    "verification_observation_id": 467,
+    "condition_sample_started_mono": 4369.6605528,
+    "condition_stable_since_mono": null,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 476
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 0,
+    "drop_rejected": 1,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "cancel-1",
+   "mode": "cancel",
+   "seed": 1,
+   "elapsed_seconds": 0.37754640000002837,
+   "outcome": {
+    "intent_id": "7c46c586ae44491d9b13e76d09cbba37",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "cancelled",
+    "reason": "requested",
+    "started_mono": 4370.5052289,
+    "expires_mono": 4375.5052289,
+    "cursor": [
+     105,
+     154
+    ],
+    "error_px": 420.7433897282285,
+    "commands": 29,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 14,
+    "overridden_commands": 13,
+    "stage": "dragging",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 540
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 0,
+    "drop_rejected": 1,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "static_reach-2",
+   "mode": "static_reach",
+   "seed": 2,
+   "elapsed_seconds": 0.30051240000011603,
+   "outcome": {
+    "intent_id": "35a38087c8904ffaaba75ef2f60fefa8",
+    "program": "reach",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "cursor_confirmed_click_released",
+    "started_mono": 4371.6155458,
+    "expires_mono": 4376.6155458,
+    "cursor": [
+     99,
+     179
+    ],
+    "error_px": 0.0,
+    "commands": 24,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 8,
+    "overridden_commands": 15
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 598
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 1,
+    "drop_accepted": 0,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "drag_until-2",
+   "mode": "drag_until",
+   "seed": 2,
+   "elapsed_seconds": 0.9519145000003846,
+   "outcome": {
+    "intent_id": "0ac0a3614f4a46d79c5e32481416e8ee",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "started_mono": 4372.6958134,
+    "expires_mono": 4377.6958134,
+    "cursor": [
+     351,
+     174
+    ],
+    "error_px": 174.14074767268,
+    "commands": 78,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 56,
+    "overridden_commands": 19,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": true,
+    "released_mono": 4373.5074951,
+    "verification_observation_id": 684,
+    "condition_sample_started_mono": 4373.6134267,
+    "condition_stable_since_mono": 4373.521845,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 693
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 1,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "drop-2",
+   "mode": "drop",
+   "seed": 2,
+   "elapsed_seconds": 1.3790179000006901,
+   "outcome": {
+    "intent_id": "cfb360d9e38f47d3970e31bf6c4d77cc",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "completed",
+    "reason": "condition_observed_after_release",
+    "started_mono": 4374.4279962,
+    "expires_mono": 4379.4279962,
+    "cursor": [
+     519,
+     179
+    ],
+    "error_px": 0.0,
+    "commands": 120,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 87,
+    "overridden_commands": 30,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": true,
+    "released_mono": 4375.6732166,
+    "verification_observation_id": 802,
+    "condition_sample_started_mono": 4375.7685707,
+    "condition_stable_since_mono": 4375.6778898,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 811
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 1,
+    "drop_rejected": 0,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "reject-2",
+   "mode": "reject",
+   "seed": 2,
+   "elapsed_seconds": 1.476383100000021,
+   "outcome": {
+    "intent_id": "e0b3c0b6a8d6406199ee5576b67f45c8",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "failed",
+    "reason": "condition_not_observed",
+    "started_mono": 4376.5968058,
+    "expires_mono": 4381.5968058,
+    "cursor": [
+     367,
+     177
+    ],
+    "error_px": 158.02847844613325,
+    "commands": 80,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 59,
+    "overridden_commands": 18,
+    "stage": "verifying",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 4377.4283546,
+    "verification_observation_id": 924,
+    "condition_sample_started_mono": 4378.0069589,
+    "condition_stable_since_mono": null,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 935
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 0,
+    "drop_rejected": 1,
+    "false_action": 0
+   },
+   "passed": true
+  },
+  {
+   "id": "cancel-2",
+   "mode": "cancel",
+   "seed": 2,
+   "elapsed_seconds": 0.423416300000099,
+   "outcome": {
+    "intent_id": "15f46e58c99e4cb8855d5c932370480d",
+    "program": "drag",
+    "watch_id": "5f5ef6f090e64a258d97bd31011a5a70",
+    "phase": "cancelled",
+    "reason": "requested",
+    "started_mono": 4378.8413511,
+    "expires_mono": 4383.8413511,
+    "cursor": [
+     105,
+     179
+    ],
+    "error_px": 420.0,
+    "commands": 34,
+    "task_success_verified": false,
+    "controller": "connectome",
+    "actuation_authority": "supervised_connectome",
+    "neural_commands": 15,
+    "overridden_commands": 17,
+    "stage": "dragging",
+    "button_held": false,
+    "condition_verified": false,
+    "released_mono": 0.0,
+    "verification_observation_id": 0,
+    "condition_sample_started_mono": 0.0,
+    "condition_stable_since_mono": null,
+    "destination": [
+     519,
+     179
+    ],
+    "destination_watch_id": null,
+    "until": {
+     "watch_id": "f984adb6343c4a03821ff492fec376c1",
+     "present": true
+    }
+   },
+   "pending_commands": [],
+   "button_held": false,
+   "capture_sources": {
+    "provided": 999
+   },
+   "truth_counts": {
+    "pointer_down": 1,
+    "pointer_up": 1,
+    "hit": 0,
+    "drop_accepted": 0,
+    "drop_rejected": 1,
+    "false_action": 0
+   },
+   "passed": true
+  }
+ ],
+ "events": "1346 events omitted from the published copy; the full ledger stays in runs/",
+ "lost_events": 0,
+ "final_state": "halted",
+ "pending_commands": [],
+ "capture_sources": {
+  "provided": 1006
+ },
+ "dropped_frames": 0,
+ "environment": "synthetic",
+ "session_id": 0,
+ "browser_version": null,
+ "measured_at": "2026-09-17T11:59:04.778731+00:00",
+ "dependencies": {
+  "mcp": "2.2.0",
+  "numpy": "2.5.3",
+  "opencv-python": "5.0.0.93",
+  "pygame": "2.6.1",
+  "dxcam": "0.3.0",
+  "playwright": null
+ },
+ "python": "3.13.2",
+ "controller": {
+  "mode": "connectome"
+ },
+ "truth": [
+  {
+   "kind": "render_submitted",
+   "t_mono": 4360.9391331,
+   "target_id": 0,
+   "trial_id": null,
+   "source": [
+    100,
+    160
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4362.8255584,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "mode": "static_reach"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4362.8305878,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4363.5891162,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "x": 99,
+   "y": 154,
+   "hit": true
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4363.5891187,
+   "target_id": 0,
+   "trial_id": "static_reach-1"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4363.5914099,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4363.6094702,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "x": 99,
+   "y": 154,
+   "was_held": false
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4363.6280341,
+   "target_id": 0,
+   "trial_id": "static_reach-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4363.9135126,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "mode": "drag_until"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4363.916384,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4364.7378548,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "x": 99,
+   "y": 154,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.7548543,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    105,
+    154
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.7735004,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    111,
+    156
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.7920291,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    122,
+    158
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.810068,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    128,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.8282049,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    140,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.8462422,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    152,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.8643327,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    164,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.8834058,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    170,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.902441,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    182,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.9202532,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    194,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.9384387,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    206,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.9563301,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    212,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.9744756,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    224,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4364.9926831,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    236,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.0110088,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    248,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.0293856,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    254,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.047298,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    267,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.0652544,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    279,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.0836853,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    291,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.1020086,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    297,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.1202419,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    310,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.1375902,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    322,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.1568764,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    333,
+    167
+   ],
+   "condition": true,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4365.1628393,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "x": 339,
+   "y": 168,
+   "was_held": true
+  },
+  {
+   "kind": "drop_accepted",
+   "t_mono": 4365.1628426,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "x": 339,
+   "y": 168,
+   "threshold": 330,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.1754363,
+   "target_id": 0,
+   "trial_id": "drag_until-1",
+   "source": [
+    339,
+    168
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4365.5561953,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "mode": "drop"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4365.5594608,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4366.378071,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "x": 99,
+   "y": 155,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.3893067,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4075984,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    112,
+    155
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4265089,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    117,
+    158
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4447648,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    130,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4631648,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    136,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4808087,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    142,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.4994749,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    159,
+    159
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.5174457,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    171,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.535754,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    183,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.5532965,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    189,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.5715058,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    201,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.5891795,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    213,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6072657,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    225,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6254071,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    231,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6434165,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    243,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6612423,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    255,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6793754,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    267,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.6970982,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    273,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.7158931,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    285,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.7343671,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    297,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.7524286,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    309,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.7706,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    315,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.7888422,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    327,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.8073785,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    339,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.825363,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    351,
+    169
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.8433376,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    357,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.8611935,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    369,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.8787929,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    377,
+    175
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.897654,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    392,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.9160653,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    399,
+    181
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.9341827,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    411,
+    184
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.9529021,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    423,
+    187
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.971029,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    433,
+    190
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4366.9895233,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    443,
+    194
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.0080653,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    448,
+    196
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.0264061,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    458,
+    200
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.0454835,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    468,
+    204
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.0636842,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    476,
+    206
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.0822875,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    484,
+    208
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.1012236,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    488,
+    209
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.1189703,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    494,
+    211
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.137042,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    500,
+    211
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.1563935,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    504,
+    210
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.1749104,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    506,
+    209
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.1938636,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    509,
+    205
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.2119149,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    511,
+    199
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.2300102,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    510,
+    191
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.2477087,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    509,
+    181
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.2668991,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    510,
+    176
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.2855384,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    515,
+    178
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3040739,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    517,
+    178
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3224615,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    519,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3405886,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    519,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3588214,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    519,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3770055,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    519,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4367.3796298,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "x": 519,
+   "y": 179,
+   "was_held": true
+  },
+  {
+   "kind": "drop_accepted",
+   "t_mono": 4367.379634,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "x": 519,
+   "y": 179,
+   "threshold": 330,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.3957144,
+   "target_id": 0,
+   "trial_id": "drop-1",
+   "source": [
+    519,
+    179
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4367.8226847,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "mode": "reject"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4367.8262741,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4368.6612185,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "x": 98,
+   "y": 155,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.6721595,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.6906368,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    111,
+    155
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.70882,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    116,
+    158
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.7273548,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    127,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.7460042,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    133,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.7644454,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    143,
+    160
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.7831141,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    157,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8013712,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    169,
+    161
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8200083,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    181,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8383723,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    193,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8565055,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    199,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8748232,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    211,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.8933165,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    223,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.9116172,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    235,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.9302413,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    241,
+    163
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.9489174,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    253,
+    162
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.9678991,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    265,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4368.9860516,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    277,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0045849,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    289,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0232213,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    301,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0413085,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    307,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0591555,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    319,
+    169
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0768605,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    331,
+    169
+   ],
+   "condition": true,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4369.0817844,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "x": 331,
+   "y": 169,
+   "was_held": true
+  },
+  {
+   "kind": "drop_rejected",
+   "t_mono": 4369.0817885,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "x": 331,
+   "y": 169,
+   "threshold": 330,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.0958474,
+   "target_id": 0,
+   "trial_id": "reject-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4369.9783575,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "mode": "cancel"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4369.9927489,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4370.8094716,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "x": 99,
+   "y": 154,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4370.8268787,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "source": [
+    105,
+    154
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4370.8268918,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "x": 105,
+   "y": 154,
+   "was_held": true
+  },
+  {
+   "kind": "drop_rejected",
+   "t_mono": 4370.8268948,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "x": 105,
+   "y": 154,
+   "threshold": 330,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4370.8453156,
+   "target_id": 0,
+   "trial_id": "cancel-1",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4371.1096511,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "mode": "static_reach"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4371.118133,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4371.8616353,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "x": 99,
+   "y": 179,
+   "hit": true
+  },
+  {
+   "kind": "hit",
+   "t_mono": 4371.8616384,
+   "target_id": 0,
+   "trial_id": "static_reach-2"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4371.8794608,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4371.8823219,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "x": 99,
+   "y": 179,
+   "was_held": false
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4371.8978225,
+   "target_id": 0,
+   "trial_id": "static_reach-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4372.190516,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "mode": "drag_until"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4372.2049266,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4373.0650588,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "x": 99,
+   "y": 179,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.0794946,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    105,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.0977675,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    118,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.1164062,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    123,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.134244,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    135,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.1521213,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    147,
+    176
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.1707328,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    153,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.1891996,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    165,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.2078864,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    177,
+    176
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.2264934,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    189,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.2450047,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    201,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.2630876,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    207,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.2814942,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    219,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3004474,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    231,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3185448,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    243,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3372428,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    255,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3559329,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    261,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3736598,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    273,
+    169
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.3914501,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    285,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.4099414,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    297,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.4286252,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    303,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.4470861,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    315,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.4659071,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    327,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.4845078,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    339,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.5032382,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    351,
+    174
+   ],
+   "condition": true,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4373.5074898,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "x": 351,
+   "y": 174,
+   "was_held": true
+  },
+  {
+   "kind": "drop_accepted",
+   "t_mono": 4373.507493,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "x": 351,
+   "y": 174,
+   "threshold": 350,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.5218428,
+   "target_id": 0,
+   "trial_id": "drag_until-2",
+   "source": [
+    351,
+    174
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4373.921035,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "mode": "drop"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4373.9248319,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4374.7920108,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "x": 99,
+   "y": 179,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.7953192,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.8133833,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    105,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.8315208,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    117,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.8505362,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    128,
+    180
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.868553,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    140,
+    178
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.8878288,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    152,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.9052075,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    158,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.9231057,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    170,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.941786,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    182,
+    176
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.9601388,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    194,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.9786802,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    200,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4374.996701,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    212,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.0148227,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    224,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.0330542,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    236,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.0515093,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    242,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.0702786,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    255,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.0888368,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    267,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.1077376,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    279,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.1262061,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    291,
+    166
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.1450791,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    303,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.1636168,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    309,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.1817994,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    321,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.2001016,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    333,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.218363,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    345,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.2369087,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    351,
+    173
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.2554255,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    364,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.2736523,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    376,
+    175
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.2918468,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    388,
+    176
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.3104948,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    394,
+    177
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.3291573,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    407,
+    180
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.3481843,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    419,
+    182
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.3666496,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    431,
+    184
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.3851644,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    443,
+    186
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4037182,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    448,
+    187
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4218038,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    459,
+    191
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4395321,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    469,
+    195
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4579987,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    478,
+    199
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4764329,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    482,
+    201
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.4952572,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    488,
+    205
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.5135398,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    495,
+    203
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.5320904,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    504,
+    194
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.5500928,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    512,
+    186
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.5683357,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    512,
+    185
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.5861353,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    515,
+    182
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.6039771,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    517,
+    180
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.6218118,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    518,
+    180
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.6401778,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    519,
+    178
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.6589123,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    519,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4375.6732109,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "x": 519,
+   "y": 179,
+   "was_held": true
+  },
+  {
+   "kind": "drop_accepted",
+   "t_mono": 4375.6732142,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "x": 519,
+   "y": 179,
+   "threshold": 350,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4375.6778878,
+   "target_id": 0,
+   "trial_id": "drop-2",
+   "source": [
+    519,
+    179
+   ],
+   "condition": true,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4376.0788275,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "mode": "reject"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4376.0980259,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4376.9612672,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "x": 99,
+   "y": 179,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4376.9782678,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    105,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4376.9962817,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    117,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.0151671,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    127,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.0334501,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    133,
+    178
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.0518127,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    145,
+    175
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.0707465,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    157,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.0890918,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    169,
+    173
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1079077,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    181,
+    174
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1262644,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    187,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1442961,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    199,
+    169
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1622418,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    211,
+    169
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1807776,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    223,
+    170
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.1991076,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    229,
+    168
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.218412,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    241,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.2372147,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    253,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.2552248,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    265,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.2735239,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    277,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.2922613,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    283,
+    164
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.3107022,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    295,
+    165
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.3297015,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    301,
+    167
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.3487142,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    318,
+    171
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.3682143,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    331,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.386235,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    337,
+    172
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.4042639,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    346,
+    173
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.4222667,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    361,
+    176
+   ],
+   "condition": true,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4377.4283501,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "x": 367,
+   "y": 177,
+   "was_held": true
+  },
+  {
+   "kind": "drop_rejected",
+   "t_mono": 4377.4283528,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "x": 367,
+   "y": 177,
+   "threshold": 350,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4377.4406539,
+   "target_id": 0,
+   "trial_id": "reject-2",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "trial_started",
+   "t_mono": 4378.3341785,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "mode": "cancel"
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4378.3382463,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "source": [
+    100,
+    180
+   ],
+   "condition": false,
+   "held": false
+  },
+  {
+   "kind": "pointer_down",
+   "t_mono": 4379.1872373,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "x": 99,
+   "y": 179,
+   "hit": true
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4379.2032709,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "source": [
+    105,
+    179
+   ],
+   "condition": false,
+   "held": true
+  },
+  {
+   "kind": "pointer_up",
+   "t_mono": 4379.203646,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "x": 105,
+   "y": 179,
+   "was_held": true
+  },
+  {
+   "kind": "drop_rejected",
+   "t_mono": 4379.203648,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "x": 105,
+   "y": 179,
+   "threshold": 350,
+   "destination": [
+    520,
+    180
+   ]
+  },
+  {
+   "kind": "render_submitted",
+   "t_mono": 4379.2211742,
+   "target_id": 0,
+   "trial_id": "cancel-2",
+   "source": [
+    100,
+    155
+   ],
+   "condition": false,
+   "held": false
+  }
+ ],
+ "score": {
+  "static_reach": {
+   "passed": 2,
+   "trials": 2
+  },
+  "drag_until": {
+   "passed": 2,
+   "trials": 2
+  },
+  "drop": {
+   "passed": 2,
+   "trials": 2
+  },
+  "reject": {
+   "passed": 2,
+   "trials": 2
+  },
+  "cancel": {
+   "passed": 2,
+   "trials": 2
+  }
+ },
+ "passed": true,
+ "notes": "Five cases per seed through MCP: quiet-screen reach, early release on a visual condition, accepted drop, rejected drop with failed post-release verification, and cancellation while held. Fixture setup/truth are evaluator-only; policies see pixels and public tools. GDI fallback makes new acquisitions, with sample-start and availability times recorded separately. Synthetic results exclude real capture/input. This is fixture validation, not Solitaire gameplay.",
+ "shadow": {
+  "mode": "shadow",
+  "actuation_authority": false,
+  "state": "closed",
+  "error": null,
+  "submitted": 622,
+  "replaced": 0,
+  "predictions": 621,
+  "discarded": 1,
+  "model": {
+   "type": "Haltere ConnectomeRNN",
+   "checkpoint": "C:\\DEV\\Ganglion\\runs\\cursor-dagger-v1\\round-03\\cursor-readout.pt",
+   "sha256": "c455ec5387de8dbce0ab1039581d7462e6c26f107c9dec964172b59755551f22",
+   "adapter_version": 2,
+   "neurons": 30000,
+   "edges": 2767698,
+   "device": "cuda:0",
+   "neural_dt_seconds": 0.01,
+   "desktop_trained": true,
+   "training": {
+    "adapter_version": 2,
+    "trained": true,
+    "training_domain": "synthetic cursor episodes",
+    "method": "frozen connectome, DAgger ridge motor readout",
+    "control_authority": false,
+    "training_seeds": [
+     1000,
+     1001,
+     1002,
+     1003,
+     1004,
+     1005,
+     1006,
+     1007,
+     1008,
+     1009,
+     1010,
+     1011,
+     1012,
+     1013,
+     1014,
+     1015,
+     1016,
+     1017,
+     1018,
+     1019,
+     1020,
+     1021,
+     1022,
+     1023,
+     1024,
+     1025,
+     1026,
+     1027,
+     1028,
+     1029,
+     1030,
+     1031,
+     1032,
+     1033,
+     1034,
+     1035,
+     1036,
+     1037,
+     1038,
+     1039,
+     1040,
+     1041,
+     1042,
+     1043,
+     1044,
+     1045,
+     1046,
+     1047,
+     1048,
+     1049,
+     1050,
+     1051,
+     1052,
+     1053,
+     1054,
+     1055,
+     1056,
+     1057,
+     1058,
+     1059,
+     1060,
+     1061,
+     1062,
+     1063,
+     10100,
+     10101,
+     10102,
+     10103,
+     10104,
+     10105,
+     10106,
+     10107,
+     10108,
+     10109,
+     10110,
+     10111,
+     10112,
+     10113,
+     10114,
+     10115,
+     10116,
+     10117,
+     10118,
+     10119,
+     10120,
+     10121,
+     10122,
+     10123,
+     10124,
+     10125,
+     10126,
+     10127,
+     10128,
+     10129,
+     10130,
+     10131,
+     10200,
+     10201,
+     10202,
+     10203,
+     10204,
+     10205,
+     10206,
+     10207,
+     10208,
+     10209,
+     10210,
+     10211,
+     10212,
+     10213,
+     10214,
+     10215,
+     10216,
+     10217,
+     10218,
+     10219,
+     10220,
+     10221,
+     10222,
+     10223,
+     10224,
+     10225,
+     10226,
+     10227,
+     10228,
+     10229,
+     10230,
+     10231,
+     10300,
+     10301,
+     10302,
+     10303,
+     10304,
+     10305,
+     10306,
+     10307,
+     10308,
+     10309,
+     10310,
+     10311,
+     10312,
+     10313,
+     10314,
+     10315,
+     10316,
+     10317,
+     10318,
+     10319,
+     10320,
+     10321,
+     10322,
+     10323,
+     10324,
+     10325,
+     10326,
+     10327,
+     10328,
+     10329,
+     10330,
+     10331
+    ],
+    "validation_seeds": [
+     2000,
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "readout_fit": {
+     "selected_motor_neurons": 512,
+     "ridge": 0.1,
+     "validation_mse": 0.02779717743396759,
+     "candidates": [
+      {
+       "ridge": 1e-05,
+       "validation_mse": 0.029817529022693634
+      },
+      {
+       "ridge": 0.0001,
+       "validation_mse": 0.03095254860818386
+      },
+      {
+       "ridge": 0.001,
+       "validation_mse": 0.030992619693279266
+      },
+      {
+       "ridge": 0.01,
+       "validation_mse": 0.028757791966199875
+      },
+      {
+       "ridge": 0.1,
+       "validation_mse": 0.02779717743396759
+      }
+     ]
+    },
+    "parent_sha256": "61bd3add4dc72ab197a833e1eded27c952a9d6a6e581aec4fbf22ee181795dd0"
+   },
+   "visual_frontend": "deterministic taught colour components",
+   "readout_interpretation": "trained cursor velocity"
+  }
+ },
+ "shadow_score": {
+  "actuation_authority": "supervised_connectome",
+  "promoted": false,
+  "neural_share": {
+   "pointer_commands": 630,
+   "connectome_commands": 451,
+   "overridden_commands": 169,
+   "connectome_share": 0.7274193548387097
+  }
+ },
+ "event_counts": {
+  "core_ready": 1,
+  "lease_claimed": 1,
+  "watch_added": 3,
+  "appear": 12,
+  "input_requested": 10,
+  "pointer_feedback": 640,
+  "intent_started": 10,
+  "shadow_prediction": 621,
+  "input_submitted": 2,
+  "vanish": 10,
+  "effect_observed": 2,
+  "input_released": 10,
+  "intent_completed": 6,
+  "drag_started": 8,
+  "intent_failed": 2,
+  "output_halted": 4,
+  "intent_cancelled": 2,
+  "shadow_discarded": 1,
+  "halted": 1
+ },
+ "inference_ms": {
+  "p50": 2.9131000001143548,
+  "p95": 6.806990000268333,
+  "p99": 9.387938999716422
+ },
+ "inference_within_5ms_fraction": 0.8681672025723473,
+ "mean_disagreement_px": 2.3446760446305563
+}

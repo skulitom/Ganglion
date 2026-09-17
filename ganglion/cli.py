@@ -29,9 +29,12 @@ def main(argv=None) -> int:
     p = sub.add_parser('core', help='run the resident reflex service in this session')
     p.add_argument('--endpoint', required=True, help='write private connection credentials to this file')
     p.add_argument('--window', type=int, help='target HWND for live capture and input')
+    p.add_argument('--pid', type=int, help='select the single visible top-level window of this process instead of --window')
+    p.add_argument('--title', help='select the single visible top-level window whose title contains this text')
     p.add_argument('--synthetic', action='store_true', help='headless Arena; no desktop input')
     p.add_argument('--seconds', type=float, default=0, help='stop after this many seconds; 0 runs until interrupted')
     p.add_argument('--shadow-checkpoint', help='optional Haltere connectome checkpoint; predictions have no control authority')
+    p.add_argument('--log', metavar='PATH', help='append stdout/stderr to this file (for windowless launches such as pythonw)')
 
     p = sub.add_parser('mcp', help='MCP stdio bridge to a running core')
     p.add_argument('--endpoint', required=True)
@@ -48,12 +51,16 @@ def main(argv=None) -> int:
     p.add_argument('--trials', type=int, default=4, help='paired seeds per policy, 1–8')
     p.add_argument('--json', metavar='PATH')
     p.add_argument('--shadow-checkpoint', help='compare real connectome predictions with live reach decisions')
+    p.add_argument('--controller', choices=['deterministic', 'connectome'], default='deterministic',
+                   help='connectome: its proposals drive the cursor when they pass the supervising envelope')
 
     sub.add_parser('version')
     p = sub.add_parser('drag-demo', help='Static-screen reach and bounded drag through MCP')
     p.add_argument('--environment', choices=['synthetic', 'arena', 'browser'], default='synthetic')
     p.add_argument('--trials', type=int, default=2)
     p.add_argument('--json', metavar='PATH')
+    p.add_argument('--shadow-checkpoint', help='optional Haltere connectome checkpoint')
+    p.add_argument('--controller', choices=['deterministic', 'connectome'], default='deterministic')
 
     a = ap.parse_args(argv)
     if a.cmd == 'version':
@@ -79,8 +86,11 @@ def main(argv=None) -> int:
         return flasher.main(a.args)
     if a.cmd == 'core':
         from .core.runner import run_core
-        return run_core(a.endpoint, hwnd=a.window, synthetic=a.synthetic, seconds=a.seconds,
-                        shadow_checkpoint=a.shadow_checkpoint)
+        if a.log:
+            stream = open(a.log, 'a', buffering=1, encoding='utf-8')
+            sys.stdout = sys.stderr = stream
+        return run_core(a.endpoint, hwnd=a.window, pid=a.pid, title=a.title, synthetic=a.synthetic,
+                        seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint)
     if a.cmd == 'mcp':
         from .mcp.server import build
         build(a.endpoint, observer=a.observer, client_id=a.client_id).run()
@@ -93,12 +103,13 @@ def main(argv=None) -> int:
     if a.cmd == 'reach-demo':
         from .arena.reach_demo import run
         result = run(environment=a.environment, trials=a.trials, path=a.json,
-                     shadow_checkpoint=a.shadow_checkpoint)
+                     shadow_checkpoint=a.shadow_checkpoint, controller=a.controller)
         print(json.dumps({k: v for k, v in result.items() if k not in ('events', 'truth', 'trials')}, indent=2))
         return 0 if result['passed'] else 1
     if a.cmd == 'drag-demo':
         from .arena.drag_demo import run
-        result = run(environment=a.environment, trials=a.trials, path=a.json)
+        result = run(environment=a.environment, trials=a.trials, path=a.json,
+                     shadow_checkpoint=a.shadow_checkpoint, controller=a.controller)
         print(json.dumps({k: v for k, v in result.items() if k not in ('events', 'truth', 'trials')}, indent=2))
         return 0 if result['passed'] else 1
     return 2

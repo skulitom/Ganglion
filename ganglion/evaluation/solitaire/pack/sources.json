@@ -1,0 +1,82 @@
+{
+  "note": "Frames captured through ganglion_look at 1280x720 on 2026-09-17; labels read by the agent. Covered face cards and aces keep only their colour (r/b). Waste cards are listed bottom to top.",
+  "frames": [
+    {
+      "frame": "docs/bench/results/solitaire-live/frames/deal-2026-09-17-initial.png",
+      "columns": [
+        "Qs",
+        "Kr 2d",
+        "4s Jb Qc",
+        "5d 9d 4h 4c",
+        "3h Th 9s 3c 6s",
+        "Ab 7c 8h 6h 5h 3d",
+        "8s 3s 5c 9h Kb Qr Tc"
+      ],
+      "waste": ""
+    },
+    {
+      "frame": "docs/bench/results/solitaire-live/frames/deal-2026-09-17-a.png",
+      "columns": [
+        "Js",
+        "6h Kh",
+        "3s Ab 2h",
+        "Th Tc 9s 6s",
+        "Qb 9d Qr 2s Jc",
+        "7d 5c Kb Ar Jr 5s",
+        "4h 6c 4d 8h 2c 4s 5d"
+      ],
+      "waste": "9h 7s Qd"
+    },
+    {
+      "frame": "docs/bench/results/solitaire-live/frames/deal-2026-09-17-b.png",
+      "columns": [
+        "Js",
+        "6h Kh",
+        "3s Ab 2h",
+        "Th Tc 9s 6s 5d 4s",
+        "Qb 9d Qr 2s Jc",
+        "7d 5c Kb Ar Jr 5s",
+        "4h 6c 4d 8h 2c"
+      ],
+      "waste": "9h 7s Qd 7c 8c Ts"
+    },
+    {
+      "frame": "docs/bench/results/solitaire-live/frames/deal-2026-09-17-c.png",
+      "columns": [
+        "4s",
+        "6h 5c 4d 3s",
+        "Kb Qr Jb Th 9c 8d",
+        "Ts Ab 9h 6d 5s",
+        "9s 6s Kd",
+        "8c 2h 7h 6c 5h 4c 3h",
+        "Jb 4h 8h"
+      ],
+      "waste": "Kh 2s Kc Jh 2c 9d 3d Td Tc 8s",
+      "foundations": [
+        "",
+        "Ah",
+        "2d",
+        "As"
+      ]
+    },
+    {
+      "frame": "docs/bench/results/solitaire-live/frames/deal-2026-09-17-d.png",
+      "columns": [
+        "4c",
+        "6h 4d",
+        "8h Qb Jb Th",
+        "",
+        "9d 8d Td 3c 4h",
+        "8c 5h 7h 8s Qr Qb Jh",
+        "2c 2s 6s Jb Kb 6c Jd"
+      ],
+      "waste": "7d 6d Kh",
+      "foundations": [
+        "",
+        "",
+        "Ah",
+        "As"
+      ]
+    }
+  ]
+}

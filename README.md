@@ -6,12 +6,15 @@ The fast loop runs inside an [Anode](https://github.com/skulitom/Anode) seat (a 
 session) or on the console; the brain comes from [Haltere](https://github.com/skulitom/haltere),
 the male-CNS fly connectome that flies a drone in Liftoff.
 
-Status: Gate C demonstrated; Gate D connectome shadow experiments started. See [STATUS.md](STATUS.md).
-The control path uses deterministic colour perception and cursor-feedback reach/drag.
-Haltere's actual 30,000-neuron model can now receive the same motor observations in a separate
-shadow worker, with predictions, timing and replay data in the ledger. It has no actuation
-authority. Generic cursor training now adapts the fly model's motor readout and sensory encoders;
-the candidates are still experimental. See [training results](docs/bench/TRAINING.md).
+Status: Gate C demonstrated; Gate D connectome experiments running on a working system. See
+[STATUS.md](STATUS.md). The control path uses deterministic colour perception and cursor-feedback
+reach/drag. Haltere's actual 30,000-neuron model receives the same motor observations in a
+separate worker and, when an intent asks for it, drives the pointer under a supervising envelope
+that only lets a proposal through when it brings the cursor closer to the goal. In live Sawayama
+Solitaire drags it produced 90.6% of the accepted pointer commands. Generic cursor training adapts
+the fly model's motor readout and sensory encoders; the candidates are still experimental and
+cannot yet finish a reach unaided. See [the connectome experiment](docs/bench/SHADOW.md) and
+[training results](docs/bench/TRAINING.md).
 Read [PLAN.md](PLAN.md) for
 the design, the target set and the phases; `suggestions/` holds an external review of the plan
 that shaped its runtime contracts and delivery gates.
@@ -75,10 +78,15 @@ rejected drops, and cancellation while held. An independent helper bounds each d
 samples after release verify the condition. Quiet desktops use actual GDI acquisitions alongside
 DXGI. See the [drag scorecard and limits](docs/bench/DRAG.md).
 
-The same drag primitive now handles a legal card move and rejected drop in Sawayama Solitaire
-inside Anode. A separate evaluation runner applies an explicitly taught board profile through
-MCP and saves images/events. This is a verified move on one board, not card recognition or a
-solver. See the [Solitaire scorecard](docs/bench/SOLITAIRE.md), including the Steam session limitation.
+The same drag primitive plays Sawayama Solitaire in real time inside Anode: an evaluation
+harness reads the board from captured frames with taught glyph templates, picks a move, and
+executes it through the public MCP tools, with the deterministic or the connectome controller.
+The card logic stays outside the core and exists to keep real drags flowing, not to win games.
+See the [Solitaire scorecard](docs/bench/SOLITAIRE.md).
+
+```bash
+.venv/Scripts/python.exe -m ganglion.evaluation.solitaire.player --endpoint runs/solitaire.endpoint.json --out runs/solitaire-play/example --session 2 --dry-run
+```
 
 ## Phase 0 tools
 
@@ -97,7 +105,7 @@ ganglion/core      capture, leases, reflexes, cursor-feedback reach/drag, ledger
 ganglion/percepts  application-independent colour-component detection
 ganglion/mcp       thin MCP stdio bridge to the resident core
 ganglion/arena     headless and real-window target worlds, MCP demo, timing flasher
-ganglion/evaluation opt-in application checks from explicitly taught profiles, through MCP
+ganglion/evaluation opt-in application checks through MCP; solitaire/ is the real-time Sawayama harness
 ganglion/brain     optional actual-connectome shadow inference and frozen replay
 ganglion/train     headless cursor imitation, DAgger and encoder/readout training
 ganglion/bench     the measurements that decide tick rates and latency compensation

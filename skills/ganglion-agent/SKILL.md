@@ -43,6 +43,10 @@ the destination or matching the condition, then verifies that condition from fre
 release. Without `until`, completion establishes only arrival and release. A pre-satisfied condition
 fails before pickup. `condition_verified` does not prove arbitrary application success.
 
+On a core started with `--shadow-checkpoint`, add `controller: "connectome"` to a reach or drag
+spec to let the fly model propose pointer velocity; the core applies a proposal only when it
+brings the cursor closer to the goal and reports `neural_commands` and `overridden_commands`.
+
 The helper releases a drag without continuing renewals within at most 100 ms, subject to OS
 scheduling. Wait for `output_halted` after cancellation; a release fault requires core restart.
 Keyboard/gamepad programs and learned vision remain unavailable.
