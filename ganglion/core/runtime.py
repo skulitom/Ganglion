@@ -5,7 +5,7 @@ Tests use a fake clock and output to exercise the same state transitions.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from math import hypot
 from threading import RLock
 from uuid import uuid4
@@ -14,6 +14,8 @@ from .ledger import Ledger
 from .schema import ArmSpec, WatchSpec, IntentSpec, InputSpec
 from .reach import Reach, step, supervise
 from .drag import Drag, drive_drag, drag_event
+from .aim import Align, drive_align, align_event
+from .locomotion import Move, drive_move, finish_move
 
 
 class RuntimeErrorWithCode(ValueError):
@@ -32,6 +34,7 @@ class Watch:
     observation_id: int = 0
     sample_started: float = 0.0
     source: str = "provided"
+    state: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -54,8 +57,11 @@ class Runtime:
         self.expires = 0.0
         self.watches: dict[str, Watch] = {}
         self.reflexes: dict[str, Reflex] = {}
-        self.pending: dict[str, dict] = {}
+        self.pending: dict[str, dict] = {}      # pointer, button and look commands in flight
+        self.key_pending: dict[str, dict] = {}  # key holds are a separate actuator
+        self.motion_until = 0.0                 # own commands move the view or the player until then
         self.intent: Reach | None = None
+        self.locomotion: Move | None = None
         self.frame = None
         self.frame_seq = 0
         self.frame_time = 0.0
@@ -66,6 +72,8 @@ class Runtime:
         self.layout = None
         self.layout_rev = 0
         self.dropped_frames = 0
+        self.change = None            # mean grey change of the upper frame against the previous one
+        self._change_gray = None
         self.ledger.append("core_ready", clock(), critical=True)
         self.shadow = None
         if shadow_predictor is not None:
@@ -74,6 +82,13 @@ class Runtime:
 
     def _error(self, code, message):
         raise RuntimeErrorWithCode(code, message)
+
+    def note_self_motion(self, until):
+        self.motion_until = max(self.motion_until, until)
+
+    def client_centre(self):
+        x, y, w, h = self.layout["rect"]
+        return x + w // 2, y + h // 2
 
     def _require_owner(self, client):
         self.tick(drive=False)
@@ -112,6 +127,9 @@ class Runtime:
             if self.shadow:
                 self.shadow.invalidate()
             self._finish_intent("cancelled", reason, stop=False)
+            if self.locomotion and self.locomotion.active:
+                self.locomotion.phase, self.locomotion.reason = "cancelled", reason
+                self.ledger.append("intent_cancelled", self.clock(), critical=True, **self.locomotion.status())
             self.reflexes.clear()
             self.watches.clear()
             self.owner, self.lease_id, self.expires = None, None, 0.0
@@ -137,18 +155,22 @@ class Runtime:
                     self.ledger.append("reflex_expired", now, critical=True, reflex_id=rid)
             for event in self.output.poll():
                 command_id = event["command_id"]
-                details = self.pending.get(command_id, {})
+                details = self.pending.get(command_id) or self.key_pending.get(command_id, {})
                 self.ledger.append(event["kind"], event["t_mono"],
-                                   critical=event["kind"] != "pointer_feedback",
+                                   critical=event["kind"] not in ("pointer_feedback", "look_done"),
                                    **details, **{k: v for k, v in event.items()
                                                  if k not in ("kind", "t_mono")})
                 if event["kind"] in ("input_released", "input_failed", "input_cancelled",
-                                     "pointer_feedback", "output_halted", "drag_started"):
+                                     "pointer_feedback", "output_halted", "drag_started", "look_done"):
                     self.pending.pop(command_id, None)
+                if event["kind"] in ("keys_released", "input_failed", "input_cancelled"):
+                    self.key_pending.pop(command_id, None)
                 intent = self.intent
                 if isinstance(intent, Drag) and (event.get("drag_id") == intent.id or details.get("intent_id") == intent.id):
                     drag_event(self, intent, event)
-                if intent and intent.active and details.get("intent_id") == intent.id:
+                if isinstance(intent, Align):
+                    align_event(self, intent, event, details)
+                elif intent and intent.active and details.get("intent_id") == intent.id:
                     if event["kind"] == "pointer_feedback":
                         intent.cursor = tuple(event["cursor"])
                         intent.cursor_time = event["t_mono"]
@@ -177,6 +199,17 @@ class Runtime:
     def start_intent(self, client, spec: IntentSpec):
         with self.lock:
             self._require_owner(client)
+            if spec.program == "move":
+                if spec.until and spec.until.watch_id not in self.watches:
+                    self._error("unknown_watch", "Teach the until watch before starting the move.")
+                if self.locomotion and self.locomotion.active:
+                    self._error("keys_busy", "Cancel the active move before starting another.")
+                now = self.clock()
+                self.locomotion = Move(uuid4().hex, spec, now, now + spec.timeout_seconds)
+                self.state = "running"
+                self.ledger.append("intent_started", now, critical=True, **self.locomotion.status())
+                drive_move(self, self.locomotion, now)
+                return self.locomotion.status()
             if spec.watch_id not in self.watches:
                 self._error("unknown_watch", "Create a watch before reaching it.")
             if spec.program == "drag":
@@ -194,8 +227,12 @@ class Runtime:
             if spec.controller == "connectome" and self.shadow is None:
                 self._error("controller_unavailable",
                             "Start the core with --shadow-checkpoint to grant the connectome supervised authority.")
+            if spec.program == "align" and spec.point is not None:
+                x, y, w, h = self.layout["rect"]
+                if not (x <= spec.point[0] < x + w and y <= spec.point[1] < y + h):
+                    self._error("point_outside_target", "Align point must be inside the bound client area.")
             now = self.clock()
-            factory = Drag if spec.program == "drag" else Reach
+            factory = Drag if spec.program == "drag" else Align if spec.program == "align" else Reach
             self.intent = factory(uuid4().hex, spec, now, now + spec.timeout_seconds)
             self.state = "running"
             self.ledger.append("intent_started", now, critical=True, **self.intent.status())
@@ -204,6 +241,9 @@ class Runtime:
     def cancel(self, client, ident):
         with self.lock:
             self._require_owner(client)
+            if self.locomotion and self.locomotion.id == ident:
+                finish_move(self, self.locomotion, "cancelled", "requested")
+                return self.locomotion.status()
             if not self.intent or self.intent.id != ident:
                 self._error("unknown_intent", "This intent is no longer retained by the runtime.")
             self._finish_intent("cancelled", "requested")
@@ -217,6 +257,11 @@ class Runtime:
             self.shadow.invalidate()
         intent.phase, intent.reason = phase, reason
         self.ledger.append("intent_" + phase, self.clock(), critical=True, **intent.status())
+        cleanup = getattr(intent, "cleanup_watch", None)
+        if cleanup and cleanup in self.watches:
+            del self.watches[cleanup]
+            self.reflexes = {k: v for k, v in self.reflexes.items() if v.spec.watch_id != cleanup}
+            self.ledger.append("watch_removed", self.clock(), critical=True, id=cleanup, reason="intent_ended")
         if stop:
             # FIFO barrier: a new program cannot share the pointer with queued old output.
             # One already submitted command may execute before cancellation is acknowledged.
@@ -229,6 +274,8 @@ class Runtime:
                 self.halt(f"cancel_failed: {exc}", degraded=True)
 
     def _tick_intent(self, now):
+        if self.locomotion and self.locomotion.active and self.owner is not None:
+            drive_move(self, self.locomotion, now)
         intent = self.intent
         if not intent or not intent.active or self.owner is None:
             return
@@ -237,6 +284,9 @@ class Runtime:
             return
         if isinstance(intent, Drag):
             drive_drag(self, intent, now)
+            return
+        if isinstance(intent, Align):
+            drive_align(self, intent, now)
             return
         if intent.phase == "clicking":
             return
@@ -329,11 +379,27 @@ class Runtime:
                 intent.spec.speed_px_s, dt))
         return point
 
+    def _change_energy(self, frame):
+        """Cheap whole-view change sense: mean absolute grey difference of the upper 60% of the
+        frame at 64x36, against the previous frame. Near zero while the view is static, whatever
+        the pointer or a weapon model at the bottom does."""
+        try:
+            import cv2
+            h = frame.shape[0]
+            small = cv2.resize(cv2.cvtColor(frame[:int(h * 0.6), :, :3], cv2.COLOR_BGR2GRAY), (64, 36),
+                               interpolation=cv2.INTER_AREA).astype("float32")
+        except Exception:
+            return None
+        previous, self._change_gray = self._change_gray, small
+        if previous is None:
+            return None
+        return float(abs(small - previous).mean())
+
     def snapshot(self):
         if self.frame is None:
             return None
         h, w = self.frame.shape[:2]
-        return {"id": f"{self.ledger.epoch}:{self.layout_rev}:{self.frame_seq}",
+        return {"id": f"{self.ledger.epoch}:{self.layout_rev}:{self.frame_seq}", "change": self.change,
                 "observation_id": self.frame_seq, "captured_mono": self.frame_time,
                 "capture_source": self.frame_source,
                 "sample_started_mono": self.frame_started,
@@ -355,32 +421,52 @@ class Runtime:
             self._error("stale_snapshot", "Call look and rebind against its snapshot ID.")
 
     def input(self, client, spec: InputSpec):
-        """A discrete agent-chosen point, bound to a layout but not a visual predicate."""
+        """A discrete agent-chosen input, bound to a layout but not a visual predicate."""
         with self.lock:
             self._require_owner(client)
             self._check_snapshot(spec.snapshot_id)
-            if self.pending or (self.intent and self.intent.active):
+            uses_pointer = spec.action in ("move", "click", "look", "button")
+            if uses_pointer and (self.pending or (self.intent and self.intent.active)):
                 self._error("pointer_busy", "Wait for pending output or cancel the active intent.")
-            x, y = spec.point
-            tx, ty, tw, th = self.layout["rect"]
-            if not (tx <= x < tx + tw and ty <= y < ty + th
-                    and x < self.frame.shape[1] and y < self.frame.shape[0]):
-                self._error("point_outside_target", "Input must be inside the bound client area.")
+            if spec.action in ("move", "click"):
+                x, y = spec.point
+                tx, ty, tw, th = self.layout["rect"]
+                if not (tx <= x < tx + tw and ty <= y < ty + th
+                        and x < self.frame.shape[1] and y < self.frame.shape[0]):
+                    self._error("point_outside_target", "Input must be inside the bound client area.")
             cid = uuid4().hex
             now = self.clock()
-            self.pending[cid] = {"action": spec.action, "snapshot_id": spec.snapshot_id}
+            details = {"action": spec.action, "snapshot_id": spec.snapshot_id}
             command = {"command_id": cid, "target": self.layout, "deadline": min(self.expires, now + 0.05)}
+            hold_until = min(self.expires, now + spec.hold_ms / 1000)
+            keys = [spec.key] if spec.action == "key" else list(spec.keys)
+            (self.key_pending if spec.action in ("key", "hold") else self.pending)[cid] = details
             try:
                 if spec.action == "click":
-                    self.output.submit(command | {"x": x, "y": y, "hold_ms": 20})
-                else:
+                    self.output.submit(command | {"x": x, "y": y, "hold_ms": spec.hold_ms})
+                elif spec.action == "move":
                     self.output.pointer(command | {"point": (x, y)})
+                elif spec.action in ("key", "hold"):
+                    self.output.key(command | {"keys": keys, "hold_until": hold_until})
+                    if any(k in ("w", "a", "s", "d", "space", "ctrl", "lshift") for k in keys):
+                        self.note_self_motion(hold_until + 0.35)   # the view settles after the keys go up
+                elif spec.action == "look":
+                    self.output.look(command | {"dx": spec.delta[0], "dy": spec.delta[1],
+                                                "chunks": max(1, spec.spread_ms // 10)})
+                    # Cover the capture pipeline: a turn shows up in captured frames a few frames late.
+                    self.note_self_motion(now + spec.spread_ms / 1000 + 0.25)
+                else:
+                    self.output.button(command | {"button": spec.button, "hold_until": hold_until})
+                    self.note_self_motion(hold_until + 0.15)   # recoil and muzzle flash are own motion
             except Exception as exc:
                 self.pending.pop(cid, None)
+                self.key_pending.pop(cid, None)
                 self.halt(f"submit_failed: {exc}", degraded=True)
                 self._error("input_unavailable", str(exc))
             self.ledger.append("input_requested", now, critical=True, command_id=cid,
-                               action=spec.action, point=spec.point, snapshot_id=spec.snapshot_id)
+                               action=spec.action, point=spec.point, keys=keys or None, delta=spec.delta,
+                               button=spec.button if spec.action in ("click", "button") else None,
+                               snapshot_id=spec.snapshot_id)
             return {"command_id": cid}
 
     def add_watch(self, client, spec: WatchSpec):
@@ -392,12 +478,7 @@ class Runtime:
             if not (tx <= x and ty <= y and x + w <= tx + tw and y + h <= ty + th
                     and x + w <= self.frame.shape[1] and y + h <= self.frame.shape[0]):
                 self._error("region_outside_target", "The watch must fit inside the target client area.")
-            if len(self.watches) >= 16:
-                self._error("watch_budget", "At most 16 watches; unwatch one first.")
-            wid = uuid4().hex
-            self.watches[wid] = Watch(spec)
-            self.ledger.append("watch_added", self.clock(), critical=True, watch_id=wid, name=spec.name)
-            return {"watch_id": wid}
+            return {"watch_id": self._new_watch(spec)}
 
     def arm(self, client, spec: ArmSpec):
         with self.lock:
@@ -429,9 +510,38 @@ class Runtime:
                                critical=True, id=ident)
             return {"removed": ident}
 
+    def _detect(self, watch, frame, captured, moving):
+        if watch.spec.kind == "motion":
+            from ganglion.percepts.motion import detect_motion
+            return detect_motion(frame, watch.spec, watch.state, captured=captured, moving=moving)
+        if watch.spec.kind == "track":
+            from ganglion.percepts.track import detect_track
+            return detect_track(frame, watch.spec, watch.state)
+        from ganglion.percepts.color import detect
+        return detect(frame, watch.spec, was_present=watch.present)
+
+    def _new_watch(self, spec: WatchSpec):
+        """Register a watch under the lock; a track watch cuts its template from the newest frame."""
+        if len(self.watches) >= 16:
+            self._error("watch_budget", "At most 16 watches; unwatch one first.")
+        watch = Watch(spec)
+        if spec.kind == "track":
+            from ganglion.percepts.track import init_track
+            tx, ty, tw, th = spec.template_region
+            x, y, w, h = self.layout["rect"]
+            if not (x <= tx and y <= ty and tx + tw <= x + w and ty + th <= y + h):
+                self._error("region_outside_target", "The template must lie inside the target client area.")
+            try:
+                watch.state = init_track(self.frame, spec.template_region, spec)
+            except ValueError as exc:
+                self._error("template_unusable", str(exc))
+        wid = uuid4().hex
+        self.watches[wid] = watch
+        self.ledger.append("watch_added", self.clock(), critical=True, watch_id=wid, name=spec.name, watch_kind=spec.kind)
+        return wid
+
     def observe(self, frame, captured, seq, layout, *, source="provided", sample_started=None):
         """Run detectors outside the state lock so halt/lease checks cannot wait on vision."""
-        from ganglion.percepts.color import detect
         sample_started = captured if sample_started is None else sample_started
         with self.lock:
             if seq <= self.frame_seq:
@@ -442,12 +552,14 @@ class Runtime:
                     self.halt("target_layout_changed", degraded=True)
                 self.layout, self.layout_rev = layout, self.layout_rev + 1
             self.frame, self.frame_seq, self.frame_time = frame, seq, captured
+            self.change = self._change_energy(frame)
             self.frame_source = source
             self.frame_started = sample_started
             self.source_counts[source] = self.source_counts.get(source, 0) + 1
             watches = list(self.watches.items())
             revision = self.layout_rev
-        observations = [(wid, watch, detect(frame, watch.spec, was_present=watch.present))
+            moving = self.clock() < self.motion_until
+        observations = [(wid, watch, self._detect(watch, frame, captured, moving))
                         for wid, watch in watches]
         with self.lock:
             self.tick(drive=False)
@@ -487,7 +599,7 @@ class Runtime:
                     if (reflex.fires >= spec.max_fires or ready >= reflex.expires
                             or ready - reflex.last_fire < spec.cooldown_ms / 1000):
                         continue
-                    if spec.response == "click" and (self.pending or (self.intent and self.intent.active)):
+                    if spec.response in ("click", "align", "track") and (self.pending or (self.intent and self.intent.active)):
                         self.ledger.append("reflex_rejected", ready, critical=True, reflex_id=rid,
                                            observation_id=seq, reason="pointer_busy")
                         continue
@@ -495,6 +607,43 @@ class Runtime:
                     details = {"reflex_id": rid, "watch_id": wid, "observation_id": seq,
                                "captured_mono": captured, "percept_ready_mono": ready,
                                "capture_source": source, "sample_started_mono": sample_started}
+                    if spec.response in ("align", "track"):
+                        options = spec.align.model_dump()
+                        target_wid, cleanup = wid, None
+                        if spec.response == "track":
+                            # Follow the thing that just moved: a template cut around its blob,
+                            # tracked every frame so the turn itself no longer blinds the program.
+                            bx, by, bw, bh = detection["bbox"]
+                            grow = 8
+                            track_spec = WatchSpec(name=f"track:{watch.spec.name}", snapshot_id=self.snapshot()["id"],
+                                                   region=layout["rect"], kind="track",
+                                                   template_region=(max(layout["rect"][0], bx - grow),
+                                                                    max(layout["rect"][1], by - grow),
+                                                                    min(bw + 2 * grow, 1024), min(bh + 2 * grow, 1024)))
+                            try:
+                                target_wid = cleanup = self._new_watch(track_spec)
+                            except RuntimeErrorWithCode as exc:
+                                self.ledger.append("reflex_rejected", ready, critical=True, reflex_id=rid,
+                                                   observation_id=seq, reason=exc.code)
+                                continue
+                        intent_spec = IntentSpec(program="align", watch_id=target_wid, **options)
+                        self.intent = Align(uuid4().hex, intent_spec, ready, ready + intent_spec.timeout_seconds)
+                        self.intent.cleanup_watch = cleanup
+                        self.state = "running"
+                        details["intent_id"] = self.intent.id
+                        self.ledger.append("intent_started", ready, critical=True, reflex_id=rid, **self.intent.status())
+                    elif spec.response == "key":
+                        deadline = min(self.expires, reflex.expires, sample_started + 0.05)
+                        self.key_pending[cid] = details
+                        try:
+                            self.output.key({"command_id": cid, "target": layout, "deadline": deadline,
+                                             "keys": [spec.key], "hold_until": min(self.expires, ready + spec.hold_ms / 1000)})
+                        except Exception as exc:
+                            self.key_pending.pop(cid, None)
+                            self.halt(f"submit_failed: {exc}", degraded=True)
+                            break
+                        if spec.key in ("w", "a", "s", "d", "space", "ctrl", "lshift"):
+                            self.note_self_motion(ready + spec.hold_ms / 1000 + 0.35)
                     if spec.response == "click":
                         # The helper rechecks target identity, foreground, bounds, and this deadline.
                         deadline = min(self.expires, reflex.expires, sample_started + 0.05)
@@ -510,8 +659,8 @@ class Runtime:
                         watch.last_command = cid
                     reflex.fires += 1
                     reflex.last_fire = ready
-                    self.ledger.append("reflex_fired" if spec.response == "click" else "notify",
-                                       ready, critical=True, command_id=cid, **details)
+                    self.ledger.append("notify" if spec.response == "notify" else "reflex_fired",
+                                       ready, critical=True, command_id=cid, response=spec.response, **details)
             self._tick_intent(self.clock())
 
     def status(self):
@@ -523,8 +672,10 @@ class Runtime:
                                  "detection": v.detection} for k, v in self.watches.items()],
                     "reflexes": [{"id": k, "watch_id": v.spec.watch_id, "fires": v.fires,
                                   "expires_mono": v.expires} for k, v in self.reflexes.items()],
-                    "pending_commands": list(self.pending), "dropped_frames": self.dropped_frames,
+                    "pending_commands": list(self.pending), "pending_keys": list(self.key_pending),
+                    "self_motion_until_mono": self.motion_until, "dropped_frames": self.dropped_frames,
                     "intent": self.intent.status() if self.intent else None,
+                    "locomotion": self.locomotion.status() if self.locomotion else None,
                     "capture_sources": dict(self.source_counts),
                     "shadow": self.shadow.status() if self.shadow else None,
                     "latest_cursor": self.ledger.cursor()}

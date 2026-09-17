@@ -49,6 +49,20 @@ reduce live inference jitter, and add the fly visual front-end so goals stop com
 colour components. No checkpoint has been released to Hugging Face; the candidate does not yet
 control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.md).
 
+## First-person control in Half-Life
+
+- The core gained bounded key holds, relative look deltas and button holds, motion and
+  template-track watches, an `align` program (view to target, then bursts) that the connectome
+  can drive under the supervising envelope, a concurrent `move` program the runtime renews at
+  100 Hz, key and align/track reflex responses, and a whole-view change sense. 129 tests pass.
+- Live in Half-Life inside Anode: the motion → track → connectome align → fire chain engaged
+  console-spawned grunts on its own. Session totals: 58 reflex firings, 15 aligned bursts,
+  connectome share 80.4% of view commands, first shot 0.1–3.8 s after acquisition, four grunts
+  dead with no damage taken. Alarm lights and doors caused false alarms until the motion percept
+  became illumination-invariant; colour HUD reflexes misfired under red lighting and were disarmed.
+- No level was completed: traversal is still agent-directed, with a bump-and-turn explore
+  behaviour as the only autonomy. [Scorecard and limits](docs/bench/HALFLIFE.md).
+
 ## Real-time Solitaire with the connectome in the loop
 
 - A live loop reads the Sawayama board from captured frames, picks a move, executes it through

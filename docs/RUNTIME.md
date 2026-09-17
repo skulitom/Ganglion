@@ -235,6 +235,25 @@ occlusion. It does not re-detect an object at that point. Older snapshots from t
 are allowed, which makes the distinction between an agent-chosen point and a watched target
 explicit. Discrete input and click reflexes cannot take the pointer during an active intent.
 
+### First-person programs
+
+`ganglion_input` also accepts `key` (tap), `hold` (up to four keys for `hold_ms`, re-issue to
+extend), `look` (relative `delta` in mouse counts, optionally spread over `spread_ms`) and
+`button` (hold a mouse button without moving the pointer). Movement keys, looks and button
+holds mark a self-motion window during which motion watches report nothing.
+
+`ganglion_watch` takes `kind`: `color` (default), `motion` (largest changed blob against a frame
+`lag_ms` older on a brightness-normalised image, after `persist` comparisons) or `track` (a crop
+at `template_region` of the newest frame, followed by correlation within `search_px`).
+
+`ganglion_intent` with `program: "align"` turns the view until the watched target sits at
+`point` (client centre by default) for `settle_ms`, then holds `fire.button` for `fire.hold_ms`,
+`fire.repeat` times; `controller: "connectome"` lets the model propose the view velocity under
+the envelope. `program: "move"` holds `keys` until `until`, `timeout_seconds` or cancellation,
+renewed by the runtime every 100 ms, and runs beside a pointer program. `ganglion_arm` responses
+`key` (a bounded tap), `align` and `track` (an align intent on the watch, or on a tracker cut
+around the detected blob) complete the reflex table.
+
 ### Drag and verify
 
 Teach a source watch and a completion-condition watch, then call `ganglion_intent`:

@@ -20,6 +20,9 @@ def build(endpoint, *, observer=False, client_id=None):
         "Pass next_cursor to look/wait to consume events without gaps. Halt when finished. "
         "Supports color components, cursor-feedback reach/drag, and bounded left clicks; no semantic recognition. "
         "Drag can stop at a destination or taught condition, then verify that condition after release. "
+        "Align turns a first-person view with relative mouse deltas until a watched target sits at a point, "
+        "then optionally fires; watches can detect motion while the runtime is not moving the view; "
+        "input can hold keys, send relative look deltas and hold buttons for bounded times. "
         "Intent completion reports observed state, not arbitrary application success."))
     read = ToolAnnotations(read_only_hint=True, destructive_hint=False, open_world_hint=False)
     write = ToolAnnotations(read_only_hint=False, destructive_hint=False, open_world_hint=False)
@@ -64,12 +67,16 @@ def build(endpoint, *, observer=False, client_id=None):
 
     @server.tool(annotations=write)
     async def ganglion_watch(spec: WatchSpec, request_id: str | None = None) -> CallToolResult:
-        """Teach a connected RGB-color target in a screen-pixel region bound to look's snapshot_id."""
+        """Teach a target in a screen-pixel region bound to look's snapshot_id: a connected RGB
+        colour component (kind color), or the largest blob that changed against a frame lag_ms
+        older (kind motion), reported only while no own command is moving the view or player.
+        """
         return await call("watch", spec.model_dump(), request_id)
 
     @server.tool(annotations=write)
     async def ganglion_arm(spec: ArmSpec, request_id: str | None = None) -> CallToolResult:
-        """Arm an appearance/presence reflex: bounded left click or notify, with cooldown and firing budget."""
+        """Arm an appearance/presence reflex with cooldown and firing budget: bounded left click,
+        notify, a bounded key tap (key), or an align intent on the same watch (align options)."""
         return await call("arm", spec.model_dump(), request_id)
 
     @server.tool(annotations=read)
@@ -80,11 +87,14 @@ def build(endpoint, *, observer=False, client_id=None):
 
     @server.tool(annotations=write)
     async def ganglion_intent(spec: IntentSpec, request_id: str | None = None) -> CallToolResult:
-        """Reach or drag a watched target using measured cursor feedback.
+        """Reach, drag, or align on a watched target.
 
         Reach can click after arrival. Drag requires a destination point or destination_watch_id;
         optional until={watch_id,present} releases early on that condition and verifies it after
         release. Arrival also releases, then verifies. A condition already satisfied prevents pickup.
+        Align (first person) sends relative mouse deltas of gain counts per pixel of error until the
+        target sits at point (client centre by default) for settle_ms, then holds fire.button for
+        fire.hold_ms, repeat times with interval_ms between; it ends when the target is lost.
 
         Owns the pointer until completion, failure, or cancellation. Read intent state in status
         or wait for intent_completed/intent_failed/intent_cancelled. Timeout never renews a lease.
@@ -98,7 +108,9 @@ def build(endpoint, *, observer=False, client_id=None):
 
     @server.tool(annotations=write)
     async def ganglion_input(spec: InputSpec, request_id: str | None = None) -> CallToolResult:
-        """Submit one agent-chosen absolute move or bounded click in the snapshot's client area.
+        """Submit one bounded agent-chosen input: move/click at a point, key tap, hold of up to
+        four keys for hold_ms (re-issue to extend), look (relative mouse delta in counts, optionally
+        spread over spread_ms) or button hold without moving the pointer.
 
         Coordinates are physical screen pixels. Checks current layout/focus/occlusion; does not
         re-detect what is at the chosen point. Use an intent for a target that can move.

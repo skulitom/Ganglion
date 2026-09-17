@@ -47,6 +47,12 @@ On a core started with `--shadow-checkpoint`, add `controller: "connectome"` to 
 spec to let the fly model propose pointer velocity; the core applies a proposal only when it
 brings the cursor closer to the goal and reports `neural_commands` and `overridden_commands`.
 
+First person: `ganglion_input` holds keys, sends relative look deltas and holds buttons;
+`ganglion_watch` kinds `motion` and `track` see what moves and follow it; `ganglion_intent`
+`align` turns to a target and fires, `move` holds keys continuously; `ganglion_arm` responses
+`key`, `align` and `track` react at frame rate. Arm motion reflexes only where motion means a
+threat: doors and flashing lights move too.
+
 The helper releases a drag without continuing renewals within at most 100 ms, subject to OS
 scheduling. Wait for `output_halted` after cancellation; a release fault requires core restart.
 Keyboard/gamepad programs and learned vision remain unavailable.

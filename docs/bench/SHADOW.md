@@ -116,6 +116,14 @@ Reproduce (the live command inside Anode):
 .venv/Scripts/python.exe -m ganglion.cli drag-demo --environment synthetic --trials 2 --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --controller connectome --json runs/neural-drag.json
 ```
 
+## First person
+
+The same envelope now drives a first-person view: [Half-Life](HALFLIFE.md) drags the align
+program's virtual cursor and goal through the connectome each tick. Across the recorded pilot
+session the model produced 80.4% of the view commands (5,071 against 1,233 overrides), fired
+15 aligned bursts and killed four grunts without damage taken; its share fell against targets
+that strafed fast, where the envelope overrode most proposals.
+
 ## Validation and next work
 
 The full suite passes 97 tests including the three optional browser checks. New regressions

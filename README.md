@@ -88,6 +88,12 @@ See the [Solitaire scorecard](docs/bench/SOLITAIRE.md).
 .venv/Scripts/python.exe -m ganglion.evaluation.solitaire.player --endpoint runs/solitaire.endpoint.json --out runs/solitaire-play/example --session 2 --dry-run
 ```
 
+## First person
+
+In Half-Life inside Anode, the core turns the view with relative mouse deltas, holds keys
+continuously, tracks the thing that just moved and fires when aligned, with the connectome
+proposing the view velocity under the same envelope. See the [Half-Life scorecard](docs/bench/HALFLIFE.md).
+
 ## Phase 0 tools
 
 ```bash

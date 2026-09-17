@@ -1,0 +1,71 @@
+{
+ "source": "runs/hl/pilot-007/events.jsonl (full ledger kept locally)",
+ "fights": [
+  {
+   "started_after_s": 239.8,
+   "duration_s": 0.0,
+   "reflex_fired": 1,
+   "align_intents": 1,
+   "outcomes": {
+    "timeout": 1
+   },
+   "bursts_fired": 0,
+   "connectome_commands": 229,
+   "overridden_commands": 11,
+   "connectome_share": 0.954,
+   "look_commands_by_controller": {
+    "deterministic_override": 11,
+    "connectome": 229
+   },
+   "acquire_to_first_shot_s": []
+  },
+  {
+   "started_after_s": 277.2,
+   "duration_s": 179.4,
+   "reflex_fired": 58,
+   "align_intents": 58,
+   "outcomes": {
+    "timeout": 21,
+    "aligned_and_fired": 15,
+    "target_lost": 19,
+    "target_lost_after_fire": 3
+   },
+   "bursts_fired": 68,
+   "connectome_commands": 5071,
+   "overridden_commands": 1233,
+   "connectome_share": 0.804,
+   "look_commands_by_controller": {
+    "deterministic_override": 1233,
+    "connectome": 5067
+   },
+   "acquire_to_first_shot_s": [
+    0.106,
+    0.123,
+    0.124,
+    0.305,
+    0.323,
+    0.381,
+    0.385,
+    0.479,
+    0.849,
+    0.881,
+    0.89,
+    1.276,
+    1.289,
+    1.29,
+    1.445,
+    1.511,
+    1.522,
+    1.56,
+    1.91,
+    1.985,
+    2.165,
+    2.23,
+    2.676,
+    2.712,
+    2.807,
+    3.757
+   ]
+  }
+ ]
+}

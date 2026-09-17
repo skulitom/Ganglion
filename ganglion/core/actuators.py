@@ -76,6 +76,12 @@ for _c in 'abcdefghijklmnopqrstuvwxyz':
 for _d in '0123456789':
     VK[_d] = ord(_d)
 
+# Physical keys sent by fixed scan code: their virtual key depends on the keyboard layout, but
+# games that read scan codes (SDL) want the key left of 1 whatever the layout calls it.
+SCAN = {'grave': 0x29, 'tilde': 0x29, 'backslash': 0x2B, 'lbracket': 0x1A, 'rbracket': 0x1B,
+        'semicolon': 0x27, 'quote': 0x28, 'comma': 0x33, 'period': 0x34, 'slash': 0x35, 'minus': 0x0C,
+        'equals': 0x0D}
+
 # Keys whose scan code needs the extended flag (navigation cluster, right-hand modifiers, Win, Apps).
 EXTENDED = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x2C, 0x2D, 0x2E, 0x5B, 0x5C, 0x5D, 0x90,
             0xA3, 0xA5, 0x6F}
@@ -156,7 +162,9 @@ class Actuators:
     # -- keyboard --------------------------------------------------------------------------------
     def key(self, name_or_vk: str | int, down: bool) -> None:
         vk = VK[name_or_vk.lower()] if isinstance(name_or_vk, str) else int(name_or_vk)
-        scan = self.user32.MapVirtualKeyW(vk, 0)  # MAPVK_VK_TO_VSC
+        scan = SCAN.get(name_or_vk.lower()) if isinstance(name_or_vk, str) else None
+        if scan is None:
+            scan = self.user32.MapVirtualKeyW(vk, 0)  # MAPVK_VK_TO_VSC
         flags = KEYEVENTF_SCANCODE | (KEYEVENTF_EXTENDEDKEY if vk in EXTENDED else 0) | (0 if down else KEYEVENTF_KEYUP)
         self._send(self._key(scan, 0, flags))
         (self.held_keys.add if down else self.held_keys.discard)(vk)
