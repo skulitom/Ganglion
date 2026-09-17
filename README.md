@@ -118,13 +118,13 @@ Run the same bench inside an Anode seat (`seat_run` / `anode run`) to get the se
 ## Layout
 
 ```
-ganglion/core      capture, leases, reflexes, cursor-feedback reach/drag, ledger, input helper, NDJSON service
-ganglion/percepts  application-independent colour-component detection
+ganglion/core      capture, leases, watches and reflexes (perception.py), reach/drag/align/move programs, ledger, input helper, NDJSON service
+ganglion/percepts  application-independent detectors: colour components, motion, template tracking, optic flow
 ganglion/mcp       thin MCP stdio bridge to the resident core
 ganglion/arena     headless and real-window target worlds, MCP demo, timing flasher
 ganglion/evaluation opt-in application checks through MCP; solitaire/ is the real-time Sawayama harness
 ganglion/brain     optional actual-connectome shadow inference and frozen replay
-ganglion/train     headless cursor imitation, DAgger and encoder/readout training
+ganglion/train     headless cursor imitation, DAgger, fine-tuning and the fixed evaluation suite
 ganglion/bench     the measurements that decide tick rates and latency compensation
 ganglion/doctor.py what is installed and which session we are in
 docs/census        census of the local male-CNS connectome (scripts and outputs)
