@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Ganglion drag fixture</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#121820; color:#dde4ea; font:15px system-ui; user-select:none; }
+main { width:680px; margin:16px auto; }
+header { display:flex; justify-content:space-between; align-items:baseline; }
+h1 { font-size:20px; margin:0 0 14px; }
+#stage { position:relative; width:640px; height:360px; background:#1b2531; touch-action:none; }
+#piece { position:absolute; width:36px; height:36px; background:rgb(40,220,120); border-radius:5px; cursor:grab; }
+#goal { position:absolute; left:470px; top:140px; width:100px; height:80px; background:rgb(240,190,50); border-radius:8px; }
+#indicator { position:absolute; left:40px; top:280px; width:560px; height:25px; background:rgb(110,65,65); }
+footer { color:#8d9baa; font-size:12px; margin-top:12px; }
+</style>
+<main><header><h1>Move and confirm</h1><span id="status">Ready</span></header>
+<div id="stage"><div id="goal"></div><div id="indicator"></div><div id="piece"></div></div>
+<footer>Static controls, a slider condition, accepted drops, and snap-back rejection.</footer></main>
+<script>
+const stage=document.querySelector('#stage'), piece=document.querySelector('#piece');
+const indicator=document.querySelector('#indicator'), status=document.querySelector('#status');
+let trial=null, source=[100,155], held=false, confirmed=false, threshold=330;
+window.truth=[];
+function emit(kind,data={}) { window.truth.push({kind,trial_id:trial?.id,browser_ms:performance.now(),...data}); }
+function render() {
+  piece.style.left=`${source[0]-18}px`; piece.style.top=`${source[1]-18}px`;
+  piece.style.display=trial?.mode==='static_reach'&&confirmed?'none':'block';
+  indicator.style.background=confirmed?'rgb(60,130,240)':'rgb(110,65,65)';
+  status.textContent=confirmed?'Condition met':(trial?.mode||'Ready');
+}
+window.beginTrial=value=>{
+  trial=value; source=[100,130+value.seed*25]; threshold=310+value.seed*20;
+  held=false; confirmed=false; emit('trial_started',{mode:trial.mode}); render();
+};
+function pos(event) { const b=stage.getBoundingClientRect(); return [event.clientX-b.left,event.clientY-b.top]; }
+stage.addEventListener('pointerdown',event=>{
+  if(!trial)return;
+  const [x,y]=pos(event), hit=event.target===piece;
+  emit('pointer_down',{x,y,hit,trusted:event.isTrusted});
+  if(!hit){emit('false_action');return;}
+  if(trial.mode==='static_reach'){confirmed=true;emit('hit');}
+  else {held=true;stage.setPointerCapture(event.pointerId);}
+  render();
+});
+stage.addEventListener('pointermove',event=>{
+  if(!held)return;
+  source=pos(event);
+  if(['drag_until','reject'].includes(trial.mode))confirmed=source[0]>=threshold;
+  render();
+});
+stage.addEventListener('pointerup',event=>{
+  if(!trial)return;
+  const [x,y]=pos(event);emit('pointer_up',{x,y,was_held:held,trusted:event.isTrusted});
+  if(held){
+    const accepted=(trial.mode==='drag_until'&&x>=threshold)||
+      (trial.mode==='drop'&&x>=470&&x<=570&&y>=140&&y<=220);
+    held=false;confirmed=accepted;
+    emit(accepted?'drop_accepted':'drop_rejected',{x,y,threshold,destination:[520,180]});
+    if(!accepted)source=[100,155];
+  }
+  render();
+});
+render();
+</script></html>

@@ -1,0 +1,472 @@
+
+====================================================================================================
+neck motor neurons: EXPR: ann[ann['subclass'] == 'nm']
+====================================================================================================
+            bodyId           type superclass subclass somaSide somaNeuromere exitNerve entryNerve flywireType   hemibrainType       mancType synonyms  status
+1236         11316           CvN4   cb_motor       nm        L            LB       CvN        NaN      CB0899             NaN            NaN      NaN  Traced
+2021         12141           CvN4   cb_motor       nm        R            LB       CvN        NaN      CB0899             NaN            NaN      NaN  Traced
+119734      174810           CvN5   cb_motor       nm        L            LB       CvN        NaN      CB0838             NaN            NaN      NaN  Traced
+590          10627           CvN5   cb_motor       nm        R            LB       CvN        NaN      CB0838             NaN            NaN      NaN  Traced
+124420      192306           CvN6   cb_motor       nm        L           NaN       CvN        NaN      CB0916             NaN            NaN      NaN  Traced
+143          10156           CvN6   cb_motor       nm        R           NaN       CvN        NaN      CB0916             NaN            NaN      NaN  Traced
+707          10754           CvN7   cb_motor       nm        L           NaN       CvN        NaN      CB0831             NaN            NaN      NaN  Traced
+166749      556449           CvN7   cb_motor       nm        R           NaN       CvN        NaN      CB0831             NaN            NaN      NaN  Traced
+1771         11879         GNG276   cb_motor       nm        L            LB       CvN        NaN      CB0705             NaN            NaN      NaN  Traced
+2211         12342         GNG276   cb_motor       nm        R            LB       CvN        NaN      CB0705             NaN            NaN      NaN  Traced
+1980         12097         GNG283   cb_motor       nm        L            LB       CvN        NaN      CB0705             NaN            NaN      NaN  Traced
+132757      231558         GNG283   cb_motor       nm        R            LB       CvN        NaN      CB0705  (hb2180780757)            NaN      NaN  Traced
+693          10738         GNG641   cb_motor       nm        L           NaN       CvN        NaN      CB4212             NaN            NaN      NaN  Traced
+1320         11403         GNG641   cb_motor       nm        R           NaN       CvN        NaN      CB4212             NaN            NaN      NaN  Traced
+658          10699         GNG648   cb_motor       nm        L            LB       CvN        NaN      CB0913             NaN            NaN      NaN  Traced
+521          10554         GNG648   cb_motor       nm        R            LB       CvN        NaN      CB0913             NaN            NaN      NaN  Traced
+1823         11934         GNG650   cb_motor       nm        L            LB       CvN        NaN      CB0835             NaN            NaN      NaN  Traced
+1273         11354         GNG650   cb_motor       nm        R            LB       CvN        NaN      CB0835             NaN            NaN      NaN  Traced
+2058         12180         GNG653   cb_motor       nm        L            LB       CvN        NaN      CB0706             NaN            NaN      NaN  Traced
+2960         13128         GNG653   cb_motor       nm        R            LB       CvN        NaN      CB0706             NaN            NaN      NaN  Traced
+187359      903152       ADNM1 MN  vnc_motor       nm        L            T1       CvN        NaN         NaN             NaN          ADNM1      NaN  Traced
+170405      801678       ADNM1 MN  vnc_motor       nm        R            T1       CvN        NaN         NaN             NaN          ADNM1      NaN  Traced
+172447      804343       ADNM2 MN  vnc_motor       nm        L            T1       CvN        NaN         NaN             NaN          ADNM2      NaN  Traced
+180112      813696       ADNM2 MN  vnc_motor       nm        R            T1       CvN        NaN         NaN             NaN          ADNM2      NaN  Traced
+191104      928688           FNM2  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN           FNM2      NaN  Traced
+172375      804245           FNM2  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN           FNM2      NaN  Traced
+171326      802923         MNnm03  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm03      NaN  Traced
+170753      802151         MNnm03  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm03      NaN  Traced
+186759      853504  MNnm07,MNnm12  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN  MNnm07,MNnm12      NaN  Traced
+205992  1050011487  MNnm07,MNnm12  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN  MNnm07,MNnm12      NaN  Traced
+186560      834952  MNnm07,MNnm12  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN  MNnm07,MNnm12      NaN  Traced
+206129  1050211750  MNnm07,MNnm12  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN  MNnm07,MNnm12      NaN  Traced
+171222      802781         MNnm08  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm08      NaN  Traced
+170754      802152         MNnm08  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm08      NaN  Traced
+188272      905617         MNnm09  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm09      NaN  Traced
+171983      803765         MNnm09  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm09      NaN  Traced
+171838      803582         MNnm10  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm10      NaN  Traced
+171820      803558         MNnm10  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm10      NaN  Traced
+188128      905210         MNnm11  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm11      NaN  Traced
+171689      803378         MNnm11  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm11      NaN  Traced
+170135      801319         MNnm13  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm13      NaN  Traced
+187360      903153         MNnm13  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm13      NaN  Traced
+174207      806489         MNnm14  vnc_motor       nm        L            T1     DProN        NaN         NaN             NaN         MNnm14      NaN  Traced
+174134      806403         MNnm14  vnc_motor       nm        R            T1     DProN        NaN         NaN             NaN         MNnm14      NaN  Traced
+
+count by superclass x somaSide:
+somaSide     L   R  All
+superclass             
+cb_motor    10  10   20
+vnc_motor   12  12   24
+All         22  22   44
+type list cb_motor nm: ['CvN4', 'CvN5', 'CvN6', 'CvN7', 'GNG276', 'GNG283', 'GNG641', 'GNG648', 'GNG650', 'GNG653']
+type list vnc_motor nm: ['ADNM1 MN', 'ADNM2 MN', 'FNM2', 'MNnm03', 'MNnm07,MNnm12', 'MNnm08', 'MNnm09', 'MNnm10', 'MNnm11', 'MNnm13', 'MNnm14']
+
+EXPR: ann[ann['exitNerve'] == 'CvN']  (cervical nerve)
+somaSide                L  M   R  All
+superclass   subclass                
+cb_motor     nm        10  0  10   20
+vnc_efferent <NA>       0  1   0    1
+vnc_motor    nm         2  0   2    4
+All                    12  1  12   25
+
+====================================================================================================
+wing + haltere motor neurons: EXPR: ann[(ann['superclass']=='vnc_motor') & ann['subclass'].isin(['wm','hm'])]
+====================================================================================================
+somaSide              L   R  All
+subclass type                   
+hm       MNhm03       1   1    2
+         MNhm42       1   1    2
+         MNhm43       1   1    2
+         hDVM MN      1   1    2
+         hi1 MN       1   1    2
+         hi2 MN       2   2    4
+         hiii2 MN     1   1    2
+wm       <NA>         0   1    1
+         DLMn a, b    1   1    2
+         DLMn c-f     4   4    8
+         DVMn 1a-c    3   3    6
+         DVMn 2a, b   2   2    4
+         DVMn 3a, b   2   2    4
+         MNwm35       1   1    2
+         MNwm36       1   1    2
+         STTMm        2   2    4
+         TTMn         1   1    2
+         b1 MN        1   1    2
+         b2 MN        1   1    2
+         b3 MN        1   1    2
+         hg1 MN       1   1    2
+         hg2 MN       1   1    2
+         hg3 MN       1   1    2
+         hg4 MN       1   1    2
+         i1 MN        1   1    2
+         i2 MN        1   1    2
+         iii1 MN      1   1    2
+         iii3 MN      1   1    2
+         ps1 MN       1   1    2
+         ps2 MN       1   1    2
+         tp1 MN       1   1    2
+         tp2 MN       1   1    2
+         tpn MN       1   1    2
+All                  41  42   83
+by exitNerve:
+exitNerve  ADMN  AbN1  MesoAN  PDMNa  PDMNp  All
+subclass                                        
+hm            0    16       0      0      0   16
+wm           28     0      19     14      6   67
+All          28    16      19     14      6   83
+
+====================================================================================================
+leg motor neurons: EXPR: ann[(ann['superclass']=='vnc_motor') & ann['subclass'].isin(['fl','ml','hl'])]
+====================================================================================================
+somaNeuromere  T1      T2      T3      All
+somaSide        L   R   L   R   L   R     
+subclass                                  
+fl             68  67   0   0   0   0  135
+hl              0   0   0   0  66  64  130
+ml              0   0  58  58   0   0  116
+All            68  67  58  58  66  64  381
+distinct types per leg subclass: {'fl': 19, 'hl': 26, 'ml': 25}
+type naming examples: ['Tergopleural/Pleural promotor MN', 'Ti extensor MN', 'Pleural remotor/abductor MN', 'MNml82', 'Sternal anterior rotator MN', 'MNhl64', 'Sternotrochanter MN', 'Fe reductor MN', 'Tr flexor MN', 'Sternal posterior rotator MN', 'MNhl02', 'MNhl59', 'MNml81', 'Acc. ti flexor MN', 'MNhl62', 'Ti flexor MN', 'Tergotr. MN', 'MNml29', 'Tr extensor MN', 'ltm1-tibia MN', 'MNhl29', 'MNhl88', 'ltm2-femur MN', 'MNhl01', 'Sternal adductor MN', 'Acc. tr flexor MN', 'Ta levator MN', 'MNhl87', 'ltm MN', 'MNml78']
+
+all vnc_motor subclass x somaSide:
+somaSide    L    R  All
+subclass               
+ad        107  107  214
+fl         68   67  135
+hl         66   64  130
+hm          8    8   16
+ml         58   58  116
+nm         12   12   24
+wm         33   34   67
+xm          3    3    6
+All       355  353  708
+cb_motor subclass x somaSide:
+somaSide   L   R  All
+subclass             
+am         6   7   13
+nm        10  10   20
+pm        35  32   67
+rm         3   4    7
+All       54  53  107
+cb_motor types by subclass:
+subclass
+am                          [GNG133, GNG649, GNG651, GNG652, GNG668, PS348]
+nm    [CvN4, CvN5, CvN6, CvN7, GNG276, GNG283, GNG641, GNG648, GNG650, G...
+pm    [CEM, MN1, MN10, MN11D, MN11V, MN12D, MN13, MN2Da, MN2Db, MN2V, MN...
+rm                                                  [GNG314, GNG647, PS349]
+
+====================================================================================================
+ocellar nerve entries: EXPR: ann[ann['entryNerve'] == 'ON']
+====================================================================================================
+        bodyId        type          superclass subclass somaSide somaNeuromere exitNerve entryNerve        flywireType hemibrainType mancType synonyms  status            class      instance somaLocation
+4419     14707       DNx02  sensory_descending      NaN      NaN           NaN       NaN         ON              DNx02           NaN    DNx02      NaN  Traced  unknown_sensory       DNx02_R         None
+4971     15303       DNx02  sensory_descending      NaN      NaN           NaN       NaN         ON              DNx02           NaN    DNx02      NaN  Traced  unknown_sensory       DNx02_R         None
+5080     15430       DNx02  sensory_descending      NaN      NaN           NaN       NaN         ON              DNx02           NaN    DNx02      NaN  Traced  unknown_sensory       DNx02_L         None
+5207     15569       DNx02  sensory_descending      NaN      NaN           NaN       NaN         ON              DNx02           NaN    DNx02      NaN  Traced  unknown_sensory       DNx02_L         None
+6839     17347  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_L         None
+26896    39549  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_R         None
+43240    58081  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_L         None
+43608    58494  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_L         None
+47924    63593         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+75169    96958         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+76887    99200         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+79388   102452         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+82685   106770         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+82715   106814         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+83801   108254         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+84084   108629         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+86116   111319         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+86303   111571         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+88033   113887         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+88197   114110         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+90916   117869         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+90955   117918         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+92720   120430         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+99068   129766         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+107229  143534         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+114109  158361         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+120429  177248         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+128391  208737         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+138465  364582         NaN      cb_sensory_tbc      NaN      NaN           NaN       NaN         ON                NaN           NaN      NaN      NaN  Traced              NaN           NaN         None
+140174  470711         NaN      cb_sensory_tbc      NaN      NaN           NaN       NaN         ON                NaN           NaN      NaN      NaN  Traced              NaN           NaN         None
+149934  512689         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+150244  513285  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_R         None
+161156  536485  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_R         None
+161157  536486  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_R         None
+166642  555740  BM_Vt_PoOc          cb_sensory      NaN      NaN           NaN       NaN         ON         BM_Vt_PoOc           NaN      NaN      NaN  Traced   mechanosensory  BM_Vt_PoOc_L         None
+166717  556078         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+166718  556079         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+167266  560242         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+191844  944698         NaN          cb_sensory      NaN      NaN           NaN       NaN         ON  BM_dOcci,BM_dPoOr           NaN      NaN      NaN  Traced   mechanosensory           NaN         None
+
+EXPR: ann[ann['exitNerve'] == 'ON']
+        bodyId    type   superclass subclass somaSide somaNeuromere exitNerve entryNerve flywireType hemibrainType mancType synonyms  status class  instance
+1960     12076  GNG647     cb_motor       rm        R           NaN        ON        NaN      CB0918           NaN      NaN      NaN  Traced   NaN  GNG647_R
+2006     12126  GNG647     cb_motor       rm        L           NaN        ON        NaN      CB0918           NaN      NaN      NaN  Traced   NaN  GNG647_L
+2051     12173  GNG314     cb_motor       rm        L           NaN        ON        NaN      CB0004           NaN      NaN      NaN  Traced   NaN  GNG314_L
+2487     12631  GNG314     cb_motor       rm        R           NaN        ON        NaN      CB0004           NaN      NaN      NaN  Traced   NaN  GNG314_R
+3393     13592  GNG647     cb_motor       rm        R           NaN        ON        NaN      CB0918           NaN      NaN      NaN  Traced   NaN  GNG647_R
+5993     16428  GNG656  cb_efferent      NaN        L            MX        ON        NaN      CB2748           NaN      NaN      NaN  Traced   NaN  GNG656_L
+7219     17754  GNG656  cb_efferent      NaN        R            MX        ON        NaN      CB2748           NaN      NaN      NaN  Traced   NaN  GNG656_R
+7391     17941  GNG656  cb_efferent      NaN        L            MX        ON        NaN      CB2748           NaN      NaN      NaN  Traced   NaN  GNG656_L
+150534  513814  GNG656  cb_efferent      NaN        R            MX        ON        NaN      CB2748           NaN      NaN      NaN  Traced   NaN  GNG656_R
+
+OCG / OCC types (ocellar interneurons): EXPR: ann[ann['type'].str.match(r'^OC[GC]\d', na=False)]
+        bodyId    type          superclass subclass somaSide somaNeuromere exitNerve entryNerve flywireType hemibrainType mancType           synonyms  status  instance
+5767     16182  OCC01b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC01b         OCG05      NaN                NaN  Traced  OCC01b_L
+5500     15886  OCC01b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC01b         OCG05      NaN                NaN  Traced  OCC01b_R
+31057    44205  OCC02a  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_L
+36576    50424  OCC02a  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_L
+53569    70298  OCC02a  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_L
+26052    38608  OCC02a  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_R
+32816    46178  OCC02a  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_R
+33433    46871  OCC02a  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02a         OCG07      NaN                NaN  Traced  OCC02a_R
+49471    65395  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+77993   100604  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+90868   117806  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+100913  132578  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+102473  135135  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+102666  135456  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+104718  138936  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+165320  549959  OCC02b  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_L
+79474   102559  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+84451   109103  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+91764   119044  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+92449   120042  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+94370   122734  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+95590   124521  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+100033  131262  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+102819  135697  OCC02b  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC02b         OCG08      NaN                NaN  Traced  OCC02b_R
+149647  512190  OCG01a   visual_projection      NaN        L           NaN       NaN        NaN      OCG01a         OCG01      NaN                NaN  Traced  OCG01a_L
+150741  514165  OCG01a   visual_projection      NaN        R           NaN       NaN        NaN      OCG01a         OCG01      NaN                NaN  Traced  OCG01a_R
+70       10081  OCG01b   visual_projection      NaN        L           NaN       NaN        NaN      OCG01b         OCG01      NaN                NaN  Traced  OCG01b_L
+65       10076  OCG01b   visual_projection      NaN        R           NaN       NaN        NaN      OCG01b         OCG01      NaN                NaN  Traced  OCG01b_R
+153798  519267  OCG01c   visual_projection      NaN        L           NaN       NaN        NaN      OCG01c         OCG01      NaN  OCG01c (FAFB, GJ)  Traced  OCG01c_L
+2007     12127  OCG01c   visual_projection      NaN        R           NaN       NaN        NaN      OCG01c         OCG01      NaN  OCG01c (FAFB, GJ)  Traced  OCG01c_R
+1        10002  OCG01d   visual_projection      NaN        L           NaN       NaN        NaN      OCG01d         OCG01      NaN                NaN  Traced  OCG01d_L
+217      10235  OCG01d   visual_projection      NaN        R           NaN       NaN        NaN      OCG01d         OCG01      NaN                NaN  Traced  OCG01d_R
+447      10478  OCG01e   visual_projection      NaN        L           NaN       NaN        NaN      OCG01e         OCG01      NaN                NaN  Traced  OCG01e_L
+357      10381  OCG01e   visual_projection      NaN        R           NaN       NaN        NaN      OCG01e         OCG01      NaN                NaN  Traced  OCG01e_R
+153796  519265  OCG01f   visual_projection      NaN        L           NaN       NaN        NaN      OCG01f         OCG01      NaN                NaN  Traced  OCG01f_L
+153797  519266  OCG01f   visual_projection      NaN        R           NaN       NaN        NaN      OCG01f         OCG01      NaN                NaN  Traced  OCG01f_R
+4458     14748  OCG02b   visual_projection      NaN        L           NaN       NaN        NaN      OCG02b         OCG02      NaN                NaN  Traced  OCG02b_L
+4749     15062  OCG02b   visual_projection      NaN        R           NaN       NaN        NaN      OCG02b         OCG02      NaN                NaN  Traced  OCG02b_R
+14205    25410  OCG02c   visual_projection      NaN        L           NaN       NaN        NaN      OCG02c         OCG04      NaN                NaN  Traced  OCG02c_L
+23883    36190  OCG02c   visual_projection      NaN        L           NaN       NaN        NaN      OCG02c         OCG04      NaN                NaN  Traced  OCG02c_L
+9981     20778  OCG02c   visual_projection      NaN        R           NaN       NaN        NaN      OCG02c         OCG04      NaN                NaN  Traced  OCG02c_R
+42214    56908  OCG02c   visual_projection      NaN        R           NaN       NaN        NaN      OCG02c         OCG04      NaN                NaN  Traced  OCG02c_R
+12330    23351   OCG03   visual_projection      NaN        L           NaN       NaN        NaN      OCG02a         OCG03      NaN                NaN  Traced   OCG03_L
+8819     19503   OCG03   visual_projection      NaN        R           NaN       NaN        NaN      OCG02a         OCG03      NaN                NaN  Traced   OCG03_R
+4008     14262   OCG06  visual_centrifugal      NaN        L           NaN       NaN        NaN      OCC01a         OCG06      NaN                NaN  Traced   OCG06_L
+1365     11448   OCG06  visual_centrifugal      NaN        R           NaN       NaN        NaN      OCC01a         OCG06      NaN                NaN  Traced   OCG06_R
+
+====================================================================================================
+photoreceptors (ol_sensory): fields that could carry the eye side
+====================================================================================================
+instance suffix value_counts: EXPR: pr["instance"].str.extract(r"_([LRM])$")[0].value_counts(dropna=False)
+{'R': 3749, 'L': 2349}
+instance examples: ['R1-R6_L', 'HBeyelet_L', 'R8p_L', 'R8y_L', 'R8d_L', 'R7y_R', 'R7p_L', 'R8_unclear_L', 'R7y_L', 'R8y_R']
+rootSide: {'R': 3746, 'L': 2345, nan: 7}
+status: {'Traced': 4114, nan: 1983, 'Anchor': 1}
+class: {'visual': 6091, nan: 7}
+type x status:
+status        <NA>  Anchor  Traced   All
+type                                    
+HBeyelet         0       0       7     7
+R1-R6         1983       0    1394  3377
+R7R8_unclear     0       0      85    85
+R7_unclear       0       0     404   404
+R7d              0       0      82    82
+R7p              0       0     332   332
+R7y              0       1     481   482
+R8_unclear       0       0     442   442
+R8d              0       0      76    76
+R8p              0       0     330   330
+R8y              0       0     481   481
+All           1983       1    4114  6098
+assignedOlHex for photoreceptors non-null: 0
+somaLocation non-null for photoreceptors: 28
+
+====================================================================================================
+class == visual / ol_bilateral
+====================================================================================================
+superclass    ol_sensory
+type                    
+R1-R6               3377
+R7R8_unclear          85
+R7_unclear           404
+R7d                   82
+R7p                  332
+R7y                  482
+R8_unclear           442
+R8d                   76
+R8p                  330
+R8y                  481
+
+EXPR: ann[ann['class'] == 'ol_bilateral'] -> types:
+somaSide   L   R  All
+type                 
+H1         1   1    2
+LC14a-1   15  15   30
+LC14a-2    7   8   15
+LC14b     21  22   43
+LT54       1   1    2
+MeVPLp2    1   1    2
+MeVPMe10   2   2    4
+MeVPMe12   2   2    4
+MeVPMe13   1   1    2
+MeVPMe7    1   1    2
+MeVPOL1    1   1    2
+l-LNv      4   4    8
+All       57  59  116
+
+====================================================================================================
+neurotransmitter predictions for the visual populations
+====================================================================================================
+nt rows 1,835,518; distinct body 1,835,518
+consensus_nt value_counts (all bodies): {'unclear': 1671117, 'acetylcholine': 104193, 'glutamate': 29443, 'gaba': 22196, 'histamine': 8024, 'dopamine': 396, 'octopamine': 101, 'serotonin': 48}
+predicted_nt value_counts: {'unclear': 1684226, 'acetylcholine': 95420, 'glutamate': 28199, 'gaba': 20358, 'dopamine': 4447, 'histamine': 2259, 'serotonin': 483, 'octopamine': 126}
+ground_truth value_counts: {nan: 1750034, 'acetylcholine': 52779, 'glutamate': 14397, 'gaba': 13150, 'histamine': 4683, 'dopamine': 380, 'octopamine': 51, 'serotonin': 44}
+annotation rows with an nt row: 187016 of 211577
+  R1-R6     n= 3377 consensus={'histamine': 3377} celltype_pred=['histamine'] conf=[0.97] ground_truth=['histamine']
+  R7p       n=  332 consensus={'histamine': 332} celltype_pred=['histamine'] conf=[0.95] ground_truth=['histamine']
+  R8p       n=  330 consensus={'histamine': 330} celltype_pred=['histamine'] conf=[0.79] ground_truth=[]
+  L1        n= 1776 consensus={'glutamate': 1776} celltype_pred=['glutamate'] conf=[0.81] ground_truth=['glutamate']
+  L2        n= 1779 consensus={'acetylcholine': 1779} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  L3        n= 1772 consensus={'acetylcholine': 1772} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=['acetylcholine']
+  L4        n= 1770 consensus={'acetylcholine': 1770} celltype_pred=['acetylcholine'] conf=[0.92] ground_truth=['acetylcholine']
+  L5        n= 1787 consensus={'acetylcholine': 1787} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  C2        n= 1745 consensus={'gaba': 1745} celltype_pred=['gaba'] conf=[0.54] ground_truth=['gaba']
+  C3        n= 1779 consensus={'gaba': 1779} celltype_pred=['gaba'] conf=[0.86] ground_truth=['gaba']
+  T1        n= 1777 consensus={'histamine': 1777} celltype_pred=['histamine'] conf=[0.51] ground_truth=[]
+  Mi1       n= 1773 consensus={'acetylcholine': 1773} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  Mi4       n= 1772 consensus={'gaba': 1772} celltype_pred=['gaba'] conf=[0.86] ground_truth=['gaba']
+  Mi9       n= 1775 consensus={'glutamate': 1775} celltype_pred=['glutamate'] conf=[0.75] ground_truth=['glutamate']
+  Tm1       n= 1777 consensus={'acetylcholine': 1777} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  Tm2       n= 1766 consensus={'acetylcholine': 1766} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  Tm3       n= 2054 consensus={'acetylcholine': 2054} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  Tm4       n= 1670 consensus={'acetylcholine': 1670} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  Tm9       n= 1771 consensus={'acetylcholine': 1771} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=['acetylcholine']
+  Tm20      n= 1762 consensus={'acetylcholine': 1762} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  T4a       n= 1684 consensus={'acetylcholine': 1684} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  T5a       n= 1664 consensus={'acetylcholine': 1664} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=['acetylcholine']
+  HSE       n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.91] ground_truth=['acetylcholine']
+  HSN       n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.8] ground_truth=['acetylcholine']
+  HSS       n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.88] ground_truth=['acetylcholine']
+  VS        n=   18 consensus={'acetylcholine': 18} celltype_pred=['acetylcholine'] conf=[0.82] ground_truth=['acetylcholine']
+  H1        n=    2 consensus={'glutamate': 2} celltype_pred=['glutamate'] conf=[0.81] ground_truth=[]
+  H2        n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.92] ground_truth=[]
+  VCH       n=    2 consensus={'gaba': 2} celltype_pred=['gaba'] conf=[0.87] ground_truth=['gaba']
+  DCH       n=    2 consensus={'gaba': 2} celltype_pred=['gaba'] conf=[0.87] ground_truth=['gaba']
+  LC4       n=  126 consensus={'acetylcholine': 126} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=['acetylcholine']
+  LC6       n=  124 consensus={'acetylcholine': 124} celltype_pred=['acetylcholine'] conf=[0.93] ground_truth=['acetylcholine']
+  LPLC2     n=  185 consensus={'acetylcholine': 185} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  LPLC1     n=  134 consensus={'acetylcholine': 134} celltype_pred=['acetylcholine'] conf=[0.94] ground_truth=['acetylcholine']
+  LPLC4     n=   97 consensus={'acetylcholine': 97} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=[]
+  LC9       n=  219 consensus={'acetylcholine': 219} celltype_pred=['acetylcholine'] conf=[0.93] ground_truth=[]
+  LC10a     n=  275 consensus={'acetylcholine': 275} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  LC11      n=  143 consensus={'acetylcholine': 143} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=[]
+  LC12      n=  498 consensus={'acetylcholine': 498} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=[]
+  LC15      n=  126 consensus={'acetylcholine': 126} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=[]
+  LC16      n=  182 consensus={'acetylcholine': 182} celltype_pred=['acetylcholine'] conf=[0.92] ground_truth=['acetylcholine']
+  LC17      n=  353 consensus={'acetylcholine': 353} celltype_pred=['acetylcholine'] conf=[0.94] ground_truth=[]
+  LC18      n=  208 consensus={'acetylcholine': 208} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=[]
+  LC21      n=  153 consensus={'acetylcholine': 153} celltype_pred=['acetylcholine'] conf=[0.94] ground_truth=[]
+  LC22      n=   73 consensus={'acetylcholine': 73} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=[]
+  LLPC1     n=  285 consensus={'acetylcholine': 285} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  DNp01     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.53] ground_truth=[]
+  DNp02     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.88] ground_truth=['acetylcholine']
+  DNp11     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.92] ground_truth=['acetylcholine']
+  DNp09     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.96] ground_truth=['acetylcholine']
+  DNa02     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  DNa01     n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  MDN       n=    4 consensus={'acetylcholine': 4} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=['acetylcholine']
+  OCG01a    n=    2 consensus={'glutamate': 2} celltype_pred=['glutamate'] conf=[0.72] ground_truth=[]
+  OCG02b    n=    2 consensus={'acetylcholine': 2} celltype_pred=['acetylcholine'] conf=[0.95] ground_truth=[]
+  GNG276    n=    2 consensus={'unclear': 2} celltype_pred=['unclear'] conf=[0.37] ground_truth=[]
+  CvN4      n=    2 consensus={'unclear': 2} celltype_pred=['unclear'] conf=[0.32] ground_truth=[]
+  ADNM1 MN  n=    2 consensus={'unclear': 2} celltype_pred=['unclear'] conf=[0.48] ground_truth=[]
+  Lawf1     n=  361 consensus={'acetylcholine': 361} celltype_pred=['acetylcholine'] conf=[0.79] ground_truth=['acetylcholine']
+  Lawf2     n=  383 consensus={'acetylcholine': 383} celltype_pred=['acetylcholine'] conf=[0.63] ground_truth=['acetylcholine']
+  Dm2       n= 1452 consensus={'acetylcholine': 1452} celltype_pred=['acetylcholine'] conf=[0.97] ground_truth=[]
+
+consensus_nt by superclass for OL/visual superclasses:
+consensus_nt        <no nt row>  acetylcholine  dopamine   gaba  glutamate  histamine  octopamine  serotonin  unclear     All
+superclass                                                                                                                   
+descending_neuron             0            931         0    241        104          0           0          2       36    1314
+ol_intrinsic                  3          57718         0  10784      19040       1785           0          0       73   89403
+ol_sensory                    0              0         0      0          0       6098           0          0        0    6098
+visual_centrifugal            0             97         8    303         87          0          16          2       50     563
+visual_projection             1           7889         0     36        794          0           0          0      481    9201
+All                           4          66635         8  11364      20025       7883          16          4      640  106579
+
+====================================================================================================
+flight graph node composition (data/built/flight.nodes.parquet)
+====================================================================================================
+somaSide            <NA>      L    M      R    All
+superclass                                        
+<NA>                   2      0    0      0      2
+ascending_neuron       0    839    7    790   1636
+cb_intrinsic           0   6360   76   6337  12773
+cb_motor               0     14    0     20     34
+cb_sensory           637      0    0      0    637
+cb_sensory_tbc         1      0    0      0      1
+descending_neuron      0    656   10    648   1314
+efferent_ascending     0      2    1      2      5
+sensory_ascending    423      0    0      0    423
+sensory_descending    11      0    0      0     11
+visual_centrifugal     0     70    0     67    137
+visual_projection      0    775    0    825   1600
+vnc_efferent           0      1    5      1      7
+vnc_endocrine          0      2    0      0      2
+vnc_intrinsic          4   4761  226   4540   9531
+vnc_motor              0     70    0     62    132
+vnc_sensory         1755      0    0      0   1755
+All                 2833  13550  325  13292  30000
+
+flight nodes: visual types present (type in VPN/LPTC families):
+  visual_projection + visual_centrifugal nodes in flight graph: 1737
+type
+LPLC2      183
+LPLC1      131
+LC4        126
+LC9        124
+LC10a      109
+LPLC4       97
+LC10d       85
+LLPC1       68
+LC22        52
+LC31a       25
+LC10c-2     24
+LC10c-1     23
+LT51        22
+LoVC25      21
+LC36        20
+VS          18
+LC19        14
+LoVP92      13
+LoVP18      12
+LT52        12
+LoVP26      12
+MeVP9       11
+LC23        11
+LoVP93      11
+LC31b       10
+LC33         8
+LPT31        8
+LT78         7
+LoVP50       7
+VST2         7
+MeVP18       6
+LoVC15       6
+LoVP23       6
+LT77         6
+LPT116       6
+MeVP58       6
+PVLP046      5
+LoVP89       5
+VST1         5
+LoVP25       5
+
+flight populations (pop_* columns) sizes: {'pop_haltere': 439, 'pop_wing_cs': 218, 'pop_lptc': 48, 'pop_ocelli': 22, 'pop_jo': 475, 'pop_compass': 50, 'pop_goal': 116, 'pop_wing_mn': 83, 'pop_descending': 1314, 'pop_cx': 2950, 'pop_premotor': 3830, 'pop_dn_wing': 499}
+flight pop_ocelli types: {'OCG02c': 4, 'OCG01d': 2, 'OCG01b': 2, 'OCG01e': 2, 'OCG06': 2, 'OCG01c': 2, 'OCG02b': 2, 'OCG03': 2, 'OCG01a': 2, 'OCG01f': 2}
+flight pop_lptc types: {'VS': 18, 'VST2': 7, 'VST1': 5, 'VSm': 4, 'VCH': 2, 'HSN': 2, 'HSE': 2, 'H2': 2, 'HSS': 2, 'DCH': 2, 'HST': 2}
+flight pop_wing_mn types: {'DLMn c-f': 8, 'DVMn 1a-c': 6, 'STTMm': 4, 'hi2 MN': 4, 'DVMn 2a, b': 4, 'DVMn 3a, b': 4, 'TTMn': 2, 'MNwm36': 2, 'MNwm35': 2, 'hg1 MN': 2, 'i2 MN': 2, 'MNhm42': 2, 'i1 MN': 2, 'ps1 MN': 2, 'hg4 MN': 2, 'tp2 MN': 2, 'hg3 MN': 2, 'b2 MN': 2, 'tpn MN': 2, 'b3 MN': 2, 'DLMn a, b': 2, 'b1 MN': 2, 'tp1 MN': 2, 'iii3 MN': 2, 'MNhm03': 2, 'iii1 MN': 2, 'ps2 MN': 2, 'hDVM MN': 2, 'MNhm43': 2, 'hg2 MN': 2, 'hi1 MN': 2, 'hiii2 MN': 2}
+neck MNs in flight graph: 11
+DNp01/DNp09/DNa02/MDN in flight graph: {'MDN': 4, 'DNp01': 2, 'DNp11': 2, 'DNp02': 2, 'DNa02': 2, 'DNa01': 2, 'DNp09': 2}

@@ -1,0 +1,2114 @@
+{
+  "started_mono": 173856.2652482,
+  "halt_requested_mono": 173864.2894523,
+  "events": [
+    {
+      "seq": 1,
+      "t_mono": 173854.6795165,
+      "kind": "core_ready"
+    },
+    {
+      "seq": 2,
+      "t_mono": 173856.2252746,
+      "kind": "lease_claimed",
+      "client_id": "d836724ba392451fbb03588aeb4f869b"
+    },
+    {
+      "seq": 3,
+      "t_mono": 173856.249243,
+      "kind": "watch_added",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "name": "green target"
+    },
+    {
+      "seq": 4,
+      "t_mono": 173856.2617764,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 92,
+      "captured_mono": 173856.2596371,
+      "detection": {
+        "x": 758,
+        "y": 340,
+        "pixels": 3136,
+        "bbox": [
+          731,
+          313,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 5,
+      "t_mono": 173856.264539,
+      "kind": "reflex_armed",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51"
+    },
+    {
+      "seq": 6,
+      "t_mono": 173856.2766656,
+      "kind": "reflex_fired",
+      "command_id": "1b1528528c8e42d68340b254844aa33f",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 93,
+      "captured_mono": 173856.2747027,
+      "percept_ready_mono": 173856.2766656
+    },
+    {
+      "seq": 7,
+      "t_mono": 173856.2890792,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 93,
+      "captured_mono": 173856.2747027,
+      "percept_ready_mono": 173856.2766656,
+      "command_id": "1b1528528c8e42d68340b254844aa33f",
+      "x": 758,
+      "y": 340
+    },
+    {
+      "seq": 8,
+      "t_mono": 173856.3064423,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 96,
+      "captured_mono": 173856.3051956,
+      "detection": null
+    },
+    {
+      "seq": 9,
+      "t_mono": 173856.3064423,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "1b1528528c8e42d68340b254844aa33f",
+      "observation_id": 96,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 10,
+      "t_mono": 173856.3097203,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 93,
+      "captured_mono": 173856.2747027,
+      "percept_ready_mono": 173856.2766656,
+      "command_id": "1b1528528c8e42d68340b254844aa33f"
+    },
+    {
+      "seq": 11,
+      "t_mono": 173856.640314,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 117,
+      "captured_mono": 173856.6383229,
+      "detection": {
+        "x": 659,
+        "y": 427,
+        "pixels": 3136,
+        "bbox": [
+          632,
+          400,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 12,
+      "t_mono": 173856.640314,
+      "kind": "reflex_fired",
+      "command_id": "e87dbc25bc1647849c81a6c228fb7978",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 117,
+      "captured_mono": 173856.6383229,
+      "percept_ready_mono": 173856.640314
+    },
+    {
+      "seq": 13,
+      "t_mono": 173856.6408435,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 117,
+      "captured_mono": 173856.6383229,
+      "percept_ready_mono": 173856.640314,
+      "command_id": "e87dbc25bc1647849c81a6c228fb7978",
+      "x": 659,
+      "y": 427
+    },
+    {
+      "seq": 14,
+      "t_mono": 173856.6612744,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 117,
+      "captured_mono": 173856.6383229,
+      "percept_ready_mono": 173856.640314,
+      "command_id": "e87dbc25bc1647849c81a6c228fb7978"
+    },
+    {
+      "seq": 15,
+      "t_mono": 173856.6862786,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 121,
+      "captured_mono": 173856.6839155,
+      "detection": null
+    },
+    {
+      "seq": 16,
+      "t_mono": 173856.6862786,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "e87dbc25bc1647849c81a6c228fb7978",
+      "observation_id": 121,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 17,
+      "t_mono": 173857.1409718,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 150,
+      "captured_mono": 173857.1388275,
+      "detection": {
+        "x": 605,
+        "y": 318,
+        "pixels": 3136,
+        "bbox": [
+          578,
+          291,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 18,
+      "t_mono": 173857.1409718,
+      "kind": "reflex_fired",
+      "command_id": "4daa005c37f04b23a2f00a0fe638b3f6",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 150,
+      "captured_mono": 173857.1388275,
+      "percept_ready_mono": 173857.1409718
+    },
+    {
+      "seq": 19,
+      "t_mono": 173857.1414599,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 150,
+      "captured_mono": 173857.1388275,
+      "percept_ready_mono": 173857.1409718,
+      "command_id": "4daa005c37f04b23a2f00a0fe638b3f6",
+      "x": 605,
+      "y": 318
+    },
+    {
+      "seq": 20,
+      "t_mono": 173857.162233,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 150,
+      "captured_mono": 173857.1388275,
+      "percept_ready_mono": 173857.1409718,
+      "command_id": "4daa005c37f04b23a2f00a0fe638b3f6"
+    },
+    {
+      "seq": 21,
+      "t_mono": 173857.1711565,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 153,
+      "captured_mono": 173857.168828,
+      "detection": null
+    },
+    {
+      "seq": 22,
+      "t_mono": 173857.1711565,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "4daa005c37f04b23a2f00a0fe638b3f6",
+      "observation_id": 153,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 23,
+      "t_mono": 173857.4608883,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 171,
+      "captured_mono": 173857.4585076,
+      "detection": {
+        "x": 280,
+        "y": 310,
+        "pixels": 3136,
+        "bbox": [
+          253,
+          283,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 24,
+      "t_mono": 173857.4608883,
+      "kind": "reflex_fired",
+      "command_id": "c2e113d179164e15b94e86bcaa7561cb",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 171,
+      "captured_mono": 173857.4585076,
+      "percept_ready_mono": 173857.4608883
+    },
+    {
+      "seq": 25,
+      "t_mono": 173857.4613445,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 171,
+      "captured_mono": 173857.4585076,
+      "percept_ready_mono": 173857.4608883,
+      "command_id": "c2e113d179164e15b94e86bcaa7561cb",
+      "x": 280,
+      "y": 310
+    },
+    {
+      "seq": 26,
+      "t_mono": 173857.4750816,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 173,
+      "captured_mono": 173857.4730845,
+      "detection": null
+    },
+    {
+      "seq": 27,
+      "t_mono": 173857.4750816,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "c2e113d179164e15b94e86bcaa7561cb",
+      "observation_id": 173,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 28,
+      "t_mono": 173857.4824364,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 171,
+      "captured_mono": 173857.4585076,
+      "percept_ready_mono": 173857.4608883,
+      "command_id": "c2e113d179164e15b94e86bcaa7561cb"
+    },
+    {
+      "seq": 29,
+      "t_mono": 173857.8532242,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 196,
+      "captured_mono": 173857.8511689,
+      "detection": {
+        "x": 649,
+        "y": 354,
+        "pixels": 3136,
+        "bbox": [
+          622,
+          327,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 30,
+      "t_mono": 173857.8532242,
+      "kind": "reflex_fired",
+      "command_id": "b76c8521f2724db692a98a151a3b3db6",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 196,
+      "captured_mono": 173857.8511689,
+      "percept_ready_mono": 173857.8532242
+    },
+    {
+      "seq": 31,
+      "t_mono": 173857.8536875,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 196,
+      "captured_mono": 173857.8511689,
+      "percept_ready_mono": 173857.8532242,
+      "command_id": "b76c8521f2724db692a98a151a3b3db6",
+      "x": 649,
+      "y": 354
+    },
+    {
+      "seq": 32,
+      "t_mono": 173857.8753074,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 196,
+      "captured_mono": 173857.8511689,
+      "percept_ready_mono": 173857.8532242,
+      "command_id": "b76c8521f2724db692a98a151a3b3db6"
+    },
+    {
+      "seq": 33,
+      "t_mono": 173857.8834042,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 199,
+      "captured_mono": 173857.8816973,
+      "detection": null
+    },
+    {
+      "seq": 34,
+      "t_mono": 173857.8834042,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "b76c8521f2724db692a98a151a3b3db6",
+      "observation_id": 199,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 35,
+      "t_mono": 173858.2167304,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 220,
+      "captured_mono": 173858.2147977,
+      "detection": {
+        "x": 523,
+        "y": 452,
+        "pixels": 3136,
+        "bbox": [
+          496,
+          425,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 36,
+      "t_mono": 173858.2167304,
+      "kind": "reflex_fired",
+      "command_id": "5f54804b024844a189310099257dd7f6",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 220,
+      "captured_mono": 173858.2147977,
+      "percept_ready_mono": 173858.2167304
+    },
+    {
+      "seq": 37,
+      "t_mono": 173858.217188,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 220,
+      "captured_mono": 173858.2147977,
+      "percept_ready_mono": 173858.2167304,
+      "command_id": "5f54804b024844a189310099257dd7f6",
+      "x": 523,
+      "y": 452
+    },
+    {
+      "seq": 38,
+      "t_mono": 173858.2318625,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 222,
+      "captured_mono": 173858.2302113,
+      "detection": null
+    },
+    {
+      "seq": 39,
+      "t_mono": 173858.2318625,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "5f54804b024844a189310099257dd7f6",
+      "observation_id": 222,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 40,
+      "t_mono": 173858.2385357,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 220,
+      "captured_mono": 173858.2147977,
+      "percept_ready_mono": 173858.2167304,
+      "command_id": "5f54804b024844a189310099257dd7f6"
+    },
+    {
+      "seq": 41,
+      "t_mono": 173858.5961181,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 246,
+      "captured_mono": 173858.5939809,
+      "detection": {
+        "x": 700,
+        "y": 422,
+        "pixels": 3136,
+        "bbox": [
+          673,
+          395,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 42,
+      "t_mono": 173858.5961181,
+      "kind": "reflex_fired",
+      "command_id": "6936bdb9d084407288a978c7e8d22cbf",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 246,
+      "captured_mono": 173858.5939809,
+      "percept_ready_mono": 173858.5961181
+    },
+    {
+      "seq": 43,
+      "t_mono": 173858.5965571,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 246,
+      "captured_mono": 173858.5939809,
+      "percept_ready_mono": 173858.5961181,
+      "command_id": "6936bdb9d084407288a978c7e8d22cbf",
+      "x": 700,
+      "y": 422
+    },
+    {
+      "seq": 44,
+      "t_mono": 173858.6105277,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 248,
+      "captured_mono": 173858.6091557,
+      "detection": null
+    },
+    {
+      "seq": 45,
+      "t_mono": 173858.6105277,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "6936bdb9d084407288a978c7e8d22cbf",
+      "observation_id": 248,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 46,
+      "t_mono": 173858.6179963,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 246,
+      "captured_mono": 173858.5939809,
+      "percept_ready_mono": 173858.5961181,
+      "command_id": "6936bdb9d084407288a978c7e8d22cbf"
+    },
+    {
+      "seq": 47,
+      "t_mono": 173859.1726826,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 284,
+      "captured_mono": 173859.1709139,
+      "detection": {
+        "x": 472,
+        "y": 282,
+        "pixels": 3136,
+        "bbox": [
+          445,
+          255,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 48,
+      "t_mono": 173859.1726826,
+      "kind": "reflex_fired",
+      "command_id": "8cdbd1ceba0c4c6eaeb79a54b196a430",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 284,
+      "captured_mono": 173859.1709139,
+      "percept_ready_mono": 173859.1726826
+    },
+    {
+      "seq": 49,
+      "t_mono": 173859.1731646,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 284,
+      "captured_mono": 173859.1709139,
+      "percept_ready_mono": 173859.1726826,
+      "command_id": "8cdbd1ceba0c4c6eaeb79a54b196a430",
+      "x": 472,
+      "y": 282
+    },
+    {
+      "seq": 50,
+      "t_mono": 173859.1884694,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 286,
+      "captured_mono": 173859.186053,
+      "detection": null
+    },
+    {
+      "seq": 51,
+      "t_mono": 173859.1884694,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "8cdbd1ceba0c4c6eaeb79a54b196a430",
+      "observation_id": 286,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 52,
+      "t_mono": 173859.1941089,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 284,
+      "captured_mono": 173859.1709139,
+      "percept_ready_mono": 173859.1726826,
+      "command_id": "8cdbd1ceba0c4c6eaeb79a54b196a430"
+    },
+    {
+      "seq": 53,
+      "t_mono": 173859.749148,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 322,
+      "captured_mono": 173859.7464688,
+      "detection": {
+        "x": 298,
+        "y": 282,
+        "pixels": 3136,
+        "bbox": [
+          271,
+          255,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 54,
+      "t_mono": 173859.749148,
+      "kind": "reflex_fired",
+      "command_id": "31f55d88d8a3468e82c9e4c40edef2ff",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 322,
+      "captured_mono": 173859.7464688,
+      "percept_ready_mono": 173859.749148
+    },
+    {
+      "seq": 55,
+      "t_mono": 173859.7496023,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 322,
+      "captured_mono": 173859.7464688,
+      "percept_ready_mono": 173859.749148,
+      "command_id": "31f55d88d8a3468e82c9e4c40edef2ff",
+      "x": 298,
+      "y": 282
+    },
+    {
+      "seq": 56,
+      "t_mono": 173859.7703569,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 322,
+      "captured_mono": 173859.7464688,
+      "percept_ready_mono": 173859.749148,
+      "command_id": "31f55d88d8a3468e82c9e4c40edef2ff"
+    },
+    {
+      "seq": 57,
+      "t_mono": 173859.7785818,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 325,
+      "captured_mono": 173859.7768648,
+      "detection": null
+    },
+    {
+      "seq": 58,
+      "t_mono": 173859.7785818,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "31f55d88d8a3468e82c9e4c40edef2ff",
+      "observation_id": 325,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 59,
+      "t_mono": 173860.2794847,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 358,
+      "captured_mono": 173860.2766327,
+      "detection": {
+        "x": 715,
+        "y": 297,
+        "pixels": 3136,
+        "bbox": [
+          688,
+          270,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 60,
+      "t_mono": 173860.2794847,
+      "kind": "reflex_fired",
+      "command_id": "2c1188a64f8e48dfb07fd06c73f1f5ab",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 358,
+      "captured_mono": 173860.2766327,
+      "percept_ready_mono": 173860.2794847
+    },
+    {
+      "seq": 61,
+      "t_mono": 173860.2799898,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 358,
+      "captured_mono": 173860.2766327,
+      "percept_ready_mono": 173860.2794847,
+      "command_id": "2c1188a64f8e48dfb07fd06c73f1f5ab",
+      "x": 715,
+      "y": 297
+    },
+    {
+      "seq": 62,
+      "t_mono": 173860.2937419,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 360,
+      "captured_mono": 173860.2919595,
+      "detection": null
+    },
+    {
+      "seq": 63,
+      "t_mono": 173860.2937419,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "2c1188a64f8e48dfb07fd06c73f1f5ab",
+      "observation_id": 360,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 64,
+      "t_mono": 173860.3007421,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 358,
+      "captured_mono": 173860.2766327,
+      "percept_ready_mono": 173860.2794847,
+      "command_id": "2c1188a64f8e48dfb07fd06c73f1f5ab"
+    },
+    {
+      "seq": 65,
+      "t_mono": 173860.6122555,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 380,
+      "captured_mono": 173860.610277,
+      "detection": {
+        "x": 628,
+        "y": 383,
+        "pixels": 3136,
+        "bbox": [
+          601,
+          356,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 66,
+      "t_mono": 173860.6122555,
+      "kind": "reflex_fired",
+      "command_id": "c9c7ce87a71148fdabeec8e09f6b169e",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 380,
+      "captured_mono": 173860.610277,
+      "percept_ready_mono": 173860.6122555
+    },
+    {
+      "seq": 67,
+      "t_mono": 173860.6126907,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 380,
+      "captured_mono": 173860.610277,
+      "percept_ready_mono": 173860.6122555,
+      "command_id": "c9c7ce87a71148fdabeec8e09f6b169e",
+      "x": 628,
+      "y": 383
+    },
+    {
+      "seq": 68,
+      "t_mono": 173860.6343204,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 380,
+      "captured_mono": 173860.610277,
+      "percept_ready_mono": 173860.6122555,
+      "command_id": "c9c7ce87a71148fdabeec8e09f6b169e"
+    },
+    {
+      "seq": 69,
+      "t_mono": 173860.6426654,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 383,
+      "captured_mono": 173860.6412321,
+      "detection": null
+    },
+    {
+      "seq": 70,
+      "t_mono": 173860.6426654,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "c9c7ce87a71148fdabeec8e09f6b169e",
+      "observation_id": 383,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 71,
+      "t_mono": 173861.0669454,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 409,
+      "captured_mono": 173861.0650359,
+      "detection": {
+        "x": 756,
+        "y": 422,
+        "pixels": 3136,
+        "bbox": [
+          729,
+          395,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 72,
+      "t_mono": 173861.0669454,
+      "kind": "reflex_fired",
+      "command_id": "c058c880d73e44859c277779cfda7b00",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 409,
+      "captured_mono": 173861.0650359,
+      "percept_ready_mono": 173861.0669454
+    },
+    {
+      "seq": 73,
+      "t_mono": 173861.0674074,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 409,
+      "captured_mono": 173861.0650359,
+      "percept_ready_mono": 173861.0669454,
+      "command_id": "c058c880d73e44859c277779cfda7b00",
+      "x": 756,
+      "y": 422
+    },
+    {
+      "seq": 74,
+      "t_mono": 173861.0893115,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 409,
+      "captured_mono": 173861.0650359,
+      "percept_ready_mono": 173861.0669454,
+      "command_id": "c058c880d73e44859c277779cfda7b00"
+    },
+    {
+      "seq": 75,
+      "t_mono": 173861.1014781,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 412,
+      "captured_mono": 173861.0960479,
+      "detection": null
+    },
+    {
+      "seq": 76,
+      "t_mono": 173861.1014781,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "c058c880d73e44859c277779cfda7b00",
+      "observation_id": 412,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 77,
+      "t_mono": 173861.4148189,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 433,
+      "captured_mono": 173861.4131565,
+      "detection": {
+        "x": 543,
+        "y": 278,
+        "pixels": 3136,
+        "bbox": [
+          516,
+          251,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 78,
+      "t_mono": 173861.4148189,
+      "kind": "reflex_fired",
+      "command_id": "714ea326fee544c99c29142004a396cb",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 433,
+      "captured_mono": 173861.4131565,
+      "percept_ready_mono": 173861.4148189
+    },
+    {
+      "seq": 79,
+      "t_mono": 173861.4152151,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 433,
+      "captured_mono": 173861.4131565,
+      "percept_ready_mono": 173861.4148189,
+      "command_id": "714ea326fee544c99c29142004a396cb",
+      "x": 543,
+      "y": 278
+    },
+    {
+      "seq": 80,
+      "t_mono": 173861.4355239,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 433,
+      "captured_mono": 173861.4131565,
+      "percept_ready_mono": 173861.4148189,
+      "command_id": "714ea326fee544c99c29142004a396cb"
+    },
+    {
+      "seq": 81,
+      "t_mono": 173861.4617819,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 436,
+      "captured_mono": 173861.4599951,
+      "detection": null
+    },
+    {
+      "seq": 82,
+      "t_mono": 173861.4617819,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "714ea326fee544c99c29142004a396cb",
+      "observation_id": 436,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 83,
+      "t_mono": 173861.960447,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 469,
+      "captured_mono": 173861.9585995,
+      "detection": {
+        "x": 594,
+        "y": 264,
+        "pixels": 3136,
+        "bbox": [
+          567,
+          237,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 84,
+      "t_mono": 173861.960447,
+      "kind": "reflex_fired",
+      "command_id": "a828ac3bc1a642b9872b35b28c9e71c0",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 469,
+      "captured_mono": 173861.9585995,
+      "percept_ready_mono": 173861.960447
+    },
+    {
+      "seq": 85,
+      "t_mono": 173861.9608723,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 469,
+      "captured_mono": 173861.9585995,
+      "percept_ready_mono": 173861.960447,
+      "command_id": "a828ac3bc1a642b9872b35b28c9e71c0",
+      "x": 594,
+      "y": 264
+    },
+    {
+      "seq": 86,
+      "t_mono": 173861.9763761,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 471,
+      "captured_mono": 173861.9741003,
+      "detection": null
+    },
+    {
+      "seq": 87,
+      "t_mono": 173861.9763761,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "a828ac3bc1a642b9872b35b28c9e71c0",
+      "observation_id": 471,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 88,
+      "t_mono": 173861.9818904,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 469,
+      "captured_mono": 173861.9585995,
+      "percept_ready_mono": 173861.960447,
+      "command_id": "a828ac3bc1a642b9872b35b28c9e71c0"
+    },
+    {
+      "seq": 89,
+      "t_mono": 173862.3401006,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 495,
+      "captured_mono": 173862.3373671,
+      "detection": {
+        "x": 308,
+        "y": 376,
+        "pixels": 3136,
+        "bbox": [
+          281,
+          349,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 90,
+      "t_mono": 173862.3401006,
+      "kind": "reflex_fired",
+      "command_id": "e6db2644881a491ba1455c8584c2a67b",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 495,
+      "captured_mono": 173862.3373671,
+      "percept_ready_mono": 173862.3401006
+    },
+    {
+      "seq": 91,
+      "t_mono": 173862.3405405,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 495,
+      "captured_mono": 173862.3373671,
+      "percept_ready_mono": 173862.3401006,
+      "command_id": "e6db2644881a491ba1455c8584c2a67b",
+      "x": 308,
+      "y": 376
+    },
+    {
+      "seq": 92,
+      "t_mono": 173862.361267,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 495,
+      "captured_mono": 173862.3373671,
+      "percept_ready_mono": 173862.3401006,
+      "command_id": "e6db2644881a491ba1455c8584c2a67b"
+    },
+    {
+      "seq": 93,
+      "t_mono": 173862.3706097,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 498,
+      "captured_mono": 173862.3689567,
+      "detection": null
+    },
+    {
+      "seq": 94,
+      "t_mono": 173862.3706097,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "e6db2644881a491ba1455c8584c2a67b",
+      "observation_id": 498,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 95,
+      "t_mono": 173862.9012793,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 532,
+      "captured_mono": 173862.8994083,
+      "detection": {
+        "x": 509,
+        "y": 410,
+        "pixels": 3136,
+        "bbox": [
+          482,
+          383,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 96,
+      "t_mono": 173862.9012793,
+      "kind": "reflex_fired",
+      "command_id": "3de416b133ea43c3b54b773236d757d7",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 532,
+      "captured_mono": 173862.8994083,
+      "percept_ready_mono": 173862.9012793
+    },
+    {
+      "seq": 97,
+      "t_mono": 173862.901698,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 532,
+      "captured_mono": 173862.8994083,
+      "percept_ready_mono": 173862.9012793,
+      "command_id": "3de416b133ea43c3b54b773236d757d7",
+      "x": 509,
+      "y": 410
+    },
+    {
+      "seq": 98,
+      "t_mono": 173862.9170906,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 534,
+      "captured_mono": 173862.9154457,
+      "detection": null
+    },
+    {
+      "seq": 99,
+      "t_mono": 173862.9170906,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "3de416b133ea43c3b54b773236d757d7",
+      "observation_id": 534,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 100,
+      "t_mono": 173862.9225348,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 532,
+      "captured_mono": 173862.8994083,
+      "percept_ready_mono": 173862.9012793,
+      "command_id": "3de416b133ea43c3b54b773236d757d7"
+    },
+    {
+      "seq": 101,
+      "t_mono": 173863.4777505,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 571,
+      "captured_mono": 173863.4753694,
+      "detection": {
+        "x": 339,
+        "y": 421,
+        "pixels": 3136,
+        "bbox": [
+          312,
+          394,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 102,
+      "t_mono": 173863.4777505,
+      "kind": "reflex_fired",
+      "command_id": "4bcbe3a2125142f6881c30612294e77d",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 571,
+      "captured_mono": 173863.4753694,
+      "percept_ready_mono": 173863.4777505
+    },
+    {
+      "seq": 103,
+      "t_mono": 173863.4782017,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 571,
+      "captured_mono": 173863.4753694,
+      "percept_ready_mono": 173863.4777505,
+      "command_id": "4bcbe3a2125142f6881c30612294e77d",
+      "x": 339,
+      "y": 421
+    },
+    {
+      "seq": 104,
+      "t_mono": 173863.4996144,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 571,
+      "captured_mono": 173863.4753694,
+      "percept_ready_mono": 173863.4777505,
+      "command_id": "4bcbe3a2125142f6881c30612294e77d"
+    },
+    {
+      "seq": 105,
+      "t_mono": 173863.5212021,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 574,
+      "captured_mono": 173863.5192176,
+      "detection": null
+    },
+    {
+      "seq": 106,
+      "t_mono": 173863.5212021,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "4bcbe3a2125142f6881c30612294e77d",
+      "observation_id": 574,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 107,
+      "t_mono": 173864.0380052,
+      "kind": "appear",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 605,
+      "captured_mono": 173864.0356431,
+      "detection": {
+        "x": 683,
+        "y": 376,
+        "pixels": 3136,
+        "bbox": [
+          656,
+          349,
+          56,
+          56
+        ]
+      }
+    },
+    {
+      "seq": 108,
+      "t_mono": 173864.0380052,
+      "kind": "reflex_fired",
+      "command_id": "9b8267cd945342e487c20be03d91f1de",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 605,
+      "captured_mono": 173864.0356431,
+      "percept_ready_mono": 173864.0380052
+    },
+    {
+      "seq": 109,
+      "t_mono": 173864.0384503,
+      "kind": "input_submitted",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 605,
+      "captured_mono": 173864.0356431,
+      "percept_ready_mono": 173864.0380052,
+      "command_id": "9b8267cd945342e487c20be03d91f1de",
+      "x": 683,
+      "y": 376
+    },
+    {
+      "seq": 110,
+      "t_mono": 173864.0605111,
+      "kind": "input_released",
+      "reflex_id": "3a7fef7578b447e7a9619bde1e52c22d",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 605,
+      "captured_mono": 173864.0356431,
+      "percept_ready_mono": 173864.0380052,
+      "command_id": "9b8267cd945342e487c20be03d91f1de"
+    },
+    {
+      "seq": 111,
+      "t_mono": 173864.0662472,
+      "kind": "vanish",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "observation_id": 608,
+      "captured_mono": 173864.0648121,
+      "detection": null
+    },
+    {
+      "seq": 112,
+      "t_mono": 173864.0662472,
+      "kind": "effect_observed",
+      "watch_id": "ebf41bebf2414e459aac8450c028ba51",
+      "command_id": "9b8267cd945342e487c20be03d91f1de",
+      "observation_id": 608,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    }
+  ],
+  "lost_events": 0,
+  "final_state": "halted",
+  "dropped_frames": 0,
+  "version": "0.0.1",
+  "synthetic": false,
+  "session_id": 3,
+  "seconds_without_agent_calls": 8.0,
+  "measured_at": "2026-09-17T00:09:01.684283+00:00",
+  "python": "3.13.2",
+  "dependencies": {
+    "mcp": "2.2.0",
+    "numpy": "2.5.3",
+    "opencv-python": "5.0.0.93",
+    "pygame": "2.6.1",
+    "dxcam": "0.3.0"
+  },
+  "preexisting_targets_excluded_from_reaction_timing": 1,
+  "score": {
+    "hit": 18,
+    "miss": 0,
+    "false_action": 0
+  },
+  "timing_ms": {
+    "capture_to_submit_ms": {
+      "p50": 2.5206000136677176,
+      "p90": 3.1734000076539814,
+      "p95": 3.3571000094525516,
+      "p99": 14.376500010257587,
+      "max": 14.376500010257587,
+      "n": 18
+    },
+    "percept_to_submit_ms": {
+      "p50": 0.45429999590851367,
+      "p90": 0.5051000043749809,
+      "p95": 0.5295000155456364,
+      "p99": 12.413600023137406,
+      "max": 12.413600023137406,
+      "n": 18
+    },
+    "scheduled_to_receive_ms": {
+      "p50": 31.287599995266646,
+      "p90": 33.28089998103678,
+      "p95": 33.96830000565387,
+      "p99": 49.649199994746596,
+      "max": 49.649199994746596,
+      "n": 17
+    }
+  },
+  "truth": [
+    {
+      "kind": "render_submitted",
+      "t_mono": 173854.0381868,
+      "target_id": 0,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173854.6194496,
+      "target_id": 1,
+      "box": [
+        307,
+        146,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173854.6205657,
+      "target_id": 1,
+      "visible": true
+    },
+    {
+      "kind": "miss",
+      "t_mono": 173855.6274611,
+      "target_id": 1
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173855.6285438,
+      "target_id": 1,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173856.1323048,
+      "target_id": 2,
+      "box": [
+        531,
+        133,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173856.1337597,
+      "target_id": 2,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173856.2952406,
+      "target_id": 2,
+      "x": 558,
+      "y": 160
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173856.2952446,
+      "target_id": 2,
+      "x": 558,
+      "y": 160
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173856.2964588,
+      "target_id": 2,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173856.6343218,
+      "target_id": 3,
+      "box": [
+        432,
+        220,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173856.6354255,
+      "target_id": 3,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173856.6509752,
+      "target_id": 3,
+      "x": 459,
+      "y": 247
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173856.6509776,
+      "target_id": 3,
+      "x": 459,
+      "y": 247
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173856.6520002,
+      "target_id": 3,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173857.1220834,
+      "target_id": 4,
+      "box": [
+        378,
+        111,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.123191,
+      "target_id": 4,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173857.153371,
+      "target_id": 4,
+      "x": 405,
+      "y": 138
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173857.1533733,
+      "target_id": 4,
+      "x": 405,
+      "y": 138
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.1544858,
+      "target_id": 4,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173857.4458408,
+      "target_id": 5,
+      "box": [
+        53,
+        103,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.4469655,
+      "target_id": 5,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173857.4624853,
+      "target_id": 5,
+      "x": 80,
+      "y": 130
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173857.4624873,
+      "target_id": 5,
+      "x": 80,
+      "y": 130
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.4635098,
+      "target_id": 5,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173857.8351924,
+      "target_id": 6,
+      "box": [
+        422,
+        147,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.8362547,
+      "target_id": 6,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173857.8679343,
+      "target_id": 6,
+      "x": 449,
+      "y": 174
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173857.8679364,
+      "target_id": 6,
+      "x": 449,
+      "y": 174
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173857.8689791,
+      "target_id": 6,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173858.2092896,
+      "target_id": 7,
+      "box": [
+        296,
+        245,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173858.210345,
+      "target_id": 7,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173858.225893,
+      "target_id": 7,
+      "x": 323,
+      "y": 272
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173858.2258959,
+      "target_id": 7,
+      "x": 323,
+      "y": 272
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173858.2269901,
+      "target_id": 7,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173858.5861636,
+      "target_id": 8,
+      "box": [
+        473,
+        215,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173858.5872899,
+      "target_id": 8,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173858.6017788,
+      "target_id": 8,
+      "x": 500,
+      "y": 242
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173858.6017811,
+      "target_id": 8,
+      "x": 500,
+      "y": 242
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173858.6028332,
+      "target_id": 8,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173859.1420467,
+      "target_id": 9,
+      "box": [
+        245,
+        75,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173859.143206,
+      "target_id": 9,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173859.1745825,
+      "target_id": 9,
+      "x": 272,
+      "y": 102
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173859.1745847,
+      "target_id": 9,
+      "x": 272,
+      "y": 102
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173859.1756866,
+      "target_id": 9,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173859.7306363,
+      "target_id": 10,
+      "box": [
+        71,
+        75,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173859.7321921,
+      "target_id": 10,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173859.7631127,
+      "target_id": 10,
+      "x": 98,
+      "y": 102
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173859.7631155,
+      "target_id": 10,
+      "x": 98,
+      "y": 102
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173859.7644745,
+      "target_id": 10,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173860.26817,
+      "target_id": 11,
+      "box": [
+        488,
+        90,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173860.2693512,
+      "target_id": 11,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173860.2846289,
+      "target_id": 11,
+      "x": 515,
+      "y": 117
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173860.2846315,
+      "target_id": 11,
+      "x": 515,
+      "y": 117
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173860.2857152,
+      "target_id": 11,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173860.5916596,
+      "target_id": 12,
+      "box": [
+        401,
+        176,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173860.5930352,
+      "target_id": 12,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173860.6256279,
+      "target_id": 12,
+      "x": 428,
+      "y": 203
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173860.6256299,
+      "target_id": 12,
+      "x": 428,
+      "y": 203
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173860.6266958,
+      "target_id": 12,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173861.0488636,
+      "target_id": 13,
+      "box": [
+        529,
+        215,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.0504168,
+      "target_id": 13,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173861.0812116,
+      "target_id": 13,
+      "x": 556,
+      "y": 242
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173861.0812144,
+      "target_id": 13,
+      "x": 556,
+      "y": 242
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.0822364,
+      "target_id": 13,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173861.4067207,
+      "target_id": 14,
+      "box": [
+        316,
+        71,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.4078857,
+      "target_id": 14,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173861.423709,
+      "target_id": 14,
+      "x": 343,
+      "y": 98
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173861.4237107,
+      "target_id": 14,
+      "x": 343,
+      "y": 98
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.4247653,
+      "target_id": 14,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173861.9463092,
+      "target_id": 15,
+      "box": [
+        367,
+        57,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.947472,
+      "target_id": 15,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173861.9630374,
+      "target_id": 15,
+      "x": 394,
+      "y": 84
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173861.9630391,
+      "target_id": 15,
+      "x": 394,
+      "y": 84
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173861.9642406,
+      "target_id": 15,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173862.3208567,
+      "target_id": 16,
+      "box": [
+        81,
+        169,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173862.3218892,
+      "target_id": 16,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173862.3541376,
+      "target_id": 16,
+      "x": 108,
+      "y": 196
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173862.3541397,
+      "target_id": 16,
+      "x": 108,
+      "y": 196
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173862.3553028,
+      "target_id": 16,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173862.8908932,
+      "target_id": 17,
+      "box": [
+        282,
+        203,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173862.8922769,
+      "target_id": 17,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173862.9069964,
+      "target_id": 17,
+      "x": 309,
+      "y": 230
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173862.9069989,
+      "target_id": 17,
+      "x": 309,
+      "y": 230
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173862.9088544,
+      "target_id": 17,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173863.4610813,
+      "target_id": 18,
+      "box": [
+        112,
+        214,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173863.4621126,
+      "target_id": 18,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173863.4933575,
+      "target_id": 18,
+      "x": 139,
+      "y": 241
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173863.4933595,
+      "target_id": 18,
+      "x": 139,
+      "y": 241
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173863.4945061,
+      "target_id": 18,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173863.9991944,
+      "target_id": 19,
+      "box": [
+        456,
+        169,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173864.0003396,
+      "target_id": 19,
+      "visible": true
+    },
+    {
+      "kind": "input_received",
+      "t_mono": 173864.0488436,
+      "target_id": 19,
+      "x": 483,
+      "y": 196
+    },
+    {
+      "kind": "hit",
+      "t_mono": 173864.0488458,
+      "target_id": 19,
+      "x": 483,
+      "y": 196
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173864.0498705,
+      "target_id": 19,
+      "visible": false
+    },
+    {
+      "kind": "event_scheduled",
+      "t_mono": 173864.583147,
+      "target_id": 20,
+      "box": [
+        49,
+        150,
+        56,
+        56
+      ]
+    },
+    {
+      "kind": "render_submitted",
+      "t_mono": 173864.5841837,
+      "target_id": 20,
+      "visible": true
+    }
+  ],
+  "timing_notes": "Monotonic host clock. render_submitted is measured after pygame flip, not physical presentation. Synthetic results exercise the pipeline but do not measure DXGI, SendInput, or OS scheduling. Effect-observed events mean target disappearance; Arena truth verifies actual task success.",
+  "passed": true
+}

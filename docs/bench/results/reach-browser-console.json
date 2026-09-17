@@ -1,0 +1,5244 @@
+{
+  "trials": [
+    {
+      "id": "periodic-1",
+      "seed": 1,
+      "mode": "periodic",
+      "policy_calls": 12,
+      "elapsed_seconds": 3.1468015999998897,
+      "outcome": {
+        "attempts": 6,
+        "target_absent": false
+      },
+      "hits": 0,
+      "false_actions": 6
+    },
+    {
+      "id": "reach-1",
+      "seed": 1,
+      "mode": "reach",
+      "policy_calls": 3,
+      "elapsed_seconds": 0.5393908999976702,
+      "outcome": {
+        "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+        "program": "reach",
+        "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+        "phase": "completed",
+        "reason": "cursor_confirmed_click_released",
+        "started_mono": 176411.1532672,
+        "expires_mono": 176414.1532672,
+        "cursor": [
+          707,
+          330
+        ],
+        "error_px": 2.23606797749979,
+        "commands": 48,
+        "task_success_verified": false
+      },
+      "hits": 1,
+      "false_actions": 0
+    },
+    {
+      "id": "periodic-2",
+      "seed": 2,
+      "mode": "periodic",
+      "policy_calls": 12,
+      "elapsed_seconds": 3.103228499996476,
+      "outcome": {
+        "attempts": 6,
+        "target_absent": false
+      },
+      "hits": 0,
+      "false_actions": 6
+    },
+    {
+      "id": "reach-2",
+      "seed": 2,
+      "mode": "reach",
+      "policy_calls": 3,
+      "elapsed_seconds": 0.45793330000014976,
+      "outcome": {
+        "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+        "program": "reach",
+        "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+        "phase": "completed",
+        "reason": "cursor_confirmed_click_released",
+        "started_mono": 176415.467655,
+        "expires_mono": 176418.467655,
+        "cursor": [
+          602,
+          274
+        ],
+        "error_px": 4.123105625617661,
+        "commands": 39,
+        "task_success_verified": false
+      },
+      "hits": 1,
+      "false_actions": 0
+    },
+    {
+      "id": "periodic-3",
+      "seed": 3,
+      "mode": "periodic",
+      "policy_calls": 12,
+      "elapsed_seconds": 3.1009377000154927,
+      "outcome": {
+        "attempts": 6,
+        "target_absent": false
+      },
+      "hits": 0,
+      "false_actions": 6
+    },
+    {
+      "id": "reach-3",
+      "seed": 3,
+      "mode": "reach",
+      "policy_calls": 3,
+      "elapsed_seconds": 0.32308989999000914,
+      "outcome": {
+        "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+        "program": "reach",
+        "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+        "phase": "completed",
+        "reason": "cursor_confirmed_click_released",
+        "started_mono": 176419.6886068,
+        "expires_mono": 176422.6886068,
+        "cursor": [
+          434,
+          289
+        ],
+        "error_px": 4.242640687119285,
+        "commands": 28,
+        "task_success_verified": false
+      },
+      "hits": 1,
+      "false_actions": 0
+    },
+    {
+      "id": "periodic-4",
+      "seed": 4,
+      "mode": "periodic",
+      "policy_calls": 12,
+      "elapsed_seconds": 3.118441900005564,
+      "outcome": {
+        "attempts": 6,
+        "target_absent": false
+      },
+      "hits": 0,
+      "false_actions": 6
+    },
+    {
+      "id": "reach-4",
+      "seed": 4,
+      "mode": "reach",
+      "policy_calls": 3,
+      "elapsed_seconds": 0.354529599979287,
+      "outcome": {
+        "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+        "program": "reach",
+        "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+        "phase": "completed",
+        "reason": "cursor_confirmed_click_released",
+        "started_mono": 176423.7691503,
+        "expires_mono": 176426.7691503,
+        "cursor": [
+          377,
+          371
+        ],
+        "error_px": 4.123105625617661,
+        "commands": 29,
+        "task_success_verified": false
+      },
+      "hits": 1,
+      "false_actions": 0
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "t_mono": 176405.8552144,
+      "kind": "core_ready"
+    },
+    {
+      "seq": 2,
+      "t_mono": 176407.4695172,
+      "kind": "lease_claimed",
+      "client_id": "22fe25dff8de43c2b2e3a9d313b41200"
+    },
+    {
+      "seq": 3,
+      "t_mono": 176407.4712302,
+      "kind": "watch_added",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "name": "moving choice"
+    },
+    {
+      "seq": 4,
+      "t_mono": 176407.4747951,
+      "kind": "input_requested",
+      "command_id": "48c45e948ee5485f917793e70fd4acde",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 5,
+      "t_mono": 176407.4762448,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "48c45e948ee5485f917793e70fd4acde",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 6,
+      "t_mono": 176407.5740693,
+      "kind": "appear",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 5,
+      "captured_mono": 176407.5701695,
+      "detection": {
+        "x": 697,
+        "y": 375,
+        "pixels": 1161,
+        "bbox": [
+          679,
+          358,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "t_mono": 176407.9561411,
+      "kind": "input_requested",
+      "command_id": "f38ed97c57df4b77a2d5a24e43ebad45",
+      "action": "click",
+      "point": [
+        703,
+        366
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:13"
+    },
+    {
+      "seq": 8,
+      "t_mono": 176407.9681676,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:13",
+      "command_id": "f38ed97c57df4b77a2d5a24e43ebad45",
+      "x": 703,
+      "y": 366
+    },
+    {
+      "seq": 9,
+      "t_mono": 176407.9893106,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:13",
+      "command_id": "f38ed97c57df4b77a2d5a24e43ebad45"
+    },
+    {
+      "seq": 10,
+      "t_mono": 176408.5078812,
+      "kind": "input_requested",
+      "command_id": "060e521debab46eab726f3395030000b",
+      "action": "click",
+      "point": [
+        707,
+        322
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:55"
+    },
+    {
+      "seq": 11,
+      "t_mono": 176408.5150829,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:55",
+      "command_id": "060e521debab46eab726f3395030000b",
+      "x": 707,
+      "y": 322
+    },
+    {
+      "seq": 12,
+      "t_mono": 176408.53595,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:55",
+      "command_id": "060e521debab46eab726f3395030000b"
+    },
+    {
+      "seq": 13,
+      "t_mono": 176409.0144238,
+      "kind": "input_requested",
+      "command_id": "76109012f5484757bd6a4ea28c2dda1e",
+      "action": "click",
+      "point": [
+        674,
+        287
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:96"
+    },
+    {
+      "seq": 14,
+      "t_mono": 176409.0155215,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:96",
+      "command_id": "76109012f5484757bd6a4ea28c2dda1e",
+      "x": 674,
+      "y": 287
+    },
+    {
+      "seq": 15,
+      "t_mono": 176409.0366375,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:96",
+      "command_id": "76109012f5484757bd6a4ea28c2dda1e"
+    },
+    {
+      "seq": 16,
+      "t_mono": 176409.5376332,
+      "kind": "input_requested",
+      "command_id": "db506a46a2d046fbb4ff79aa930ea8ff",
+      "action": "click",
+      "point": [
+        614,
+        271
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:135"
+    },
+    {
+      "seq": 17,
+      "t_mono": 176409.5386997,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:135",
+      "command_id": "db506a46a2d046fbb4ff79aa930ea8ff",
+      "x": 614,
+      "y": 271
+    },
+    {
+      "seq": 18,
+      "t_mono": 176409.55979,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:135",
+      "command_id": "db506a46a2d046fbb4ff79aa930ea8ff"
+    },
+    {
+      "seq": 19,
+      "t_mono": 176410.045558,
+      "kind": "input_requested",
+      "command_id": "75a18c0e4b9e452daf80fa22afef5bd0",
+      "action": "click",
+      "point": [
+        535,
+        279
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:175"
+    },
+    {
+      "seq": 20,
+      "t_mono": 176410.0464062,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:175",
+      "command_id": "75a18c0e4b9e452daf80fa22afef5bd0",
+      "x": 535,
+      "y": 279
+    },
+    {
+      "seq": 21,
+      "t_mono": 176410.0679227,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:175",
+      "command_id": "75a18c0e4b9e452daf80fa22afef5bd0"
+    },
+    {
+      "seq": 22,
+      "t_mono": 176410.5731025,
+      "kind": "input_requested",
+      "command_id": "19f4f4f39d614988a9d10ef555b633ac",
+      "action": "click",
+      "point": [
+        459,
+        308
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:214"
+    },
+    {
+      "seq": 23,
+      "t_mono": 176410.5743138,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:214",
+      "command_id": "19f4f4f39d614988a9d10ef555b633ac",
+      "x": 459,
+      "y": 308
+    },
+    {
+      "seq": 24,
+      "t_mono": 176410.5951637,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:214",
+      "command_id": "19f4f4f39d614988a9d10ef555b633ac"
+    },
+    {
+      "seq": 25,
+      "t_mono": 176410.9647253,
+      "kind": "input_requested",
+      "command_id": "95b745eaea00481187cccc1335a641c2",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 26,
+      "t_mono": 176410.9651007,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "95b745eaea00481187cccc1335a641c2",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 27,
+      "t_mono": 176411.1532672,
+      "kind": "intent_started",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 176411.1532672,
+      "expires_mono": 176414.1532672,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false
+    },
+    {
+      "seq": 28,
+      "t_mono": 176411.1564876,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 278,
+      "captured_mono": 176411.1446051,
+      "percept_ready_mono": 176411.1562507,
+      "goal": [
+        701,
+        369
+      ],
+      "command_id": "5ed60b4814a3459399e20463f4392c2d",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 29,
+      "t_mono": 176411.1674294,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 279,
+      "captured_mono": 176411.1588163,
+      "percept_ready_mono": 176411.1667675,
+      "goal": [
+        702,
+        368
+      ],
+      "command_id": "526cc9cc8e854ec9bcc6b66b7713a911",
+      "cursor": [
+        229,
+        136
+      ],
+      "submitted_point": [
+        229,
+        136
+      ]
+    },
+    {
+      "seq": 30,
+      "t_mono": 176411.1777046,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 280,
+      "captured_mono": 176411.1730965,
+      "percept_ready_mono": 176411.1773879,
+      "goal": [
+        702,
+        368
+      ],
+      "command_id": "dafe3f54df3745a19d016e5bad5e225c",
+      "cursor": [
+        240,
+        142
+      ],
+      "submitted_point": [
+        240,
+        142
+      ]
+    },
+    {
+      "seq": 31,
+      "t_mono": 176411.1879931,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 280,
+      "captured_mono": 176411.1730965,
+      "percept_ready_mono": 176411.1876227,
+      "goal": [
+        702,
+        368
+      ],
+      "command_id": "677381059aee4a5797e6d33a02289ffb",
+      "cursor": [
+        251,
+        147
+      ],
+      "submitted_point": [
+        251,
+        147
+      ]
+    },
+    {
+      "seq": 32,
+      "t_mono": 176411.2015245,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 282,
+      "captured_mono": 176411.1910233,
+      "percept_ready_mono": 176411.2012195,
+      "goal": [
+        703,
+        365
+      ],
+      "command_id": "8c2f56c206bd40d7b3de7c752f98e70a",
+      "cursor": [
+        266,
+        154
+      ],
+      "submitted_point": [
+        266,
+        154
+      ]
+    },
+    {
+      "seq": 33,
+      "t_mono": 176411.212022,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 284,
+      "captured_mono": 176411.2042523,
+      "percept_ready_mono": 176411.2116236,
+      "goal": [
+        704,
+        364
+      ],
+      "command_id": "582ccf49bc294cd49cb39d309f433108",
+      "cursor": [
+        277,
+        159
+      ],
+      "submitted_point": [
+        277,
+        159
+      ]
+    },
+    {
+      "seq": 34,
+      "t_mono": 176411.2298536,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 286,
+      "captured_mono": 176411.2170299,
+      "percept_ready_mono": 176411.2293499,
+      "goal": [
+        704,
+        363
+      ],
+      "command_id": "fe6cc60a6cc54d52928cd7f26a174fd7",
+      "cursor": [
+        296,
+        168
+      ],
+      "submitted_point": [
+        296,
+        168
+      ]
+    },
+    {
+      "seq": 35,
+      "t_mono": 176411.2400403,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 288,
+      "captured_mono": 176411.2328695,
+      "percept_ready_mono": 176411.2396134,
+      "goal": [
+        705,
+        362
+      ],
+      "command_id": "1f44199d000446ea90b422e464c4e1ee",
+      "cursor": [
+        307,
+        173
+      ],
+      "submitted_point": [
+        307,
+        173
+      ]
+    },
+    {
+      "seq": 36,
+      "t_mono": 176411.2503434,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 290,
+      "captured_mono": 176411.2426418,
+      "percept_ready_mono": 176411.2499286,
+      "goal": [
+        705,
+        361
+      ],
+      "command_id": "c1946ba3a153404882e2e10d865ea671",
+      "cursor": [
+        318,
+        178
+      ],
+      "submitted_point": [
+        318,
+        178
+      ]
+    },
+    {
+      "seq": 37,
+      "t_mono": 176411.2610093,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 291,
+      "captured_mono": 176411.2513401,
+      "percept_ready_mono": 176411.2603845,
+      "goal": [
+        706,
+        360
+      ],
+      "command_id": "ea15d1a844304774b0e0b9f2fceed146",
+      "cursor": [
+        329,
+        183
+      ],
+      "submitted_point": [
+        329,
+        183
+      ]
+    },
+    {
+      "seq": 38,
+      "t_mono": 176411.2712332,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 293,
+      "captured_mono": 176411.2645016,
+      "percept_ready_mono": 176411.2708823,
+      "goal": [
+        706,
+        359
+      ],
+      "command_id": "da89c972814e46dea5ad94212233f3df",
+      "cursor": [
+        340,
+        188
+      ],
+      "submitted_point": [
+        340,
+        188
+      ]
+    },
+    {
+      "seq": 39,
+      "t_mono": 176411.2814677,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 294,
+      "captured_mono": 176411.2739337,
+      "percept_ready_mono": 176411.2809905,
+      "goal": [
+        706,
+        359
+      ],
+      "command_id": "b49709614c984ca5a8879a0ac2ede6dd",
+      "cursor": [
+        351,
+        193
+      ],
+      "submitted_point": [
+        351,
+        193
+      ]
+    },
+    {
+      "seq": 40,
+      "t_mono": 176411.291481,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 296,
+      "captured_mono": 176411.2846611,
+      "percept_ready_mono": 176411.2911707,
+      "goal": [
+        707,
+        358
+      ],
+      "command_id": "e6e9f5c5b8b54768891ebb980ec78e33",
+      "cursor": [
+        362,
+        198
+      ],
+      "submitted_point": [
+        362,
+        198
+      ]
+    },
+    {
+      "seq": 41,
+      "t_mono": 176411.3018048,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 297,
+      "captured_mono": 176411.2935848,
+      "percept_ready_mono": 176411.3014965,
+      "goal": [
+        707,
+        357
+      ],
+      "command_id": "efda8509f8aa4a9aab6474668edc91c9",
+      "cursor": [
+        373,
+        203
+      ],
+      "submitted_point": [
+        373,
+        203
+      ]
+    },
+    {
+      "seq": 42,
+      "t_mono": 176411.3120635,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 299,
+      "captured_mono": 176411.3044881,
+      "percept_ready_mono": 176411.3117358,
+      "goal": [
+        707,
+        356
+      ],
+      "command_id": "85d8bb1a9ffd427887eb5c322acc8cd1",
+      "cursor": [
+        384,
+        208
+      ],
+      "submitted_point": [
+        384,
+        208
+      ]
+    },
+    {
+      "seq": 43,
+      "t_mono": 176411.3226028,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 300,
+      "captured_mono": 176411.3150641,
+      "percept_ready_mono": 176411.3222232,
+      "goal": [
+        707,
+        356
+      ],
+      "command_id": "74c440221b4042ab910b58dfe5850028",
+      "cursor": [
+        395,
+        213
+      ],
+      "submitted_point": [
+        395,
+        213
+      ]
+    },
+    {
+      "seq": 44,
+      "t_mono": 176411.333027,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 302,
+      "captured_mono": 176411.3253825,
+      "percept_ready_mono": 176411.3326708,
+      "goal": [
+        708,
+        355
+      ],
+      "command_id": "85cb7af21a3f46d09ceb29fca17fb0b6",
+      "cursor": [
+        406,
+        218
+      ],
+      "submitted_point": [
+        406,
+        218
+      ]
+    },
+    {
+      "seq": 45,
+      "t_mono": 176411.3432462,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 304,
+      "captured_mono": 176411.3378946,
+      "percept_ready_mono": 176411.3429393,
+      "goal": [
+        708,
+        354
+      ],
+      "command_id": "9481ac33f9cc4db58f2b104551b343ef",
+      "cursor": [
+        417,
+        223
+      ],
+      "submitted_point": [
+        417,
+        223
+      ]
+    },
+    {
+      "seq": 46,
+      "t_mono": 176411.3539765,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 306,
+      "captured_mono": 176411.3482494,
+      "percept_ready_mono": 176411.3534965,
+      "goal": [
+        708,
+        352
+      ],
+      "command_id": "1ebd5ba939e2481da816f9885b0992ac",
+      "cursor": [
+        429,
+        228
+      ],
+      "submitted_point": [
+        429,
+        228
+      ]
+    },
+    {
+      "seq": 47,
+      "t_mono": 176411.3642311,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 307,
+      "captured_mono": 176411.3579478,
+      "percept_ready_mono": 176411.3638242,
+      "goal": [
+        708,
+        352
+      ],
+      "command_id": "159d957746c246f68ad67569fabe9603",
+      "cursor": [
+        440,
+        233
+      ],
+      "submitted_point": [
+        440,
+        233
+      ]
+    },
+    {
+      "seq": 48,
+      "t_mono": 176411.3744951,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 307,
+      "captured_mono": 176411.3579478,
+      "percept_ready_mono": 176411.3741865,
+      "goal": [
+        708,
+        352
+      ],
+      "command_id": "9ac27a2a99d8484b93b9f8f8370a90a3",
+      "cursor": [
+        451,
+        238
+      ],
+      "submitted_point": [
+        451,
+        238
+      ]
+    },
+    {
+      "seq": 49,
+      "t_mono": 176411.3850739,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 309,
+      "captured_mono": 176411.3770024,
+      "percept_ready_mono": 176411.3847243,
+      "goal": [
+        709,
+        350
+      ],
+      "command_id": "9ff36bbb9ab544749f1e92a1af49f685",
+      "cursor": [
+        463,
+        243
+      ],
+      "submitted_point": [
+        463,
+        243
+      ]
+    },
+    {
+      "seq": 50,
+      "t_mono": 176411.3954676,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 310,
+      "captured_mono": 176411.3855437,
+      "percept_ready_mono": 176411.3950191,
+      "goal": [
+        709,
+        349
+      ],
+      "command_id": "572ba9585d96427ca23bba604f79bd04",
+      "cursor": [
+        474,
+        248
+      ],
+      "submitted_point": [
+        474,
+        248
+      ]
+    },
+    {
+      "seq": 51,
+      "t_mono": 176411.4055303,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 312,
+      "captured_mono": 176411.3998672,
+      "percept_ready_mono": 176411.4052383,
+      "goal": [
+        709,
+        348
+      ],
+      "command_id": "ffb7c82e946440bf86293b447f451885",
+      "cursor": [
+        485,
+        253
+      ],
+      "submitted_point": [
+        485,
+        253
+      ]
+    },
+    {
+      "seq": 52,
+      "t_mono": 176411.4156958,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 314,
+      "captured_mono": 176411.4083878,
+      "percept_ready_mono": 176411.4152864,
+      "goal": [
+        709,
+        348
+      ],
+      "command_id": "5fdeab63f3324fb4822369d85c47b3da",
+      "cursor": [
+        496,
+        258
+      ],
+      "submitted_point": [
+        496,
+        258
+      ]
+    },
+    {
+      "seq": 53,
+      "t_mono": 176411.4259754,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 316,
+      "captured_mono": 176411.4186582,
+      "percept_ready_mono": 176411.4256541,
+      "goal": [
+        709,
+        347
+      ],
+      "command_id": "76e8704c3d2f4c5b8deccca998b2d956",
+      "cursor": [
+        507,
+        263
+      ],
+      "submitted_point": [
+        507,
+        263
+      ]
+    },
+    {
+      "seq": 54,
+      "t_mono": 176411.4362132,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 318,
+      "captured_mono": 176411.4293751,
+      "percept_ready_mono": 176411.4359212,
+      "goal": [
+        710,
+        346
+      ],
+      "command_id": "9c3f699c7c5e445eb578da9d22a00726",
+      "cursor": [
+        518,
+        268
+      ],
+      "submitted_point": [
+        518,
+        268
+      ]
+    },
+    {
+      "seq": 55,
+      "t_mono": 176411.4472252,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 320,
+      "captured_mono": 176411.4412385,
+      "percept_ready_mono": 176411.4463526,
+      "goal": [
+        710,
+        345
+      ],
+      "command_id": "bdfe546ee2c245e98af0b63740d88847",
+      "cursor": [
+        530,
+        273
+      ],
+      "submitted_point": [
+        530,
+        273
+      ]
+    },
+    {
+      "seq": 56,
+      "t_mono": 176411.4572308,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 321,
+      "captured_mono": 176411.4509682,
+      "percept_ready_mono": 176411.4567979,
+      "goal": [
+        710,
+        345
+      ],
+      "command_id": "4c6d551685a143d9b53f75a1c8b23f19",
+      "cursor": [
+        542,
+        278
+      ],
+      "submitted_point": [
+        542,
+        278
+      ]
+    },
+    {
+      "seq": 57,
+      "t_mono": 176411.4675766,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 321,
+      "captured_mono": 176411.4509682,
+      "percept_ready_mono": 176411.4671274,
+      "goal": [
+        710,
+        345
+      ],
+      "command_id": "5b6e38b8ff8441bbafd6fe37c9e133f5",
+      "cursor": [
+        554,
+        283
+      ],
+      "submitted_point": [
+        554,
+        283
+      ]
+    },
+    {
+      "seq": 58,
+      "t_mono": 176411.4774921,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 323,
+      "captured_mono": 176411.470974,
+      "percept_ready_mono": 176411.4771372,
+      "goal": [
+        710,
+        343
+      ],
+      "command_id": "dbedc62f26304e24bf8e8d8d52e28996",
+      "cursor": [
+        565,
+        287
+      ],
+      "submitted_point": [
+        565,
+        287
+      ]
+    },
+    {
+      "seq": 59,
+      "t_mono": 176411.4881925,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 325,
+      "captured_mono": 176411.4814654,
+      "percept_ready_mono": 176411.4876019,
+      "goal": [
+        710,
+        341
+      ],
+      "command_id": "28e14916ac2c4d819f89e4feb4d35b20",
+      "cursor": [
+        577,
+        291
+      ],
+      "submitted_point": [
+        577,
+        291
+      ]
+    },
+    {
+      "seq": 60,
+      "t_mono": 176411.4984897,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 326,
+      "captured_mono": 176411.4911536,
+      "percept_ready_mono": 176411.4978536,
+      "goal": [
+        710,
+        340
+      ],
+      "command_id": "46fea8cb7989442aab9ba45a8cfd2bd8",
+      "cursor": [
+        589,
+        295
+      ],
+      "submitted_point": [
+        589,
+        295
+      ]
+    },
+    {
+      "seq": 61,
+      "t_mono": 176411.5081713,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 326,
+      "captured_mono": 176411.4911536,
+      "percept_ready_mono": 176411.507875,
+      "goal": [
+        710,
+        340
+      ],
+      "command_id": "ac2b9ce909f944e38e52be6d04e4d901",
+      "cursor": [
+        600,
+        299
+      ],
+      "submitted_point": [
+        600,
+        299
+      ]
+    },
+    {
+      "seq": 62,
+      "t_mono": 176411.5186497,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 327,
+      "captured_mono": 176411.5051262,
+      "percept_ready_mono": 176411.5183648,
+      "goal": [
+        710,
+        340
+      ],
+      "command_id": "c79d01128a7c4df098e838df63e6b143",
+      "cursor": [
+        612,
+        303
+      ],
+      "submitted_point": [
+        612,
+        303
+      ]
+    },
+    {
+      "seq": 63,
+      "t_mono": 176411.5289692,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 328,
+      "captured_mono": 176411.5200316,
+      "percept_ready_mono": 176411.5284891,
+      "goal": [
+        710,
+        338
+      ],
+      "command_id": "c4b68073b871467aad9c310dfed0b5f7",
+      "cursor": [
+        623,
+        307
+      ],
+      "submitted_point": [
+        623,
+        307
+      ]
+    },
+    {
+      "seq": 64,
+      "t_mono": 176411.5389631,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 330,
+      "captured_mono": 176411.5310156,
+      "percept_ready_mono": 176411.5385098,
+      "goal": [
+        710,
+        337
+      ],
+      "command_id": "d27979828e8b4d06ae27b9526bb587ac",
+      "cursor": [
+        634,
+        311
+      ],
+      "submitted_point": [
+        634,
+        311
+      ]
+    },
+    {
+      "seq": 65,
+      "t_mono": 176411.5492278,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 332,
+      "captured_mono": 176411.5435562,
+      "percept_ready_mono": 176411.5489178,
+      "goal": [
+        710,
+        337
+      ],
+      "command_id": "ca6eaad0b16545e7a9f917d0cacd7950",
+      "cursor": [
+        646,
+        315
+      ],
+      "submitted_point": [
+        646,
+        315
+      ]
+    },
+    {
+      "seq": 66,
+      "t_mono": 176411.5599271,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 332,
+      "captured_mono": 176411.5435562,
+      "percept_ready_mono": 176411.5591682,
+      "goal": [
+        710,
+        337
+      ],
+      "command_id": "371eea871c9c4ea29c467773b3f8bfac",
+      "cursor": [
+        658,
+        319
+      ],
+      "submitted_point": [
+        658,
+        319
+      ]
+    },
+    {
+      "seq": 67,
+      "t_mono": 176411.5698294,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 334,
+      "captured_mono": 176411.5649045,
+      "percept_ready_mono": 176411.5695478,
+      "goal": [
+        710,
+        335
+      ],
+      "command_id": "8698ee311b5f4e809e55c761239fe899",
+      "cursor": [
+        670,
+        323
+      ],
+      "submitted_point": [
+        670,
+        323
+      ]
+    },
+    {
+      "seq": 68,
+      "t_mono": 176411.5806284,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 336,
+      "captured_mono": 176411.5743266,
+      "percept_ready_mono": 176411.5801196,
+      "goal": [
+        710,
+        334
+      ],
+      "command_id": "4d6a16e17d1f40e2915d041d2558120e",
+      "cursor": [
+        682,
+        326
+      ],
+      "submitted_point": [
+        682,
+        326
+      ]
+    },
+    {
+      "seq": 69,
+      "t_mono": 176411.5910262,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 337,
+      "captured_mono": 176411.5841944,
+      "percept_ready_mono": 176411.5905803,
+      "goal": [
+        710,
+        333
+      ],
+      "command_id": "1f27d91ee6954783a5e5d5c9dbaabd2e",
+      "cursor": [
+        692,
+        329
+      ],
+      "submitted_point": [
+        692,
+        329
+      ]
+    },
+    {
+      "seq": 70,
+      "t_mono": 176411.6013287,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 337,
+      "captured_mono": 176411.5841944,
+      "percept_ready_mono": 176411.600986,
+      "goal": [
+        710,
+        333
+      ],
+      "command_id": "0a95046da68b4d2fb7a995d35e1d3ec7",
+      "cursor": [
+        699,
+        330
+      ],
+      "submitted_point": [
+        699,
+        330
+      ]
+    },
+    {
+      "seq": 71,
+      "t_mono": 176411.6117838,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 339,
+      "captured_mono": 176411.6005818,
+      "percept_ready_mono": 176411.611449,
+      "goal": [
+        710,
+        333
+      ],
+      "command_id": "72e0e6e6ef824e3291fec245c5244bd0",
+      "cursor": [
+        703,
+        331
+      ],
+      "submitted_point": [
+        703,
+        331
+      ]
+    },
+    {
+      "seq": 72,
+      "t_mono": 176411.6220451,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 341,
+      "captured_mono": 176411.6156876,
+      "percept_ready_mono": 176411.6216709,
+      "goal": [
+        709,
+        331
+      ],
+      "command_id": "96429ac7173b41a5b75c3f0bfd6e05b8",
+      "cursor": [
+        705,
+        331
+      ],
+      "submitted_point": [
+        705,
+        331
+      ]
+    },
+    {
+      "seq": 73,
+      "t_mono": 176411.6321614,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 342,
+      "captured_mono": 176411.626521,
+      "percept_ready_mono": 176411.6318751,
+      "goal": [
+        709,
+        329
+      ],
+      "command_id": "d6fd6991fda74cb5b427be77221dfebd",
+      "cursor": [
+        706,
+        330
+      ],
+      "submitted_point": [
+        706,
+        330
+      ]
+    },
+    {
+      "seq": 74,
+      "t_mono": 176411.6425538,
+      "kind": "pointer_feedback",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 344,
+      "captured_mono": 176411.6370583,
+      "percept_ready_mono": 176411.6422407,
+      "goal": [
+        709,
+        329
+      ],
+      "command_id": "ee48e54b6e944ed7a7c8a17679b1265d",
+      "cursor": [
+        707,
+        330
+      ],
+      "submitted_point": [
+        707,
+        330
+      ]
+    },
+    {
+      "seq": 75,
+      "t_mono": 176411.6533436,
+      "kind": "input_submitted",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 344,
+      "captured_mono": 176411.6370583,
+      "percept_ready_mono": 176411.6525693,
+      "goal": [
+        709,
+        329
+      ],
+      "command_id": "af0ad99a845e4fae91ca9f49286264da",
+      "x": 707,
+      "y": 330
+    },
+    {
+      "seq": 76,
+      "t_mono": 176411.6742181,
+      "kind": "input_released",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 344,
+      "captured_mono": 176411.6370583,
+      "percept_ready_mono": 176411.6525693,
+      "goal": [
+        709,
+        329
+      ],
+      "command_id": "af0ad99a845e4fae91ca9f49286264da"
+    },
+    {
+      "seq": 77,
+      "t_mono": 176411.6810829,
+      "kind": "intent_completed",
+      "intent_id": "9bbab9e142b248ebb95ddb312c4607e9",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "completed",
+      "reason": "cursor_confirmed_click_released",
+      "started_mono": 176411.1532672,
+      "expires_mono": 176414.1532672,
+      "cursor": [
+        707,
+        330
+      ],
+      "error_px": 2.23606797749979,
+      "commands": 48,
+      "task_success_verified": false
+    },
+    {
+      "seq": 78,
+      "t_mono": 176411.6819955,
+      "kind": "vanish",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 347,
+      "captured_mono": 176411.6777172,
+      "detection": null
+    },
+    {
+      "seq": 79,
+      "t_mono": 176411.6819955,
+      "kind": "effect_observed",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "command_id": "af0ad99a845e4fae91ca9f49286264da",
+      "observation_id": 347,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 80,
+      "t_mono": 176411.8349295,
+      "kind": "input_requested",
+      "command_id": "086ac335b6204dbfb92283c749bc6cf1",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 81,
+      "t_mono": 176411.8355403,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "086ac335b6204dbfb92283c749bc6cf1",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 82,
+      "t_mono": 176411.9354706,
+      "kind": "appear",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 349,
+      "captured_mono": 176411.9312768,
+      "detection": {
+        "x": 662,
+        "y": 294,
+        "pixels": 1161,
+        "bbox": [
+          644,
+          277,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "seq": 83,
+      "t_mono": 176412.2744076,
+      "kind": "input_requested",
+      "command_id": "e4153fe6d7614f74a17af8db1f0a7596",
+      "action": "click",
+      "point": [
+        653,
+        289
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:355"
+    },
+    {
+      "seq": 84,
+      "t_mono": 176412.2756235,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:355",
+      "command_id": "e4153fe6d7614f74a17af8db1f0a7596",
+      "x": 653,
+      "y": 289
+    },
+    {
+      "seq": 85,
+      "t_mono": 176412.2966517,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:355",
+      "command_id": "e4153fe6d7614f74a17af8db1f0a7596"
+    },
+    {
+      "seq": 86,
+      "t_mono": 176412.7817469,
+      "kind": "input_requested",
+      "command_id": "29174174c26c43e284823b41ad9053cc",
+      "action": "click",
+      "point": [
+        586,
+        272
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:393"
+    },
+    {
+      "seq": 87,
+      "t_mono": 176412.7828418,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:393",
+      "command_id": "29174174c26c43e284823b41ad9053cc",
+      "x": 586,
+      "y": 272
+    },
+    {
+      "seq": 88,
+      "t_mono": 176412.8041317,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:393",
+      "command_id": "29174174c26c43e284823b41ad9053cc"
+    },
+    {
+      "seq": 89,
+      "t_mono": 176413.2904661,
+      "kind": "input_requested",
+      "command_id": "83d6abcf5b8948c6bf5bd13710c9d277",
+      "action": "click",
+      "point": [
+        509,
+        277
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:432"
+    },
+    {
+      "seq": 90,
+      "t_mono": 176413.2920136,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:432",
+      "command_id": "83d6abcf5b8948c6bf5bd13710c9d277",
+      "x": 509,
+      "y": 277
+    },
+    {
+      "seq": 91,
+      "t_mono": 176413.3135412,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:432",
+      "command_id": "83d6abcf5b8948c6bf5bd13710c9d277"
+    },
+    {
+      "seq": 92,
+      "t_mono": 176413.8019781,
+      "kind": "input_requested",
+      "command_id": "7ae3dac9118e4267b5eb8455a9641702",
+      "action": "click",
+      "point": [
+        439,
+        303
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:471"
+    },
+    {
+      "seq": 93,
+      "t_mono": 176413.8032667,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:471",
+      "command_id": "7ae3dac9118e4267b5eb8455a9641702",
+      "x": 439,
+      "y": 303
+    },
+    {
+      "seq": 94,
+      "t_mono": 176413.8241131,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:471",
+      "command_id": "7ae3dac9118e4267b5eb8455a9641702"
+    },
+    {
+      "seq": 95,
+      "t_mono": 176414.3493858,
+      "kind": "input_requested",
+      "command_id": "546523b916dd4a3289aedf833d5aa2d4",
+      "action": "click",
+      "point": [
+        387,
+        344
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:512"
+    },
+    {
+      "seq": 96,
+      "t_mono": 176414.3510431,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:512",
+      "command_id": "546523b916dd4a3289aedf833d5aa2d4",
+      "x": 387,
+      "y": 344
+    },
+    {
+      "seq": 97,
+      "t_mono": 176414.372581,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:512",
+      "command_id": "546523b916dd4a3289aedf833d5aa2d4"
+    },
+    {
+      "seq": 98,
+      "t_mono": 176414.8699443,
+      "kind": "input_requested",
+      "command_id": "1c8a7a0cae7c406fad49dfff3a7c78fd",
+      "action": "click",
+      "point": [
+        370,
+        385
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:553"
+    },
+    {
+      "seq": 99,
+      "t_mono": 176414.8749689,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:553",
+      "command_id": "1c8a7a0cae7c406fad49dfff3a7c78fd",
+      "x": 370,
+      "y": 385
+    },
+    {
+      "seq": 100,
+      "t_mono": 176414.8959502,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:553",
+      "command_id": "1c8a7a0cae7c406fad49dfff3a7c78fd"
+    },
+    {
+      "seq": 101,
+      "t_mono": 176415.2677131,
+      "kind": "input_requested",
+      "command_id": "b87a6471a3664846afecd37be098dd03",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 102,
+      "t_mono": 176415.268177,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "b87a6471a3664846afecd37be098dd03",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 103,
+      "t_mono": 176415.467655,
+      "kind": "intent_started",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 176415.467655,
+      "expires_mono": 176418.467655,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false
+    },
+    {
+      "seq": 104,
+      "t_mono": 176415.469122,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 618,
+      "captured_mono": 176415.4642813,
+      "percept_ready_mono": 176415.4689778,
+      "goal": [
+        649,
+        287
+      ],
+      "command_id": "03039619de554635abba0554dd7e13d5",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 105,
+      "t_mono": 176415.4819309,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 618,
+      "captured_mono": 176415.4642813,
+      "percept_ready_mono": 176415.4814137,
+      "goal": [
+        649,
+        287
+      ],
+      "command_id": "3dc372fc8fdd44a0b295f55ac26216f3",
+      "cursor": [
+        232,
+        135
+      ],
+      "submitted_point": [
+        232,
+        135
+      ]
+    },
+    {
+      "seq": 106,
+      "t_mono": 176415.4929083,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 619,
+      "captured_mono": 176415.4774409,
+      "percept_ready_mono": 176415.4924804,
+      "goal": [
+        648,
+        287
+      ],
+      "command_id": "2080c603fd844e42bd37352e768d9308",
+      "cursor": [
+        244,
+        140
+      ],
+      "submitted_point": [
+        244,
+        140
+      ]
+    },
+    {
+      "seq": 107,
+      "t_mono": 176415.50323,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 621,
+      "captured_mono": 176415.4946801,
+      "percept_ready_mono": 176415.502904,
+      "goal": [
+        648,
+        287
+      ],
+      "command_id": "71385bf897d34b6ea8520702bbf9e2e3",
+      "cursor": [
+        256,
+        144
+      ],
+      "submitted_point": [
+        256,
+        144
+      ]
+    },
+    {
+      "seq": 108,
+      "t_mono": 176415.514072,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 622,
+      "captured_mono": 176415.5067259,
+      "percept_ready_mono": 176415.5135037,
+      "goal": [
+        645,
+        285
+      ],
+      "command_id": "a31a2f13d23545608f7135d140e23d66",
+      "cursor": [
+        268,
+        148
+      ],
+      "submitted_point": [
+        268,
+        148
+      ]
+    },
+    {
+      "seq": 109,
+      "t_mono": 176415.5243409,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 623,
+      "captured_mono": 176415.5100715,
+      "percept_ready_mono": 176415.5239291,
+      "goal": [
+        645,
+        285
+      ],
+      "command_id": "15fa83422e6e4c72926d4bad904f7991",
+      "cursor": [
+        280,
+        152
+      ],
+      "submitted_point": [
+        280,
+        152
+      ]
+    },
+    {
+      "seq": 110,
+      "t_mono": 176415.5347807,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 624,
+      "captured_mono": 176415.5202782,
+      "percept_ready_mono": 176415.5342686,
+      "goal": [
+        645,
+        285
+      ],
+      "command_id": "424bfc1107f34b1894456ad0db8c1010",
+      "cursor": [
+        292,
+        156
+      ],
+      "submitted_point": [
+        292,
+        156
+      ]
+    },
+    {
+      "seq": 111,
+      "t_mono": 176415.5452101,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 626,
+      "captured_mono": 176415.5378939,
+      "percept_ready_mono": 176415.5447917,
+      "goal": [
+        641,
+        284
+      ],
+      "command_id": "9bf9299bc5084fb7a21a02340ef7f1b8",
+      "cursor": [
+        304,
+        160
+      ],
+      "submitted_point": [
+        304,
+        160
+      ]
+    },
+    {
+      "seq": 112,
+      "t_mono": 176415.5556106,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 627,
+      "captured_mono": 176415.5448555,
+      "percept_ready_mono": 176415.5550964,
+      "goal": [
+        641,
+        284
+      ],
+      "command_id": "58700cf901f04a57bd18239e3c67fd0e",
+      "cursor": [
+        316,
+        164
+      ],
+      "submitted_point": [
+        316,
+        164
+      ]
+    },
+    {
+      "seq": 113,
+      "t_mono": 176415.5660139,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 628,
+      "captured_mono": 176415.5579387,
+      "percept_ready_mono": 176415.565588,
+      "goal": [
+        638,
+        283
+      ],
+      "command_id": "9d17c947a585476dbd48798e0bbdf3aa",
+      "cursor": [
+        328,
+        168
+      ],
+      "submitted_point": [
+        328,
+        168
+      ]
+    },
+    {
+      "seq": 114,
+      "t_mono": 176415.5763849,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 630,
+      "captured_mono": 176415.5707044,
+      "percept_ready_mono": 176415.5759981,
+      "goal": [
+        638,
+        283
+      ],
+      "command_id": "2863364593974201b1a4294f32d63558",
+      "cursor": [
+        340,
+        172
+      ],
+      "submitted_point": [
+        340,
+        172
+      ]
+    },
+    {
+      "seq": 115,
+      "t_mono": 176415.5868553,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 630,
+      "captured_mono": 176415.5707044,
+      "percept_ready_mono": 176415.5863851,
+      "goal": [
+        638,
+        283
+      ],
+      "command_id": "bd328ca99dd04a158fbc7d4cf16848ab",
+      "cursor": [
+        352,
+        176
+      ],
+      "submitted_point": [
+        352,
+        176
+      ]
+    },
+    {
+      "seq": 116,
+      "t_mono": 176415.5969994,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 632,
+      "captured_mono": 176415.5899884,
+      "percept_ready_mono": 176415.5966541,
+      "goal": [
+        635,
+        282
+      ],
+      "command_id": "d3a71bc62b3b40e68866a4ba38f16416",
+      "cursor": [
+        364,
+        180
+      ],
+      "submitted_point": [
+        364,
+        180
+      ]
+    },
+    {
+      "seq": 117,
+      "t_mono": 176415.6074831,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 634,
+      "captured_mono": 176415.6014264,
+      "percept_ready_mono": 176415.6070922,
+      "goal": [
+        633,
+        281
+      ],
+      "command_id": "4355ffa0336f4c849f67ed850324b143",
+      "cursor": [
+        376,
+        184
+      ],
+      "submitted_point": [
+        376,
+        184
+      ]
+    },
+    {
+      "seq": 118,
+      "t_mono": 176415.6177628,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 635,
+      "captured_mono": 176415.613051,
+      "percept_ready_mono": 176415.6174135,
+      "goal": [
+        633,
+        281
+      ],
+      "command_id": "a098f773c5ca4d9994ddb042270f737b",
+      "cursor": [
+        388,
+        188
+      ],
+      "submitted_point": [
+        388,
+        188
+      ]
+    },
+    {
+      "seq": 119,
+      "t_mono": 176415.6282966,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 635,
+      "captured_mono": 176415.613051,
+      "percept_ready_mono": 176415.6279181,
+      "goal": [
+        633,
+        281
+      ],
+      "command_id": "2c832237f37c4a54a6cd6b52ea62272c",
+      "cursor": [
+        400,
+        192
+      ],
+      "submitted_point": [
+        400,
+        192
+      ]
+    },
+    {
+      "seq": 120,
+      "t_mono": 176415.6388968,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 637,
+      "captured_mono": 176415.630867,
+      "percept_ready_mono": 176415.6383598,
+      "goal": [
+        629,
+        280
+      ],
+      "command_id": "ca9b3332383840e385f1f3d3b8e4751f",
+      "cursor": [
+        412,
+        196
+      ],
+      "submitted_point": [
+        412,
+        196
+      ]
+    },
+    {
+      "seq": 121,
+      "t_mono": 176415.6490919,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 639,
+      "captured_mono": 176415.6418637,
+      "percept_ready_mono": 176415.6486736,
+      "goal": [
+        628,
+        280
+      ],
+      "command_id": "662e6f3adb6d4bca89fb7b68a3019c14",
+      "cursor": [
+        424,
+        200
+      ],
+      "submitted_point": [
+        424,
+        200
+      ]
+    },
+    {
+      "seq": 122,
+      "t_mono": 176415.6592429,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 640,
+      "captured_mono": 176415.6518209,
+      "percept_ready_mono": 176415.6586823,
+      "goal": [
+        626,
+        279
+      ],
+      "command_id": "dd0238bb54c647b2bd1e995607fc82b7",
+      "cursor": [
+        435,
+        204
+      ],
+      "submitted_point": [
+        435,
+        204
+      ]
+    },
+    {
+      "seq": 123,
+      "t_mono": 176415.6697224,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 642,
+      "captured_mono": 176415.6642168,
+      "percept_ready_mono": 176415.6693394,
+      "goal": [
+        626,
+        279
+      ],
+      "command_id": "830ad9c90b474ab883c7cdd1e26021dd",
+      "cursor": [
+        447,
+        209
+      ],
+      "submitted_point": [
+        447,
+        209
+      ]
+    },
+    {
+      "seq": 124,
+      "t_mono": 176415.679976,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 642,
+      "captured_mono": 176415.6642168,
+      "percept_ready_mono": 176415.6795207,
+      "goal": [
+        626,
+        279
+      ],
+      "command_id": "9babf2bc89df4657bf1dfd0165f52e5e",
+      "cursor": [
+        458,
+        213
+      ],
+      "submitted_point": [
+        458,
+        213
+      ]
+    },
+    {
+      "seq": 125,
+      "t_mono": 176415.690026,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 644,
+      "captured_mono": 176415.6826691,
+      "percept_ready_mono": 176415.6895272,
+      "goal": [
+        622,
+        278
+      ],
+      "command_id": "7ad2b139e290437ba812cdbcd9fb5dbe",
+      "cursor": [
+        469,
+        217
+      ],
+      "submitted_point": [
+        469,
+        217
+      ]
+    },
+    {
+      "seq": 126,
+      "t_mono": 176415.7011381,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 645,
+      "captured_mono": 176415.6921203,
+      "percept_ready_mono": 176415.6998175,
+      "goal": [
+        621,
+        278
+      ],
+      "command_id": "0763cb4fe150480586ed20ed844efc48",
+      "cursor": [
+        480,
+        222
+      ],
+      "submitted_point": [
+        480,
+        222
+      ]
+    },
+    {
+      "seq": 127,
+      "t_mono": 176415.7105473,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 647,
+      "captured_mono": 176415.7049965,
+      "percept_ready_mono": 176415.7102014,
+      "goal": [
+        621,
+        278
+      ],
+      "command_id": "91036bc444bd4dfdbc04b3b8507cac02",
+      "cursor": [
+        492,
+        227
+      ],
+      "submitted_point": [
+        492,
+        227
+      ]
+    },
+    {
+      "seq": 128,
+      "t_mono": 176415.7207959,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 647,
+      "captured_mono": 176415.7049965,
+      "percept_ready_mono": 176415.7203088,
+      "goal": [
+        621,
+        278
+      ],
+      "command_id": "8da20787e2c74cd4b340240518d7e3e3",
+      "cursor": [
+        503,
+        231
+      ],
+      "submitted_point": [
+        503,
+        231
+      ]
+    },
+    {
+      "seq": 129,
+      "t_mono": 176415.730797,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 649,
+      "captured_mono": 176415.7238881,
+      "percept_ready_mono": 176415.7303496,
+      "goal": [
+        617,
+        277
+      ],
+      "command_id": "7de730643c3546bf90bddbf05e458909",
+      "cursor": [
+        514,
+        236
+      ],
+      "submitted_point": [
+        514,
+        236
+      ]
+    },
+    {
+      "seq": 130,
+      "t_mono": 176415.7416215,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 650,
+      "captured_mono": 176415.7340357,
+      "percept_ready_mono": 176415.7407711,
+      "goal": [
+        615,
+        276
+      ],
+      "command_id": "b895d07aaba14aafb43a4b060a72aea4",
+      "cursor": [
+        526,
+        241
+      ],
+      "submitted_point": [
+        526,
+        241
+      ]
+    },
+    {
+      "seq": 131,
+      "t_mono": 176415.7513947,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 651,
+      "captured_mono": 176415.7374035,
+      "percept_ready_mono": 176415.7509349,
+      "goal": [
+        615,
+        276
+      ],
+      "command_id": "b95432c68d9f430c87aecf7ed082557b",
+      "cursor": [
+        537,
+        245
+      ],
+      "submitted_point": [
+        537,
+        245
+      ]
+    },
+    {
+      "seq": 132,
+      "t_mono": 176415.7617775,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 652,
+      "captured_mono": 176415.74723,
+      "percept_ready_mono": 176415.7613065,
+      "goal": [
+        615,
+        276
+      ],
+      "command_id": "94c673db190f47408f1ddd2d70f35de1",
+      "cursor": [
+        549,
+        250
+      ],
+      "submitted_point": [
+        549,
+        250
+      ]
+    },
+    {
+      "seq": 133,
+      "t_mono": 176415.7720445,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 654,
+      "captured_mono": 176415.7645372,
+      "percept_ready_mono": 176415.7716184,
+      "goal": [
+        612,
+        276
+      ],
+      "command_id": "b0c6bf2508d14f929e0136eeb03d12cb",
+      "cursor": [
+        560,
+        255
+      ],
+      "submitted_point": [
+        560,
+        255
+      ]
+    },
+    {
+      "seq": 134,
+      "t_mono": 176415.7823278,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 655,
+      "captured_mono": 176415.7729531,
+      "percept_ready_mono": 176415.7818924,
+      "goal": [
+        610,
+        275
+      ],
+      "command_id": "5fd8b71d6cd54d5ba7a13794dee16fb0",
+      "cursor": [
+        571,
+        260
+      ],
+      "submitted_point": [
+        571,
+        260
+      ]
+    },
+    {
+      "seq": 135,
+      "t_mono": 176415.7925426,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 657,
+      "captured_mono": 176415.7849753,
+      "percept_ready_mono": 176415.7920039,
+      "goal": [
+        608,
+        275
+      ],
+      "command_id": "5494dfa582f04cb4aff559a30f0626d2",
+      "cursor": [
+        582,
+        265
+      ],
+      "submitted_point": [
+        582,
+        265
+      ]
+    },
+    {
+      "seq": 136,
+      "t_mono": 176415.8029805,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 658,
+      "captured_mono": 176415.7971453,
+      "percept_ready_mono": 176415.8024819,
+      "goal": [
+        608,
+        275
+      ],
+      "command_id": "cff16a030aa74f0dbbc2b5fd9fb7897e",
+      "cursor": [
+        592,
+        269
+      ],
+      "submitted_point": [
+        592,
+        269
+      ]
+    },
+    {
+      "seq": 137,
+      "t_mono": 176415.8133883,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 658,
+      "captured_mono": 176415.7971453,
+      "percept_ready_mono": 176415.8129319,
+      "goal": [
+        608,
+        275
+      ],
+      "command_id": "892b1bcbd2054744b1b5ef956b22d9f0",
+      "cursor": [
+        598,
+        271
+      ],
+      "submitted_point": [
+        598,
+        271
+      ]
+    },
+    {
+      "seq": 138,
+      "t_mono": 176415.8235364,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 660,
+      "captured_mono": 176415.8160406,
+      "percept_ready_mono": 176415.823112,
+      "goal": [
+        604,
+        274
+      ],
+      "command_id": "ed1c6fd2c4344ac9b039c6d65a79e170",
+      "cursor": [
+        600,
+        272
+      ],
+      "submitted_point": [
+        600,
+        272
+      ]
+    },
+    {
+      "seq": 139,
+      "t_mono": 176415.8344089,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 662,
+      "captured_mono": 176415.8292041,
+      "percept_ready_mono": 176415.8334138,
+      "goal": [
+        602,
+        274
+      ],
+      "command_id": "a05ca0ffe45b4b66a8a68c15b1cb5563",
+      "cursor": [
+        601,
+        273
+      ],
+      "submitted_point": [
+        601,
+        273
+      ]
+    },
+    {
+      "seq": 140,
+      "t_mono": 176415.8438662,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 663,
+      "captured_mono": 176415.8396444,
+      "percept_ready_mono": 176415.843461,
+      "goal": [
+        602,
+        274
+      ],
+      "command_id": "898958ac6435420daeec80a6610a35f4",
+      "cursor": [
+        602,
+        274
+      ],
+      "submitted_point": [
+        602,
+        274
+      ]
+    },
+    {
+      "seq": 141,
+      "t_mono": 176415.8542361,
+      "kind": "pointer_feedback",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 663,
+      "captured_mono": 176415.8396444,
+      "percept_ready_mono": 176415.8538111,
+      "goal": [
+        602,
+        274
+      ],
+      "command_id": "42f5ace2bb9146ffbb73d0e0fc93ae0d",
+      "cursor": [
+        602,
+        274
+      ],
+      "submitted_point": [
+        602,
+        274
+      ]
+    },
+    {
+      "seq": 142,
+      "t_mono": 176415.8758805,
+      "kind": "input_submitted",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 664,
+      "captured_mono": 176415.8536621,
+      "percept_ready_mono": 176415.864116,
+      "goal": [
+        598,
+        273
+      ],
+      "command_id": "2b61431328624d7b8f72c07f0a838674",
+      "x": 602,
+      "y": 274
+    },
+    {
+      "seq": 143,
+      "t_mono": 176415.8974607,
+      "kind": "input_released",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 664,
+      "captured_mono": 176415.8536621,
+      "percept_ready_mono": 176415.864116,
+      "goal": [
+        598,
+        273
+      ],
+      "command_id": "2b61431328624d7b8f72c07f0a838674"
+    },
+    {
+      "seq": 144,
+      "t_mono": 176415.901333,
+      "kind": "intent_completed",
+      "intent_id": "3cb0d832aa634d8bb6549593c3d015b2",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "completed",
+      "reason": "cursor_confirmed_click_released",
+      "started_mono": 176415.467655,
+      "expires_mono": 176418.467655,
+      "cursor": [
+        602,
+        274
+      ],
+      "error_px": 4.123105625617661,
+      "commands": 39,
+      "task_success_verified": false
+    },
+    {
+      "seq": 145,
+      "t_mono": 176415.9082829,
+      "kind": "vanish",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 668,
+      "captured_mono": 176415.9046058,
+      "detection": null
+    },
+    {
+      "seq": 146,
+      "t_mono": 176415.9082829,
+      "kind": "effect_observed",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "command_id": "2b61431328624d7b8f72c07f0a838674",
+      "observation_id": 668,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 147,
+      "t_mono": 176416.0626991,
+      "kind": "input_requested",
+      "command_id": "b76df668c2d34312b24374ae84e65e70",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 148,
+      "t_mono": 176416.063237,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "b76df668c2d34312b24374ae84e65e70",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 149,
+      "t_mono": 176416.1774365,
+      "kind": "appear",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 670,
+      "captured_mono": 176416.1729725,
+      "detection": {
+        "x": 477,
+        "y": 276,
+        "pixels": 1161,
+        "bbox": [
+          459,
+          259,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "seq": 150,
+      "t_mono": 176416.5231758,
+      "kind": "input_requested",
+      "command_id": "8fc3ace56c054f69b5cdf0adbb19f703",
+      "action": "click",
+      "point": [
+        468,
+        279
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:675"
+    },
+    {
+      "seq": 151,
+      "t_mono": 176416.52441,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:675",
+      "command_id": "8fc3ace56c054f69b5cdf0adbb19f703",
+      "x": 468,
+      "y": 279
+    },
+    {
+      "seq": 152,
+      "t_mono": 176416.5455964,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:675",
+      "command_id": "8fc3ace56c054f69b5cdf0adbb19f703"
+    },
+    {
+      "seq": 153,
+      "t_mono": 176417.0444537,
+      "kind": "input_requested",
+      "command_id": "4fb8ec34332d4198bbe532a7b0fd0a2e",
+      "action": "click",
+      "point": [
+        405,
+        308
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:716"
+    },
+    {
+      "seq": 154,
+      "t_mono": 176417.0458288,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:716",
+      "command_id": "4fb8ec34332d4198bbe532a7b0fd0a2e",
+      "x": 405,
+      "y": 308
+    },
+    {
+      "seq": 155,
+      "t_mono": 176417.066978,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:716",
+      "command_id": "4fb8ec34332d4198bbe532a7b0fd0a2e"
+    },
+    {
+      "seq": 156,
+      "t_mono": 176417.5513008,
+      "kind": "input_requested",
+      "command_id": "1c574a0b66ff457a81df731d406a151f",
+      "action": "click",
+      "point": [
+        373,
+        348
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:755"
+    },
+    {
+      "seq": 157,
+      "t_mono": 176417.5525615,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:755",
+      "command_id": "1c574a0b66ff457a81df731d406a151f",
+      "x": 373,
+      "y": 348
+    },
+    {
+      "seq": 158,
+      "t_mono": 176417.5735957,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:755",
+      "command_id": "1c574a0b66ff457a81df731d406a151f"
+    },
+    {
+      "seq": 159,
+      "t_mono": 176418.0820314,
+      "kind": "input_requested",
+      "command_id": "2788d6de5e7b437db2bf744250825caf",
+      "action": "click",
+      "point": [
+        377,
+        389
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:794"
+    },
+    {
+      "seq": 160,
+      "t_mono": 176418.0831638,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:794",
+      "command_id": "2788d6de5e7b437db2bf744250825caf",
+      "x": 377,
+      "y": 389
+    },
+    {
+      "seq": 161,
+      "t_mono": 176418.1044378,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:794",
+      "command_id": "2788d6de5e7b437db2bf744250825caf"
+    },
+    {
+      "seq": 162,
+      "t_mono": 176418.590301,
+      "kind": "input_requested",
+      "command_id": "a73a959672e04108a1422d5cdff80c73",
+      "action": "click",
+      "point": [
+        414,
+        415
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:833"
+    },
+    {
+      "seq": 163,
+      "t_mono": 176418.5915036,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:833",
+      "command_id": "a73a959672e04108a1422d5cdff80c73",
+      "x": 414,
+      "y": 415
+    },
+    {
+      "seq": 164,
+      "t_mono": 176418.612377,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:833",
+      "command_id": "a73a959672e04108a1422d5cdff80c73"
+    },
+    {
+      "seq": 165,
+      "t_mono": 176419.0966465,
+      "kind": "input_requested",
+      "command_id": "c9efa89af3424bbda32b1ce889c2c3fc",
+      "action": "click",
+      "point": [
+        478,
+        420
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:871"
+    },
+    {
+      "seq": 166,
+      "t_mono": 176419.0975892,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:871",
+      "command_id": "c9efa89af3424bbda32b1ce889c2c3fc",
+      "x": 478,
+      "y": 420
+    },
+    {
+      "seq": 167,
+      "t_mono": 176419.118839,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:871",
+      "command_id": "c9efa89af3424bbda32b1ce889c2c3fc"
+    },
+    {
+      "seq": 168,
+      "t_mono": 176419.4999638,
+      "kind": "input_requested",
+      "command_id": "93dec9380b0741fd8a5e72eb94de0828",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 169,
+      "t_mono": 176419.501097,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "93dec9380b0741fd8a5e72eb94de0828",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 170,
+      "t_mono": 176419.6886068,
+      "kind": "intent_started",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 176419.6886068,
+      "expires_mono": 176422.6886068,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false
+    },
+    {
+      "seq": 171,
+      "t_mono": 176419.6914497,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 935,
+      "captured_mono": 176419.6777295,
+      "percept_ready_mono": 176419.6912639,
+      "goal": [
+        467,
+        279
+      ],
+      "command_id": "d107a7587c224e82a94acaf893857f08",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 172,
+      "t_mono": 176419.7020989,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 936,
+      "captured_mono": 176419.6909578,
+      "percept_ready_mono": 176419.7015949,
+      "goal": [
+        466,
+        279
+      ],
+      "command_id": "202146000cf143ca9bb961f0baea2834",
+      "cursor": [
+        229,
+        136
+      ],
+      "submitted_point": [
+        229,
+        136
+      ]
+    },
+    {
+      "seq": 173,
+      "t_mono": 176419.7124236,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 938,
+      "captured_mono": 176419.7073842,
+      "percept_ready_mono": 176419.7121306,
+      "goal": [
+        464,
+        280
+      ],
+      "command_id": "799eb0d61a924234843ce3b3a0b0bfe1",
+      "cursor": [
+        240,
+        143
+      ],
+      "submitted_point": [
+        240,
+        143
+      ]
+    },
+    {
+      "seq": 174,
+      "t_mono": 176419.7230882,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 939,
+      "captured_mono": 176419.7190596,
+      "percept_ready_mono": 176419.7227959,
+      "goal": [
+        464,
+        280
+      ],
+      "command_id": "f46188159c90432f80c5a71b304067c3",
+      "cursor": [
+        251,
+        150
+      ],
+      "submitted_point": [
+        251,
+        150
+      ]
+    },
+    {
+      "seq": 175,
+      "t_mono": 176419.7355204,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 940,
+      "captured_mono": 176419.7226323,
+      "percept_ready_mono": 176419.7350775,
+      "goal": [
+        464,
+        280
+      ],
+      "command_id": "61757fca70674b79a4b281a2991b79fd",
+      "cursor": [
+        264,
+        158
+      ],
+      "submitted_point": [
+        264,
+        158
+      ]
+    },
+    {
+      "seq": 176,
+      "t_mono": 176419.7457959,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 942,
+      "captured_mono": 176419.7388464,
+      "percept_ready_mono": 176419.7454624,
+      "goal": [
+        460,
+        281
+      ],
+      "command_id": "88468111524a42469b8c090dab800435",
+      "cursor": [
+        275,
+        165
+      ],
+      "submitted_point": [
+        275,
+        165
+      ]
+    },
+    {
+      "seq": 177,
+      "t_mono": 176419.755962,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 943,
+      "captured_mono": 176419.7465272,
+      "percept_ready_mono": 176419.7556699,
+      "goal": [
+        460,
+        281
+      ],
+      "command_id": "6de813cac94242d2ba63246f29d7906f",
+      "cursor": [
+        285,
+        172
+      ],
+      "submitted_point": [
+        285,
+        172
+      ]
+    },
+    {
+      "seq": 178,
+      "t_mono": 176419.7666224,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 944,
+      "captured_mono": 176419.7576504,
+      "percept_ready_mono": 176419.766117,
+      "goal": [
+        457,
+        282
+      ],
+      "command_id": "4ba2a597b3764208b59a604cd91a90c8",
+      "cursor": [
+        296,
+        179
+      ],
+      "submitted_point": [
+        296,
+        179
+      ]
+    },
+    {
+      "seq": 179,
+      "t_mono": 176419.7765254,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 946,
+      "captured_mono": 176419.7710584,
+      "percept_ready_mono": 176419.7762681,
+      "goal": [
+        457,
+        282
+      ],
+      "command_id": "ba7f39ebf37a46edb6f0fcd8b14762cc",
+      "cursor": [
+        306,
+        186
+      ],
+      "submitted_point": [
+        306,
+        186
+      ]
+    },
+    {
+      "seq": 180,
+      "t_mono": 176419.7871215,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 946,
+      "captured_mono": 176419.7710584,
+      "percept_ready_mono": 176419.7868227,
+      "goal": [
+        457,
+        282
+      ],
+      "command_id": "35df6da01e7a4db29126c3e3f861673e",
+      "cursor": [
+        317,
+        193
+      ],
+      "submitted_point": [
+        317,
+        193
+      ]
+    },
+    {
+      "seq": 181,
+      "t_mono": 176419.7974924,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 948,
+      "captured_mono": 176419.7898016,
+      "percept_ready_mono": 176419.7971233,
+      "goal": [
+        453,
+        283
+      ],
+      "command_id": "bc69973ab2134043b34853995deffda8",
+      "cursor": [
+        327,
+        200
+      ],
+      "submitted_point": [
+        327,
+        200
+      ]
+    },
+    {
+      "seq": 182,
+      "t_mono": 176419.8079428,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 950,
+      "captured_mono": 176419.801191,
+      "percept_ready_mono": 176419.8075727,
+      "goal": [
+        451,
+        284
+      ],
+      "command_id": "eaf73e4d2dd041f8be38b11fa588dd6b",
+      "cursor": [
+        337,
+        207
+      ],
+      "submitted_point": [
+        337,
+        207
+      ]
+    },
+    {
+      "seq": 183,
+      "t_mono": 176419.8182948,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 951,
+      "captured_mono": 176419.8113052,
+      "percept_ready_mono": 176419.8179143,
+      "goal": [
+        450,
+        284
+      ],
+      "command_id": "7287b9bd42c74a93ac3c3cb9a2352100",
+      "cursor": [
+        347,
+        214
+      ],
+      "submitted_point": [
+        347,
+        214
+      ]
+    },
+    {
+      "seq": 184,
+      "t_mono": 176419.8283766,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 951,
+      "captured_mono": 176419.8113052,
+      "percept_ready_mono": 176419.8279476,
+      "goal": [
+        450,
+        284
+      ],
+      "command_id": "42e0163022b64848a5fa52d54e326308",
+      "cursor": [
+        357,
+        221
+      ],
+      "submitted_point": [
+        357,
+        221
+      ]
+    },
+    {
+      "seq": 185,
+      "t_mono": 176419.8387046,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 952,
+      "captured_mono": 176419.8251739,
+      "percept_ready_mono": 176419.8383895,
+      "goal": [
+        450,
+        284
+      ],
+      "command_id": "a95812104e8e4373884c6660ddb4844c",
+      "cursor": [
+        367,
+        228
+      ],
+      "submitted_point": [
+        367,
+        228
+      ]
+    },
+    {
+      "seq": 186,
+      "t_mono": 176419.8488523,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 954,
+      "captured_mono": 176419.8432692,
+      "percept_ready_mono": 176419.8485749,
+      "goal": [
+        446,
+        286
+      ],
+      "command_id": "6e7a1603ca634294911b68605b78e3dc",
+      "cursor": [
+        377,
+        235
+      ],
+      "submitted_point": [
+        377,
+        235
+      ]
+    },
+    {
+      "seq": 187,
+      "t_mono": 176419.85933,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 955,
+      "captured_mono": 176419.8534413,
+      "percept_ready_mono": 176419.859011,
+      "goal": [
+        444,
+        286
+      ],
+      "command_id": "ab9fa821da9945b9a2dba69ca8fe7deb",
+      "cursor": [
+        387,
+        243
+      ],
+      "submitted_point": [
+        387,
+        243
+      ]
+    },
+    {
+      "seq": 188,
+      "t_mono": 176419.8700713,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 957,
+      "captured_mono": 176419.8637209,
+      "percept_ready_mono": 176419.8691056,
+      "goal": [
+        444,
+        286
+      ],
+      "command_id": "63ddc554203a4270bf14a34cd25ee4f8",
+      "cursor": [
+        397,
+        250
+      ],
+      "submitted_point": [
+        397,
+        250
+      ]
+    },
+    {
+      "seq": 189,
+      "t_mono": 176419.8798307,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 957,
+      "captured_mono": 176419.8637209,
+      "percept_ready_mono": 176419.8793744,
+      "goal": [
+        444,
+        286
+      ],
+      "command_id": "2268ac6310704639aaa923b59122e4e1",
+      "cursor": [
+        407,
+        257
+      ],
+      "submitted_point": [
+        407,
+        257
+      ]
+    },
+    {
+      "seq": 190,
+      "t_mono": 176419.8901161,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 959,
+      "captured_mono": 176419.8839493,
+      "percept_ready_mono": 176419.8897939,
+      "goal": [
+        441,
+        288
+      ],
+      "command_id": "a1eba3e201644d9186a05b1ed9307dd6",
+      "cursor": [
+        416,
+        265
+      ],
+      "submitted_point": [
+        416,
+        265
+      ]
+    },
+    {
+      "seq": 191,
+      "t_mono": 176419.9006467,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 961,
+      "captured_mono": 176419.8946972,
+      "percept_ready_mono": 176419.900089,
+      "goal": [
+        439,
+        288
+      ],
+      "command_id": "f44d9efc586a43919734edf8339da4bf",
+      "cursor": [
+        424,
+        273
+      ],
+      "submitted_point": [
+        424,
+        273
+      ]
+    },
+    {
+      "seq": 192,
+      "t_mono": 176419.9108529,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 962,
+      "captured_mono": 176419.9049919,
+      "percept_ready_mono": 176419.9105152,
+      "goal": [
+        439,
+        288
+      ],
+      "command_id": "06f3658a9e894dc98c47b18a9242ffd7",
+      "cursor": [
+        429,
+        278
+      ],
+      "submitted_point": [
+        429,
+        278
+      ]
+    },
+    {
+      "seq": 193,
+      "t_mono": 176419.9214239,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 962,
+      "captured_mono": 176419.9049919,
+      "percept_ready_mono": 176419.9209332,
+      "goal": [
+        439,
+        288
+      ],
+      "command_id": "12ce69522a054937b69f833aa6cac45d",
+      "cursor": [
+        433,
+        282
+      ],
+      "submitted_point": [
+        433,
+        282
+      ]
+    },
+    {
+      "seq": 194,
+      "t_mono": 176419.9315445,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 964,
+      "captured_mono": 176419.9245077,
+      "percept_ready_mono": 176419.9312054,
+      "goal": [
+        436,
+        290
+      ],
+      "command_id": "8920509a27974488b0b16fc3660c2b7b",
+      "cursor": [
+        434,
+        285
+      ],
+      "submitted_point": [
+        434,
+        285
+      ]
+    },
+    {
+      "seq": 195,
+      "t_mono": 176419.9418851,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 966,
+      "captured_mono": 176419.9350563,
+      "percept_ready_mono": 176419.941554,
+      "goal": [
+        435,
+        290
+      ],
+      "command_id": "c96bea4a6c6e4451b0622142ccc667fb",
+      "cursor": [
+        434,
+        287
+      ],
+      "submitted_point": [
+        434,
+        287
+      ]
+    },
+    {
+      "seq": 196,
+      "t_mono": 176419.9519571,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 967,
+      "captured_mono": 176419.9463252,
+      "percept_ready_mono": 176419.9516281,
+      "goal": [
+        433,
+        291
+      ],
+      "command_id": "6572ca4b5a8c4cf09bcc4db533d5019f",
+      "cursor": [
+        434,
+        288
+      ],
+      "submitted_point": [
+        434,
+        288
+      ]
+    },
+    {
+      "seq": 197,
+      "t_mono": 176419.9628842,
+      "kind": "pointer_feedback",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 968,
+      "captured_mono": 176419.9547839,
+      "percept_ready_mono": 176419.9624605,
+      "goal": [
+        433,
+        291
+      ],
+      "command_id": "1679596a10e74ddd9425d334e6c3fbfe",
+      "cursor": [
+        434,
+        289
+      ],
+      "submitted_point": [
+        434,
+        289
+      ]
+    },
+    {
+      "seq": 198,
+      "t_mono": 176419.9735669,
+      "kind": "input_submitted",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 970,
+      "captured_mono": 176419.9659972,
+      "percept_ready_mono": 176419.9728215,
+      "goal": [
+        431,
+        292
+      ],
+      "command_id": "2175d6ac363d41ec8732588bdc577f1b",
+      "x": 434,
+      "y": 289
+    },
+    {
+      "seq": 199,
+      "t_mono": 176419.994887,
+      "kind": "input_released",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 970,
+      "captured_mono": 176419.9659972,
+      "percept_ready_mono": 176419.9728215,
+      "goal": [
+        431,
+        292
+      ],
+      "command_id": "2175d6ac363d41ec8732588bdc577f1b"
+    },
+    {
+      "seq": 200,
+      "t_mono": 176420.0000304,
+      "kind": "intent_completed",
+      "intent_id": "8a11453945b84d7090c244f8d5c923a0",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "completed",
+      "reason": "cursor_confirmed_click_released",
+      "started_mono": 176419.6886068,
+      "expires_mono": 176422.6886068,
+      "cursor": [
+        434,
+        289
+      ],
+      "error_px": 4.242640687119285,
+      "commands": 28,
+      "task_success_verified": false
+    },
+    {
+      "seq": 201,
+      "t_mono": 176420.0000403,
+      "kind": "vanish",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 973,
+      "captured_mono": 176419.9971665,
+      "detection": null
+    },
+    {
+      "seq": 202,
+      "t_mono": 176420.0000403,
+      "kind": "effect_observed",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "command_id": "2175d6ac363d41ec8732588bdc577f1b",
+      "observation_id": 973,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 203,
+      "t_mono": 176420.1442108,
+      "kind": "input_requested",
+      "command_id": "63146266a19c4b9ab01f2d69a708f01f",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 204,
+      "t_mono": 176420.1449033,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "63146266a19c4b9ab01f2d69a708f01f",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 205,
+      "t_mono": 176420.2554063,
+      "kind": "appear",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 975,
+      "captured_mono": 176420.251332,
+      "detection": {
+        "x": 370,
+        "y": 344,
+        "pixels": 1161,
+        "bbox": [
+          352,
+          327,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "seq": 206,
+      "t_mono": 176420.5968464,
+      "kind": "input_requested",
+      "command_id": "98637b9e698a4bc3af766b64fc4f4ef6",
+      "action": "click",
+      "point": [
+        370,
+        351
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:981"
+    },
+    {
+      "seq": 207,
+      "t_mono": 176420.597663,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:981",
+      "command_id": "98637b9e698a4bc3af766b64fc4f4ef6",
+      "x": 370,
+      "y": 351
+    },
+    {
+      "seq": 208,
+      "t_mono": 176420.6188984,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:981",
+      "command_id": "98637b9e698a4bc3af766b64fc4f4ef6"
+    },
+    {
+      "seq": 209,
+      "t_mono": 176421.1050008,
+      "kind": "input_requested",
+      "command_id": "551a9b0d0d6f400e96cc302a5edd0f03",
+      "action": "click",
+      "point": [
+        391,
+        390
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1020"
+    },
+    {
+      "seq": 210,
+      "t_mono": 176421.1062758,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1020",
+      "command_id": "551a9b0d0d6f400e96cc302a5edd0f03",
+      "x": 391,
+      "y": 390
+    },
+    {
+      "seq": 211,
+      "t_mono": 176421.1274676,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1020",
+      "command_id": "551a9b0d0d6f400e96cc302a5edd0f03"
+    },
+    {
+      "seq": 212,
+      "t_mono": 176421.613553,
+      "kind": "input_requested",
+      "command_id": "28ae5d18bbb142c6a618ee53dd8a2028",
+      "action": "click",
+      "point": [
+        443,
+        415
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1059"
+    },
+    {
+      "seq": 213,
+      "t_mono": 176421.6147247,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1059",
+      "command_id": "28ae5d18bbb142c6a618ee53dd8a2028",
+      "x": 443,
+      "y": 415
+    },
+    {
+      "seq": 214,
+      "t_mono": 176421.6358741,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1059",
+      "command_id": "28ae5d18bbb142c6a618ee53dd8a2028"
+    },
+    {
+      "seq": 215,
+      "t_mono": 176422.1343931,
+      "kind": "input_requested",
+      "command_id": "97431a2b7b2b4856bc980f47508a631d",
+      "action": "click",
+      "point": [
+        516,
+        420
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1100"
+    },
+    {
+      "seq": 216,
+      "t_mono": 176422.1354683,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1100",
+      "command_id": "97431a2b7b2b4856bc980f47508a631d",
+      "x": 516,
+      "y": 420
+    },
+    {
+      "seq": 217,
+      "t_mono": 176422.15735,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1100",
+      "command_id": "97431a2b7b2b4856bc980f47508a631d"
+    },
+    {
+      "seq": 218,
+      "t_mono": 176422.6761802,
+      "kind": "input_requested",
+      "command_id": "1d0dd5ada9dd42a285bac3eb84fc4abd",
+      "action": "click",
+      "point": [
+        594,
+        401
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1139"
+    },
+    {
+      "seq": 219,
+      "t_mono": 176422.6775772,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1139",
+      "command_id": "1d0dd5ada9dd42a285bac3eb84fc4abd",
+      "x": 594,
+      "y": 401
+    },
+    {
+      "seq": 220,
+      "t_mono": 176422.6988132,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1139",
+      "command_id": "1d0dd5ada9dd42a285bac3eb84fc4abd"
+    },
+    {
+      "seq": 221,
+      "t_mono": 176423.2077952,
+      "kind": "input_requested",
+      "command_id": "b42d857f9a584ce9abb4617fd46047a1",
+      "action": "click",
+      "point": [
+        665,
+        361
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1182"
+    },
+    {
+      "seq": 222,
+      "t_mono": 176423.2090736,
+      "kind": "input_submitted",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1182",
+      "command_id": "b42d857f9a584ce9abb4617fd46047a1",
+      "x": 665,
+      "y": 361
+    },
+    {
+      "seq": 223,
+      "t_mono": 176423.2302868,
+      "kind": "input_released",
+      "action": "click",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:1182",
+      "command_id": "b42d857f9a584ce9abb4617fd46047a1"
+    },
+    {
+      "seq": 224,
+      "t_mono": 176423.5813115,
+      "kind": "input_requested",
+      "command_id": "aac3ba6cdd394a2c8766d144867fe464",
+      "action": "move",
+      "point": [
+        218,
+        130
+      ],
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2"
+    },
+    {
+      "seq": 225,
+      "t_mono": 176423.5817558,
+      "kind": "pointer_feedback",
+      "action": "move",
+      "snapshot_id": "7714ad276e5e4d19a916581c767edbbe:1:2",
+      "command_id": "aac3ba6cdd394a2c8766d144867fe464",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": [
+        218,
+        130
+      ]
+    },
+    {
+      "seq": 226,
+      "t_mono": 176423.7691503,
+      "kind": "intent_started",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 176423.7691503,
+      "expires_mono": 176426.7691503,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false
+    },
+    {
+      "seq": 227,
+      "t_mono": 176423.7715009,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1243,
+      "captured_mono": 176423.7574933,
+      "percept_ready_mono": 176423.7713098,
+      "goal": [
+        370,
+        350
+      ],
+      "command_id": "06b7fb80cfdc44b8ba4367180d5e4a9b",
+      "cursor": [
+        218,
+        130
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 228,
+      "t_mono": 176423.7821182,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1244,
+      "captured_mono": 176423.7714842,
+      "percept_ready_mono": 176423.7816617,
+      "goal": [
+        370,
+        351
+      ],
+      "command_id": "3f8249237c154c70843581e39ce2a40a",
+      "cursor": [
+        225,
+        140
+      ],
+      "submitted_point": [
+        225,
+        140
+      ]
+    },
+    {
+      "seq": 229,
+      "t_mono": 176423.7923309,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1246,
+      "captured_mono": 176423.7881983,
+      "percept_ready_mono": 176423.7920993,
+      "goal": [
+        370,
+        352
+      ],
+      "command_id": "cdd570dd70764370a0dda208ab7867f6",
+      "cursor": [
+        232,
+        150
+      ],
+      "submitted_point": [
+        232,
+        150
+      ]
+    },
+    {
+      "seq": 230,
+      "t_mono": 176423.804379,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1248,
+      "captured_mono": 176423.8004308,
+      "percept_ready_mono": 176423.8041127,
+      "goal": [
+        370,
+        354
+      ],
+      "command_id": "8e799d320c0f4739b5a1ceba381a2f11",
+      "cursor": [
+        240,
+        162
+      ],
+      "submitted_point": [
+        240,
+        162
+      ]
+    },
+    {
+      "seq": 231,
+      "t_mono": 176423.8164502,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1250,
+      "captured_mono": 176423.8116478,
+      "percept_ready_mono": 176423.816156,
+      "goal": [
+        370,
+        354
+      ],
+      "command_id": "86db73540d234dde891d7d59bba86578",
+      "cursor": [
+        248,
+        174
+      ],
+      "submitted_point": [
+        248,
+        174
+      ]
+    },
+    {
+      "seq": 232,
+      "t_mono": 176423.827307,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1250,
+      "captured_mono": 176423.8116478,
+      "percept_ready_mono": 176423.8267946,
+      "goal": [
+        370,
+        354
+      ],
+      "command_id": "9bb51453a83a4bd3a045b2b0e3b450ed",
+      "cursor": [
+        255,
+        185
+      ],
+      "submitted_point": [
+        255,
+        185
+      ]
+    },
+    {
+      "seq": 233,
+      "t_mono": 176423.837199,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1252,
+      "captured_mono": 176423.8302022,
+      "percept_ready_mono": 176423.8368993,
+      "goal": [
+        371,
+        356
+      ],
+      "command_id": "52e4625418104c0f8eac13f4b1c25ac3",
+      "cursor": [
+        262,
+        195
+      ],
+      "submitted_point": [
+        262,
+        195
+      ]
+    },
+    {
+      "seq": 234,
+      "t_mono": 176423.847419,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1254,
+      "captured_mono": 176423.8413502,
+      "percept_ready_mono": 176423.8470023,
+      "goal": [
+        371,
+        357
+      ],
+      "command_id": "111f169237ce4bb180322929f88a3dc4",
+      "cursor": [
+        269,
+        205
+      ],
+      "submitted_point": [
+        269,
+        205
+      ]
+    },
+    {
+      "seq": 235,
+      "t_mono": 176423.8579591,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1255,
+      "captured_mono": 176423.8517008,
+      "percept_ready_mono": 176423.857509,
+      "goal": [
+        371,
+        357
+      ],
+      "command_id": "e113bf12be164ad1adf1a6d3780c6026",
+      "cursor": [
+        276,
+        215
+      ],
+      "submitted_point": [
+        276,
+        215
+      ]
+    },
+    {
+      "seq": 236,
+      "t_mono": 176423.8683939,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1255,
+      "captured_mono": 176423.8517008,
+      "percept_ready_mono": 176423.8679653,
+      "goal": [
+        371,
+        357
+      ],
+      "command_id": "7231f97132214d9ead52adc5fc5697ac",
+      "cursor": [
+        283,
+        225
+      ],
+      "submitted_point": [
+        283,
+        225
+      ]
+    },
+    {
+      "seq": 237,
+      "t_mono": 176423.8786584,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1257,
+      "captured_mono": 176423.8713612,
+      "percept_ready_mono": 176423.8783588,
+      "goal": [
+        372,
+        359
+      ],
+      "command_id": "6326b64a0ce54e5aac696501da4bc0c6",
+      "cursor": [
+        290,
+        235
+      ],
+      "submitted_point": [
+        290,
+        235
+      ]
+    },
+    {
+      "seq": 238,
+      "t_mono": 176423.8889686,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1259,
+      "captured_mono": 176423.8821111,
+      "percept_ready_mono": 176423.8886635,
+      "goal": [
+        372,
+        360
+      ],
+      "command_id": "cda99db353ed4c2a913aaf2ee245a1d5",
+      "cursor": [
+        297,
+        245
+      ],
+      "submitted_point": [
+        297,
+        245
+      ]
+    },
+    {
+      "seq": 239,
+      "t_mono": 176423.8995121,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1260,
+      "captured_mono": 176423.8913519,
+      "percept_ready_mono": 176423.8991166,
+      "goal": [
+        372,
+        361
+      ],
+      "command_id": "bbc60dcf8dde4f51bc9f3c28430523f8",
+      "cursor": [
+        304,
+        256
+      ],
+      "submitted_point": [
+        304,
+        256
+      ]
+    },
+    {
+      "seq": 240,
+      "t_mono": 176423.909782,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1261,
+      "captured_mono": 176423.8945994,
+      "percept_ready_mono": 176423.9094744,
+      "goal": [
+        372,
+        361
+      ],
+      "command_id": "01d0fb2b22c541cebe664511bc3b8a78",
+      "cursor": [
+        311,
+        266
+      ],
+      "submitted_point": [
+        311,
+        266
+      ]
+    },
+    {
+      "seq": 241,
+      "t_mono": 176423.9210473,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1262,
+      "captured_mono": 176423.9053419,
+      "percept_ready_mono": 176423.920643,
+      "goal": [
+        372,
+        361
+      ],
+      "command_id": "ab5c8fd7cf2d492d859f4191069c3fff",
+      "cursor": [
+        318,
+        277
+      ],
+      "submitted_point": [
+        318,
+        277
+      ]
+    },
+    {
+      "seq": 242,
+      "t_mono": 176423.9312235,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1264,
+      "captured_mono": 176423.9240804,
+      "percept_ready_mono": 176423.9308796,
+      "goal": [
+        373,
+        363
+      ],
+      "command_id": "a92708f2eb85425cbc0e9900988033a3",
+      "cursor": [
+        325,
+        287
+      ],
+      "submitted_point": [
+        325,
+        287
+      ]
+    },
+    {
+      "seq": 243,
+      "t_mono": 176423.9416688,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1266,
+      "captured_mono": 176423.9339591,
+      "percept_ready_mono": 176423.9413259,
+      "goal": [
+        373,
+        364
+      ],
+      "command_id": "f6d23bd7057b41a69f24526e8c903560",
+      "cursor": [
+        332,
+        298
+      ],
+      "submitted_point": [
+        332,
+        298
+      ]
+    },
+    {
+      "seq": 244,
+      "t_mono": 176423.9520872,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1267,
+      "captured_mono": 176423.9468262,
+      "percept_ready_mono": 176423.9516459,
+      "goal": [
+        374,
+        365
+      ],
+      "command_id": "83964c92001c43e79c0c5f414685b3b3",
+      "cursor": [
+        339,
+        308
+      ],
+      "submitted_point": [
+        339,
+        308
+      ]
+    },
+    {
+      "seq": 245,
+      "t_mono": 176423.9623744,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1269,
+      "captured_mono": 176423.9563205,
+      "percept_ready_mono": 176423.9620921,
+      "goal": [
+        374,
+        365
+      ],
+      "command_id": "717a24dc07c4422bb8cda73a86498c91",
+      "cursor": [
+        346,
+        319
+      ],
+      "submitted_point": [
+        346,
+        319
+      ]
+    },
+    {
+      "seq": 246,
+      "t_mono": 176423.9733647,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1269,
+      "captured_mono": 176423.9563205,
+      "percept_ready_mono": 176423.9729881,
+      "goal": [
+        374,
+        365
+      ],
+      "command_id": "1cf83b05cd6943948d6e1daf66e10f10",
+      "cursor": [
+        353,
+        330
+      ],
+      "submitted_point": [
+        353,
+        330
+      ]
+    },
+    {
+      "seq": 247,
+      "t_mono": 176423.9834153,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1271,
+      "captured_mono": 176423.9767771,
+      "percept_ready_mono": 176423.9831255,
+      "goal": [
+        375,
+        368
+      ],
+      "command_id": "55a58c780b6d4c91b73a22ff9e1dbe50",
+      "cursor": [
+        359,
+        341
+      ],
+      "submitted_point": [
+        359,
+        341
+      ]
+    },
+    {
+      "seq": 248,
+      "t_mono": 176423.9938865,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1273,
+      "captured_mono": 176423.9893744,
+      "percept_ready_mono": 176423.9935634,
+      "goal": [
+        375,
+        369
+      ],
+      "command_id": "1c5fd1b0ca674f458ea67818763842f7",
+      "cursor": [
+        365,
+        351
+      ],
+      "submitted_point": [
+        365,
+        351
+      ]
+    },
+    {
+      "seq": 249,
+      "t_mono": 176424.004411,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1274,
+      "captured_mono": 176423.9974502,
+      "percept_ready_mono": 176424.0040164,
+      "goal": [
+        375,
+        369
+      ],
+      "command_id": "9406443ab464434488a93d98aa14a19f",
+      "cursor": [
+        369,
+        358
+      ],
+      "submitted_point": [
+        369,
+        358
+      ]
+    },
+    {
+      "seq": 250,
+      "t_mono": 176424.0155303,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1274,
+      "captured_mono": 176423.9974502,
+      "percept_ready_mono": 176424.015182,
+      "goal": [
+        375,
+        369
+      ],
+      "command_id": "40525fe1e31946dc9577e8684fa59290",
+      "cursor": [
+        371,
+        362
+      ],
+      "submitted_point": [
+        371,
+        362
+      ]
+    },
+    {
+      "seq": 251,
+      "t_mono": 176424.029453,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1277,
+      "captured_mono": 176424.024843,
+      "percept_ready_mono": 176424.0291234,
+      "goal": [
+        377,
+        372
+      ],
+      "command_id": "7257c5ecebad4937996cb42ed8e6f710",
+      "cursor": [
+        374,
+        367
+      ],
+      "submitted_point": [
+        374,
+        367
+      ]
+    },
+    {
+      "seq": 252,
+      "t_mono": 176424.0416581,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1278,
+      "captured_mono": 176424.0328091,
+      "percept_ready_mono": 176424.0411997,
+      "goal": [
+        377,
+        372
+      ],
+      "command_id": "4a0cd76bdf844c118c0bd8e5fdb15ce0",
+      "cursor": [
+        375,
+        369
+      ],
+      "submitted_point": [
+        375,
+        369
+      ]
+    },
+    {
+      "seq": 253,
+      "t_mono": 176424.0515208,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1280,
+      "captured_mono": 176424.0450081,
+      "percept_ready_mono": 176424.0512164,
+      "goal": [
+        377,
+        373
+      ],
+      "command_id": "321dcc6cb1c94db8bbd8d7f8fd17aa00",
+      "cursor": [
+        376,
+        370
+      ],
+      "submitted_point": [
+        376,
+        370
+      ]
+    },
+    {
+      "seq": 254,
+      "t_mono": 176424.0617435,
+      "kind": "pointer_feedback",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1282,
+      "captured_mono": 176424.0539956,
+      "percept_ready_mono": 176424.0614516,
+      "goal": [
+        378,
+        374
+      ],
+      "command_id": "97949d6385684685a339c2c84625b5a3",
+      "cursor": [
+        377,
+        371
+      ],
+      "submitted_point": [
+        377,
+        371
+      ]
+    },
+    {
+      "seq": 255,
+      "t_mono": 176424.0748972,
+      "kind": "input_submitted",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1283,
+      "captured_mono": 176424.0671848,
+      "percept_ready_mono": 176424.0715382,
+      "goal": [
+        378,
+        375
+      ],
+      "command_id": "9578c87bacb04d8383721d56a641d644",
+      "x": 377,
+      "y": 371
+    },
+    {
+      "seq": 256,
+      "t_mono": 176424.0957937,
+      "kind": "input_released",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1283,
+      "captured_mono": 176424.0671848,
+      "percept_ready_mono": 176424.0715382,
+      "goal": [
+        378,
+        375
+      ],
+      "command_id": "9578c87bacb04d8383721d56a641d644"
+    },
+    {
+      "seq": 257,
+      "t_mono": 176424.0980785,
+      "kind": "intent_completed",
+      "intent_id": "b72982fca5ca418b953db2b2c2c0623d",
+      "program": "reach",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "phase": "completed",
+      "reason": "cursor_confirmed_click_released",
+      "started_mono": 176423.7691503,
+      "expires_mono": 176426.7691503,
+      "cursor": [
+        377,
+        371
+      ],
+      "error_px": 4.123105625617661,
+      "commands": 29,
+      "task_success_verified": false
+    },
+    {
+      "seq": 258,
+      "t_mono": 176424.1083779,
+      "kind": "vanish",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "observation_id": 1287,
+      "captured_mono": 176424.1050217,
+      "detection": null
+    },
+    {
+      "seq": 259,
+      "t_mono": 176424.1083779,
+      "kind": "effect_observed",
+      "watch_id": "1b7ab050e9af4769aa42efcee395b907",
+      "command_id": "9578c87bacb04d8383721d56a641d644",
+      "observation_id": 1287,
+      "condition": "watched_target_absent",
+      "task_success_verified": false
+    },
+    {
+      "seq": 260,
+      "t_mono": 176424.2444978,
+      "kind": "halted",
+      "reason": "requested",
+      "state": "halted"
+    }
+  ],
+  "lost_events": 0,
+  "final_state": "halted",
+  "pending_commands": [],
+  "dropped_frames": 0,
+  "environment": "browser",
+  "session_id": 1,
+  "measured_at": "2026-09-17T00:51:41.548468+00:00",
+  "dependencies": {
+    "mcp": "2.2.0",
+    "numpy": "2.5.3",
+    "opencv-python": "5.0.0.93",
+    "pygame": "2.6.1",
+    "dxcam": "0.3.0",
+    "playwright": "1.63.0"
+  },
+  "python": "3.13.2",
+  "controller": {
+    "gain_per_second": 35,
+    "speed_px_s": 1200,
+    "tolerance_px": 6,
+    "settle_ms": 30,
+    "timeout_seconds": 3
+  },
+  "baseline": {
+    "decision_delay_ms": 250,
+    "minimum_cadence_ms": 500,
+    "max_attempts": 6
+  },
+  "browser_version": "153.0.4234.32",
+  "score": {
+    "periodic": {
+      "trials": 4,
+      "successes": 0,
+      "false_actions": 24,
+      "policy_calls": 48,
+      "mean_elapsed_seconds": 3.1173524250043556
+    },
+    "reach": {
+      "trials": 4,
+      "successes": 4,
+      "false_actions": 0,
+      "policy_calls": 12,
+      "mean_elapsed_seconds": 0.41873592499177903
+    }
+  },
+  "truth": [
+    {
+      "kind": "trial_started",
+      "trial_id": "periodic-1",
+      "browser_ms": 3115.0999999940395,
+      "seed": 1
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 3540.0999999940395,
+      "x": 511,
+      "y": 256,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 3540.199999988079,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 4086,
+      "x": 515,
+      "y": 212,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 4086,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 4586.5999999940395,
+      "x": 482,
+      "y": 177,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 4586.5999999940395,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 5110.0999999940395,
+      "x": 422,
+      "y": 161,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 5110.199999988079,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 5617.9000000059605,
+      "x": 343,
+      "y": 169,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 5617.9000000059605,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-1",
+      "browser_ms": 6145.300000011921,
+      "x": 267,
+      "y": 198,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-1",
+      "browser_ms": 6145.300000011921,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "reach-1",
+      "browser_ms": 6611.0999999940395,
+      "seed": 1
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "reach-1",
+      "browser_ms": 7224.199999988079,
+      "x": 515,
+      "y": 220,
+      "trusted": true
+    },
+    {
+      "kind": "hit",
+      "trial_id": "reach-1",
+      "browser_ms": 7224.199999988079,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "periodic-2",
+      "browser_ms": 7483.5,
+      "seed": 2
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 7846.800000011921,
+      "x": 461,
+      "y": 179,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 7846.800000011921,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 8354.09999999404,
+      "x": 394,
+      "y": 162,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 8354.09999999404,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 8863,
+      "x": 317,
+      "y": 167,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 8863,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 9374.199999988079,
+      "x": 247,
+      "y": 193,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 9374.199999988079,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 9922.199999988079,
+      "x": 195,
+      "y": 234,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 9922.199999988079,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-2",
+      "browser_ms": 10445.90000000596,
+      "x": 178,
+      "y": 275,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-2",
+      "browser_ms": 10445.90000000596,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "reach-2",
+      "browser_ms": 10902.59999999404,
+      "seed": 2
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "reach-2",
+      "browser_ms": 11446.90000000596,
+      "x": 410,
+      "y": 164,
+      "trusted": true
+    },
+    {
+      "kind": "hit",
+      "trial_id": "reach-2",
+      "browser_ms": 11446.90000000596,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "periodic-3",
+      "browser_ms": 11712.40000000596,
+      "seed": 3
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 12095.5,
+      "x": 276,
+      "y": 169,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 12095.5,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 12616.90000000596,
+      "x": 213,
+      "y": 198,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 12616.90000000596,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 13123.800000011921,
+      "x": 181,
+      "y": 238,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 13123.800000011921,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 13654.5,
+      "x": 185,
+      "y": 279,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 13654.5,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 14162.5,
+      "x": 222,
+      "y": 305,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 14162.5,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-3",
+      "browser_ms": 14668.90000000596,
+      "x": 286,
+      "y": 310,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-3",
+      "browser_ms": 14668.90000000596,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "reach-3",
+      "browser_ms": 15150.40000000596,
+      "seed": 3
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "reach-3",
+      "browser_ms": 15544.300000011921,
+      "x": 242,
+      "y": 179,
+      "trusted": true
+    },
+    {
+      "kind": "hit",
+      "trial_id": "reach-3",
+      "browser_ms": 15544.300000011921,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "periodic-4",
+      "browser_ms": 15793.800000011921,
+      "seed": 4
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 16169,
+      "x": 178,
+      "y": 241,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 16169,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 16677.30000001192,
+      "x": 199,
+      "y": 280,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 16677.30000001192,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 17186.19999998808,
+      "x": 251,
+      "y": 305,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 17186.19999998808,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 17706.69999998808,
+      "x": 324,
+      "y": 310,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 17706.69999998808,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 18248.69999998808,
+      "x": 402,
+      "y": 291,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 18248.69999998808,
+      "trusted": true
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "periodic-4",
+      "browser_ms": 18780.69999998808,
+      "x": 473,
+      "y": 251,
+      "trusted": true
+    },
+    {
+      "kind": "false_action",
+      "trial_id": "periodic-4",
+      "browser_ms": 18780.69999998808,
+      "trusted": true
+    },
+    {
+      "kind": "trial_started",
+      "trial_id": "reach-4",
+      "browser_ms": 19230,
+      "seed": 4
+    },
+    {
+      "kind": "input_received",
+      "trial_id": "reach-4",
+      "browser_ms": 19645.80000001192,
+      "x": 185,
+      "y": 261,
+      "trusted": true
+    },
+    {
+      "kind": "hit",
+      "trial_id": "reach-4",
+      "browser_ms": 19645.80000001192,
+      "trusted": true
+    }
+  ],
+  "passed": true,
+  "notes": "Paired trajectory seeds; six discrete attempts or one three-second reach per trial. Periodic baseline models 250 ms decision latency / 500 ms cadence, not measured LLM latency. Both policies use the public MCP interface and identical taught color perception. Fixture resets and ground truth are evaluator-only. Browser DOM is never a policy sensor. Elapsed time includes MCP overhead and completion observation; browser truth uses its own performance clock. Synthetic capture/output does not measure Windows latency. These are small fixture smoke tests, not evidence of general web navigation or a sub-tick tracking bound."
+}

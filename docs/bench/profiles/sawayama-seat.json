@@ -1,0 +1,30 @@
+{
+  "name": "Sawayama observed tableau, 2026-09-17",
+  "application": "The Zachtronics Solitaire Collection / Sawayama",
+  "expected_session": 3,
+  "client_size": [1280, 720],
+  "watches": {
+    "nine_clubs_source": {"region": [405, 286, 65, 92], "color_rgb": [250, 250, 245], "tolerance": 18, "min_pixels": 500},
+    "invalid_destination_extension": {"region": [500, 410, 48, 12], "color_rgb": [250, 250, 245], "tolerance": 18, "min_pixels": 100},
+    "legal_destination_extension": {"region": [681, 448, 45, 12], "color_rgb": [250, 250, 245], "tolerance": 18, "min_pixels": 100}
+  },
+  "cases": [
+    {
+      "name": "rejected-nine-on-six",
+      "description": "Attempt the visible nine of clubs onto the six of spades; verify snapback and source restoration.",
+      "source": "nine_clubs_source", "destination": [524, 356],
+      "condition": "invalid_destination_extension",
+      "expected_phase": "failed", "expected_reason": "condition_not_observed",
+      "before": {"nine_clubs_source": true, "invalid_destination_extension": false, "legal_destination_extension": false},
+      "after": {"nine_clubs_source": true, "invalid_destination_extension": false, "legal_destination_extension": false}
+    },
+    {
+      "name": "accepted-nine-on-ten",
+      "description": "Move the visible nine of clubs onto the ten of hearts; verify the vacated source and persistent destination extension.",
+      "source": "nine_clubs_source", "destination": [698, 409],
+      "condition": "legal_destination_extension",
+      "before": {"nine_clubs_source": true, "invalid_destination_extension": false, "legal_destination_extension": false},
+      "after": {"nine_clubs_source": false, "legal_destination_extension": true, "invalid_destination_extension": false}
+    }
+  ]
+}

@@ -1,0 +1,4299 @@
+{
+  "profile": {
+    "name": "Sawayama observed tableau, 2026-09-17",
+    "application": "The Zachtronics Solitaire Collection / Sawayama",
+    "expected_session": 3,
+    "client_size": [
+      1280,
+      720
+    ],
+    "watches": {
+      "nine_clubs_source": {
+        "region": [
+          405,
+          286,
+          65,
+          92
+        ],
+        "color_rgb": [
+          250,
+          250,
+          245
+        ],
+        "tolerance": 18,
+        "min_pixels": 500
+      },
+      "invalid_destination_extension": {
+        "region": [
+          500,
+          410,
+          48,
+          12
+        ],
+        "color_rgb": [
+          250,
+          250,
+          245
+        ],
+        "tolerance": 18,
+        "min_pixels": 100
+      },
+      "legal_destination_extension": {
+        "region": [
+          681,
+          448,
+          45,
+          12
+        ],
+        "color_rgb": [
+          250,
+          250,
+          245
+        ],
+        "tolerance": 18,
+        "min_pixels": 100
+      }
+    },
+    "cases": [
+      {
+        "name": "rejected-nine-on-six",
+        "description": "Attempt the visible nine of clubs onto the six of spades; verify snapback and source restoration.",
+        "source": "nine_clubs_source",
+        "destination": [
+          524,
+          356
+        ],
+        "condition": "invalid_destination_extension",
+        "condition_present": true,
+        "expected_phase": "failed",
+        "expected_reason": "condition_not_observed",
+        "before": {
+          "nine_clubs_source": true,
+          "invalid_destination_extension": false,
+          "legal_destination_extension": false
+        },
+        "after": {
+          "nine_clubs_source": true,
+          "invalid_destination_extension": false,
+          "legal_destination_extension": false
+        }
+      },
+      {
+        "name": "accepted-nine-on-ten",
+        "description": "Move the visible nine of clubs onto the ten of hearts; verify the vacated source and persistent destination extension.",
+        "source": "nine_clubs_source",
+        "destination": [
+          698,
+          409
+        ],
+        "condition": "legal_destination_extension",
+        "condition_present": true,
+        "expected_phase": "completed",
+        "expected_reason": "condition_observed_after_release",
+        "before": {
+          "nine_clubs_source": true,
+          "invalid_destination_extension": false,
+          "legal_destination_extension": false
+        },
+        "after": {
+          "nine_clubs_source": false,
+          "legal_destination_extension": true,
+          "invalid_destination_extension": false
+        }
+      }
+    ]
+  },
+  "measured_at": "2026-09-17T08:24:58.172201+00:00",
+  "dependencies": {
+    "mcp": "2.2.0",
+    "numpy": "2.5.3",
+    "opencv-python": "5.0.0.93",
+    "pygame": "2.6.1",
+    "dxcam": "0.3.0",
+    "playwright": "1.63.0"
+  },
+  "python": "3.13.2",
+  "cases": [
+    {
+      "name": "rejected-nine-on-six",
+      "description": "Attempt the visible nine of clubs onto the six of spades; verify snapback and source restoration.",
+      "before": {
+        "nine_clubs_source": {
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        "invalid_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        },
+        "legal_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "intent": {
+        "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+        "program": "drag",
+        "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+        "phase": "running",
+        "reason": null,
+        "started_mono": 203622.5461337,
+        "expires_mono": 203630.5461337,
+        "cursor": null,
+        "error_px": null,
+        "commands": 0,
+        "task_success_verified": false,
+        "stage": "approaching",
+        "button_held": false,
+        "condition_verified": false,
+        "released_mono": 0.0,
+        "verification_observation_id": 0,
+        "condition_sample_started_mono": 0.0,
+        "condition_stable_since_mono": null,
+        "destination": [
+          524,
+          356
+        ],
+        "destination_watch_id": null,
+        "until": {
+          "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+          "present": true
+        }
+      },
+      "elapsed_seconds": 1.9283176999888383,
+      "outcome": {
+        "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+        "program": "drag",
+        "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+        "phase": "failed",
+        "reason": "condition_not_observed",
+        "started_mono": 203622.5461337,
+        "expires_mono": 203630.5461337,
+        "cursor": [
+          524,
+          356
+        ],
+        "error_px": 0.0,
+        "commands": 66,
+        "task_success_verified": false,
+        "stage": "verifying",
+        "button_held": false,
+        "condition_verified": false,
+        "released_mono": 203623.2311144,
+        "verification_observation_id": 11372,
+        "condition_sample_started_mono": 203624.4255136,
+        "condition_stable_since_mono": null,
+        "destination": [
+          524,
+          356
+        ],
+        "destination_watch_id": null,
+        "until": {
+          "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+          "present": true
+        }
+      },
+      "after": {
+        "nine_clubs_source": {
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        "invalid_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        },
+        "legal_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        }
+      },
+      "snapshot": {
+        "id": "a8213e3b143247dabe023a1b35293378:1:11401",
+        "observation_id": 11401,
+        "captured_mono": 203624.8702842,
+        "capture_source": "dxgi",
+        "sample_started_mono": 203624.8648499,
+        "age_ms": 5.6127999851014465,
+        "session_id": 3,
+        "width": 1280,
+        "height": 720,
+        "layout_revision": 1,
+        "target": {
+          "hwnd": 66708,
+          "pid": 85676,
+          "class": "SDL_app",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ]
+        },
+        "coordinate_space": "screen",
+        "origin": [
+          0,
+          0
+        ]
+      },
+      "pending_commands": [],
+      "drag_starts": 1,
+      "releases": 1
+    },
+    {
+      "name": "accepted-nine-on-ten",
+      "description": "Move the visible nine of clubs onto the ten of hearts; verify the vacated source and persistent destination extension.",
+      "before": {
+        "nine_clubs_source": {
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        "invalid_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        },
+        "legal_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "intent": {
+        "intent_id": "d48a4ca7f0a246f286addda858426c39",
+        "program": "drag",
+        "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+        "phase": "running",
+        "reason": null,
+        "started_mono": 203624.9044072,
+        "expires_mono": 203632.9044072,
+        "cursor": null,
+        "error_px": null,
+        "commands": 0,
+        "task_success_verified": false,
+        "stage": "approaching",
+        "button_held": false,
+        "condition_verified": false,
+        "released_mono": 0.0,
+        "verification_observation_id": 0,
+        "condition_sample_started_mono": 0.0,
+        "condition_stable_since_mono": null,
+        "destination": [
+          698,
+          409
+        ],
+        "destination_watch_id": null,
+        "until": {
+          "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+          "present": true
+        }
+      },
+      "elapsed_seconds": 0.9946574000059627,
+      "outcome": {
+        "intent_id": "d48a4ca7f0a246f286addda858426c39",
+        "program": "drag",
+        "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+        "phase": "completed",
+        "reason": "condition_observed_after_release",
+        "started_mono": 203624.9044072,
+        "expires_mono": 203632.9044072,
+        "cursor": [
+          692,
+          407
+        ],
+        "error_px": 9.486832980505138,
+        "commands": 79,
+        "task_success_verified": false,
+        "stage": "verifying",
+        "button_held": false,
+        "condition_verified": true,
+        "released_mono": 203625.75088,
+        "verification_observation_id": 11467,
+        "condition_sample_started_mono": 203625.8647335,
+        "condition_stable_since_mono": 203625.758172,
+        "destination": [
+          698,
+          409
+        ],
+        "destination_watch_id": null,
+        "until": {
+          "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+          "present": true
+        }
+      },
+      "after": {
+        "nine_clubs_source": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        },
+        "legal_destination_extension": {
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        "invalid_destination_extension": {
+          "expected": false,
+          "observed": false,
+          "passed": true
+        }
+      },
+      "snapshot": {
+        "id": "a8213e3b143247dabe023a1b35293378:1:11495",
+        "observation_id": 11495,
+        "captured_mono": 203626.2938649,
+        "capture_source": "dxgi",
+        "sample_started_mono": 203626.2888437,
+        "age_ms": 3.123599977698177,
+        "session_id": 3,
+        "width": 1280,
+        "height": 720,
+        "layout_revision": 1,
+        "target": {
+          "hwnd": 66708,
+          "pid": 85676,
+          "class": "SDL_app",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ]
+        },
+        "coordinate_space": "screen",
+        "origin": [
+          0,
+          0
+        ]
+      },
+      "pending_commands": [],
+      "drag_starts": 1,
+      "releases": 1
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "t_mono": 203451.9820876,
+      "kind": "core_ready"
+    },
+    {
+      "seq": 2,
+      "t_mono": 203612.8760714,
+      "kind": "observation_dropped",
+      "observation_id": 10605,
+      "reason": "older_than_50_ms"
+    },
+    {
+      "seq": 3,
+      "t_mono": 203612.9026913,
+      "kind": "observation_dropped",
+      "observation_id": 10609,
+      "reason": "older_than_50_ms"
+    },
+    {
+      "seq": 4,
+      "t_mono": 203622.1484032,
+      "kind": "lease_claimed",
+      "client_id": "96fd43648bc346838b57cde02a56cab8"
+    },
+    {
+      "seq": 5,
+      "t_mono": 203622.1636871,
+      "kind": "watch_added",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "name": "nine_clubs_source"
+    },
+    {
+      "seq": 6,
+      "t_mono": 203622.1767542,
+      "kind": "appear",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11223,
+      "captured_mono": 203622.1715485,
+      "detection": {
+        "x": 435,
+        "y": 332,
+        "pixels": 4749,
+        "bbox": [
+          405,
+          286,
+          65,
+          92
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "t_mono": 203622.1789659,
+      "kind": "watch_added",
+      "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+      "name": "invalid_destination_extension"
+    },
+    {
+      "seq": 8,
+      "t_mono": 203622.1942804,
+      "kind": "watch_added",
+      "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+      "name": "legal_destination_extension"
+    },
+    {
+      "seq": 9,
+      "t_mono": 203622.5461337,
+      "kind": "intent_started",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "program": "drag",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 203622.5461337,
+      "expires_mono": 203630.5461337,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false,
+      "stage": "approaching",
+      "button_held": false,
+      "condition_verified": false,
+      "released_mono": 0.0,
+      "verification_observation_id": 0,
+      "condition_sample_started_mono": 0.0,
+      "condition_stable_since_mono": null,
+      "destination": [
+        524,
+        356
+      ],
+      "destination_watch_id": null,
+      "until": {
+        "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+        "present": true
+      }
+    },
+    {
+      "seq": 10,
+      "t_mono": 203622.5498849,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11247,
+      "captured_mono": 203622.5377388,
+      "sample_started_mono": 203622.5310781,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.5495173,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "96c04621dfd445d6a27362159fc36463",
+      "cursor": [
+        563,
+        333
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 11,
+      "t_mono": 203622.5612551,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11248,
+      "captured_mono": 203622.5506553,
+      "sample_started_mono": 203622.5468833,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.5597748,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "bbbb1ab007774cfc94ffc7e34aa2e293",
+      "cursor": [
+        558,
+        333
+      ],
+      "submitted_point": [
+        558,
+        333
+      ]
+    },
+    {
+      "seq": 12,
+      "t_mono": 203622.5714454,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11249,
+      "captured_mono": 203622.5662206,
+      "sample_started_mono": 203622.562041,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.5709041,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "f60d6c226d59470796409c19a8896d67",
+      "cursor": [
+        552,
+        333
+      ],
+      "submitted_point": [
+        552,
+        333
+      ]
+    },
+    {
+      "seq": 13,
+      "t_mono": 203622.5816356,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11249,
+      "captured_mono": 203622.5662206,
+      "sample_started_mono": 203622.562041,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.5812507,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "77409e07ef9d490daedcf22144d0ac4c",
+      "cursor": [
+        547,
+        333
+      ],
+      "submitted_point": [
+        547,
+        333
+      ]
+    },
+    {
+      "seq": 14,
+      "t_mono": 203622.5921211,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11250,
+      "captured_mono": 203622.5812041,
+      "sample_started_mono": 203622.5777505,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.5915955,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "495cc4fa1c594d5697df244c49687615",
+      "cursor": [
+        542,
+        333
+      ],
+      "submitted_point": [
+        542,
+        333
+      ]
+    },
+    {
+      "seq": 15,
+      "t_mono": 203622.6026365,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11251,
+      "captured_mono": 203622.5953028,
+      "sample_started_mono": 203622.5917553,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6020626,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "68feabcad7a54426bc9fff83b420c9e7",
+      "cursor": [
+        537,
+        333
+      ],
+      "submitted_point": [
+        537,
+        333
+      ]
+    },
+    {
+      "seq": 16,
+      "t_mono": 203622.6127129,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11252,
+      "captured_mono": 203622.6108975,
+      "sample_started_mono": 203622.6078144,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.612435,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "0297901396ce45a4b56a2a68eef4112d",
+      "cursor": [
+        532,
+        333
+      ],
+      "submitted_point": [
+        532,
+        333
+      ]
+    },
+    {
+      "seq": 17,
+      "t_mono": 203622.6232738,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11252,
+      "captured_mono": 203622.6108975,
+      "sample_started_mono": 203622.6078144,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6229789,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "53b5948a6cd14da2a576bdf00cd41ff1",
+      "cursor": [
+        527,
+        333
+      ],
+      "submitted_point": [
+        527,
+        333
+      ]
+    },
+    {
+      "seq": 18,
+      "t_mono": 203622.6332636,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11253,
+      "captured_mono": 203622.6293048,
+      "sample_started_mono": 203622.6224268,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6330136,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "94fc2fc4bdb041cc86f605a9ede93d46",
+      "cursor": [
+        522,
+        333
+      ],
+      "submitted_point": [
+        522,
+        333
+      ]
+    },
+    {
+      "seq": 19,
+      "t_mono": 203622.6436479,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11253,
+      "captured_mono": 203622.6293048,
+      "sample_started_mono": 203622.6224268,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6433694,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "65bd6c0f0b56490381080854ebfdd81e",
+      "cursor": [
+        517,
+        333
+      ],
+      "submitted_point": [
+        517,
+        333
+      ]
+    },
+    {
+      "seq": 20,
+      "t_mono": 203622.6541066,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11254,
+      "captured_mono": 203622.6441691,
+      "sample_started_mono": 203622.6377055,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6538046,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "fd7b21b58fb240d0a69ec0b1a876648b",
+      "cursor": [
+        512,
+        333
+      ],
+      "submitted_point": [
+        512,
+        333
+      ]
+    },
+    {
+      "seq": 21,
+      "t_mono": 203622.6642573,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11255,
+      "captured_mono": 203622.6571363,
+      "sample_started_mono": 203622.6522496,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6639149,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "e2f032bb2dce4b79b5b21eb58b6b813c",
+      "cursor": [
+        507,
+        333
+      ],
+      "submitted_point": [
+        507,
+        333
+      ]
+    },
+    {
+      "seq": 22,
+      "t_mono": 203622.6745704,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11256,
+      "captured_mono": 203622.6722327,
+      "sample_started_mono": 203622.668025,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6741653,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "0c166cc3d6d54f389ae05f56889551b2",
+      "cursor": [
+        502,
+        333
+      ],
+      "submitted_point": [
+        502,
+        333
+      ]
+    },
+    {
+      "seq": 23,
+      "t_mono": 203622.6849807,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11256,
+      "captured_mono": 203622.6722327,
+      "sample_started_mono": 203622.668025,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6846828,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "b39e5f59e1174bdcaf41d620b946f280",
+      "cursor": [
+        497,
+        333
+      ],
+      "submitted_point": [
+        497,
+        333
+      ]
+    },
+    {
+      "seq": 24,
+      "t_mono": 203622.695425,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11257,
+      "captured_mono": 203622.6871853,
+      "sample_started_mono": 203622.6826567,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.6951089,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "4badc5fc972a40cebb113222a166c281",
+      "cursor": [
+        492,
+        333
+      ],
+      "submitted_point": [
+        492,
+        333
+      ]
+    },
+    {
+      "seq": 25,
+      "t_mono": 203622.7056788,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11258,
+      "captured_mono": 203622.7019009,
+      "sample_started_mono": 203622.6988322,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7053148,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "f37be19a473642ccafdcbf76ed1ad3f8",
+      "cursor": [
+        487,
+        333
+      ],
+      "submitted_point": [
+        487,
+        333
+      ]
+    },
+    {
+      "seq": 26,
+      "t_mono": 203622.7159103,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11258,
+      "captured_mono": 203622.7019009,
+      "sample_started_mono": 203622.6988322,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.715663,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "9c91e25df5004fdf8e8b02638fc8c4b7",
+      "cursor": [
+        482,
+        333
+      ],
+      "submitted_point": [
+        482,
+        333
+      ]
+    },
+    {
+      "seq": 27,
+      "t_mono": 203622.7264197,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11259,
+      "captured_mono": 203622.7169378,
+      "sample_started_mono": 203622.713645,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.726024,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "47c172993e36422b9d8a8947cc62ea99",
+      "cursor": [
+        477,
+        333
+      ],
+      "submitted_point": [
+        477,
+        333
+      ]
+    },
+    {
+      "seq": 28,
+      "t_mono": 203622.7368037,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11260,
+      "captured_mono": 203622.7348779,
+      "sample_started_mono": 203622.7292494,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7364602,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "e73e999401b041128865260536dfe5c1",
+      "cursor": [
+        472,
+        333
+      ],
+      "submitted_point": [
+        472,
+        333
+      ]
+    },
+    {
+      "seq": 29,
+      "t_mono": 203622.7472196,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11260,
+      "captured_mono": 203622.7348779,
+      "sample_started_mono": 203622.7292494,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7469447,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "bbbbafc7f90b4e69975119c2cec794f8",
+      "cursor": [
+        467,
+        333
+      ],
+      "submitted_point": [
+        467,
+        333
+      ]
+    },
+    {
+      "seq": 30,
+      "t_mono": 203622.7577152,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11261,
+      "captured_mono": 203622.7502951,
+      "sample_started_mono": 203622.7431768,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7573232,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "e2fb23bf36c04dcaa981ee5699b2d8ad",
+      "cursor": [
+        462,
+        333
+      ],
+      "submitted_point": [
+        462,
+        333
+      ]
+    },
+    {
+      "seq": 31,
+      "t_mono": 203622.7696388,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11262,
+      "captured_mono": 203622.7639195,
+      "sample_started_mono": 203622.7583621,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7693449,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "e066907c09ca473896d9700804727029",
+      "cursor": [
+        456,
+        333
+      ],
+      "submitted_point": [
+        456,
+        333
+      ]
+    },
+    {
+      "seq": 32,
+      "t_mono": 203622.7797534,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11263,
+      "captured_mono": 203622.7772687,
+      "sample_started_mono": 203622.7739371,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7793795,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "d2ebfdca484548d19d985c76343e13d9",
+      "cursor": [
+        451,
+        333
+      ],
+      "submitted_point": [
+        451,
+        333
+      ]
+    },
+    {
+      "seq": 33,
+      "t_mono": 203622.7898603,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11263,
+      "captured_mono": 203622.7772687,
+      "sample_started_mono": 203622.7739371,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7895451,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "3052f2bddea94f12a4944a2cd527c29a",
+      "cursor": [
+        446,
+        333
+      ],
+      "submitted_point": [
+        446,
+        333
+      ]
+    },
+    {
+      "seq": 34,
+      "t_mono": 203622.7998852,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11264,
+      "captured_mono": 203622.7929213,
+      "sample_started_mono": 203622.7887412,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.7995726,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "0c8584d09ddb425483a29a964c643068",
+      "cursor": [
+        442,
+        333
+      ],
+      "submitted_point": [
+        442,
+        333
+      ]
+    },
+    {
+      "seq": 35,
+      "t_mono": 203622.8099971,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11265,
+      "captured_mono": 203622.8074168,
+      "sample_started_mono": 203622.8043291,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.809724,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "51215f505c63450ab494c30960816400",
+      "cursor": [
+        440,
+        333
+      ],
+      "submitted_point": [
+        440,
+        333
+      ]
+    },
+    {
+      "seq": 36,
+      "t_mono": 203622.8203784,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11265,
+      "captured_mono": 203622.8074168,
+      "sample_started_mono": 203622.8043291,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.820034,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "623060740d104e1c98ca4a749f90d3da",
+      "cursor": [
+        438,
+        333
+      ],
+      "submitted_point": [
+        438,
+        333
+      ]
+    },
+    {
+      "seq": 37,
+      "t_mono": 203622.830772,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11266,
+      "captured_mono": 203622.8230755,
+      "sample_started_mono": 203622.8194955,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.830425,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "3f68e4fc630449868570c44ee5162e61",
+      "cursor": [
+        437,
+        333
+      ],
+      "submitted_point": [
+        437,
+        333
+      ]
+    },
+    {
+      "seq": 38,
+      "t_mono": 203622.8411674,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11267,
+      "captured_mono": 203622.837714,
+      "sample_started_mono": 203622.8345288,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.8407866,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "0f92bc02b09847f1a9ebf8ebb2c03b0b",
+      "cursor": [
+        436,
+        333
+      ],
+      "submitted_point": [
+        436,
+        333
+      ]
+    },
+    {
+      "seq": 39,
+      "t_mono": 203622.8515976,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11267,
+      "captured_mono": 203622.837714,
+      "sample_started_mono": 203622.8345288,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.8512983,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "2a281fdf375a407e9a9a6f50f941902f",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 40,
+      "t_mono": 203622.8620163,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11268,
+      "captured_mono": 203622.8568438,
+      "sample_started_mono": 203622.850114,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.861674,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "622696f4e9524ed280d7afca88ef3fac",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 41,
+      "t_mono": 203622.8721114,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11268,
+      "captured_mono": 203622.8568438,
+      "sample_started_mono": 203622.850114,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.8718156,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "304861d4a00c41af8c49494438a79981",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 42,
+      "t_mono": 203622.8824629,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11269,
+      "captured_mono": 203622.8713105,
+      "sample_started_mono": 203622.8655721,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.8821574,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "5bfc4b6cb789462684bd1e5817ea2e11",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 43,
+      "t_mono": 203622.8930122,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11270,
+      "captured_mono": 203622.885191,
+      "sample_started_mono": 203622.8808963,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.8926011,
+      "goal": [
+        436,
+        333
+      ],
+      "command_id": "8d66ff1bfd854ad5ada672b1f1defeb8",
+      "cursor": [
+        436,
+        333
+      ],
+      "submitted_point": [
+        436,
+        333
+      ]
+    },
+    {
+      "seq": 44,
+      "t_mono": 203622.9030824,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11271,
+      "captured_mono": 203622.8986689,
+      "sample_started_mono": 203622.8946944,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9026208,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "16f9d2227a2d4bd1b020845c3a0fc6f7",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 45,
+      "t_mono": 203622.9134213,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11271,
+      "captured_mono": 203622.8986689,
+      "sample_started_mono": 203622.8946944,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9130511,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "b6a60d20412040258d24702b46c4089c",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 46,
+      "t_mono": 203622.9238009,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11272,
+      "captured_mono": 203622.9142982,
+      "sample_started_mono": 203622.910875,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9234314,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "b87d3cd2b7c446c6923bba296d9bcc22",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 47,
+      "t_mono": 203622.9408453,
+      "kind": "drag_started",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11273,
+      "captured_mono": 203622.9291954,
+      "sample_started_mono": 203622.9254689,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9334906,
+      "goal": null,
+      "command_id": "ab954940f6c94fc78aee70db0e50b39a",
+      "drag_id": "8ab8c106c63e467696123d76c8d8e404",
+      "cursor": [
+        435,
+        332
+      ],
+      "hold_until": 203623.0254689
+    },
+    {
+      "seq": 48,
+      "t_mono": 203622.9440407,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11273,
+      "captured_mono": 203622.9291954,
+      "sample_started_mono": 203622.9254689,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9436698,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "409ac1723f334872a3e3fb22a8952596",
+      "cursor": [
+        440,
+        333
+      ],
+      "submitted_point": [
+        440,
+        333
+      ]
+    },
+    {
+      "seq": 49,
+      "t_mono": 203622.9546081,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11274,
+      "captured_mono": 203622.9477094,
+      "sample_started_mono": 203622.9407841,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9540338,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "ac830f85cdf449a29361a155dbd9ff1d",
+      "cursor": [
+        445,
+        334
+      ],
+      "submitted_point": [
+        445,
+        334
+      ]
+    },
+    {
+      "seq": 50,
+      "t_mono": 203622.9647405,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11275,
+      "captured_mono": 203622.9619224,
+      "sample_started_mono": 203622.956039,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9644715,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "44f9129bda13477cab2153cb061b28d7",
+      "cursor": [
+        450,
+        335
+      ],
+      "submitted_point": [
+        450,
+        335
+      ]
+    },
+    {
+      "seq": 51,
+      "t_mono": 203622.9751117,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11275,
+      "captured_mono": 203622.9619224,
+      "sample_started_mono": 203622.956039,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9747882,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "3fbc3394e9a74ca686786050d8282d45",
+      "cursor": [
+        455,
+        336
+      ],
+      "submitted_point": [
+        455,
+        336
+      ]
+    },
+    {
+      "seq": 52,
+      "t_mono": 203622.9854795,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11276,
+      "captured_mono": 203622.9773391,
+      "sample_started_mono": 203622.971194,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9851291,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "4144cb06e0f84614a14e236e9579eead",
+      "cursor": [
+        460,
+        337
+      ],
+      "submitted_point": [
+        460,
+        337
+      ]
+    },
+    {
+      "seq": 53,
+      "t_mono": 203622.99931,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11277,
+      "captured_mono": 203622.9907347,
+      "sample_started_mono": 203622.9867226,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203622.9988949,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "3676a46c0b1940c7a6ebea327a025b81",
+      "cursor": [
+        467,
+        339
+      ],
+      "submitted_point": [
+        467,
+        339
+      ]
+    },
+    {
+      "seq": 54,
+      "t_mono": 203623.0098164,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11278,
+      "captured_mono": 203623.0076453,
+      "sample_started_mono": 203623.0019824,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0093493,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "cd68133a33d04f548c5fd0f4a3c72171",
+      "cursor": [
+        472,
+        340
+      ],
+      "submitted_point": [
+        472,
+        340
+      ]
+    },
+    {
+      "seq": 55,
+      "t_mono": 203623.0201092,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11278,
+      "captured_mono": 203623.0076453,
+      "sample_started_mono": 203623.0019824,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0197026,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "6d594681e5954b0c83f7d4768b82efaa",
+      "cursor": [
+        477,
+        342
+      ],
+      "submitted_point": [
+        477,
+        342
+      ]
+    },
+    {
+      "seq": 56,
+      "t_mono": 203623.034711,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11279,
+      "captured_mono": 203623.0207306,
+      "sample_started_mono": 203623.016523,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0344434,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "fa577b136cbb4b779701cde65f113ecf",
+      "cursor": [
+        484,
+        344
+      ],
+      "submitted_point": [
+        484,
+        344
+      ]
+    },
+    {
+      "seq": 57,
+      "t_mono": 203623.0449929,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11280,
+      "captured_mono": 203623.0354025,
+      "sample_started_mono": 203623.0321156,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0446484,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "33c6fc63304a4bae973dd0617ba40836",
+      "cursor": [
+        489,
+        345
+      ],
+      "submitted_point": [
+        489,
+        345
+      ]
+    },
+    {
+      "seq": 58,
+      "t_mono": 203623.0554936,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11281,
+      "captured_mono": 203623.0501013,
+      "sample_started_mono": 203623.0467324,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0551383,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "bff1c00cd261467eba7e8a7ed0a9b3b9",
+      "cursor": [
+        494,
+        347
+      ],
+      "submitted_point": [
+        494,
+        347
+      ]
+    },
+    {
+      "seq": 59,
+      "t_mono": 203623.0658385,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11281,
+      "captured_mono": 203623.0501013,
+      "sample_started_mono": 203623.0467324,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0656106,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "bab1262ed50647cfbcd6e7bf5a5aa3c1",
+      "cursor": [
+        499,
+        349
+      ],
+      "submitted_point": [
+        499,
+        349
+      ]
+    },
+    {
+      "seq": 60,
+      "t_mono": 203623.0763749,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11282,
+      "captured_mono": 203623.0684109,
+      "sample_started_mono": 203623.0623183,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0759158,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "8b66120ab9d0471dbc435ff2d4518dc2",
+      "cursor": [
+        504,
+        350
+      ],
+      "submitted_point": [
+        504,
+        350
+      ]
+    },
+    {
+      "seq": 61,
+      "t_mono": 203623.0865484,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11283,
+      "captured_mono": 203623.0822871,
+      "sample_started_mono": 203623.0764311,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.086258,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "45d0bd7412674903af3ca816493b5f2b",
+      "cursor": [
+        509,
+        351
+      ],
+      "submitted_point": [
+        509,
+        351
+      ]
+    },
+    {
+      "seq": 62,
+      "t_mono": 203623.0969612,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11284,
+      "captured_mono": 203623.0954968,
+      "sample_started_mono": 203623.0924389,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.0966253,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "14afb1c8b88a4b5da74093c882eeaadd",
+      "cursor": [
+        514,
+        353
+      ],
+      "submitted_point": [
+        514,
+        353
+      ]
+    },
+    {
+      "seq": 63,
+      "t_mono": 203623.1072892,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11284,
+      "captured_mono": 203623.0954968,
+      "sample_started_mono": 203623.0924389,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1069753,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "69c64ce9f073470fb8b3c61fb16c1387",
+      "cursor": [
+        518,
+        354
+      ],
+      "submitted_point": [
+        518,
+        354
+      ]
+    },
+    {
+      "seq": 64,
+      "t_mono": 203623.1175426,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11285,
+      "captured_mono": 203623.1104884,
+      "sample_started_mono": 203623.1069892,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1172979,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "feaaa0319dab4941997c4a4804fba026",
+      "cursor": [
+        520,
+        355
+      ],
+      "submitted_point": [
+        520,
+        355
+      ]
+    },
+    {
+      "seq": 65,
+      "t_mono": 203623.1264979,
+      "kind": "vanish",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11286,
+      "captured_mono": 203623.1256989,
+      "detection": null
+    },
+    {
+      "seq": 66,
+      "t_mono": 203623.1279462,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11286,
+      "captured_mono": 203623.1256989,
+      "sample_started_mono": 203623.1218954,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1277014,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "c4a248c2f25e40859efb1bfc4a722110",
+      "cursor": [
+        521,
+        355
+      ],
+      "submitted_point": [
+        521,
+        355
+      ]
+    },
+    {
+      "seq": 67,
+      "t_mono": 203623.1382611,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11286,
+      "captured_mono": 203623.1256989,
+      "sample_started_mono": 203623.1218954,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1380299,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "5e6b138c124e4d41995837a7ed1f5c63",
+      "cursor": [
+        522,
+        355
+      ],
+      "submitted_point": [
+        522,
+        355
+      ]
+    },
+    {
+      "seq": 68,
+      "t_mono": 203623.1488364,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11287,
+      "captured_mono": 203623.1403684,
+      "sample_started_mono": 203623.1370001,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.148435,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "b53d299ea94f4ddb959fb470a9b148a3",
+      "cursor": [
+        523,
+        355
+      ],
+      "submitted_point": [
+        523,
+        355
+      ]
+    },
+    {
+      "seq": 69,
+      "t_mono": 203623.1590772,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11288,
+      "captured_mono": 203623.1557795,
+      "sample_started_mono": 203623.1526092,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1587282,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "f769ee77fe334dd19928a6fb00faf518",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 70,
+      "t_mono": 203623.1690641,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11288,
+      "captured_mono": 203623.1557795,
+      "sample_started_mono": 203623.1526092,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1688189,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "4609e40d7a5a449d8185fe7fd6c22251",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 71,
+      "t_mono": 203623.1792751,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11289,
+      "captured_mono": 203623.1730335,
+      "sample_started_mono": 203623.168319,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.1790155,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "1f18acbd99cc45f4981d6e089e3d364b",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 72,
+      "t_mono": 203623.1897072,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11289,
+      "captured_mono": 203623.1730335,
+      "sample_started_mono": 203623.168319,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.189493,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "f1781fb7d326424497f4b50b27746690",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 73,
+      "t_mono": 203623.2001458,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11290,
+      "captured_mono": 203623.18922,
+      "sample_started_mono": 203623.1831807,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.199907,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "a0eb03e9e36a4e2982439d92b034316b",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 74,
+      "t_mono": 203623.2104753,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11291,
+      "captured_mono": 203623.2036803,
+      "sample_started_mono": 203623.1988557,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.2102357,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "2be71cd319394410a4954058444e16c3",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 75,
+      "t_mono": 203623.2207277,
+      "kind": "pointer_feedback",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11292,
+      "captured_mono": 203623.2176506,
+      "sample_started_mono": 203623.2132381,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.2204949,
+      "goal": [
+        524,
+        356
+      ],
+      "command_id": "732237fc6481451e869ff88e692f5d08",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": [
+        524,
+        356
+      ]
+    },
+    {
+      "seq": 76,
+      "t_mono": 203623.2311144,
+      "kind": "input_released",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11292,
+      "captured_mono": 203623.2176506,
+      "sample_started_mono": 203623.2132381,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203623.2308293,
+      "goal": null,
+      "command_id": "c6e4b6fd1f0e4a5b9d322f8033e7f55b",
+      "drag_id": "8ab8c106c63e467696123d76c8d8e404",
+      "reason": "requested"
+    },
+    {
+      "seq": 77,
+      "t_mono": 203623.2781921,
+      "kind": "appear",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11296,
+      "captured_mono": 203623.2776133,
+      "detection": {
+        "x": 435,
+        "y": 332,
+        "pixels": 4749,
+        "bbox": [
+          405,
+          286,
+          65,
+          92
+        ]
+      }
+    },
+    {
+      "seq": 78,
+      "t_mono": 203624.4379889,
+      "kind": "intent_failed",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "program": "drag",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "phase": "failed",
+      "reason": "condition_not_observed",
+      "started_mono": 203622.5461337,
+      "expires_mono": 203630.5461337,
+      "cursor": [
+        524,
+        356
+      ],
+      "error_px": 0.0,
+      "commands": 66,
+      "task_success_verified": false,
+      "stage": "verifying",
+      "button_held": false,
+      "condition_verified": false,
+      "released_mono": 203623.2311144,
+      "verification_observation_id": 11372,
+      "condition_sample_started_mono": 203624.4255136,
+      "condition_stable_since_mono": null,
+      "destination": [
+        524,
+        356
+      ],
+      "destination_watch_id": null,
+      "until": {
+        "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+        "present": true
+      }
+    },
+    {
+      "seq": 79,
+      "t_mono": 203624.4380969,
+      "kind": "output_halted",
+      "intent_id": "8ab8c106c63e467696123d76c8d8e404",
+      "command_id": "64e3dafd615d4081912987896d792d46"
+    },
+    {
+      "seq": 80,
+      "t_mono": 203624.9044072,
+      "kind": "intent_started",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "program": "drag",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "phase": "running",
+      "reason": null,
+      "started_mono": 203624.9044072,
+      "expires_mono": 203632.9044072,
+      "cursor": null,
+      "error_px": null,
+      "commands": 0,
+      "task_success_verified": false,
+      "stage": "approaching",
+      "button_held": false,
+      "condition_verified": false,
+      "released_mono": 0.0,
+      "verification_observation_id": 0,
+      "condition_sample_started_mono": 0.0,
+      "condition_stable_since_mono": null,
+      "destination": [
+        698,
+        409
+      ],
+      "destination_watch_id": null,
+      "until": {
+        "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+        "present": true
+      }
+    },
+    {
+      "seq": 81,
+      "t_mono": 203624.9068018,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11403,
+      "captured_mono": 203624.8988253,
+      "sample_started_mono": 203624.8953214,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9065948,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "53f4bd426905431f80989d378afc0480",
+      "cursor": [
+        524,
+        356
+      ],
+      "submitted_point": null
+    },
+    {
+      "seq": 82,
+      "t_mono": 203624.9173989,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11404,
+      "captured_mono": 203624.9136906,
+      "sample_started_mono": 203624.9107423,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9170699,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "7a14df28b5ca4044a04a3ac06a6c1017",
+      "cursor": [
+        519,
+        355
+      ],
+      "submitted_point": [
+        519,
+        355
+      ]
+    },
+    {
+      "seq": 83,
+      "t_mono": 203624.9277367,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11404,
+      "captured_mono": 203624.9136906,
+      "sample_started_mono": 203624.9107423,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9274588,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "f127a44f4c66434aac24714e64ae4236",
+      "cursor": [
+        514,
+        354
+      ],
+      "submitted_point": [
+        514,
+        354
+      ]
+    },
+    {
+      "seq": 84,
+      "t_mono": 203624.937962,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11405,
+      "captured_mono": 203624.9283734,
+      "sample_started_mono": 203624.9248648,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9376149,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "7428a3d537484ef099117cfed56a3ce1",
+      "cursor": [
+        509,
+        353
+      ],
+      "submitted_point": [
+        509,
+        353
+      ]
+    },
+    {
+      "seq": 85,
+      "t_mono": 203624.9484096,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11406,
+      "captured_mono": 203624.9437929,
+      "sample_started_mono": 203624.9407489,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9481253,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "220c3b3e3ab1469da09b944b4acb97bf",
+      "cursor": [
+        504,
+        352
+      ],
+      "submitted_point": [
+        504,
+        352
+      ]
+    },
+    {
+      "seq": 86,
+      "t_mono": 203624.9587459,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11406,
+      "captured_mono": 203624.9437929,
+      "sample_started_mono": 203624.9407489,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9584876,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "896eeca46ef4499791c7c817d4a5aea5",
+      "cursor": [
+        499,
+        351
+      ],
+      "submitted_point": [
+        499,
+        351
+      ]
+    },
+    {
+      "seq": 87,
+      "t_mono": 203624.9693483,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11407,
+      "captured_mono": 203624.9604814,
+      "sample_started_mono": 203624.9553773,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.968943,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "abfc26a38a8549f8992a37ed1f2f8743",
+      "cursor": [
+        494,
+        350
+      ],
+      "submitted_point": [
+        494,
+        350
+      ]
+    },
+    {
+      "seq": 88,
+      "t_mono": 203624.9797776,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11408,
+      "captured_mono": 203624.9772833,
+      "sample_started_mono": 203624.9711577,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9794415,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "aa8a93725627475991d237f3265c4558",
+      "cursor": [
+        489,
+        348
+      ],
+      "submitted_point": [
+        489,
+        348
+      ]
+    },
+    {
+      "seq": 89,
+      "t_mono": 203624.9899045,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11408,
+      "captured_mono": 203624.9772833,
+      "sample_started_mono": 203624.9711577,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9894615,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "4293df2b9d374bb29f626287986c2467",
+      "cursor": [
+        484,
+        347
+      ],
+      "submitted_point": [
+        484,
+        347
+      ]
+    },
+    {
+      "seq": 90,
+      "t_mono": 203625.000298,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11409,
+      "captured_mono": 203624.989642,
+      "sample_started_mono": 203624.9858004,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203624.9999684,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "5aff1f2a9716401c8fbb3bc91f08ba55",
+      "cursor": [
+        479,
+        345
+      ],
+      "submitted_point": [
+        479,
+        345
+      ]
+    },
+    {
+      "seq": 91,
+      "t_mono": 203625.011089,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11410,
+      "captured_mono": 203625.0060974,
+      "sample_started_mono": 203625.0020182,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0107018,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "12ab75a3b72f4f6cb75cf59f9ab70b80",
+      "cursor": [
+        474,
+        343
+      ],
+      "submitted_point": [
+        474,
+        343
+      ]
+    },
+    {
+      "seq": 92,
+      "t_mono": 203625.0222384,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11411,
+      "captured_mono": 203625.0195834,
+      "sample_started_mono": 203625.0158884,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0218433,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "ac1a1a1a81cd4492a4cb57bd15e13dab",
+      "cursor": [
+        469,
+        341
+      ],
+      "submitted_point": [
+        469,
+        341
+      ]
+    },
+    {
+      "seq": 93,
+      "t_mono": 203625.0322706,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11411,
+      "captured_mono": 203625.0195834,
+      "sample_started_mono": 203625.0158884,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0319624,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "dcaed37efe4d4a91b3b26b6494d47ddc",
+      "cursor": [
+        464,
+        340
+      ],
+      "submitted_point": [
+        464,
+        340
+      ]
+    },
+    {
+      "seq": 94,
+      "t_mono": 203625.0428486,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11412,
+      "captured_mono": 203625.0352756,
+      "sample_started_mono": 203625.0314429,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0424838,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "bb7189d3f9714881b3cd0c3ba4853d05",
+      "cursor": [
+        459,
+        339
+      ],
+      "submitted_point": [
+        459,
+        339
+      ]
+    },
+    {
+      "seq": 95,
+      "t_mono": 203625.0531838,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11413,
+      "captured_mono": 203625.0497176,
+      "sample_started_mono": 203625.0466263,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0528428,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "4f2df2195a1240f0b4b481b4cfea930c",
+      "cursor": [
+        454,
+        338
+      ],
+      "submitted_point": [
+        454,
+        338
+      ]
+    },
+    {
+      "seq": 96,
+      "t_mono": 203625.0636606,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11413,
+      "captured_mono": 203625.0497176,
+      "sample_started_mono": 203625.0466263,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0633513,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "92148f4b89f743378049ba851bb9326f",
+      "cursor": [
+        449,
+        336
+      ],
+      "submitted_point": [
+        449,
+        336
+      ]
+    },
+    {
+      "seq": 97,
+      "t_mono": 203625.0742514,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11414,
+      "captured_mono": 203625.0665956,
+      "sample_started_mono": 203625.062316,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0738518,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "c62c78d9f2fb454184a8b27935ee2147",
+      "cursor": [
+        444,
+        335
+      ],
+      "submitted_point": [
+        444,
+        335
+      ]
+    },
+    {
+      "seq": 98,
+      "t_mono": 203625.0841663,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11415,
+      "captured_mono": 203625.0833585,
+      "sample_started_mono": 203625.0770046,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0839181,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "457d68ff767c450a8940411165c4b801",
+      "cursor": [
+        441,
+        334
+      ],
+      "submitted_point": [
+        441,
+        334
+      ]
+    },
+    {
+      "seq": 99,
+      "t_mono": 203625.0949979,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11415,
+      "captured_mono": 203625.0833585,
+      "sample_started_mono": 203625.0770046,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.0947018,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "3599bc7c3abe4f24934cde1c98b4d932",
+      "cursor": [
+        439,
+        333
+      ],
+      "submitted_point": [
+        439,
+        333
+      ]
+    },
+    {
+      "seq": 100,
+      "t_mono": 203625.1054011,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11416,
+      "captured_mono": 203625.0963052,
+      "sample_started_mono": 203625.0915786,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1051484,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "0346f339dd414f0d87cba9e4a802d0be",
+      "cursor": [
+        438,
+        333
+      ],
+      "submitted_point": [
+        438,
+        333
+      ]
+    },
+    {
+      "seq": 101,
+      "t_mono": 203625.1199386,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11417,
+      "captured_mono": 203625.1107894,
+      "sample_started_mono": 203625.1066691,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1196817,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "cf5ce65c00994601ab9fe1fbf31c56b3",
+      "cursor": [
+        436,
+        332
+      ],
+      "submitted_point": [
+        436,
+        332
+      ]
+    },
+    {
+      "seq": 102,
+      "t_mono": 203625.1341249,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11418,
+      "captured_mono": 203625.1260158,
+      "sample_started_mono": 203625.1222371,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1338204,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "90b77fff8ccf4566b320708aaf7f6288",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 103,
+      "t_mono": 203625.1487215,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11419,
+      "captured_mono": 203625.141341,
+      "sample_started_mono": 203625.1373816,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1483669,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "9f14c6fbcb9e4633a5279b5d2403cd54",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 104,
+      "t_mono": 203625.1591461,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11420,
+      "captured_mono": 203625.1563397,
+      "sample_started_mono": 203625.1526636,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1588601,
+      "goal": [
+        436,
+        333
+      ],
+      "command_id": "23a91676e32a42f8889b70fb506e0e30",
+      "cursor": [
+        436,
+        333
+      ],
+      "submitted_point": [
+        436,
+        333
+      ]
+    },
+    {
+      "seq": 105,
+      "t_mono": 203625.1694754,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11420,
+      "captured_mono": 203625.1563397,
+      "sample_started_mono": 203625.1526636,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1691589,
+      "goal": [
+        436,
+        333
+      ],
+      "command_id": "29a2d30acc344843870b5215d3c0ac11",
+      "cursor": [
+        436,
+        333
+      ],
+      "submitted_point": [
+        436,
+        333
+      ]
+    },
+    {
+      "seq": 106,
+      "t_mono": 203625.1798973,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11421,
+      "captured_mono": 203625.1735086,
+      "sample_started_mono": 203625.1675662,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1795233,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "2af33eab910a422eb9cfa63fe15bafc0",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 107,
+      "t_mono": 203625.1897948,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11421,
+      "captured_mono": 203625.1735086,
+      "sample_started_mono": 203625.1675662,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1895419,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "426934bdc3d442cea1028820f56dcca2",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 108,
+      "t_mono": 203625.2000745,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11422,
+      "captured_mono": 203625.1893355,
+      "sample_started_mono": 203625.1827512,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.1998145,
+      "goal": [
+        435,
+        332
+      ],
+      "command_id": "40b14a16417e4aad9e789a2fc01a7126",
+      "cursor": [
+        435,
+        332
+      ],
+      "submitted_point": [
+        435,
+        332
+      ]
+    },
+    {
+      "seq": 109,
+      "t_mono": 203625.2108477,
+      "kind": "drag_started",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11423,
+      "captured_mono": 203625.2040255,
+      "sample_started_mono": 203625.1982231,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.210147,
+      "goal": null,
+      "command_id": "7681cdc313904743a22704a46ce2a20a",
+      "drag_id": "d48a4ca7f0a246f286addda858426c39",
+      "cursor": [
+        435,
+        332
+      ],
+      "hold_until": 203625.2982231
+    },
+    {
+      "seq": 110,
+      "t_mono": 203625.220605,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11424,
+      "captured_mono": 203625.2177575,
+      "sample_started_mono": 203625.2133222,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2203758,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "144664023db847e0b8f1f543c1d02ad6",
+      "cursor": [
+        440,
+        333
+      ],
+      "submitted_point": [
+        440,
+        333
+      ]
+    },
+    {
+      "seq": 111,
+      "t_mono": 203625.2309535,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11424,
+      "captured_mono": 203625.2177575,
+      "sample_started_mono": 203625.2133222,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2306344,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "1216624fa32e428891bf90170fe90c67",
+      "cursor": [
+        445,
+        334
+      ],
+      "submitted_point": [
+        445,
+        334
+      ]
+    },
+    {
+      "seq": 112,
+      "t_mono": 203625.240994,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11425,
+      "captured_mono": 203625.2320585,
+      "sample_started_mono": 203625.228625,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2406406,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "3b1e24bfb66d47b288c194308c4fc0d2",
+      "cursor": [
+        450,
+        335
+      ],
+      "submitted_point": [
+        450,
+        335
+      ]
+    },
+    {
+      "seq": 113,
+      "t_mono": 203625.2512843,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11426,
+      "captured_mono": 203625.2469787,
+      "sample_started_mono": 203625.2437991,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.250919,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "c20b9994a2234d73940e5170c683e9b2",
+      "cursor": [
+        455,
+        336
+      ],
+      "submitted_point": [
+        455,
+        336
+      ]
+    },
+    {
+      "seq": 114,
+      "t_mono": 203625.2613191,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11426,
+      "captured_mono": 203625.2469787,
+      "sample_started_mono": 203625.2437991,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2610492,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "4eabfdaef019484bb64047699b1c375f",
+      "cursor": [
+        460,
+        337
+      ],
+      "submitted_point": [
+        460,
+        337
+      ]
+    },
+    {
+      "seq": 115,
+      "t_mono": 203625.2722277,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11427,
+      "captured_mono": 203625.2628539,
+      "sample_started_mono": 203625.2593253,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2718073,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "6ab02083c9a646358c7d18afd0c5c5e7",
+      "cursor": [
+        465,
+        339
+      ],
+      "submitted_point": [
+        465,
+        339
+      ]
+    },
+    {
+      "seq": 116,
+      "t_mono": 203625.2824168,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11428,
+      "captured_mono": 203625.2774031,
+      "sample_started_mono": 203625.2738702,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2821443,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "b6e866b71550489095e07af80e844977",
+      "cursor": [
+        470,
+        340
+      ],
+      "submitted_point": [
+        470,
+        340
+      ]
+    },
+    {
+      "seq": 117,
+      "t_mono": 203625.2927595,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11428,
+      "captured_mono": 203625.2774031,
+      "sample_started_mono": 203625.2738702,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.2924653,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "406849f121c543f5a8d8b9d091b1527f",
+      "cursor": [
+        475,
+        341
+      ],
+      "submitted_point": [
+        475,
+        341
+      ]
+    },
+    {
+      "seq": 118,
+      "t_mono": 203625.3032498,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11429,
+      "captured_mono": 203625.2965319,
+      "sample_started_mono": 203625.2899047,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3028455,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "18a9d18f41364374b18f0fa32d23907a",
+      "cursor": [
+        480,
+        343
+      ],
+      "submitted_point": [
+        480,
+        343
+      ]
+    },
+    {
+      "seq": 119,
+      "t_mono": 203625.3135289,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11430,
+      "captured_mono": 203625.3107811,
+      "sample_started_mono": 203625.3049341,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3132713,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "52faa0115bfc4448a2c29f71382c621c",
+      "cursor": [
+        485,
+        345
+      ],
+      "submitted_point": [
+        485,
+        345
+      ]
+    },
+    {
+      "seq": 120,
+      "t_mono": 203625.3240066,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11430,
+      "captured_mono": 203625.3107811,
+      "sample_started_mono": 203625.3049341,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.323712,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "0d4483f4cdec4287bab7fd6291055385",
+      "cursor": [
+        490,
+        347
+      ],
+      "submitted_point": [
+        490,
+        347
+      ]
+    },
+    {
+      "seq": 121,
+      "t_mono": 203625.334519,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11431,
+      "captured_mono": 203625.3241729,
+      "sample_started_mono": 203625.3201203,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3340704,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "2f5db3ac26ed4222bdec6f2b59d07eef",
+      "cursor": [
+        495,
+        348
+      ],
+      "submitted_point": [
+        495,
+        348
+      ]
+    },
+    {
+      "seq": 122,
+      "t_mono": 203625.3500669,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11432,
+      "captured_mono": 203625.3381896,
+      "sample_started_mono": 203625.3345781,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3494204,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "68710a1961be493cbc307efd4e9bcb8d",
+      "cursor": [
+        502,
+        350
+      ],
+      "submitted_point": [
+        502,
+        350
+      ]
+    },
+    {
+      "seq": 123,
+      "t_mono": 203625.3644254,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11433,
+      "captured_mono": 203625.3535885,
+      "sample_started_mono": 203625.3494337,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3640852,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "34e3b8a16ce54a55b9a41f1811a9c168",
+      "cursor": [
+        509,
+        352
+      ],
+      "submitted_point": [
+        509,
+        352
+      ]
+    },
+    {
+      "seq": 124,
+      "t_mono": 203625.3795667,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11434,
+      "captured_mono": 203625.3686842,
+      "sample_started_mono": 203625.3646546,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3790683,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "d1fbbc25adab4324b9e6669c5046efd1",
+      "cursor": [
+        516,
+        354
+      ],
+      "submitted_point": [
+        516,
+        354
+      ]
+    },
+    {
+      "seq": 125,
+      "t_mono": 203625.3898615,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11434,
+      "captured_mono": 203625.3686842,
+      "sample_started_mono": 203625.3646546,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3894754,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "6bf77d223d10490898bb917d99a7a2e7",
+      "cursor": [
+        521,
+        356
+      ],
+      "submitted_point": [
+        521,
+        356
+      ]
+    },
+    {
+      "seq": 126,
+      "t_mono": 203625.3905527,
+      "kind": "vanish",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11435,
+      "captured_mono": 203625.3891779,
+      "detection": null
+    },
+    {
+      "seq": 127,
+      "t_mono": 203625.3999597,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11435,
+      "captured_mono": 203625.3891779,
+      "sample_started_mono": 203625.3804742,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.3994878,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "24ccaa31658c479a95590c301f565d30",
+      "cursor": [
+        526,
+        357
+      ],
+      "submitted_point": [
+        526,
+        357
+      ]
+    },
+    {
+      "seq": 128,
+      "t_mono": 203625.4108781,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11436,
+      "captured_mono": 203625.4020159,
+      "sample_started_mono": 203625.3952354,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4097856,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "a6d45d7684484fbaa286451b58250063",
+      "cursor": [
+        531,
+        358
+      ],
+      "submitted_point": [
+        531,
+        358
+      ]
+    },
+    {
+      "seq": 129,
+      "t_mono": 203625.4205506,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11437,
+      "captured_mono": 203625.4178419,
+      "sample_started_mono": 203625.4103795,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4200998,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "c352c8e4760b4ac296307add35caacd5",
+      "cursor": [
+        536,
+        360
+      ],
+      "submitted_point": [
+        536,
+        360
+      ]
+    },
+    {
+      "seq": 130,
+      "t_mono": 203625.4313599,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11437,
+      "captured_mono": 203625.4178419,
+      "sample_started_mono": 203625.4103795,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4310342,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "19242b9930ea4d1390f616661566cf30",
+      "cursor": [
+        541,
+        362
+      ],
+      "submitted_point": [
+        541,
+        362
+      ]
+    },
+    {
+      "seq": 131,
+      "t_mono": 203625.4418687,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11438,
+      "captured_mono": 203625.4315972,
+      "sample_started_mono": 203625.4255954,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4415111,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "93c1b658d18642cabd52fc2e2679b07e",
+      "cursor": [
+        546,
+        364
+      ],
+      "submitted_point": [
+        546,
+        364
+      ]
+    },
+    {
+      "seq": 132,
+      "t_mono": 203625.4522072,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11439,
+      "captured_mono": 203625.4448886,
+      "sample_started_mono": 203625.4410062,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4517596,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "1e2d0e01f3294ef3a982c47a5f64312b",
+      "cursor": [
+        551,
+        365
+      ],
+      "submitted_point": [
+        551,
+        365
+      ]
+    },
+    {
+      "seq": 133,
+      "t_mono": 203625.4621815,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11440,
+      "captured_mono": 203625.4600721,
+      "sample_started_mono": 203625.4560002,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.461791,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "6f5b659fa39446a5b8bf353502480d89",
+      "cursor": [
+        556,
+        366
+      ],
+      "submitted_point": [
+        556,
+        366
+      ]
+    },
+    {
+      "seq": 134,
+      "t_mono": 203625.4725038,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11440,
+      "captured_mono": 203625.4600721,
+      "sample_started_mono": 203625.4560002,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4722254,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "cb947e88f3674d52a9645bb38d7ea364",
+      "cursor": [
+        561,
+        368
+      ],
+      "submitted_point": [
+        561,
+        368
+      ]
+    },
+    {
+      "seq": 135,
+      "t_mono": 203625.4825832,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11441,
+      "captured_mono": 203625.4749776,
+      "sample_started_mono": 203625.4712334,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4822834,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "0f94acd0f50343b29aad6928a3b1d59a",
+      "cursor": [
+        566,
+        369
+      ],
+      "submitted_point": [
+        566,
+        369
+      ]
+    },
+    {
+      "seq": 136,
+      "t_mono": 203625.4901567,
+      "kind": "appear",
+      "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+      "observation_id": 11442,
+      "captured_mono": 203625.4895825,
+      "detection": {
+        "x": 532,
+        "y": 412,
+        "pixels": 155,
+        "bbox": [
+          517,
+          410,
+          31,
+          5
+        ]
+      }
+    },
+    {
+      "seq": 137,
+      "t_mono": 203625.4931019,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11442,
+      "captured_mono": 203625.4895825,
+      "sample_started_mono": 203625.4858662,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.4927458,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "ad27673b68a341d3834b5e4defc9a5fe",
+      "cursor": [
+        571,
+        371
+      ],
+      "submitted_point": [
+        571,
+        371
+      ]
+    },
+    {
+      "seq": 138,
+      "t_mono": 203625.503536,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11442,
+      "captured_mono": 203625.4895825,
+      "sample_started_mono": 203625.4858662,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5031738,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "de3e86de229d407e8e89bfac27ec3f1b",
+      "cursor": [
+        576,
+        372
+      ],
+      "submitted_point": [
+        576,
+        372
+      ]
+    },
+    {
+      "seq": 139,
+      "t_mono": 203625.5135536,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11443,
+      "captured_mono": 203625.5083428,
+      "sample_started_mono": 203625.5021347,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5131854,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "ee39f90df93d40ae91b03e30daa69b36",
+      "cursor": [
+        581,
+        373
+      ],
+      "submitted_point": [
+        581,
+        373
+      ]
+    },
+    {
+      "seq": 140,
+      "t_mono": 203625.5236296,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11444,
+      "captured_mono": 203625.5220329,
+      "sample_started_mono": 203625.5163414,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5233546,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "4d45bc7468e04a4dba3f2a1527b38b25",
+      "cursor": [
+        586,
+        374
+      ],
+      "submitted_point": [
+        586,
+        374
+      ]
+    },
+    {
+      "seq": 141,
+      "t_mono": 203625.53374,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11444,
+      "captured_mono": 203625.5220329,
+      "sample_started_mono": 203625.5163414,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5333774,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "2a596bdb0ed24a9f8985123bea1dc526",
+      "cursor": [
+        591,
+        375
+      ],
+      "submitted_point": [
+        591,
+        375
+      ]
+    },
+    {
+      "seq": 142,
+      "t_mono": 203625.5441577,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11445,
+      "captured_mono": 203625.5369348,
+      "sample_started_mono": 203625.5310866,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5438815,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "028e3642a639474d86c84268f9de953f",
+      "cursor": [
+        596,
+        377
+      ],
+      "submitted_point": [
+        596,
+        377
+      ]
+    },
+    {
+      "seq": 143,
+      "t_mono": 203625.5510976,
+      "kind": "vanish",
+      "watch_id": "1d014186e94b43378fcadd1fb8c94036",
+      "observation_id": 11446,
+      "captured_mono": 203625.5504398,
+      "detection": null
+    },
+    {
+      "seq": 144,
+      "t_mono": 203625.5546546,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11446,
+      "captured_mono": 203625.5504398,
+      "sample_started_mono": 203625.5475763,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5543617,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "d971b5aa5f9a4d0c84ac7bbe8efdc0c0",
+      "cursor": [
+        601,
+        379
+      ],
+      "submitted_point": [
+        601,
+        379
+      ]
+    },
+    {
+      "seq": 145,
+      "t_mono": 203625.5647559,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11446,
+      "captured_mono": 203625.5504398,
+      "sample_started_mono": 203625.5475763,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5645133,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "29d7dc1b1c184690923e43b5b8f40502",
+      "cursor": [
+        606,
+        380
+      ],
+      "submitted_point": [
+        606,
+        380
+      ]
+    },
+    {
+      "seq": 146,
+      "t_mono": 203625.5751893,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11447,
+      "captured_mono": 203625.5658256,
+      "sample_started_mono": 203625.562719,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5748693,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "154c6e533fc44546b04889d23df60179",
+      "cursor": [
+        611,
+        382
+      ],
+      "submitted_point": [
+        611,
+        382
+      ]
+    },
+    {
+      "seq": 147,
+      "t_mono": 203625.5893171,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11448,
+      "captured_mono": 203625.5800634,
+      "sample_started_mono": 203625.5769471,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5889639,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "5c4e63ec731444baad8c27b260e6cb65",
+      "cursor": [
+        618,
+        384
+      ],
+      "submitted_point": [
+        618,
+        384
+      ]
+    },
+    {
+      "seq": 148,
+      "t_mono": 203625.5997512,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11449,
+      "captured_mono": 203625.5951488,
+      "sample_started_mono": 203625.5921182,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.5994967,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "6e2ba2a498f64ec493d435b6265ba140",
+      "cursor": [
+        623,
+        386
+      ],
+      "submitted_point": [
+        623,
+        386
+      ]
+    },
+    {
+      "seq": 149,
+      "t_mono": 203625.6102417,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11449,
+      "captured_mono": 203625.5951488,
+      "sample_started_mono": 203625.5921182,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.609979,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "9fea20faba37419690b72b99c901908f",
+      "cursor": [
+        628,
+        388
+      ],
+      "submitted_point": [
+        628,
+        388
+      ]
+    },
+    {
+      "seq": 150,
+      "t_mono": 203625.6233807,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11450,
+      "captured_mono": 203625.6105348,
+      "sample_started_mono": 203625.6072378,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.6230937,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "188d54bc731f4300a94b99c25fa0ffc0",
+      "cursor": [
+        634,
+        390
+      ],
+      "submitted_point": [
+        634,
+        390
+      ]
+    },
+    {
+      "seq": 151,
+      "t_mono": 203625.6398477,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11451,
+      "captured_mono": 203625.6286945,
+      "sample_started_mono": 203625.6221937,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.6395249,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "002447d0414a4dcfb5beba3f5325aaf3",
+      "cursor": [
+        642,
+        392
+      ],
+      "submitted_point": [
+        642,
+        392
+      ]
+    },
+    {
+      "seq": 152,
+      "t_mono": 203625.6501495,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11452,
+      "captured_mono": 203625.6435263,
+      "sample_started_mono": 203625.6372209,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.649819,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "6c7cec57f6754141880aab0ab4d7e9df",
+      "cursor": [
+        647,
+        393
+      ],
+      "submitted_point": [
+        647,
+        393
+      ]
+    },
+    {
+      "seq": 153,
+      "t_mono": 203625.6642874,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11453,
+      "captured_mono": 203625.657626,
+      "sample_started_mono": 203625.6535373,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.6638695,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "dcfae8611c774d1fa2698a161ff295d4",
+      "cursor": [
+        654,
+        395
+      ],
+      "submitted_point": [
+        654,
+        395
+      ]
+    },
+    {
+      "seq": 154,
+      "t_mono": 203625.6741634,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11454,
+      "captured_mono": 203625.6713839,
+      "sample_started_mono": 203625.6681803,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.6738861,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "7f00fce06da14fac8d76f1464b839734",
+      "cursor": [
+        659,
+        397
+      ],
+      "submitted_point": [
+        659,
+        397
+      ]
+    },
+    {
+      "seq": 155,
+      "t_mono": 203625.6843711,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11454,
+      "captured_mono": 203625.6713839,
+      "sample_started_mono": 203625.6681803,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.6840828,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "90101fd9ea9f4797b6c8cc52fd1060f3",
+      "cursor": [
+        664,
+        398
+      ],
+      "submitted_point": [
+        664,
+        398
+      ]
+    },
+    {
+      "seq": 156,
+      "t_mono": 203625.6946481,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11455,
+      "captured_mono": 203625.686651,
+      "sample_started_mono": 203625.6827879,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.694393,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "2a0ee4ad9cac466681951a1dbc7ce96b",
+      "cursor": [
+        669,
+        400
+      ],
+      "submitted_point": [
+        669,
+        400
+      ]
+    },
+    {
+      "seq": 157,
+      "t_mono": 203625.704756,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11456,
+      "captured_mono": 203625.7019073,
+      "sample_started_mono": 203625.698119,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7044877,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "7cb6da4fb031474da23f054cd36e31e0",
+      "cursor": [
+        674,
+        401
+      ],
+      "submitted_point": [
+        674,
+        401
+      ]
+    },
+    {
+      "seq": 158,
+      "t_mono": 203625.7149125,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11456,
+      "captured_mono": 203625.7019073,
+      "sample_started_mono": 203625.698119,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7145764,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "bd656162bb5242e1aabcc8a29120ecb7",
+      "cursor": [
+        679,
+        403
+      ],
+      "submitted_point": [
+        679,
+        403
+      ]
+    },
+    {
+      "seq": 159,
+      "t_mono": 203625.725151,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11457,
+      "captured_mono": 203625.7178438,
+      "sample_started_mono": 203625.7134349,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7249012,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "1c57f577dbbe451d99671914d7fa1722",
+      "cursor": [
+        684,
+        405
+      ],
+      "submitted_point": [
+        684,
+        405
+      ]
+    },
+    {
+      "seq": 160,
+      "t_mono": 203625.735554,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11457,
+      "captured_mono": 203625.7178438,
+      "sample_started_mono": 203625.7134349,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7352579,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "59b4db5dcce740a9897e0a1df3bce3f1",
+      "cursor": [
+        689,
+        406
+      ],
+      "submitted_point": [
+        689,
+        406
+      ]
+    },
+    {
+      "seq": 161,
+      "t_mono": 203625.7455554,
+      "kind": "pointer_feedback",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11458,
+      "captured_mono": 203625.7349205,
+      "sample_started_mono": 203625.7286121,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7452785,
+      "goal": [
+        698,
+        409
+      ],
+      "command_id": "0a355476d60645908896b9832bf7eef4",
+      "cursor": [
+        692,
+        407
+      ],
+      "submitted_point": [
+        692,
+        407
+      ]
+    },
+    {
+      "seq": 162,
+      "t_mono": 203625.750645,
+      "kind": "appear",
+      "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+      "observation_id": 11459,
+      "captured_mono": 203625.7501055,
+      "detection": {
+        "x": 695,
+        "y": 450,
+        "pixels": 109,
+        "bbox": [
+          681,
+          448,
+          32,
+          4
+        ]
+      }
+    },
+    {
+      "seq": 163,
+      "t_mono": 203625.75088,
+      "kind": "input_released",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "observation_id": 11459,
+      "captured_mono": 203625.7501055,
+      "sample_started_mono": 203625.7440482,
+      "capture_source": "dxgi",
+      "percept_ready_mono": 203625.7506477,
+      "goal": null,
+      "command_id": "4058fd36f19d4f25bd5e78df9201d7d5",
+      "drag_id": "d48a4ca7f0a246f286addda858426c39",
+      "reason": "requested"
+    },
+    {
+      "seq": 164,
+      "t_mono": 203625.8713413,
+      "kind": "intent_completed",
+      "intent_id": "d48a4ca7f0a246f286addda858426c39",
+      "program": "drag",
+      "watch_id": "bab0de04ee0940e0aaa755922d5833bd",
+      "phase": "completed",
+      "reason": "condition_observed_after_release",
+      "started_mono": 203624.9044072,
+      "expires_mono": 203632.9044072,
+      "cursor": [
+        692,
+        407
+      ],
+      "error_px": 9.486832980505138,
+      "commands": 79,
+      "task_success_verified": false,
+      "stage": "verifying",
+      "button_held": false,
+      "condition_verified": true,
+      "released_mono": 203625.75088,
+      "verification_observation_id": 11467,
+      "condition_sample_started_mono": 203625.8647335,
+      "condition_stable_since_mono": 203625.758172,
+      "destination": [
+        698,
+        409
+      ],
+      "destination_watch_id": null,
+      "until": {
+        "watch_id": "b9b924daaa3045e9a9f70d9171d27778",
+        "present": true
+      }
+    },
+    {
+      "seq": 165,
+      "t_mono": 203626.3250519,
+      "kind": "halted",
+      "reason": "requested",
+      "state": "halted"
+    }
+  ],
+  "lost_events": 0,
+  "passed": true,
+  "verification": "Taught pixel predicates and saved images; no application-internal truth or solver.",
+  "target": {
+    "hwnd": 66708,
+    "pid": 85676,
+    "class": "SDL_app",
+    "rect": [
+      0,
+      0,
+      1280,
+      720
+    ]
+  },
+  "session_id": 3,
+  "watch_ids": {
+    "nine_clubs_source": "bab0de04ee0940e0aaa755922d5833bd",
+    "invalid_destination_extension": "1d014186e94b43378fcadd1fb8c94036",
+    "legal_destination_extension": "b9b924daaa3045e9a9f70d9171d27778"
+  },
+  "final_state": "halted",
+  "pending_commands": [],
+  "capture_sources": {
+    "dxgi": 11488,
+    "gdi_refresh": 11
+  },
+  "dropped_frames": 9
+}

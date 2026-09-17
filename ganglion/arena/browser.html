@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Ganglion browser fixture</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #121820; color: #dde4ea; font: 15px system-ui; }
+  main { width: 680px; margin: 16px auto; }
+  header { display: flex; align-items: baseline; justify-content: space-between; }
+  h1 { font-size: 20px; margin: 0 0 14px; font-weight: 600; }
+  #stage { position: relative; width: 640px; height: 360px; background: #1b2531; overflow: hidden; }
+  #choice { position: absolute; width: 36px; height: 36px; padding: 0; border: 0;
+    border-radius: 6px; background: rgb(40,220,120); color: #072412; font: bold 12px system-ui;
+    cursor: pointer; display: none; }
+  #result { position: absolute; left: 24px; top: 145px; pointer-events: none; }
+  footer { color: #8d9baa; font-size: 12px; margin-top: 12px; }
+</style>
+<main><header><h1>Choose the moving item</h1><span id="counter">Ready</span></header>
+<div id="stage"><div id="result">Waiting for a trial.</div><button id="choice" aria-label="Choose item">Go</button></div>
+<footer>A local browser task. A successful selection advances the card.</footer></main>
+<script>
+  const choice = document.querySelector('#choice');
+  const result = document.querySelector('#result');
+  const counter = document.querySelector('#counter');
+  const stage = document.querySelector('#stage');
+  let trial = null, started = 0, done = true;
+  window.truth = [];
+  function emit(kind, data = {}) {
+    window.truth.push({kind, trial_id: trial?.id, browser_ms: performance.now(), ...data});
+  }
+  window.beginTrial = (value) => {
+    trial = value; started = performance.now(); done = false;
+    result.textContent = ''; counter.textContent = value.id;
+    choice.style.display = 'block'; emit('trial_started', {seed: value.seed});
+  };
+  function frame() {
+    if (trial && !done) {
+      const t = (performance.now() - started) / 1000, phase = trial.seed * 1.17;
+      choice.style.left = `${Math.round(320 + 170 * Math.sin(t * .9 + phase)) - 18}px`;
+      choice.style.top = `${Math.round(180 + 75 * Math.cos(t * 1.1 + phase)) - 18}px`;
+    }
+    requestAnimationFrame(frame);
+  }
+  stage.addEventListener('pointerdown', event => {
+    if (!trial) return;
+    const hit = event.target === choice && !done;
+    emit('input_received', {x: event.clientX, y: event.clientY, trusted: event.isTrusted});
+    emit(hit ? 'hit' : 'false_action', {trusted: event.isTrusted});
+    if (hit) {
+      done = true; choice.style.display = 'none'; result.textContent = 'Selection confirmed';
+      counter.textContent = 'Complete';
+    }
+  });
+  frame();
+</script></html>

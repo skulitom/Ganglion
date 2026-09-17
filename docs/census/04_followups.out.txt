@@ -1,0 +1,270 @@
+
+====================================================================================================
+photoreceptors by rootSide (all, and status=='Traced' only)
+====================================================================================================
+rootSide == instance suffix for all rows: False ; mismatches: 7
+EXPR: pd.crosstab(pr['type'], pr['rootSide'], margins=True)   [all ol_sensory rows]
+rootSide      <NA>     L     R   All
+type                                
+HBeyelet         7     0     0     7
+R1-R6            0  1112  2265  3377
+R7R8_unclear     0     0    85    85
+R7_unclear       0   165   239   404
+R7d              0    40    42    82
+R7p              0   173   159   332
+R7y              0   230   252   482
+R8_unclear       0   188   254   442
+R8d              0    35    41    76
+R8p              0   172   158   330
+R8y              0   230   251   481
+All              7  2345  3746  6098
+
+EXPR: ... restricted to status == 'Traced' (the only rows present in the traced-only weights table)
+rootSide      <NA>     L     R   All
+type                                
+HBeyelet         7     0     0     7
+R1-R6            0   501   893  1394
+R7R8_unclear     0     0    85    85
+R7_unclear       0   165   239   404
+R7d              0    40    42    82
+R7p              0   173   159   332
+R7y              0   229   252   481
+R8_unclear       0   188   254   442
+R8d              0    35    41    76
+R8p              0   172   158   330
+R8y              0   230   251   481
+All              7  1733  2374  4114
+
+status x rootSide for R1-R6:
+rootSide     L     R   All
+status                    
+<NA>       611  1372  1983
+Traced     501   893  1394
+All       1112  2265  3377
+
+====================================================================================================
+LPTC / HS / VS naming across columns
+====================================================================================================
+        bodyId  type                      flywireType   hemibrainType synonyms             instance          superclass somaSide           somaLocation
+74       10085   Am1                              Am1             NaN      NaN                Am1_L        ol_intrinsic        L  [64900, 24869, 37642]
+82       10093   Am1                              Am1             NaN      NaN                Am1_R        ol_intrinsic        R  [28150, 31497, 42884]
+52       10061   DCH                              DCH             DCH      NaN                DCH_L  visual_centrifugal        L  [48880, 22167, 14848]
+96       10108   DCH                              DCH             DCH      NaN                DCH_R  visual_centrifugal        R  [46295, 21792, 15393]
+813      10865    H1                               H1              H1      NaN                 H1_L        ol_intrinsic        L  [69857, 18098, 20190]
+708      10755    H1                               H1              H1      NaN                 H1_R        ol_intrinsic        R  [27810, 20139, 20927]
+14       10019    H2                               H2              H2      NaN                 H2_L   visual_projection        L  [61628, 21036, 35367]
+18       10025    H2                               H2              H2      NaN                 H2_R   visual_projection        R  [32277, 23099, 37180]
+27       10034   HSE                              HSE             HSE      NaN                HSE_L   visual_projection        L  [69175, 30192, 42149]
+11       10016   HSE                              HSE             HSE      NaN                HSE_R   visual_projection        R  [31585, 24676, 38269]
+166      10181   HSN                              HSN             HSN      NaN                HSN_L   visual_projection        L  [66072, 24276, 37876]
+10       10015   HSN                              HSN             HSN      NaN                HSN_R   visual_projection        R  [31905, 26492, 38696]
+391      10419   HSS                              HSS             HSS      NaN                HSS_L   visual_projection        L  [68965, 29357, 42393]
+17       10023   HSS                              HSS             HSS      NaN                HSS_R   visual_projection        R  [28121, 30379, 43134]
+1689     11793   HST                        LPT04_HST             NaN      NaN                HST_L   visual_projection        L  [69572, 26872, 42151]
+2383     12521   HST                        LPT04_HST  (hb5813042688)      NaN  HST(hb5813042688)_R   visual_projection        R  [29112, 30590, 42520]
+20       10027   VCH                              VCH             VCH      NaN                VCH_L  visual_centrifugal        L  [51226, 21065, 14056]
+2        10003   VCH                              VCH             VCH      NaN                VCH_R  visual_centrifugal        R  [46716, 21029, 15714]
+4        10006    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [69604, 28368, 42459]
+62       10073    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [70180, 29243, 42367]
+148      10161    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [70642, 25205, 41771]
+2068     12190    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8             NaN      NaN                 VS_L   visual_projection        L  [71716, 29823, 43283]
+8895     19588    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [71288, 24367, 41504]
+153039  518028    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8             NaN      NaN                 VS_L   visual_projection        L  [70165, 27383, 42453]
+155448  522954    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [68576, 31036, 42562]
+155451  522957    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [69256, 30870, 42814]
+162109  540266    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_L   visual_projection        L  [70736, 26506, 42292]
+8        10012    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [23402, 27713, 43514]
+29       10037    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [27881, 28794, 42485]
+100      10112    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [27315, 28339, 42997]
+190      10206    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [26942, 29286, 43310]
+265      10284    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [26412, 30078, 43696]
+291      10311    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [25650, 29753, 43653]
+376      10403    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [26398, 28341, 43185]
+719      10766    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [27347, 26367, 42048]
+1460     11551    VS  VS1,VS2,VS3,VS4,VS5,VS6,VS7,VS8              VS      NaN                 VS_R   visual_projection        R  [26029, 29086, 43539]
+10696    21572  VST1                             VST1             NaN      NaN               VST1_L   visual_projection        L  [69748, 30369, 43076]
+12829    23897  VST1                             VST1             NaN      NaN               VST1_L   visual_projection        L  [70050, 26332, 42161]
+9847     20634  VST1                             VST1             NaN      NaN               VST1_R   visual_projection        R  [31984, 25411, 38563]
+13706    24867  VST1                             VST1             NaN      NaN               VST1_R   visual_projection        R  [29820, 31525, 41476]
+14643    25893  VST1                             VST1             NaN      NaN               VST1_R   visual_projection        R  [29055, 29433, 42115]
+8180     18807  VST2                             VST2              VS      NaN               VST2_L   visual_projection        L  [69928, 31019, 43225]
+155446  522952  VST2                             VST2             NaN      NaN               VST2_L   visual_projection        L  [69739, 29800, 42984]
+156914  526215  VST2                             VST2             NaN      NaN               VST2_L   visual_projection        L  [70610, 29212, 43084]
+4150     14416  VST2                             VST2             NaN      NaN               VST2_R   visual_projection        R  [25805, 27300, 43272]
+5072     15422  VST2                             VST2             NaN      NaN               VST2_R   visual_projection        R  [26159, 26813, 43112]
+6129     16570  VST2                             VST2             NaN      NaN               VST2_R   visual_projection        R  [30558, 23244, 37966]
+6164     16606  VST2                             VST2             NaN      NaN               VST2_R   visual_projection        R  [26570, 26378, 42732]
+1299     11382   VSm                              VSm             NaN      NaN                VSm_L   visual_projection        L  [71370, 27954, 42781]
+42056    56727   VSm                              VSm             NaN      NaN                VSm_L   visual_projection        L  [71685, 28825, 43012]
+1061     11134   VSm                              VSm             NaN      NaN                VSm_R   visual_projection        R  [25202, 28480, 43526]
+161292  537004   VSm                              VSm             NaN      NaN                VSm_R   visual_projection        R  [27616, 29550, 43152]
+
+====================================================================================================
+neck MNs present in the flight graph
+====================================================================================================
+       bodyId    type superclass somaSide exitNerve         nt  sign
+906     11316    CvN4   cb_motor        L       CvN    unclear     0
+1470    12141    CvN4   cb_motor        R       CvN    unclear     0
+425     10627    CvN5   cb_motor        R       CvN    unclear     0
+14596  192306    CvN6   cb_motor        L       CvN    unclear     0
+513     10754    CvN7   cb_motor        L       CvN    unclear     0
+1608    12342  GNG276   cb_motor        R       CvN    unclear     0
+1440    12097  GNG283   cb_motor        L       CvN    unclear     0
+374     10554  GNG648   cb_motor        R       CvN    unclear     0
+474     10699  GNG648   cb_motor        L       CvN    unclear     0
+2126    13128  GNG653   cb_motor        R       CvN    unclear     0
+19129  801319  MNnm13  vnc_motor        L     DProN  glutamate    -1
+
+cb_motor nodes in flight graph by subclass: {'pm': 15, 'nm': 10, 'am': 5, 'rm': 4}
+vnc_motor nodes in flight graph by subclass: {'wm': 67, 'ml': 24, 'hm': 16, 'hl': 14, 'ad': 8, 'fl': 2, 'nm': 1}
+
+====================================================================================================
+exhaustive search for 'ocel' / 'ocg' over every string column
+====================================================================================================
+columns with "ocel" hits: {}
+(class values containing "vis": ['visual'] )
+
+====================================================================================================
+soma bounding boxes (voxel units) per group, for drawing
+====================================================================================================
+group                            n                   min xyz                   max xyz              centroid xyz
+ol_intrinsic R               40807      [2468, 12342, 14997]     [48408, 53526, 44160]     [16762, 34138, 33738]
+ol_intrinsic L               40246     [49929, 10424, 13303]     [93668, 50832, 43330]     [80081, 32207, 32433]
+visual_projection R           4599       [3876, 8287, 17752]     [48694, 51389, 44120]     [25158, 29323, 31971]
+visual_projection L           4563      [48448, 6853, 17326]     [92454, 49094, 43283]     [71904, 27914, 30978]
+cb_intrinsic (all)           31997      [19986, 4758, 10154]     [76284, 49361, 43610]     [48282, 19942, 26583]
+descending_neuron (all)       1308      [29120, 7441, 12073]     [68446, 49477, 41426]     [48576, 35057, 28809]
+vnc_intrinsic (all)          12729     [33766, 39550, 60697]    [65584, 68996, 134531]    [50204, 56333, 101126]
+vnc_motor (all)                703     [34466, 39538, 61900]    [63652, 66772, 134525]    [50523, 54171, 101858]
+lamina L1 R                    139      [2966, 17668, 20342]     [20514, 53000, 35212]     [10639, 27016, 26854]
+medulla Mi1 R                  873      [2586, 12342, 20223]     [30593, 53456, 42350]     [14709, 34352, 30460]
+T4a R                          848     [10752, 17017, 32976]     [33978, 45412, 43772]     [21861, 33030, 41776]
+LC4 R                           55     [24472, 26428, 26270]     [33088, 34256, 33668]     [30130, 31731, 29705]
+ALL with somaLocation       141781       [2468, 4758, 10154]    [93668, 68996, 134531]     [48542, 32394, 38817]
+
+note: x axis separates sides (somaSide R = small x); z runs brain (small z) -> VNC (large z).
+
+====================================================================================================
+type-level L/R table for the requested visual types (compact, for the report)
+====================================================================================================
+EXPR: side = ann['somaSide'].fillna(ann['rootSide']); pd.crosstab(ann['type'], side)
+somaSide      <NA>     L     R  total          superclass  traced
+type                                                             
+R1-R6            0  1112  2265   3377          ol_sensory    1394
+R7p              0   173   159    332          ol_sensory     332
+R7y              0   230   252    482          ol_sensory     481
+R7d              0    40    42     82          ol_sensory      82
+R7_unclear       0   165   239    404          ol_sensory     404
+R8p              0   172   158    330          ol_sensory     330
+R8y              0   230   251    481          ol_sensory     481
+R8d              0    35    41     76          ol_sensory      76
+R8_unclear       0   188   254    442          ol_sensory     442
+R7R8_unclear     0     0    85     85          ol_sensory      85
+HBeyelet         0     4     3      7          ol_sensory       7
+L1               0   884   892   1776        ol_intrinsic    1776
+L2               0   886   893   1779        ol_intrinsic    1779
+L3               0   880   892   1772        ol_intrinsic    1772
+L4               0   879   891   1770        ol_intrinsic    1769
+L5               0   889   898   1787        ol_intrinsic    1787
+C2               0   871   874   1745        ol_intrinsic    1745
+C3               0   887   892   1779        ol_intrinsic    1779
+T1               0   885   892   1777        ol_intrinsic    1777
+Lawf1            0   177   184    361        ol_intrinsic     361
+Lawf2            0   195   188    383        ol_intrinsic     383
+Lai              1    36    49     86        ol_intrinsic      84
+Mi1              0   886   887   1773        ol_intrinsic    1773
+Mi4              0   883   889   1772        ol_intrinsic    1772
+Mi9              0   886   889   1775        ol_intrinsic    1775
+Tm1              0   887   890   1777        ol_intrinsic    1777
+Tm2              0   883   883   1766        ol_intrinsic    1766
+Tm3              0  1017  1037   2054        ol_intrinsic    2054
+Tm4              0   837   833   1670        ol_intrinsic    1670
+Tm9              0   884   887   1771        ol_intrinsic    1771
+Tm20             0   886   876   1762        ol_intrinsic    1762
+T2               0   808   822   1630        ol_intrinsic    1630
+T2a              0   933   939   1872        ol_intrinsic    1872
+T3               0   964   976   1940        ol_intrinsic    1940
+T4a              0   835   849   1684        ol_intrinsic    1684
+T4b              0   844   846   1690        ol_intrinsic    1690
+T4c              0   895   883   1778        ol_intrinsic    1778
+T4d              0   850   859   1709        ol_intrinsic    1709
+T4_unclear       0     3     1      4        ol_intrinsic       4
+T5a              0   826   838   1664        ol_intrinsic    1664
+T5b              0   863   852   1715        ol_intrinsic    1715
+T5c              0   862   858   1720        ol_intrinsic    1720
+T5d              0   812   808   1620        ol_intrinsic    1620
+T5a_unclear      0     0     1      1        ol_intrinsic       1
+HSN              0     1     1      2   visual_projection       2
+HSE              0     1     1      2   visual_projection       2
+HSS              0     1     1      2   visual_projection       2
+HST              0     1     1      2   visual_projection       2
+VS               0     9     9     18   visual_projection      18
+VSm              0     2     2      4   visual_projection       4
+VST1             0     2     3      5   visual_projection       5
+VST2             0     3     4      7   visual_projection       7
+H1               0     1     1      2        ol_intrinsic       2
+H2               0     1     1      2   visual_projection       2
+VCH              0     1     1      2  visual_centrifugal       2
+DCH              0     1     1      2  visual_centrifugal       2
+Am1              0     1     1      2        ol_intrinsic       2
+LC4              0    71    55    126   visual_projection     126
+LC6              0    59    65    124   visual_projection     124
+LC9              0   104   115    219   visual_projection     219
+LC10a            0   135   140    275   visual_projection     275
+LC10b            0    47    48     95   visual_projection      95
+LC10c-1          0    64    66    130   visual_projection     130
+LC10c-2          0    59    66    125   visual_projection     125
+LC10d            0   108   106    214   visual_projection     214
+LC10e            0    62    48    110   visual_projection     110
+LC10_unclear     0     4     7     11   visual_projection      11
+LC11             0    68    75    143   visual_projection     143
+LC12             0   256   242    498   visual_projection     498
+LC15             0    61    65    126   visual_projection     126
+LC16             0    88    94    182   visual_projection     182
+LC17             0   178   175    353   visual_projection     353
+LC18             0   104   104    208   visual_projection     208
+LC21             0    75    78    153   visual_projection     153
+LC22             0    38    35     73   visual_projection      73
+LPLC1            0    68    66    134   visual_projection     134
+LPLC2            0    94    91    185   visual_projection     185
+LPLC4            0    48    49     97   visual_projection      97
+LLPC1            0   143   142    285   visual_projection     285
+LLPC2            0   125   125    250   visual_projection     250
+LLPC3            0   107   112    219   visual_projection     219
+LLPC4            0     3     3      6   visual_projection       6
+LPC1             0   115   109    224   visual_projection     224
+LPC2             0    75    79    154   visual_projection     154
+DNp01            0     1     1      2   descending_neuron       2
+DNp02            0     1     1      2   descending_neuron       2
+DNp03            0     1     1      2   descending_neuron       2
+DNp04            0     1     1      2   descending_neuron       2
+DNp06            0     1     1      2   descending_neuron       2
+DNp11            0     1     1      2   descending_neuron       2
+DNp09            0     1     1      2   descending_neuron       2
+DNa01            0     1     1      2   descending_neuron       2
+DNa02            0     1     1      2   descending_neuron       2
+MDN              0     2     2      4   descending_neuron       4
+OCG01a           0     1     1      2   visual_projection       2
+OCG01b           0     1     1      2   visual_projection       2
+OCG01c           0     1     1      2   visual_projection       2
+OCG01d           0     1     1      2   visual_projection       2
+OCG01e           0     1     1      2   visual_projection       2
+OCG01f           0     1     1      2   visual_projection       2
+OCG02b           0     1     1      2   visual_projection       2
+OCG02c           0     2     2      4   visual_projection       4
+OCG03            0     1     1      2   visual_projection       2
+OCG06            0     1     1      2  visual_centrifugal       2
+OCC01b           0     1     1      2  visual_centrifugal       2
+OCC02a           0     3     3      6  visual_centrifugal       6
+OCC02b           0     8     8     16  visual_centrifugal      16
+requested names with NO exact type match: []
+  ^T2      ->   3502 neurons,   2 types: {'T2a': 1872, 'T2': 1630}
+  ^T3      ->   1940 neurons,   1 types: {'T3': 1940}
+  ^Am      ->      2 neurons,   1 types: {'Am1': 2}
+  ^Y\d     ->   1367 neurons,   5 types: {'Y3': 627, 'Y14': 208, 'Y13': 193, 'Y12': 186, 'Y11': 153}
+  ^Tlp     ->    380 neurons,   4 types: {'Tlp12': 139, 'Tlp13': 115, 'Tlp11': 68, 'Tlp14': 58}
+  ^LOLP    ->     69 neurons,   1 types: {'LOLP1': 69}
+  ^MeLo    ->   1121 neurons,  15 types: {'MeLo2': 145, 'MeLo1': 123, 'MeLo3a': 107, 'MeLo7': 96, 'MeLo9': 82, 'MeLo3b': 81, 'MeLo13': 73, 'MeLo4': 68, 'MeLo6': 62, 'MeLo10': 61, 'MeLo11': 50, 'MeLo12': 50}
+  ^Li\d    ->   1558 neurons,  31 types: {'Li22': 232, 'Li14': 217, 'Li21': 207, 'Li23': 119, 'Li25': 117, 'Li27': 113, 'Li34a': 68, 'Li13': 65, 'Li34b': 60, 'Li19': 51, 'Li18a': 49, 'Li15': 41}
+  ^LT\d    ->    203 neurons,  54 types: {'LT52': 34, 'LT51': 22, 'LT81': 11, 'LT70': 11, 'LT78': 8, 'LT74': 6, 'LT77': 6, 'LT43': 4, 'LT82a': 4, 'LT80': 4, 'LT63': 4, 'LT68': 4}
+  ^Y       ->   1368 neurons,   6 types: {'Y3': 627, 'Y14': 208, 'Y13': 193, 'Y12': 186, 'Y11': 153, 'Y_unclear': 1}

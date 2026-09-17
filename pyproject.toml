@@ -1,0 +1,43 @@
+[project]
+name = "ganglion"
+version = "0.0.1"
+description = "A fly-brain reflex layer for LLM agents: frame-rate perception, snap reactions and 100 Hz motor programs over MCP."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "pyyaml>=6",
+    "dxcam>=0.3,<0.4; sys_platform == 'win32'",
+    "opencv-python>=4.10",
+    "pygame>=2.6",
+    "mcp>=2.2,<3",
+    "pydantic>=2.11,<3",
+]
+
+[project.optional-dependencies]
+gamepad = ["vgamepad>=0.1"]
+dev = ["pytest>=8"]
+browser = ["playwright>=1.55,<2"]
+# The connectome brain comes from Haltere: `uv pip install -e C:\DEV\Haltere` plus torch (cu128) out of band.
+
+[project.scripts]
+ganglion = "ganglion.cli:main"
+
+[project.urls]
+Repository = "https://github.com/skulitom/Ganglion"
+Issues = "https://github.com/skulitom/Ganglion/issues"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["ganglion*"]
+
+[tool.setuptools.package-data]
+"ganglion.arena" = ["*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

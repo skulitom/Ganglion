@@ -1,0 +1,40 @@
+{
+  "observations": 86,
+  "actuation_authority": false,
+  "promoted": false,
+  "model": {
+    "type": "Haltere ConnectomeRNN",
+    "checkpoint": "C:\\DEV\\Haltere\\artifacts\\ftPath2_best.pt",
+    "sha256": "fecdd56bb0ce45ec800c21d1aafbc10954eba6bac604eff388aa25395db494e5",
+    "adapter_version": 1,
+    "neurons": 30000,
+    "edges": 2767698,
+    "device": "cuda:0",
+    "neural_dt_seconds": 0.01,
+    "desktop_trained": false,
+    "visual_frontend": "deterministic taught colour components",
+    "readout_interpretation": "flight outputs 0 and 1 as hypothetical cursor velocity"
+  },
+  "same_recorded_point_fraction": 1.0,
+  "max_recorded_raw_action_error": 3.390014171600342e-07,
+  "mean_reference_disagreement_px": 21.9557312617328,
+  "inference_ms": {
+    "p50": 1.7122499994002283,
+    "p95": 2.4478750056005083,
+    "p99": 2.715009995154106
+  },
+  "recording": "docs\\bench\\results\\shadow-connectome-seat-recorded.json",
+  "recorded_model": {
+    "type": "Haltere ConnectomeRNN",
+    "checkpoint": "C:\\DEV\\Haltere\\artifacts\\ftPath2_best.pt",
+    "sha256": "fecdd56bb0ce45ec800c21d1aafbc10954eba6bac604eff388aa25395db494e5",
+    "adapter_version": 1,
+    "neurons": 30000,
+    "edges": 2767698,
+    "device": "cuda:0",
+    "neural_dt_seconds": 0.01,
+    "desktop_trained": false,
+    "visual_frontend": "deterministic taught colour components",
+    "readout_interpretation": "flight outputs 0 and 1 as hypothetical cursor velocity"
+  }
+}

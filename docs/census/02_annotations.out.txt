@@ -1,0 +1,2509 @@
+annotations rows: 211,577
+
+====================================================================================================
+A. status / statusLabel
+====================================================================================================
+EXPR: ann['status'].value_counts(dropna=False)
+status
+Traced         165122
+Orphan          15925
+Glia            11864
+Unimportant     10751
+NaN              5472
+Assign           1832
+Anchor            611
+
+EXPR: ann['statusLabel'].value_counts(dropna=False)
+statusLabel
+Roughly traced           71979
+Reviewed                 54066
+Prelim Roughly traced    36387
+Orphan                   12075
+Glia                     11864
+Unimportant              10751
+Out of scope              4585
+Orphan-artifact           2318
+RT Hard to trace          2019
+0.5assign                 1832
+Orphan hotknife           1428
+NaN                        887
+Leaves                     528
+Anchor                     283
+Soma Anchor                201
+PRT Orphan                 140
+Hard to trace              104
+Sensory Anchor             101
+Partially traced            26
+RT Orphan                    3
+Putative Leaves              0
+Not examined                 0
+                             0
+Cleaved Anchor               0
+Will be merged               0
+Cervical Anchor              0
+Examined Soma Anchor         0
+Primary Anchor               0
+Traced in ROI                0
+Traced                       0
+Finalized                    0
+
+EXPR: pd.crosstab(ann['status'].fillna('<NA>'), ann['statusLabel'].astype(str))
+statusLabel  0.5assign  Anchor   Glia  Hard to trace  Leaves  Orphan  Orphan hotknife  Orphan-artifact  Out of scope  PRT Orphan  Partially traced  Prelim Roughly traced  RT Hard to trace  RT Orphan  Reviewed  Roughly traced  Sensory Anchor  Soma Anchor  Unimportant
+status                                                                                                                                                                                                                                                                    
+<NA>                 0       0      0              0       0       0                0                0          4585           0                 0                      0                 0          0         0               0               0            0            0
+Anchor               0     283      0              0       0       0                0                0             0           0                26                      0                 0          0         0               0             101          201            0
+Assign            1832       0      0              0       0       0                0                0             0           0                 0                      0                 0          0         0               0               0            0            0
+Glia                 0       0  11864              0       0       0                0                0             0           0                 0                      0                 0          0         0               0               0            0            0
+Orphan               0       0      0            104       0   12075             1428             2318             0           0                 0                      0                 0          0         0               0               0            0            0
+Traced               0       0      0              0     528       0                0                0             0         140                 0                  36387              2019          3     54066           71979               0            0            0
+Unimportant          0       0      0              0       0       0                0                0             0           0                 0                      0                 0          0         0               0               0            0        10751
+
+====================================================================================================
+B. superclass x somaSide
+====================================================================================================
+EXPR: pd.crosstab(ann['superclass'].fillna('<NA>'), ann['somaSide'].fillna('<NA>'), margins=True)
+somaSide                <NA>      L    M      R     All
+superclass                                             
+<NA>                   42848   1145    0    884   44877
+ENS                       49      1    0      0      50
+ascending_neuron           0    930    9    907    1846
+cb_efferent                0      2    0      2       4
+cb_endocrine               0     33    0     39      72
+cb_intrinsic               7  16028   77  16052   32164
+cb_motor                   0     54    0     53     107
+cb_sensory              4868      0    0      0    4868
+cb_sensory_tbc            14      0    0      0      14
+descending_neuron          0    656   10    648    1314
+descending_neuron_tbc      2      0    0      0       2
+efferent_ascending         0      3    2      3       8
+efferent_descending        0      2    0      2       4
+ol_intrinsic               2  44606    0  44795   89403
+ol_sensory              6062     23    0     13    6098
+sensory_ascending        537      0    0      0     537
+sensory_ascending_tbc      2      0    0      0       2
+sensory_descending        12      0    0      0      12
+visual_centrifugal         0    283    0    280     563
+visual_projection          0   4589    0   4612    9201
+visual_projection_tbc      0      2    0      0       2
+vnc_efferent               1     14   63     16      94
+vnc_endocrine              0     12    0     10      22
+vnc_intrinsic              8   6474  231   6448   13161
+vnc_motor                  0    355    0    353     708
+vnc_sensory             6368      2    0      0    6370
+vnc_sensory_tbc           36      0    0      0      36
+vnc_tbc                   35      1    0      2      38
+All                    60851  75215  392  75119  211577
+
+====================================================================================================
+B2. superclass x status
+====================================================================================================
+status                 <NA>  Anchor  Assign   Glia  Orphan  Traced  Unimportant     All
+superclass                                                                             
+<NA>                   3470     551    1832  11864   15893     516        10751   44877
+ENS                       3       0       0      0       0      47            0      50
+ascending_neuron          0       0       0      0       0    1846            0    1846
+cb_efferent               0       0       0      0       0       4            0       4
+cb_endocrine              0       0       0      0       0      72            0      72
+cb_intrinsic              0       4       0      0       0   32160            0   32164
+cb_motor                  0       0       0      0       0     107            0     107
+cb_sensory                0       0       0      0       0    4868            0    4868
+cb_sensory_tbc            0       8       0      0       1       5            0      14
+descending_neuron         0       0       0      0       0    1314            0    1314
+descending_neuron_tbc     0       2       0      0       0       0            0       2
+efferent_ascending        0       0       0      0       0       8            0       8
+efferent_descending       0       0       0      0       0       4            0       4
+ol_intrinsic              9       2       0      0       2   89390            0   89403
+ol_sensory             1983       1       0      0       0    4114            0    6098
+sensory_ascending         0       0       0      0       0     537            0     537
+sensory_ascending_tbc     0       0       0      0       0       2            0       2
+sensory_descending        0       0       0      0       0      12            0      12
+visual_centrifugal        0       0       0      0       0     563            0     563
+visual_projection         0       0       0      0       0    9201            0    9201
+visual_projection_tbc     0       0       0      0       0       2            0       2
+vnc_efferent              0       0       0      0       0      94            0      94
+vnc_endocrine             0       0       0      0       0      22            0      22
+vnc_intrinsic             1       7       0      0       2   13151            0   13161
+vnc_motor                 0       0       0      0       0     708            0     708
+vnc_sensory               4       1       0      0       0    6365            0    6370
+vnc_sensory_tbc           0      25       0      0       2       9            0      36
+vnc_tbc                   2      10       0      0      25       1            0      38
+All                    5472     611    1832  11864   15925  165122        10751  211577
+
+====================================================================================================
+B3. class x somaSide
+====================================================================================================
+EXPR: pd.crosstab(ann['class'].fillna('<NA>'), ann['somaSide'].fillna('<NA>'), margins=True)
+somaSide                        <NA>      L    M      R     All
+class                                                          
+<NA>                           43107  70836  390  70731  185064
+ALIN                               0     12    0     12      24
+ALLN                               0    210    2    208     420
+ALON                               0      7    0      7      14
+ALPN                               0    343    0    343     686
+CX                                 0   1479    0   1471    2950
+DAN                                0    170    0    170     340
+Kenyon_Cell                        0   2019    0   2045    4064
+MBON                               0     48    0     49      97
+SEZPN                              0     13    0     14      27
+chemosensory                      58      0    0      0      58
+gustatory                       1428      0    0      0    1428
+hygrosensory                      66      0    0      0      66
+mechanosensory                  1733      0    0      0    1733
+mechanosensory_proprioceptive   1452      2    0      0    1454
+mechanosensory_tactile          2558      0    0      0    2558
+mechanosensory_tbc                11      0    0      0      11
+ol_bilateral                       0     57    0     59     116
+olfactory                       2639      0    0      0    2639
+thermosensory                     25      0    0      0      25
+unknown_sensory                 1712      0    0      0    1712
+visual                          6062     19    0     10    6091
+All                            60851  75215  392  75119  211577
+
+====================================================================================================
+B4. class x superclass (non-null class only)
+====================================================================================================
+superclass                      <NA>  ENS  ascending_neuron  cb_efferent  cb_endocrine  cb_intrinsic  cb_motor  cb_sensory  cb_sensory_tbc  descending_neuron  descending_neuron_tbc  efferent_ascending  efferent_descending  ol_intrinsic  ol_sensory  sensory_ascending  sensory_ascending_tbc  sensory_descending  visual_centrifugal  visual_projection  visual_projection_tbc  vnc_efferent  vnc_endocrine  vnc_intrinsic  vnc_motor  vnc_sensory  vnc_sensory_tbc  vnc_tbc
+class                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+<NA>                           44877   50              1846            4            72         23542       107          20              14               1314                      2                   8                    4         89287           7                  1                      1                   0                 563               9201                      2            94             22          13161        708           83               36       38
+ALIN                               0    0                 0            0             0            24         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+ALLN                               0    0                 0            0             0           420         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+ALON                               0    0                 0            0             0            14         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+ALPN                               0    0                 0            0             0           686         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+CX                                 0    0                 0            0             0          2950         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+DAN                                0    0                 0            0             0           340         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+Kenyon_Cell                        0    0                 0            0             0          4064         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+MBON                               0    0                 0            0             0            97         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+SEZPN                              0    0                 0            0             0            27         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+chemosensory                       0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  1                      0                   0                   0                  0                      0             0              0              0          0           57                0        0
+gustatory                          0    0                 0            0             0             0         0         275               0                  0                      0                   0                    0             0           0                 80                      0                   0                   0                  0                      0             0              0              0          0         1073                0        0
+hygrosensory                       0    0                 0            0             0             0         0          66               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+mechanosensory                     0    0                 0            0             0             0         0        1733               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+mechanosensory_proprioceptive      0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                423                      1                   0                   0                  0                      0             0              0              0          0         1030                0        0
+mechanosensory_tactile             0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0         2558                0        0
+mechanosensory_tbc                 0    0                 0            0             0             0         0          11               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+ol_bilateral                       0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0           116           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+olfactory                          0    0                 0            0             0             0         0        2639               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+thermosensory                      0    0                 0            0             0             0         0          25               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+unknown_sensory                    0    0                 0            0             0             0         0          99               0                  0                      0                   0                    0             0           0                 32                      0                  12                   0                  0                      0             0              0              0          0         1569                0        0
+visual                             0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0        6091                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+
+====================================================================================================
+B5. subclass (all values) x superclass
+====================================================================================================
+superclass               <NA>  ENS  ascending_neuron  cb_efferent  cb_endocrine  cb_intrinsic  cb_motor  cb_sensory  cb_sensory_tbc  descending_neuron  descending_neuron_tbc  efferent_ascending  efferent_descending  ol_intrinsic  ol_sensory  sensory_ascending  sensory_ascending_tbc  sensory_descending  visual_centrifugal  visual_projection  visual_projection_tbc  vnc_efferent  vnc_endocrine  vnc_intrinsic  vnc_motor  vnc_sensory  vnc_sensory_tbc  vnc_tbc
+subclass                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+<NA>                    44876   50               190            4            72         32086         0        3904              14                  8                      2                   8                    4         89403        6098                  2                      2                  12                 563               9201                      2            88              7           2963          0           14               36       38
+BA                          0    0              1317            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0             19          0            0                0        0
+BI                          0    0                17            0             0            78         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0           3241          0            0                0        0
+BR                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0           1883          0            0                0        0
+CA                          0    0               160            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+CI                          0    0                 2            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0            132          0            0                0        0
+CR                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0           1039          0            0                0        0
+IA                          0    0               128            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              1          0            0                0        0
+II                          0    0                 4            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0            834          0            0                0        0
+IR                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0           3048          0            0                0        0
+XA                          0    0                28            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+abdomen                     0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                 15                      0                   0                   0                  0                      0             1              1              0          0         1128                0        0
+ad                          0    0                 0            0             0             0         0           0               0                 10                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             5             12              0        214            0                0        0
+am                          0    0                 0            0             0             0        13           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+auditory                    1    0                 0            0             0             0         0         114               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+campaniform sensilla        0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                251                      0                   0                   0                  0                      0             0              0              0          0          175                0        0
+chordotonal organ           0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                 22                      0                   0                   0                  0                      0             0              0              0          0          403                0        0
+fl                          0    0                 0            0             0             0         0           0               0                115                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0        135            0                0        0
+grooming                    0    0                 0            0             0             0         0          65               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+hair plate                  0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  1                      0                   0                   0                  0                      0             0              0              0          0          112                0        0
+haltere                     0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                149                      0                   0                   0                  0                      0             0              0              0          0           56                0        0
+hl                          0    0                 0            0             0             0         0           0               0                  2                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0        130            0                0        0
+hm                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0         16            0                0        0
+ht                          0    0                 0            0             0             0         0           0               0                 26                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+it                          0    0                 0            0             0             0         0           0               0                 18                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+labellar bristle            0    0                 0            0             0             0         0         163               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+leg                         0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                 14                      0                   0                   0                  0                      0             0              0              1          0          858                0        0
+leg bristle                 0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                 80                      0                   0                   0                  0                      0             0              0              0          0          688                0        0
+lt                          0    0                 0            0             0             0         0           0               0                 31                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+mechanosensory bristle      0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0         2206                0        0
+ml                          0    0                 0            0             0             0         0           0               0                  2                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0        116            0                0        0
+neck                        0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            2                0        0
+nm                          0    0                 0            0             0             0        20           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0         24            0                0        0
+notum                       0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  3                      0                   0                   0                  0                      0             0              0              0          0          227                0        0
+nt                          0    0                 0            0             0             0         0           0               0                108                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+pharyngeal sensillum        0    0                 0            0             0             0         0          87               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+pm                          0    0                 0            0             0             0        67           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+rm                          0    0                 0            0             0             0         7           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+strand receptor             0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              2              0          0            0                0        0
+taste bristle               0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0           70                0        0
+taste peg                   0    0                 0            0             0             0         0          60               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+ut                          0    0                 0            0             0             0         0           0               0                276                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+wind_gravity                0    0                 0            0             0             0         0         475               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+wing                        0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0           46                0        0
+wing bristle                0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0          385                0        0
+wm                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0         67            0                0        0
+wt                          0    0                 0            0             0             0         0           0               0                  2                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+xl                          0    0                 0            0             0             0         0           0               0                275                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+xm                          0    0                 0            0             0             0         0           0               0                  0                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          6            0                0        0
+xn                          0    0                 0            0             0             0         0           0               0                441                      0                   0                    0             0           0                  0                      0                   0                   0                  0                      0             0              0              0          0            0                0        0
+
+====================================================================================================
+B6. other categorical columns
+====================================================================================================
+
+EXPR: ann['supertype'].value_counts(dropna=False)
+supertype
+NaN      177481
+11862      1810
+14292      1346
+17488       695
+12783       674
+11512       619
+13253       353
+14631       338
+11119       303
+10573       275
+11372       261
+15260       208
+19102       206
+11498       185
+20297       182
+16916       180
+12156       177
+13195       174
+15054       172
+16115       153
+20345       149
+41385       147
+23643       144
+11747       143
+12911       135
+12052       134
+18681       134
+27502       130
+18842       124
+14828       119
+23155       115
+68360       114
+14591       106
+14798       103
+11683       102
+18638       102
+13333       101
+14897       100
+18105       100
+14474        98
+10405        97
+10801        97
+38565        92
+27595        89
+12586        88
+10096        85
+30554        85
+13453        83
+10946        82
+12427        82
+12207        81
+14960        80
+15249        79
+29771        78
+12006        76
+10505        75
+10657        75
+21690        75
+12317        74
+11153        73
+
+EXPR: ann['somaNeuromere'].value_counts(dropna=False)
+somaNeuromere
+NaN    189757
+T2       5076
+T1       4296
+T3       3976
+CG       2401
+LB       1313
+A1        933
+TC        729
+DC        568
+MX        500
+MD        372
+A2        273
+A3        241
+A4        212
+A8        198
+A5        179
+A6        164
+A9        143
+A7        116
+GNG        89
+A10        39
+NA          2
+
+EXPR: ann['rootSide'].value_counts(dropna=False)
+rootSide
+NaN        193638
+R            9723
+L            7802
+unknown       414
+
+EXPR: ann['entryNerve'].value_counts(dropna=False)
+entryNerve
+NaN       199742
+AN          3332
+MetaLN      1522
+MxLbN       1410
+MesoLN      1403
+ADMN        1000
+ProLN        992
+AbN4         617
+DMetaN       439
+PDMN         282
+AbN3         234
+AbNT         213
+AbN2          88
+aPhN          80
+PhN           47
+ON            39
+PrN           37
+ProCN         37
+DProN         32
+VProN         19
+ProAN         10
+AbN1           2
+
+EXPR: ann['exitNerve'].value_counts(dropna=False)
+exitNerve
+NaN            210572
+MetaLN            123
+MesoLN            117
+AbNT              102
+AbN4               98
+ProLN              82
+NCC                71
+AbN2               53
+PhN                42
+AbN3               35
+DProN              33
+ADMN               32
+AbN1               31
+MxLbN              26
+CvN                25
+ProAN              24
+VProN              22
+MesoAN             19
+PDMNa              18
+AN                 15
+ON                  9
+PDMNp               6
+DMetaN              6
+TBD                 6
+PDMN                3
+ADMN,MesoAN         3
+ADMN,DMetaN         2
+AbNT_L,AbNT         1
+AbNT,AbN4           1
+
+EXPR: ann['receptorType'].value_counts(dropna=False)
+receptorType
+NaN               210825
+putative_ppk23       269
+putative_ppk25       257
+putative_IR52b       226
+
+EXPR: ann['dimorphism'].value_counts(dropna=False)
+dimorphism
+NaN                               209209
+male-specific                       1258
+sexually dimorphic                   771
+potentially sexually dimorphic       177
+potentially male-specific            162
+
+EXPR: ann['birthtime'].value_counts(dropna=False)
+birthtime
+NaN      203673
+early      7891
+late         13
+
+EXPR: ann['fruDsx'].value_counts(dropna=False)
+fruDsx
+NaN               206565
+fru_high            2611
+fru_low             1989
+coexpress_high       193
+dsx_high             138
+coexpress_low         65
+dsx_low               16
+
+EXPR: ann['serialMotif'].value_counts(dropna=False)
+serialMotif
+NaN                 210675
+cns convergent         341
+cns tiling             240
+vnc convergent         180
+independent             44
+brain convergent        42
+sequential              38
+complex                 11
+centripetal              6
+
+====================================================================================================
+C. how many have types
+====================================================================================================
+type           non-null:  164,506   among status=='Traced':  162,517
+flywireType    non-null:  143,156   among status=='Traced':  141,169
+hemibrainType  non-null:   32,919   among status=='Traced':   32,919
+mancType       non-null:   22,744   among status=='Traced':   22,743
+synonyms       non-null:    3,955   among status=='Traced':    3,954
+instance       non-null:  161,506   among status=='Traced':  158,082
+somaSide       non-null:  150,726   among status=='Traced':  149,042
+somaLocation   non-null:  141,781   among status=='Traced':  140,024
+
+distinct type values: 11,751; distinct flywireType: 8,199; distinct hemibrainType: 4,495; distinct mancType: 3,893
+
+EXPR: ann.groupby(ann['superclass'].fillna('<NA>'))['type'].agg(['size', 'count', 'nunique'])
+                        size  count  nunique
+superclass                                  
+<NA>                   44877      0        0
+ENS                       50      0        0
+ascending_neuron        1846   1841      567
+cb_efferent                4      4        1
+cb_endocrine              72     65       10
+cb_intrinsic           32164  31280     6605
+cb_motor                 107    106       43
+cb_sensory              4868   4756      158
+cb_sensory_tbc            14      0        0
+descending_neuron       1314   1310      480
+descending_neuron_tbc      2      0        0
+efferent_ascending         8      8        5
+efferent_descending        4      4        1
+ol_intrinsic           89403  89357      271
+ol_sensory              6098   6098       11
+sensory_ascending        537    528       28
+sensory_ascending_tbc      2      1        1
+sensory_descending        12     12        4
+visual_centrifugal       563    562      108
+visual_projection       9201   9201      346
+visual_projection_tbc      2      2        2
+vnc_efferent              94     78       27
+vnc_endocrine             22     22        4
+vnc_intrinsic          13161  12967     2799
+vnc_motor                708    699      142
+vnc_sensory             6370   5605      171
+vnc_sensory_tbc           36      0        0
+vnc_tbc                   38      0        0
+
+====================================================================================================
+D. optic lobe membership
+====================================================================================================
+OL_CORE = ['ol_intrinsic', 'ol_sensory']; OL_ALL = ['ol_intrinsic', 'ol_sensory', 'visual_projection', 'visual_centrifugal']
+EXPR: ol_core = ann['superclass'].isin(OL_CORE); ol_all = ann['superclass'].isin(OL_ALL)
+somaSide            <NA>      L      R     All
+superclass                                    
+ol_intrinsic           2  44606  44795   89403
+ol_sensory          6062     23     13    6098
+visual_centrifugal     0    283    280     563
+visual_projection      0   4589   4612    9201
+All                 6064  49501  49700  105265
+
+by status:
+status              <NA>  Anchor  Orphan  Traced     All
+superclass                                              
+ol_intrinsic           9       2       2   89390   89403
+ol_sensory          1983       1       0    4114    6098
+visual_centrifugal     0       0       0     563     563
+visual_projection      0       0       0    9201    9201
+All                 1992       3       2  103268  105265
+
+assignedOlHex1/2 (hex-column coordinates) non-null by superclass x somaSide:
+EXPR: hexed = ann['assignedOlHex1'].notna()
+somaSide          L      R    All
+superclass                       
+ol_intrinsic  10453  13267  23720
+All           10453  13267  23720
+
+assignedOlHex ranges: hex1 [1, 36], hex2 [1, 39]
+distinct (hex1,hex2) pairs by side:
+somaSide
+L    879
+R    892
+
+EXPR: ann.loc[hexed, "type"].value_counts()  (top 60 types carrying hex coordinates)
+type
+L5      1773
+C3      1770
+L2      1767
+L1      1767
+Tm1     1767
+T1      1764
+Mi1     1762
+Mi9     1760
+Tm2     1758
+Mi4     1758
+Tm9     1743
+Tm20    1732
+L3       892
+C2       874
+Tm4      833
+
+number of types carrying hex coords: 15
+ALL types with hex coords and counts per side:
+somaSide    L    R
+type              
+C2          0  874
+C3        878  892
+L1        875  892
+L2        874  893
+L3          0  892
+L5        875  898
+Mi1       875  887
+Mi4       869  889
+Mi9       871  889
+T1        872  892
+Tm1       877  890
+Tm2       875  883
+Tm20      856  876
+Tm4         0  833
+Tm9       856  887
+
+====================================================================================================
+E. visual / escape / motor / descending cell types (case-insensitive regex over several columns)
+====================================================================================================
+
+--- photoreceptors R1-6 / R7 / R8: pattern r'^R(1-6|1|7|8)' over ['type', 'flywireType', 'hemibrainType', 'mancType', 'synonyms', 'instance']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^R(1-6|1|7|8)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 6,102   per-column hits: {'type': 6091, 'flywireType': 6006, 'hemibrainType': 0, 'mancType': 0, 'synonyms': 0, 'instance': 6102}
+somaSide      <NA>   L   R   All
+type                            
+<NA type>       11   0   0    11
+R1-R6         3364   4   9  3377
+R7R8_unclear    85   0   0    85
+R7_unclear     402   1   1   404
+R7d             82   0   0    82
+R7p            332   0   0   332
+R7y            482   0   0   482
+R8_unclear     440   2   0   442
+R8d             72   4   0    76
+R8p            327   3   0   330
+R8y            476   5   0   481
+All           6073  19  10  6102
+    rows matched only via non-type columns: 11
+        bodyId type superclass somaSide flywireType hemibrainType mancType synonyms      instance
+140697  500179  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140726  500217  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140778  500300  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140793  500320  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140801  500336  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140804  500344  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140806  500349  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140808  500351  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140809  500355  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140816  500370  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+140834  500416  NaN        NaN      NaN         NaN           NaN      NaN      NaN  R7R8_unclear
+
+--- anything starting with R + digit (all photoreceptor-like types): pattern r'^R\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^R\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 6,091   per-column hits: {'type': 6091}
+somaSide      <NA>   L   R   All
+type                            
+R1-R6         3364   4   9  3377
+R7R8_unclear    85   0   0    85
+R7_unclear     402   1   1   404
+R7d             82   0   0    82
+R7p            332   0   0   332
+R7y            482   0   0   482
+R8_unclear     440   2   0   442
+R8d             72   4   0    76
+R8p            327   3   0   330
+R8y            476   5   0   481
+All           6062  19  10  6091
+
+--- ocellar / OCG / ocelli: pattern r'ocell|^OCG|^OC\\d' over ['type', 'flywireType', 'hemibrainType', 'mancType', 'synonyms', 'instance']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'ocell|^OCG|^OC\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 46   per-column hits: {'type': 22, 'flywireType': 20, 'hemibrainType': 46, 'mancType': 0, 'synonyms': 2, 'instance': 22}
+somaSide   L   R  All
+type                 
+OCC01b     1   1    2
+OCC02a     3   3    6
+OCC02b     8   8   16
+OCG01a     1   1    2
+OCG01b     1   1    2
+OCG01c     1   1    2
+OCG01d     1   1    2
+OCG01e     1   1    2
+OCG01f     1   1    2
+OCG02b     1   1    2
+OCG02c     2   2    4
+OCG03      1   1    2
+OCG06      1   1    2
+All       23  23   46
+    rows matched only via non-type columns: 24
+        bodyId    type          superclass somaSide flywireType hemibrainType mancType synonyms  instance
+5500     15886  OCC01b  visual_centrifugal        R      OCC01b         OCG05      NaN      NaN  OCC01b_R
+5767     16182  OCC01b  visual_centrifugal        L      OCC01b         OCG05      NaN      NaN  OCC01b_L
+26052    38608  OCC02a  visual_centrifugal        R      OCC02a         OCG07      NaN      NaN  OCC02a_R
+31057    44205  OCC02a  visual_centrifugal        L      OCC02a         OCG07      NaN      NaN  OCC02a_L
+32816    46178  OCC02a  visual_centrifugal        R      OCC02a         OCG07      NaN      NaN  OCC02a_R
+33433    46871  OCC02a  visual_centrifugal        R      OCC02a         OCG07      NaN      NaN  OCC02a_R
+36576    50424  OCC02a  visual_centrifugal        L      OCC02a         OCG07      NaN      NaN  OCC02a_L
+49471    65395  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+53569    70298  OCC02a  visual_centrifugal        L      OCC02a         OCG07      NaN      NaN  OCC02a_L
+77993   100604  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+79474   102559  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+84451   109103  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+90868   117806  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+91764   119044  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+92449   120042  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+94370   122734  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+95590   124521  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+100033  131262  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+100913  132578  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+102473  135135  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+102666  135456  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+102819  135697  OCC02b  visual_centrifugal        R      OCC02b         OCG08      NaN      NaN  OCC02b_R
+104718  138936  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+165320  549959  OCC02b  visual_centrifugal        L      OCC02b         OCG08      NaN      NaN  OCC02b_L
+
+ocellar nerve entry: EXPR: ann[ann['entryNerve'] == 'ON']
+somaSide    <NA>  All
+type                 
+<NA>          27   27
+BM_Vt_PoOc     8    8
+DNx02          4    4
+All           39   39
+status              Traced  All
+superclass                     
+cb_sensory              33   33
+cb_sensory_tbc           2    2
+sensory_descending       4    4
+All                     39   39
+
+--- lamina L1-L5: pattern r'^L[1-5]$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^L[1-5]$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 8,884   per-column hits: {'type': 8884}
+somaSide     L     R   All
+type                      
+L1         884   892  1776
+L2         886   893  1779
+L3         880   892  1772
+L4         879   891  1770
+L5         889   898  1787
+All       4418  4466  8884
+
+--- lamina C2/C3: pattern r'^C[23]$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^C[23]$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 3,524   per-column hits: {'type': 3524}
+somaSide     L     R   All
+type                      
+C2         871   874  1745
+C3         887   892  1779
+All       1758  1766  3524
+
+--- lamina T1: pattern r'^T1$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^T1$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 1,777   per-column hits: {'type': 1777}
+somaSide    L    R   All
+type                    
+T1        885  892  1777
+All       885  892  1777
+
+--- lamina wide-field Lawf / Lai / Lat: pattern r'^(Lawf|Lai|Lat)' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^(Lawf|Lai|Lat)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 854   per-column hits: {'type': 854}
+somaSide  <NA>    L    R  All
+type                         
+Lai          1   36   49   86
+Lat1         0    4    4    8
+Lat2         0    2    2    4
+Lat3         0    4    4    8
+Lat4         0    1    1    2
+Lat5         0    1    1    2
+Lawf1        0  177  184  361
+Lawf2        0  195  188  383
+All          1  420  433  854
+
+--- medulla Mi1/Mi4/Mi9: pattern r'^Mi(1|4|9)$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^Mi(1|4|9)$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 5,320   per-column hits: {'type': 5320}
+somaSide     L     R   All
+type                      
+Mi1        886   887  1773
+Mi4        883   889  1772
+Mi9        886   889  1775
+All       2655  2665  5320
+
+--- all Mi*: pattern r'^Mi\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^Mi\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 9,589   per-column hits: {'type': 9589}
+somaSide     L     R   All
+type                      
+Mi1        886   887  1773
+Mi10       222   222   444
+Mi13       457   453   910
+Mi14       160   155   315
+Mi15       569   582  1151
+Mi16        90   101   191
+Mi17        92    97   189
+Mi18        33    36    69
+Mi19         7     5    12
+Mi2        494   492   986
+Mi20         1     1     2
+Mi4        883   889  1772
+Mi9        886   889  1775
+All       4780  4809  9589
+
+--- medulla Tm1/2/3/4/9/20: pattern r'^Tm(1|2|3|4|9|20)$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^Tm(1|2|3|4|9|20)$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 10,800   per-column hits: {'type': 10800}
+somaSide     L     R    All
+type                       
+Tm1        887   890   1777
+Tm2        883   883   1766
+Tm20       886   876   1762
+Tm3       1017  1037   2054
+Tm4        837   833   1670
+Tm9        884   887   1771
+All       5394  5406  10800
+
+--- all Tm* (not TmY): pattern r'^Tm\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^Tm\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 19,861   per-column hits: {'type': 19861}
+somaSide        L     R    All
+type                          
+Tm1           887   890   1777
+Tm12          473   494    967
+Tm16          199   197    396
+Tm2           883   883   1766
+Tm20          886   876   1762
+Tm23           17    16     33
+Tm24          130   115    245
+Tm26           53    50    103
+Tm29          268   276    544
+Tm3          1017  1037   2054
+Tm30           63    61    124
+Tm31           65    55    120
+Tm32           66    59    125
+Tm33          141   139    280
+Tm34           86    88    174
+Tm35           43    43     86
+Tm36           78    77    155
+Tm37          291   268    559
+Tm38          107   116    223
+Tm39          226   200    426
+Tm3_unclear     1     0      1
+Tm4           837   833   1670
+Tm40           97    83    180
+Tm5Y          435   463    898
+Tm5a          317   307    624
+Tm5b          260   262    522
+Tm5c          376   374    750
+Tm6           756   770   1526
+Tm9           884   887   1771
+All          9942  9919  19861
+
+--- all TmY*: pattern r'^TmY' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^TmY', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 8,177   per-column hits: {'type': 8177}
+somaSide        L     R   All
+type                         
+TmY10         274   278   552
+TmY13         221   211   432
+TmY14         243   234   477
+TmY15          99   110   209
+TmY16          88    80   168
+TmY17         195   200   395
+TmY18         673   694  1367
+TmY19a         43    43    86
+TmY19b         19    17    36
+TmY20         176   167   343
+TmY21         183   189   372
+TmY3          415   409   824
+TmY4          274   288   562
+TmY5a         686   678  1364
+TmY9a         241   230   471
+TmY9b         249   266   515
+TmY_unclear     3     1     4
+All          4082  4095  8177
+
+--- all Dm*/Pm*/Sm*/Cm* (medulla interneurons): pattern r'^(Dm|Pm|Sm|Cm)\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^(Dm|Pm|Sm|Cm)\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 12,620   per-column hits: {'type': 12620}
+somaSide  <NA>     L     R    All
+type                             
+Cm1          0   241   231    472
+Cm10         0    44    45     89
+Cm11a        0    35    40     75
+Cm11b        0    26    30     56
+Cm11c        0    21    23     44
+Cm11d        0     9     9     18
+Cm12         0    35    35     70
+Cm13         0    25    27     52
+Cm14         0    25    23     48
+Cm15         0    25    22     47
+Cm16         0    21    17     38
+Cm17         0    15    16     31
+Cm18         0    14    14     28
+Cm19         0    16    14     30
+Cm2          0   180   203    383
+Cm20         0    13    13     26
+Cm21         0    12    13     25
+Cm22         0     9    10     19
+Cm23         0     9     8     17
+Cm24         0     6     5     11
+Cm25         0     4     3      7
+Cm26         0     7     6     13
+Cm27         0     4     5      9
+Cm28         0     6     6     12
+Cm29         0     3     3      6
+Cm3          0   156   167    323
+Cm30         0     2     2      4
+Cm31a        0     2     2      4
+Cm31b        0     1     1      2
+Cm32         0     1     1      2
+Cm33         0     1     1      2
+Cm34         0     1     1      2
+Cm35         0     1     1      2
+Cm4          0   125   126    251
+Cm5          0   105   109    214
+Cm6          0   105   106    211
+Cm7          0    91    93    184
+Cm8          0    92    90    182
+Cm9          0    70    73    143
+DM1_lPN      0     1     1      2
+DM2_lPN      0     2     2      4
+DM3_adPN     0     1     1      2
+DM3_vPN      0     1     1      2
+DM4_adPN     0     1     1      2
+DM4_vPN      0     1     1      2
+DM5_lPN      0     4     3      7
+DM6_adPN     0     3     4      7
+Dm1          0    41    39     80
+Dm10         0   315   311    626
+Dm11         0    76    82    158
+Dm12         0   139   137    276
+Dm13         0    25    28     53
+Dm14         0    18    16     34
+Dm15         0   243   242    485
+Dm16         0    76    75    151
+Dm17         0     4     4      8
+Dm18         0    31    27     58
+Dm19         0    15    15     30
+Dm2          0   726   726   1452
+Dm20         0    50    48     98
+Dm3a         0   603   601   1204
+Dm3b         1   565   571   1137
+Dm3c         0   386   401    787
+Dm4          0    51    48     99
+Dm6          0    33    29     62
+Dm8a         0   287   285    572
+Dm8b         0   267   265    532
+Dm9          0   138   135    273
+Pm1          0   125   121    246
+Pm10         0    37    37     74
+Pm11         0     2     2      4
+Pm12         0     2     2      4
+Pm13         0     1     1      2
+Pm2a         0   110   109    219
+Pm2b         0    59    65    124
+Pm3          0    33    36     69
+Pm4          0    83    85    168
+Pm5          0    88    94    182
+Pm6          0    26    24     50
+Pm7          0    14    14     28
+Pm7_Li28     0     1     1      2
+Pm8          0    19    20     39
+Pm9          0    27    27     54
+All          1  6288  6331  12620
+
+--- all Mi/Tm/TmY/Dm/Pm/Sm/Cm/Y/Tlp/T2/T3 (medulla-lobula families): pattern r'^(Mi|Tm|TmY|Dm|Pm|Sm|Cm|Y|Tlp|T2|T3|T2a|T3)\\d?' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^(Mi|Tm|TmY|Dm|Pm|Sm|Cm|Y|Tlp|T2|T3|T2a|T3)\\d?', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 59,647   per-column hits: {'type': 59647}
+    (737 distinct types; showing first 5)
+somaSide  <NA>    L    R  All
+type                         
+Cm-DRA       0    4    3    7
+Cm1          0  241  231  472
+Cm10         0   44   45   89
+Cm11a        0   35   40   75
+Cm11b        0   26   30   56
+
+--- T4 a-d: pattern r'^T4' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^T4', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 6,865   per-column hits: {'type': 6865}
+somaSide       L     R   All
+type                        
+T4_unclear     3     1     4
+T4a          835   849  1684
+T4b          844   846  1690
+T4c          895   883  1778
+T4d          850   859  1709
+All         3427  3438  6865
+
+--- T5 a-d: pattern r'^T5' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^T5', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 6,720   per-column hits: {'type': 6720}
+somaSide        L     R   All
+type                         
+T5a           826   838  1664
+T5a_unclear     0     1     1
+T5b           863   852  1715
+T5c           862   858  1720
+T5d           812   808  1620
+All          3363  3357  6720
+
+--- HS (HSN/HSE/HSS/HST): pattern r'^HS' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^HS', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 8   per-column hits: {'type': 8}
+somaSide  L  R  All
+type               
+HSE       1  1    2
+HSN       1  1    2
+HSS       1  1    2
+HST       1  1    2
+All       4  4    8
+
+--- VS (VS1-10, VSm, VST): pattern r'^VS' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^VS', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 34   per-column hits: {'type': 34}
+somaSide   L   R  All
+type                 
+VS         9   9   18
+VST1       2   3    5
+VST2       3   4    7
+VSm        2   2    4
+All       16  18   34
+
+--- H1 / H2: pattern r'^H[12]$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^H[12]$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 4   per-column hits: {'type': 4}
+somaSide  L  R  All
+type               
+H1        1  1    2
+H2        1  1    2
+All       2  2    4
+
+--- CH (VCH / DCH): pattern r'^(V|D)?CH$' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^(V|D)?CH$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 4   per-column hits: {'type': 4}
+somaSide  L  R  All
+type               
+DCH       1  1    2
+VCH       1  1    2
+All       2  2    4
+
+--- other LPTC-like: LPT, LPLC, LLPC, LPi?: pattern r'^(LPT|LLPC|LPLC)' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^(LPT|LLPC|LPLC)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 1,480   per-column hits: {'type': 1480}
+somaSide        L    R   All
+type                        
+LLPC1         143  142   285
+LLPC2         125  125   250
+LLPC3         107  112   219
+LLPC4           3    3     6
+LLPC_unclear    0    1     1
+LPLC1          68   66   134
+LPLC2          94   91   185
+LPLC4          48   49    97
+LPLC_unclear    0    1     1
+LPT100         21   19    40
+LPT101          5    6    11
+LPT110          1    1     2
+LPT111         50   51   101
+LPT112         19   20    39
+LPT113         10   12    22
+LPT114         11   11    22
+LPT115          3    3     6
+LPT116          6    5    11
+LPT21           1    1     2
+LPT22           1    1     2
+LPT23           3    3     6
+LPT26           1    1     2
+LPT27           1    1     2
+LPT28           1    1     2
+LPT29           1    1     2
+LPT30           1    1     2
+LPT31           4    4     8
+LPT49           1    1     2
+LPT50           1    1     2
+LPT51           2    2     4
+LPT52           1    1     2
+LPT53           1    1     2
+LPT54           1    1     2
+LPT57           1    1     2
+LPT59           1    1     2
+LPT60           1    1     2
+All           738  742  1480
+
+--- lobula plate intrinsic LPi: pattern r'^LPi' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^LPi', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 755   per-column hits: {'type': 755}
+somaSide       L    R  All
+type                      
+LPi12          2    2    4
+LPi14         17   16   33
+LPi21          1    1    2
+LPi2b          1    1    2
+LPi2c         27   27   54
+LPi2d         35   26   61
+LPi2e         49   46   95
+LPi34         61   58  119
+LPi3412       47   57  104
+LPi3a         61   62  123
+LPi3b         24   22   46
+LPi3c          5    6   11
+LPi43         28   33   61
+LPi4a         17   17   34
+LPi4b          1    1    2
+LPi_unclear    4    0    4
+All          380  375  755
+
+--- LC4/6/9/10/11/12/15/16/17/18/21/22: pattern r'^LC(4|6|9|10|11|12|15|16|17|18|21|22)([a-z]|$)' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^LC(4|6|9|10|11|12|15|16|17|18|21|22)([a-z]|$)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 3,154   per-column hits: {'type': 3154}
+somaSide     L     R   All
+type                      
+LC10a      135   140   275
+LC10b       47    48    95
+LC10c-1     64    66   130
+LC10c-2     59    66   125
+LC10d      108   106   214
+LC10e       62    48   110
+LC11        68    75   143
+LC12       256   242   498
+LC15        61    65   126
+LC16        88    94   182
+LC17       178   175   353
+LC18       104   104   208
+LC21        75    78   153
+LC22        38    35    73
+LC4         71    55   126
+LC6         59    65   124
+LC9        104   115   219
+All       1577  1577  3154
+
+--- ALL LC*: pattern r'^LC\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^LC\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 4,253   per-column hits: {'type': 4253}
+somaSide         L     R   All
+type                          
+LC10_unclear     4     7    11
+LC10a          135   140   275
+LC10b           47    48    95
+LC10c-1         64    66   130
+LC10c-2         59    66   125
+LC10d          108   106   214
+LC10e           62    48   110
+LC11            68    75   143
+LC12           256   242   498
+LC13            83    94   177
+LC14a-1         15    15    30
+LC14a-2          7     8    15
+LC14b           21    22    43
+LC15            61    65   126
+LC16            88    94   182
+LC17           178   175   353
+LC18           104   104   208
+LC19             6     8    14
+LC20a           32    30    62
+LC20b           39    40    79
+LC21            75    78   153
+LC22            38    35    73
+LC23             5     6    11
+LC24            40    54    94
+LC25            29    27    56
+LC26            38    37    75
+LC27            23    23    46
+LC28            31    31    62
+LC29            21    19    40
+LC30            27    30    57
+LC31a           16    16    32
+LC31b            4     6    10
+LC33            16    16    32
+LC34             4     6    10
+LC35a            5     5    10
+LC35b            1     1     2
+LC36            16    16    32
+LC37             7     8    15
+LC39a            3     3     6
+LC39b            1     1     2
+LC4             71    55   126
+LC40            19    15    34
+LC41             7     6    13
+LC43             8     6    14
+LC44             2     3     5
+LC46b            5     5    10
+LC6             59    65   124
+LC9            104   115   219
+All           2112  2141  4253
+
+--- LPLC1/2/4: pattern r'^LPLC(1|2|4)' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^LPLC(1|2|4)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 416   per-column hits: {'type': 416}
+somaSide    L    R  All
+type                   
+LPLC1      68   66  134
+LPLC2      94   91  185
+LPLC4      48   49   97
+All       210  206  416
+
+--- LLPC: pattern r'^LLPC' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^LLPC', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 761   per-column hits: {'type': 761}
+somaSide        L    R  All
+type                       
+LLPC1         143  142  285
+LLPC2         125  125  250
+LLPC3         107  112  219
+LLPC4           3    3    6
+LLPC_unclear    0    1    1
+All           378  383  761
+
+EXPR: vp = ann[ann['superclass'] == 'visual_projection']; pd.crosstab(vp['type'], vp['somaSide'])
+visual_projection neurons: 9,201; distinct types: 346
+somaSide          L     R   All
+type                           
+5thsLNv_LNd6      2     2     4
+AOTU045           1     1     2
+CL125             2     2     4
+H2                1     1     2
+HSE               1     1     2
+HSN               1     1     2
+HSS               1     1     2
+HST               1     1     2
+LC10_unclear      3     7    10
+LC10a           135   140   275
+LC10b            47    48    95
+LC10c-1          64    66   130
+LC10c-2          59    66   125
+LC10d           108   106   214
+LC10e            62    48   110
+LC11             68    75   143
+LC12            256   242   498
+LC13             83    94   177
+LC15             61    65   126
+LC16             88    94   182
+LC17            178   175   353
+LC18            104   104   208
+LC19              6     8    14
+LC20a            32    30    62
+LC20b            39    40    79
+LC21             75    78   153
+LC22             38    35    73
+LC23              5     6    11
+LC24             40    54    94
+LC25             29    27    56
+LC26             38    37    75
+LC27             23    23    46
+LC28             31    31    62
+LC29             21    19    40
+LC30             27    30    57
+LC31a            16    16    32
+LC31b             4     6    10
+LC33             16    16    32
+LC34              4     6    10
+LC35a             5     5    10
+LC35b             1     1     2
+LC36             16    16    32
+LC37              7     8    15
+LC39a             3     3     6
+LC39b             1     1     2
+LC4              71    55   126
+LC40             19    15    34
+LC41              7     6    13
+LC43              8     6    14
+LC44              2     3     5
+LC46b             5     5    10
+LC6              59    65   124
+LC9             104   115   219
+LLPC1           143   142   285
+LLPC2           125   125   250
+LLPC3           107   112   219
+LLPC4             3     3     6
+LLPC_unclear      0     1     1
+LPC1            115   109   224
+LPC2             75    79   154
+LPC_unclear       0     2     2
+LPLC1            68    66   134
+LPLC2            94    91   185
+LPLC4            48    49    97
+LPLC_unclear      0     1     1
+LPT100           21    19    40
+LPT101            5     6    11
+LPT21             1     1     2
+LPT22             1     1     2
+LPT23             3     3     6
+LPT26             1     1     2
+LPT27             1     1     2
+LPT28             1     1     2
+LPT29             1     1     2
+LPT30             1     1     2
+LPT31             4     4     8
+LPT49             1     1     2
+LPT50             1     1     2
+LPT51             2     2     4
+LPT52             1     1     2
+LPT54             1     1     2
+LT11              1     1     2
+LT1a              1     1     2
+LT1b              1     1     2
+LT1c              1     1     2
+LT1d              1     1     2
+LT43              2     2     4
+LT47              1     1     2
+LT51             11    11    22
+LT52             17    17    34
+LT55              1     1     2
+LT59              1     1     2
+LT60              1     1     2
+LT61a             1     1     2
+LT61b             1     1     2
+LT62              1     1     2
+LT63              2     2     4
+LT64              1     1     2
+LT65              1     1     2
+LT66              1     1     2
+LT67              1     1     2
+LT68              2     2     4
+LT69              1     1     2
+LT72              1     1     2
+LT73              1     2     3
+LT74              3     3     6
+LT75              1     1     2
+LT76              1     1     2
+LT77              3     3     6
+LT78              4     4     8
+LT79              1     1     2
+LT80              2     2     4
+LT81              5     6    11
+LT82a             2     2     4
+LT82b             1     1     2
+LT83              1     1     2
+LT84              1     1     2
+LT85              1     1     2
+LT86              1     1     2
+LT87              1     1     2
+LoVP1            25    27    52
+LoVP10            6     9    15
+LoVP100           1     1     2
+LoVP101           1     1     2
+LoVP102           1     1     2
+LoVP103           1     1     2
+LoVP106           1     1     2
+LoVP107           1     1     2
+LoVP108           1     2     3
+LoVP109           1     0     1
+LoVP11            4     4     8
+LoVP12           23    19    42
+LoVP13           27    24    51
+LoVP14           10     9    19
+LoVP16            6     5    11
+LoVP17            4     4     8
+LoVP18            6     6    12
+LoVP19            1     1     2
+LoVP2            21    23    44
+LoVP20            1     1     2
+LoVP21            2     2     4
+LoVP22            2     2     4
+LoVP23            3     3     6
+LoVP24            4     4     8
+LoVP25            3     3     6
+LoVP26            6     6    12
+LoVP27            5     5    10
+LoVP28            1     1     2
+LoVP29            1     1     2
+LoVP3             6     6    12
+LoVP30            1     1     2
+LoVP31            0     1     1
+LoVP32            3     3     6
+LoVP33            3     3     6
+LoVP34            1     1     2
+LoVP35            1     1     2
+LoVP36            1     1     2
+LoVP38            2     2     4
+LoVP39            2     2     4
+LoVP4             7     5    12
+LoVP40            1     1     2
+LoVP41            1     1     2
+LoVP42            1     1     2
+LoVP43            1     1     2
+LoVP44            1     1     2
+LoVP45            1     1     2
+LoVP46            1     1     2
+LoVP47            1     1     2
+LoVP48            1     1     2
+LoVP49            1     1     2
+LoVP5            15    12    27
+LoVP50            3     4     7
+LoVP51            1     1     2
+LoVP52            1     1     2
+LoVP53            1     1     2
+LoVP54            1     1     2
+LoVP55            2     2     4
+LoVP56            1     1     2
+LoVP57            1     1     2
+LoVP58            1     1     2
+LoVP59            1     1     2
+LoVP6            11    11    22
+LoVP60            1     1     2
+LoVP61            2     2     4
+LoVP62            2     2     4
+LoVP63            1     1     2
+LoVP64            1     1     2
+LoVP65            1     1     2
+LoVP66            1     1     2
+LoVP67            1     1     2
+LoVP68            1     1     2
+LoVP69            1     1     2
+LoVP7             8    12    20
+LoVP70            1     1     2
+LoVP71            2     2     4
+LoVP72            1     1     2
+LoVP73            1     1     2
+LoVP74            2     2     4
+LoVP75            2     3     5
+LoVP76            2     2     4
+LoVP77            1     1     2
+LoVP78            2     1     3
+LoVP79            1     1     2
+LoVP8            13     9    22
+LoVP80            2     2     4
+LoVP82            2     2     4
+LoVP83            4     3     7
+LoVP84            3     4     7
+LoVP85            1     1     2
+LoVP86            1     1     2
+LoVP88            1     1     2
+LoVP89            3     2     5
+LoVP9             7     6    13
+LoVP90a           1     1     2
+LoVP90b           1     1     2
+LoVP90c           1     1     2
+LoVP92            7     6    13
+LoVP93            6     6    12
+LoVP95            1     1     2
+LoVP98            1     1     2
+LoVP99            1     1     2
+LoVP_unclear     10     2    12
+MeTu1           126   124   250
+MeTu2a           34    36    70
+MeTu2b           15    16    31
+MeTu3a           20    22    42
+MeTu3b           42    38    80
+MeTu3c           82    91   173
+MeTu4_unclear     0     2     2
+MeTu4a           46    49    95
+MeTu4b           16    16    32
+MeTu4c           46    41    87
+MeTu4d           20    20    40
+MeTu4e           26    25    51
+MeTu4f           28    28    56
+MeVP1            63    59   122
+MeVP10           28    33    61
+MeVP11           25    30    55
+MeVP12            9    18    27
+MeVP14           16    17    33
+MeVP15           13    11    24
+MeVP16            4     4     8
+MeVP17            7     7    14
+MeVP18            3     3     6
+MeVP2            40    36    76
+MeVP20            1     3     4
+MeVP21            3     3     6
+MeVP22            1     2     3
+MeVP23            1     1     2
+MeVP24            1     1     2
+MeVP25            1     1     2
+MeVP26            1     1     2
+MeVP27            1     1     2
+MeVP28            1     1     2
+MeVP29            1     1     2
+MeVP3            34    35    69
+MeVP30            1     1     2
+MeVP31            1     1     2
+MeVP32            1     1     2
+MeVP33            1     1     2
+MeVP34            2     2     4
+MeVP35            1     1     2
+MeVP36            1     1     2
+MeVP38            1     1     2
+MeVP39            1     1     2
+MeVP4            18    22    40
+MeVP40            1     1     2
+MeVP41            1     1     2
+MeVP42            1     1     2
+MeVP43            1     1     2
+MeVP45            1     1     2
+MeVP46            2     2     4
+MeVP47            1     1     2
+MeVP48            1     1     2
+MeVP49            1     1     2
+MeVP5             8     9    17
+MeVP50            1     1     2
+MeVP51            1     1     2
+MeVP52            1     1     2
+MeVP53            1     1     2
+MeVP54            2     2     4
+MeVP55            2     2     4
+MeVP56            1     1     2
+MeVP57            0     1     1
+MeVP58            3     3     6
+MeVP59            2     2     4
+MeVP6            50    49    99
+MeVP60            1     1     2
+MeVP61            1     1     2
+MeVP62            3     3     6
+MeVP63            1     1     2
+MeVP64            0     1     1
+MeVP6_unclear     0     2     2
+MeVP7            11    12    23
+MeVP8             7     6    13
+MeVP9             7     5    12
+MeVPLo1           2     2     4
+MeVPLo2           7     7    14
+MeVPLp1           1     1     2
+MeVPMe1           6     6    12
+MeVPMe11          1     1     2
+MeVPMe2           5     5    10
+MeVPMe3           1     1     2
+MeVPMe4           2     1     3
+MeVPMe6           1     1     2
+MeVPMe8           2     2     4
+MeVPMe9           6     6    12
+MeVP_unclear      1     0     1
+MeVPaMe1          1     1     2
+MeVPaMe2          1     1     2
+Nod1              2     2     4
+Nod2              1     1     2
+Nod3              1     1     2
+Nod4              1     1     2
+Nod5              1     1     2
+OCG01a            1     1     2
+OCG01b            1     1     2
+OCG01c            1     1     2
+OCG01d            1     1     2
+OCG01e            1     1     2
+OCG01f            1     1     2
+OCG02b            1     1     2
+OCG02c            2     2     4
+OCG03             1     1     2
+OLVp_unclear      1     0     1
+SLP250            1     1     2
+TmY14           243   234   477
+VS                9     9    18
+VST1              2     3     5
+VST2              3     4     7
+VSm               2     2     4
+aMe1              2     2     4
+aMe10             1     2     3
+aMe12             4     2     6
+aMe20             1     1     2
+aMe25             1     1     2
+aMe26             3     3     6
+aMe3              1     1     2
+aMe5             25    17    42
+aMe6a             1     1     2
+aMe8              2     2     4
+aMe9              2     2     4
+s-LNv             4     4     8
+vCal1             1     1     2
+vCal2             1     1     2
+vCal3             1     1     2
+All            4589  4612  9201
+
+EXPR: vcf = ann[ann['superclass'] == 'visual_centrifugal']
+visual_centrifugal neurons: 563; distinct types: 108
+somaSide           L    R  All
+type                          
+5-HTPMPV03         1    1    2
+<NA>               1    0    1
+DCH                1    1    2
+LPT110             1    1    2
+LPT111            50   51  101
+LPT112            19   20   39
+LPT113            10   12   22
+LPT114            11   11   22
+LPT115             3    3    6
+LPT116             6    5   11
+LPT53              1    1    2
+LPT57              1    1    2
+LPT59              1    1    2
+LT34               1    1    2
+LT35               1    1    2
+LT36               1    1    2
+LT37               1    1    2
+LT39               1    1    2
+LT40               1    1    2
+LT41               1    1    2
+LT42               1    1    2
+LT46               1    1    2
+LT56               1    1    2
+LT70               5    6   11
+LT88               1    1    2
+Lat1               4    4    8
+Lat2               2    2    4
+Lat5               1    1    2
+LoVC1              1    1    2
+LoVC11             1    1    2
+LoVC12             1    1    2
+LoVC13             1    1    2
+LoVC14             1    1    2
+LoVC15             3    3    6
+LoVC16             2    2    4
+LoVC17             3    2    5
+LoVC18             2    2    4
+LoVC19             2    2    4
+LoVC2              1    1    2
+LoVC21             1    1    2
+LoVC22             2    2    4
+LoVC24             7    3   10
+LoVC25            11   11   22
+LoVC26             3    3    6
+LoVC27             5    5   10
+LoVC28             2    1    3
+LoVC29             2    2    4
+LoVC3              1    1    2
+LoVC4              1    1    2
+LoVC5              1    1    2
+LoVC6              1    1    2
+LoVC7              1    1    2
+LoVC9              1    1    2
+LoVCLo1            1    1    2
+LoVCLo2            1    1    2
+LoVCLo3            1    1    2
+LoVP96             1    1    2
+LopVC_unclear      0    1    1
+MeVC1              1    1    2
+MeVC10             1    1    2
+MeVC11             1    1    2
+MeVC12             1    1    2
+MeVC2              1    1    2
+MeVC20             2    2    4
+MeVC21             3    3    6
+MeVC22             2    2    4
+MeVC23             1    1    2
+MeVC24             1    1    2
+MeVC25             1    1    2
+MeVC26             1    1    2
+MeVC27             3    3    6
+MeVC3              1    1    2
+MeVC4a             1    1    2
+MeVC4b             1    1    2
+MeVC5              1    1    2
+MeVC6              1    1    2
+MeVC7a             1    1    2
+MeVC7b             1    1    2
+MeVC8              1    1    2
+MeVC9              1    1    2
+MeVCMe1            2    2    4
+MeVC_unclear       0    1    1
+OA-AL2i1           1    1    2
+OA-AL2i2           2    2    4
+OA-AL2i3           2    2    4
+OA-AL2i4           1    1    2
+OA-ASM1            2    2    4
+OCC01b             1    1    2
+OCC02a             3    3    6
+OCC02b             8    8   16
+OCG06              1    1    2
+OLVC1              1    1    2
+OLVC2              1    1    2
+OLVC3              1    1    2
+OLVC4              1    1    2
+OLVC5              1    1    2
+OLVC6              1    1    2
+OLVC7              3    3    6
+PVLP046            7    7   14
+PVLP046_unclear    0    1    1
+V1                 1    1    2
+VCH                1    1    2
+aMe17a             1    1    2
+aMe17b             3    2    5
+aMe17c             2    2    4
+aMe17e             1    1    2
+aMe2               4    4    8
+aMe30              3    2    5
+aMe4              10    9   19
+All              283  280  563
+
+--- DNp01 / Giant Fiber: pattern r'^DNp01|giant fiber|\\bGF\\b' over ['type', 'flywireType', 'hemibrainType', 'mancType', 'synonyms', 'instance']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^DNp01|giant fiber|\\bGF\\b', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 2   per-column hits: {'type': 2, 'flywireType': 2, 'hemibrainType': 2, 'mancType': 2, 'synonyms': 2, 'instance': 2}
+somaSide  L  R  All
+type               
+DNp01     1  1    2
+All       1  1    2
+
+--- GF partners DNp02 / DNp11 / PVLP / DNp03/04/06: pattern r'^DNp(02|03|04|06|11)$|^PVLP' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^DNp(02|03|04|06|11)$|^PVLP', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 661   per-column hits: {'type': 661}
+    (148 distinct types; showing first 80)
+somaSide         L  R  All
+type                      
+DNp02            1  1    2
+DNp03            1  1    2
+DNp04            1  1    2
+DNp06            1  1    2
+DNp11            1  1    2
+PVLP001          1  1    2
+PVLP002          1  1    2
+PVLP003          1  1    2
+PVLP004          8  8   16
+PVLP005          8  7   15
+PVLP007          6  5   11
+PVLP008_a1       2  2    4
+PVLP008_a2       2  2    4
+PVLP008_a3       1  1    2
+PVLP008_a4       1  1    2
+PVLP008_b        2  2    4
+PVLP008_c        5  7   12
+PVLP009          2  1    3
+PVLP010          1  1    2
+PVLP011          1  1    2
+PVLP012          2  2    4
+PVLP013          1  1    2
+PVLP014          1  1    2
+PVLP015          1  1    2
+PVLP016          1  1    2
+PVLP017          1  1    2
+PVLP018          1  1    2
+PVLP019          1  1    2
+PVLP020          1  1    2
+PVLP021          2  2    4
+PVLP022          2  1    3
+PVLP024          1  2    3
+PVLP025          2  2    4
+PVLP026          1  1    2
+PVLP027          1  1    2
+PVLP028          2  2    4
+PVLP030          1  1    2
+PVLP031          2  2    4
+PVLP033          4  5    9
+PVLP034          5  5   10
+PVLP036          3  3    6
+PVLP037          4  3    7
+PVLP037_unclear  1  1    2
+PVLP046          7  7   14
+PVLP046_unclear  0  1    1
+PVLP047          4  4    8
+PVLP048          4  4    8
+PVLP049          2  2    4
+PVLP060          3  3    6
+PVLP061          1  1    2
+PVLP062          1  1    2
+PVLP063          1  1    2
+PVLP064          3  3    6
+PVLP065          1  1    2
+PVLP066          2  2    4
+PVLP068          3  3    6
+PVLP069          1  1    2
+PVLP070          2  2    4
+PVLP071          2  2    4
+PVLP072          5  5   10
+PVLP073          2  3    5
+PVLP074          5  4    9
+PVLP075          1  1    2
+PVLP076          1  1    2
+PVLP078          1  1    2
+PVLP079          1  1    2
+PVLP080_a        2  2    4
+PVLP080_b        3  3    6
+PVLP081          2  2    4
+PVLP082          5  5   10
+PVLP084          1  1    2
+PVLP085          4  4    8
+PVLP086          2  2    4
+PVLP088          3  4    7
+PVLP089          1  1    2
+PVLP090          1  1    2
+PVLP092          3  3    6
+PVLP093          1  1    2
+PVLP094          1  1    2
+PVLP096          2  2    4
+
+--- DNp09: pattern r'^DNp09' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^DNp09', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 2   per-column hits: {'type': 2}
+somaSide  L  R  All
+type               
+DNp09     1  1    2
+All       1  1    2
+
+--- DNa01 / DNa02 (steering): pattern r'^DNa0[12]' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^DNa0[12]', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 4   per-column hits: {'type': 4}
+somaSide  L  R  All
+type               
+DNa01     1  1    2
+DNa02     1  1    2
+All       2  2    4
+
+--- MDN (moonwalker): pattern r'MDN|moonwalk' over ['type', 'flywireType', 'hemibrainType', 'mancType', 'synonyms', 'instance']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'MDN|moonwalk', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 4   per-column hits: {'type': 4, 'flywireType': 4, 'hemibrainType': 4, 'mancType': 4, 'synonyms': 0, 'instance': 4}
+somaSide  L  R  All
+type               
+MDN       2  2    4
+All       2  2    4
+
+--- DNp/DNa/DNb/DNg (all named DN families, first 200): pattern r'^DN[a-z]+\\d' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^DN[a-z]+\\d', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 1,326   per-column hits: {'type': 1326}
+    (481 distinct types; showing first 200)
+somaSide       <NA>   L  M   R  All
+type                               
+DNES1             0   5  0   5   10
+DNES2             0   1  0   1    2
+DNES3             0   2  0   2    4
+DNa01             0   1  0   1    2
+DNa02             0   1  0   1    2
+DNa03             0   1  0   1    2
+DNa04             0   1  0   1    2
+DNa05             0   1  0   1    2
+DNa06             0   1  0   1    2
+DNa07             0   1  0   1    2
+DNa08             0   1  0   1    2
+DNa09             0   1  0   1    2
+DNa10             0   1  0   1    2
+DNa11             0   1  0   1    2
+DNa13             0   2  0   2    4
+DNa14             0   1  0   1    2
+DNa15             0   1  0   1    2
+DNa16             0   1  0   1    2
+DNae001           0   1  0   1    2
+DNae002           0   1  0   1    2
+DNae003           0   1  0   1    2
+DNae004           0   1  0   1    2
+DNae005           0   1  0   1    2
+DNae006           0   1  0   1    2
+DNae007           0   1  0   1    2
+DNae008           0   1  0   1    2
+DNae009           0   1  0   1    2
+DNae010           0   1  0   1    2
+DNb01             0   1  0   1    2
+DNb02             0   2  0   2    4
+DNb03             0   2  0   2    4
+DNb04             0   1  0   1    2
+DNb05             0   1  0   1    2
+DNb06             0   1  0   1    2
+DNb07             0   1  0   1    2
+DNb08             0   2  0   2    4
+DNb09             0   1  0   1    2
+DNbe001           0   1  0   1    2
+DNbe002           0   2  0   2    4
+DNbe003           0   1  0   1    2
+DNbe004           0   1  0   1    2
+DNbe005           0   1  0   1    2
+DNbe006           0   1  0   1    2
+DNbe007           0   1  0   1    2
+DNc01             0   1  0   1    2
+DNc02             0   1  0   1    2
+DNd01             0   2  0   2    4
+DNd02             0   1  0   1    2
+DNd03             0   1  0   1    2
+DNd04             0   1  0   1    2
+DNd05             0   1  0   1    2
+DNde001           0   1  0   1    2
+DNde002           0   1  0   1    2
+DNde003           0   2  0   2    4
+DNde005           0   1  0   1    2
+DNde006           0   1  0   1    2
+DNde007           0   1  0   1    2
+DNg01_a           0   1  0   1    2
+DNg01_b           0   1  0   1    2
+DNg01_c           0   1  0   1    2
+DNg01_d           0   1  0   1    2
+DNg01_unclear     0   1  0   0    1
+DNg02_a           0   5  0   5   10
+DNg02_b           0   3  0   2    5
+DNg02_c           0   2  0   2    4
+DNg02_d           0   1  0   1    2
+DNg02_e           0   1  0   1    2
+DNg02_f           0   1  0   1    2
+DNg02_g           0   2  0   2    4
+DNg03             0   6  0   6   12
+DNg04             0   2  0   2    4
+DNg05_a           0   1  0   1    2
+DNg05_b           0   2  0   2    4
+DNg05_c           0   1  0   1    2
+DNg06             0   6  0   6   12
+DNg07             0   8  0   8   16
+DNg08             0  12  0  11   23
+DNg09_a           0   3  0   3    6
+DNg09_b           0   1  0   1    2
+DNg10             0   6  0   6   12
+DNg100            0   1  0   1    2
+DNg101            0   1  0   1    2
+DNg102            0   2  0   2    4
+DNg103            0   1  0   1    2
+DNg104            0   1  0   1    2
+DNg105            0   1  0   1    2
+DNg106            0   9  0   7   16
+DNg107            0   1  0   1    2
+DNg108            0   1  0   1    2
+DNg109            0   1  0   1    2
+DNg11             0   3  0   3    6
+DNg110            0   3  0   3    6
+DNg111            0   1  0   1    2
+DNg12_a           0   4  0   4    8
+DNg12_b           0   5  0   5   10
+DNg12_c           0   4  0   4    8
+DNg12_d           0   1  0   1    2
+DNg12_e           0   3  0   3    6
+DNg12_f           0   2  0   2    4
+DNg12_g           0   1  0   1    2
+DNg12_h           0   1  0   1    2
+DNg13             0   1  0   1    2
+DNg14             0   1  0   1    2
+DNg15             0   1  0   1    2
+DNg16             0   1  0   1    2
+DNg17             0   1  0   1    2
+DNg18_a           0   2  0   1    3
+DNg18_b           0   3  0   3    6
+DNg19             0   1  0   1    2
+DNg20             0   1  0   1    2
+DNg21             0   1  0   1    2
+DNg22             0   1  0   1    2
+DNg23             0   1  0   1    2
+DNg24             0   1  0   1    2
+DNg26             0   2  0   2    4
+DNg27             0   1  0   1    2
+DNg28             0   2  0   2    4
+DNg29             0   1  0   1    2
+DNg30             0   1  0   1    2
+DNg31             0   1  0   1    2
+DNg32             0   1  0   1    2
+DNg33             0   1  0   1    2
+DNg34             0   1  0   1    2
+DNg35             0   1  0   1    2
+DNg36_a           0   2  0   2    4
+DNg36_b           0   3  0   4    7
+DNg37             0   1  0   1    2
+DNg38             0   1  0   1    2
+DNg39             0   1  0   1    2
+DNg40             0   1  0   1    2
+DNg41             0   1  0   1    2
+DNg42             0   1  0   1    2
+DNg43             0   1  0   1    2
+DNg44             0   1  0   1    2
+DNg45             0   1  0   1    2
+DNg46             0   1  0   1    2
+DNg47             0   1  0   1    2
+DNg48             0   1  0   1    2
+DNg49             0   1  0   1    2
+DNg50             0   1  0   1    2
+DNg51             0   2  0   2    4
+DNg52             0   2  0   2    4
+DNg53             0   1  0   1    2
+DNg54             0   1  0   1    2
+DNg55             0   0  1   0    1
+DNg56             0   1  0   1    2
+DNg57             0   1  0   1    2
+DNg58             0   1  0   1    2
+DNg59             0   1  0   1    2
+DNg60             0   1  0   1    2
+DNg61             0   1  0   1    2
+DNg62             0   1  0   1    2
+DNg63             0   1  0   1    2
+DNg64             0   1  0   1    2
+DNg65             0   1  0   1    2
+DNg66             0   0  1   0    1
+DNg67             0   1  0   1    2
+DNg68             0   1  0   1    2
+DNg69             0   1  0   1    2
+DNg70             0   1  0   1    2
+DNg71             0   1  0   1    2
+DNg72             0   2  0   2    4
+DNg73             0   1  0   1    2
+DNg74_a           0   1  0   1    2
+DNg74_b           0   1  0   1    2
+DNg75             0   1  0   1    2
+DNg76             0   1  0   1    2
+DNg77             0   1  0   1    2
+DNg78             0   1  0   1    2
+DNg79             0   2  0   2    4
+DNg80             0   1  0   1    2
+DNg81             0   1  0   1    2
+DNg82             0   2  0   2    4
+DNg83             0   1  0   1    2
+DNg84             0   1  0   1    2
+DNg85             0   1  0   1    2
+DNg86             0   1  0   1    2
+DNg87             0   1  0   1    2
+DNg88             0   1  0   1    2
+DNg89             0   1  0   1    2
+DNg90             0   1  0   1    2
+DNg91             0   1  0   1    2
+DNg92_a           0   1  0   1    2
+DNg92_b           0   2  0   2    4
+DNg93             0   1  0   1    2
+DNg94             0   1  0   1    2
+DNg95             0   1  0   1    2
+DNg96             0   1  0   1    2
+DNg97             0   1  0   1    2
+DNg98             0   1  0   1    2
+DNg99             0   1  0   1    2
+DNge001           0   1  0   2    3
+DNge002           0   1  0   1    2
+DNge003           0   1  0   1    2
+DNge004           0   1  0   1    2
+DNge006           0   1  0   1    2
+DNge007           0   1  0   1    2
+DNge008           0   1  0   1    2
+DNge009           0   4  0   3    7
+DNge010           0   1  0   1    2
+
+EXPR: dn = ann[ann['superclass'] == 'descending_neuron']
+descending_neuron rows: 1,314; typed: 1310; distinct types: 480
+status    Traced   All
+somaSide              
+L            656   656
+M             10    10
+R            648   648
+All         1314  1314
+DN type-prefix families (regex ^(DN[a-z]+|MDN|...) ):
+somaSide    L   M    R   All
+0                           
+<NA>        3   0    1     4
+CB          1   0    1     2
+DNa        16   0   16    32
+DNae       10   0   10    20
+DNb        12   0   12    24
+DNbe        8   0    8    16
+DNc         2   0    2     4
+DNd         4   0    4     8
+DNde        7   0    7    14
+DNg       215   2  210   427
+DNge      211   6  212   429
+DNp        81   0   81   162
+DNpe       79   2   77   158
+DNxl        1   0    1     2
+MDN         2   0    2     4
+aSP         1   0    1     2
+pIP         2   0    2     4
+pMP         1   0    1     2
+All       656  10  648  1314
+DN subclass values:
+somaSide    L   M    R   All
+subclass                    
+<NA>        4   0    4     8
+ad          3   2    5    10
+fl         58   0   57   115
+hl          1   0    1     2
+ht         13   0   13    26
+it         10   0    8    18
+lt         16   0   15    31
+ml          1   0    1     2
+nt         54   0   54   108
+ut        139   1  136   276
+wt          1   0    1     2
+xl        136   3  136   275
+xn        220   4  217   441
+All       656  10  648  1314
+DN class values:
+class
+NaN    1314
+
+ascending superclasses present: ['ascending_neuron', 'sensory_ascending', 'efferent_ascending', 'sensory_ascending_tbc']
+EXPR: an = ann[ann['superclass'].isin([s for s in ann['superclass'].dropna().unique() if 'ascend' in s])]
+somaSide               <NA>    L   M    R   All
+superclass                                     
+ascending_neuron          0  930   9  907  1846
+efferent_ascending        0    3   2    3     8
+sensory_ascending       537    0   0    0   537
+sensory_ascending_tbc     2    0   0    0     2
+All                     539  933  11  910  2393
+ascending typed: 2378; distinct types: 600
+
+--- AN* type prefix: pattern r'^AN\\d|^AN[a-z]' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^AN\\d|^AN[a-z]', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 1,849   per-column hits: {'type': 1849}
+    (556 distinct types; showing first 10)
+somaSide  L  M  R  All
+type                  
+AN00A002  0  1  0    1
+AN00A006  0  5  0    5
+AN00A009  0  1  0    1
+AN01A006  1  0  1    2
+AN01A014  1  0  1    2
+AN01A021  1  0  1    2
+AN01A033  1  0  1    2
+AN01A049  1  0  1    2
+AN01A055  1  0  1    2
+AN01A086  1  0  1    2
+
+====================================================================================================
+F. motor neurons
+====================================================================================================
+EXPR: mn = ann[ann['superclass'].fillna('').str.contains('motor')]
+somaSide      L    R  All
+superclass               
+cb_motor     54   53  107
+vnc_motor   355  353  708
+All         409  406  815
+
+motor superclass x subclass:
+superclass  cb_motor  vnc_motor  All
+subclass                            
+ad                 0        214  214
+am                13          0   13
+fl                 0        135  135
+hl                 0        130  130
+hm                 0         16   16
+ml                 0        116  116
+nm                20         24   44
+pm                67          0   67
+rm                 7          0    7
+wm                 0         67   67
+xm                 0          6    6
+All              107        708  815
+
+motor subclass x somaNeuromere:
+somaNeuromere  <NA>  A1  A10  A2  A3  A4  A5  A6  A7  A8  A9  GNG  LB   T1   T2   T3  All
+subclass                                                                                 
+ad                1  56   10  28  22  22  16   8   6  18  21    0   0    0    0    6  214
+am               11   0    0   0   0   0   0   0   0   0   0    0   2    0    0    0   13
+fl                0   0    0   0   0   0   0   0   0   0   0    0   0  135    0    0  135
+hl                0   0    0   0   0   0   0   0   0   0   0    0   0    0    0  130  130
+hm                0   0    0   0   0   0   0   0   0   0   0    0   0    0    0   16   16
+ml                0   0    0   0   0   0   0   0   0   0   0    0   0    0  116    0  116
+nm                6   0    0   0   0   0   0   0   0   0   0    0  14   24    0    0   44
+pm               63   0    0   0   0   0   0   0   0   0   0    4   0    0    0    0   67
+rm                7   0    0   0   0   0   0   0   0   0   0    0   0    0    0    0    7
+wm                0   0    0   0   0   0   0   0   0   0   0    0   0   12   55    0   67
+xm                0   0    0   0   0   0   0   0   0   0   0    0   0    2    4    0    6
+All              88  56   10  28  22  22  16   8   6  18  21    4  16  173  175  152  815
+
+motor subclass x exitNerve:
+exitNerve  <NA>  ADMN  AN  AbN1  AbN2  AbN3  AbN4  AbNT  CvN  DMetaN  DProN  MesoAN  MesoLN  MetaLN  MxLbN  ON  PDMNa  PDMNp  PhN  ProAN  ProLN  VProN  All
+subclass                                                                                                                                                   
+ad            0     0   0     6    44    28    72    64    0       0      0       0       0       0      0   0      0      0    0      0      0      0  214
+am            0     0  13     0     0     0     0     0    0       0      0       0       0       0      0   0      0      0    0      0      0      0   13
+fl            0     0   0     0     0     0     0     0    0       0      8       0       0       0      0   0      0      0    0     24     81     22  135
+hl            0     0   0     8     0     0     0     0    0       0      0       0       0     122      0   0      0      0    0      0      0      0  130
+hm            0     0   0    16     0     0     0     0    0       0      0       0       0       0      0   0      0      0    0      0      0      0   16
+ml            0     0   0     0     0     0     0     0    0       0      0       0     116       0      0   0      0      0    0      0      0      0  116
+nm            0     0   0     0     0     0     0     0   24       0     20       0       0       0      0   0      0      0    0      0      0      0   44
+pm            1     0   0     0     0     0     0     0    0       0      0       0       0       0     26   0      0      0   40      0      0      0   67
+rm            0     0   2     0     0     0     0     0    0       0      0       0       0       0      0   5      0      0    0      0      0      0    7
+wm            0    28   0     0     0     0     0     0    0       0      0      19       0       0      0   0     14      6    0      0      0      0   67
+xm            0     0   0     0     0     0     0     0    0       4      0       0       0       0      0   0      2      0    0      0      0      0    6
+All           1    28  15    30    44    28    72    64   24       4     28      19     116     122     26   5     16      6   40     24     81     22  815
+
+motor class values:
+superclass  cb_motor  vnc_motor  All
+class                               
+<NA>             107        708  815
+All              107        708  815
+
+--- neck / NMN / cervical / CvN anywhere: pattern r'neck|NMN|cervical|CvN' over ['type', 'flywireType', 'hemibrainType', 'mancType', 'synonyms', 'instance', 'subclass', 'class', 'exitNerve', 'entryNerve', 'matchingNotes']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'neck|NMN|cervical|CvN', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 29   per-column hits: {'type': 8, 'flywireType': 0, 'hemibrainType': 0, 'mancType': 0, 'synonyms': 0, 'instance': 8, 'subclass': 2, 'class': 0, 'exitNerve': 25, 'entryNerve': 0, 'matchingNotes': 2}
+somaSide   <NA>   L  M   R  All
+type                           
+<NA type>     2   0  0   0    2
+ADNM1 MN      0   1  0   1    2
+ADNM2 MN      0   1  0   1    2
+CvN4          0   1  0   1    2
+CvN5          0   1  0   1    2
+CvN6          0   1  0   1    2
+CvN7          0   1  0   1    2
+DNpe048       0   1  0   1    2
+EA00B022      0   0  1   0    1
+GNG276        0   1  0   1    2
+GNG283        0   1  0   1    2
+GNG641        0   1  0   1    2
+GNG648        0   1  0   1    2
+GNG650        0   1  0   1    2
+GNG653        0   1  0   1    2
+All           2  13  1  13   29
+    rows matched only via non-type columns: 21
+            bodyId      type         superclass somaSide flywireType   hemibrainType  mancType synonyms                instance subclass                          class exitNerve entryNerve                                                                                                                                            matchingNotes
+521          10554    GNG648           cb_motor        R      CB0913             NaN       NaN      NaN                GNG648_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+658          10699    GNG648           cb_motor        L      CB0913             NaN       NaN      NaN                GNG648_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+693          10738    GNG641           cb_motor        L      CB4212             NaN       NaN      NaN                GNG641_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+1273         11354    GNG650           cb_motor        R      CB0835             NaN       NaN      NaN                GNG650_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+1320         11403    GNG641           cb_motor        R      CB4212             NaN       NaN      NaN                GNG641_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+1771         11879    GNG276           cb_motor        L      CB0705             NaN       NaN      NaN                GNG276_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+1823         11934    GNG650           cb_motor        L      CB0835             NaN       NaN      NaN                GNG650_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+1980         12097    GNG283           cb_motor        L      CB0705             NaN       NaN      NaN                GNG283_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+2058         12180    GNG653           cb_motor        L      CB0706             NaN       NaN      NaN                GNG653_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+2211         12342    GNG276           cb_motor        R      CB0705             NaN       NaN      NaN                GNG276_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+2960         13128    GNG653           cb_motor        R      CB0706             NaN       NaN      NaN                GNG653_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+132757      231558    GNG283           cb_motor        R      CB0705  (hb2180780757)       NaN      NaN  GNG283(hb2180780757)_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+139102      402239   DNpe048  descending_neuron        R     DNpe048          SMP367       NaN      NaN       DNpe048(SMP367)_R      NaN                            NaN       NaN        NaN   biological variability mcns; does not reach the VNC. Possibly not a DN, but a case of biological variation with thin branches extending into the neck.
+155148      521776   DNpe048  descending_neuron        L     DNpe048          SMP367       NaN      NaN       DNpe048(SMP367)_L      NaN                            NaN       NaN        NaN  biological variability mcns; does not reach the VNC. Possibly not a DN, but a case of biological variation with think branches extending into the neck.
+170405      801678  ADNM1 MN          vnc_motor        R         NaN             NaN     ADNM1      NaN              ADNM1 MN_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+172447      804343  ADNM2 MN          vnc_motor        L         NaN             NaN     ADNM2      NaN              ADNM2 MN_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+180112      813696  ADNM2 MN          vnc_motor        R         NaN             NaN     ADNM2      NaN              ADNM2 MN_R       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+182012      816236  EA00B022       vnc_efferent        M         NaN             NaN  EA00B022      NaN              EA00B022_M      NaN                            NaN       CvN        NaN                                                                                                                                                      NaN
+184603      821742       NaN        vnc_sensory      NaN         NaN             NaN       NaN      NaN                     NaN     neck  mechanosensory_proprioceptive       NaN        PrN                                                                                                                                                      NaN
+187359      903152  ADNM1 MN          vnc_motor        L         NaN             NaN     ADNM1      NaN              ADNM1 MN_L       nm                            NaN       CvN        NaN                                                                                                                                                      NaN
+206287  1050625756       NaN        vnc_sensory      NaN         NaN             NaN       NaN      NaN                     NaN     neck                unknown_sensory       NaN        PrN                                                                                                                                                      NaN
+
+EXPR: ann[ann['exitNerve'].fillna('').str.contains('Cv', case=False)]
+superclass cb_motor     vnc_efferent vnc_motor    All
+somaSide          L   R            M         L  R    
+type                                                 
+ADNM1 MN          0   0            0         1  1   2
+ADNM2 MN          0   0            0         1  1   2
+CvN4              1   1            0         0  0   2
+CvN5              1   1            0         0  0   2
+CvN6              1   1            0         0  0   2
+CvN7              1   1            0         0  0   2
+EA00B022          0   0            1         0  0   1
+GNG276            1   1            0         0  0   2
+GNG283            1   1            0         0  0   2
+GNG641            1   1            0         0  0   2
+GNG648            1   1            0         0  0   2
+GNG650            1   1            0         0  0   2
+GNG653            1   1            0         0  0   2
+All              10  10            1         2  2  25
+
+--- wing / haltere MN names (MNwm, MNhm, DLM, DVM, b1, b2, i1, iii, hg, ps): pattern r'^MN(wm|hm)|^(DLM|DVM|b[123]|i[12]|iii[123]|hg[1-4]|ps[12]|tp[12]|tt|III|I1|I2)' over ['type']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'^MN(wm|hm)|^(DLM|DVM|b[123]|i[12]|iii[123]|hg[1-4]|ps[12]|tp[12]|tt|III|I1|I2)', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 468   per-column hits: {'type': 468}
+    (146 distinct types; showing first 100)
+somaSide    L  R  All
+type                 
+DLMn a, b   1  1    2
+DLMn c-f    4  4    8
+DVMn 1a-c   3  3    6
+DVMn 2a, b  2  2    4
+DVMn 3a, b  2  2    4
+MNhm03      1  1    2
+MNhm42      1  1    2
+MNhm43      1  1    2
+MNwm35      1  1    2
+MNwm36      1  1    2
+PS100       1  1    2
+PS101       1  1    2
+PS106       2  2    4
+PS107       2  2    4
+PS108       1  1    2
+PS109       2  2    4
+PS110       3  3    6
+PS111       1  1    2
+PS112       1  1    2
+PS114       1  1    2
+PS115       1  1    2
+PS116       1  1    2
+PS117_a     1  1    2
+PS117_b     1  1    2
+PS118       3  3    6
+PS124       1  1    2
+PS126       1  1    2
+PS127       1  1    2
+PS137       2  2    4
+PS138       1  1    2
+PS139       1  1    2
+PS140       2  2    4
+PS141       2  2    4
+PS142       3  3    6
+PS143       1  1    2
+PS146       2  2    4
+PS148       3  3    6
+PS149       1  1    2
+PS150       4  5    9
+PS153       4  8   12
+PS156       1  1    2
+PS157       1  1    2
+PS158       1  1    2
+PS159       1  1    2
+PS160       1  1    2
+PS161       1  1    2
+PS164       2  2    4
+PS170       1  1    2
+PS171       1  1    2
+PS172       1  1    2
+PS173       1  1    2
+PS174       1  1    2
+PS175       1  1    2
+PS176       1  1    2
+PS177       1  1    2
+PS178       1  1    2
+PS180       1  1    2
+PS181       1  1    2
+PS182       1  1    2
+PS183       1  1    2
+PS185       1  1    2
+PS186       1  1    2
+PS187       1  1    2
+PS188       3  4    7
+PS191       2  2    4
+PS192       2  2    4
+PS193       1  1    2
+PS193b      2  2    4
+PS194       3  3    6
+PS196_a     1  1    2
+PS196_b     1  1    2
+PS197       2  2    4
+PS199       1  1    2
+PS200       1  1    2
+PS201       1  1    2
+PS202       1  1    2
+PS203       2  2    4
+PS206       1  1    2
+PS208       6  5   11
+PS209       6  6   12
+PS210       0  1    1
+PS213       1  1    2
+PS214       1  1    2
+PS215       1  1    2
+PS217       1  1    2
+PS220       2  2    4
+PS221       4  4    8
+PS224       1  1    2
+PS229       3  3    6
+PS230       2  2    4
+PS231       1  1    2
+PS232       1  1    2
+PS233       2  2    4
+PS234       1  1    2
+PS237       2  2    4
+PS238       1  1    2
+PS239       2  2    4
+PS240       3  3    6
+PS241       4  4    8
+PS242       1  2    3
+
+EXPR: legmn = mn[mn['subclass'].fillna('').str.contains('leg|^fl$|^ml$|^hl$|T[123]', case=False)]  -- see subclass table above for the actual codes
+
+leg-like MN types (type contains 'leg' or starts with MN + leg muscle abbreviations):
+
+--- leg MN types: pattern r'leg|^MN(fl|ml|hl)|^(fe|ti|ta|tr|co|st|lt|ltm|Ti|Fe|Ta|Tr|Co|St)[a-z]*\\d*$' over ['type', 'subclass', 'synonyms']
+    EXPR: m = ann[cols].apply(lambda s: s.str.contains(r'leg|^MN(fl|ml|hl)|^(fe|ti|ta|tr|co|st|lt|ltm|Ti|Fe|Ta|Tr|Co|St)[a-z]*\\d*$', case=False, regex=True, na=False)).any(axis=1)
+    matched rows: 1,906   per-column hits: {'type': 234, 'subclass': 1672, 'synonyms': 0}
+somaSide       <NA>    L    R   All
+type                               
+<NA type>       391    0    0   391
+DNg01_c           0    1    1     2
+DNg01_d           0    1    1     2
+DNg01_unclear     0    1    0     1
+DNg106            0    5    5    10
+DNg40             0    1    1     2
+DNp01             0    1    1     2
+DNp02             0    1    1     2
+DNp04             0    1    1     2
+DNp06             0    1    1     2
+DNp103            0    1    1     2
+DNp59             0    1    1     2
+DNpe042           0    1    1     2
+IN06B065          0    1    0     1
+LT11              0    1    1     2
+LT33              0    1    1     2
+LT34              0    1    1     2
+LT35              0    1    1     2
+LT36              0    1    1     2
+LT37              0    1    1     2
+LT39              0    1    1     2
+LT40              0    1    1     2
+LT41              0    1    1     2
+LT42              0    1    1     2
+LT43              0    2    2     4
+LT46              0    1    1     2
+LT47              0    1    1     2
+LT51              0   11   11    22
+LT52              0   17   17    34
+LT54              0    1    1     2
+LT55              0    1    1     2
+LT56              0    1    1     2
+LT58              0    1    1     2
+LT59              0    1    1     2
+LT60              0    1    1     2
+LT62              0    1    1     2
+LT63              0    2    2     4
+LT64              0    1    1     2
+LT65              0    1    1     2
+LT66              0    1    1     2
+LT67              0    1    1     2
+LT68              0    2    2     4
+LT69              0    1    1     2
+LT70              0    5    6    11
+LT72              0    1    1     2
+LT73              0    1    2     3
+LT74              0    3    3     6
+LT75              0    1    1     2
+LT76              0    1    1     2
+LT77              0    3    3     6
+LT78              0    4    4     8
+LT79              0    1    1     2
+LT80              0    2    2     4
+LT81              0    5    6    11
+LT83              0    1    1     2
+LT84              0    1    1     2
+LT85              0    1    1     2
+LT86              0    1    1     2
+LT87              0    1    1     2
+LT88              0    1    1     2
+LgAG1            25    0    0    25
+LgAG2            11    0    0    11
+LgAG3             7    0    0     7
+LgAG4             8    0    0     8
+LgAG5             4    0    0     4
+LgAG6             4    0    0     4
+LgAG7             5    0    0     5
+LgAG8             9    0    0     9
+LgAG9             3    0    0     3
+LgLG1a          136    0    0   136
+LgLG1b          134    0    0   134
+LgLG2           129    0    0   129
+LgLG3           162    0    0   162
+LgLG4            42    0    0    42
+LgLG5            13    0    0    13
+LgLG6            16    0    0    16
+LgLG7            21    0    0    21
+LgLG8            14    0    0    14
+MNhl01            0    1    1     2
+MNhl02            0    1    1     2
+MNhl29            0    1    1     2
+MNhl59            0    1    1     2
+MNhl60            0    1    1     2
+MNhl62            0    1    1     2
+MNhl64            0    1    1     2
+MNhl65            0    2    1     3
+MNhl87            0    1    1     2
+MNhl88            0    1    1     2
+MNml29            0    1    1     2
+MNml76            0    0    1     1
+MNml77            0    1    1     2
+MNml78            0    4    2     6
+MNml79            0    1    1     2
+MNml80            0    3    3     6
+MNml81            0    1    1     2
+MNml82            0    1    1     2
+MNml83            0    0    1     1
+SAxx02           12    0    0    12
+SNch05            8    0    0     8
+SNch10           13    0    0    13
+SNpp40            2    0    0     2
+SNpp41            1    0    0     1
+SNpp43            1    0    0     1
+SNpp45            1    0    0     1
+SNpp50            1    0    0     1
+SNpp51            2    0    0     2
+SNpp52           17    0    0    17
+SNpp55            7    0    0     7
+SNpp56            4    0    0     4
+SNppxx           80    0    0    80
+SNta19            1    0    0     1
+SNta20           40    0    0    40
+SNta21            3    0    0     3
+SNta23            1    0    0     1
+SNta24            1    0    0     1
+SNta25            2    0    0     2
+SNta26            1    0    0     1
+SNta27           13    0    0    13
+SNta28            5    0    0     5
+SNta28,SNta40     1    0    0     1
+SNta29           12    0    0    12
+SNta31           21    0    0    21
+SNta32           17    0    0    17
+SNta34            2    0    0     2
+SNta35            2    0    0     2
+SNta37            5    0    0     5
+SNta38            3    0    0     3
+SNta39            2    0    0     2
+SNta41            2    0    0     2
+SNta44            1    0    0     1
+SNtaxx           19    0    0    19
+SNxx27,SNxx29     2    0    0     2
+SNxx29           20    0    0    20
+SNxx30            5    0    0     5
+SNxx32            2    0    0     2
+SNxx33           72    0    0    72
+SNxxxx          102    0    0   102
+STTMm             0    2    2     4
+All            1640  133  133  1906
+    rows matched only via non-type columns: 1672
+       bodyId     type         superclass somaSide     subclass                      synonyms
+0       10001    DNp01  descending_neuron        R           lt  Kennedy and Broadie 2018: GF
+6       10010    DNp01  descending_neuron        L           lt  Kennedy and Broadie 2018: GF
+80      10091  DNpe042  descending_neuron        L           lt                           NaN
+105     10117    DNp02  descending_neuron        R           lt              Matsuo 2016: P3b
+181     10197    DNp02  descending_neuron        L           lt              Matsuo 2016: P3b
+210     10228    DNp06  descending_neuron        L           lt         Matsuo 2016: AMMC-Di5
+264     10283   DNp103  descending_neuron        R           lt                           NaN
+338     10361    DNg40  descending_neuron        L           lt                           NaN
+343     10366    DNp59  descending_neuron        R           lt                           NaN
+389     10417   DNp103  descending_neuron        L           lt                           NaN
+550     10584    DNp06  descending_neuron        R           lt         Matsuo 2016: AMMC-Di5
+633     10674    DNp59  descending_neuron        L           lt                           NaN
+865     10923    DNg40  descending_neuron        R           lt                           NaN
+1064    11137    DNp04  descending_neuron        R           lt                           NaN
+2484    12628  DNpe042  descending_neuron        R           lt                           NaN
+3671    13891   DNg106  descending_neuron        R           lt                           NaN
+3965    14214   DNg106  descending_neuron        L           lt                           NaN
+5419    15796   DNg106  descending_neuron        R           lt                           NaN
+8394    19038   DNg106  descending_neuron        L           lt                           NaN
+8582    19247   DNg106  descending_neuron        L           lt                           NaN
+10968   21863   DNg106  descending_neuron        L           lt                           NaN
+15857   27254  DNg01_c  descending_neuron        R           lt           Cachero 2010: pSG-b
+24440   36812    LgAG6  sensory_ascending      NaN  leg bristle                           NaN
+32296   45591   SAxx02  sensory_ascending      NaN          leg                           NaN
+33330   46750   SAxx02  sensory_ascending      NaN          leg                           NaN
+
+====================================================================================================
+G. soma positions
+====================================================================================================
+EXPR: xyz = np.array(ann.loc[ann['somaLocation'].notna(), 'somaLocation'].tolist())  ->  shape
+somaLocation non-null: 141,781; element lengths: {3: 141781}
+xyz shape (141781, 3); per-axis min [2468, 4758, 10154] max [93668, 68996, 134531] mean [48542.0, 32394.0, 38817.0]
+assuming 8 nm isotropic voxels (male-CNS EM voxel size): extents in um = [729.6, 513.9, 995.0]
+
+somaLocation presence by superclass:
+EXPR: ann.groupby(ann['superclass'].fillna('<NA>'))['somaLocation'].agg(['size', 'count'])
+                        size  count
+superclass                         
+<NA>                   44877   2119
+ENS                       50      1
+ascending_neuron        1846   1812
+cb_efferent                4      4
+cb_endocrine              72     68
+cb_intrinsic           32164  31997
+cb_motor                 107    103
+cb_sensory              4868      0
+cb_sensory_tbc            14      0
+descending_neuron       1314   1308
+descending_neuron_tbc      2      0
+efferent_ascending         8      8
+efferent_descending        4      4
+ol_intrinsic           89403  81055
+ol_sensory              6098     28
+sensory_ascending        537      0
+sensory_ascending_tbc      2      0
+sensory_descending        12      0
+visual_centrifugal       563    563
+visual_projection       9201   9162
+visual_projection_tbc      2      2
+vnc_efferent              94     90
+vnc_endocrine             22     22
+vnc_intrinsic          13161  12729
+vnc_motor                708    703
+vnc_sensory             6370      2
+vnc_sensory_tbc           36      0
+vnc_tbc                   38      1
+
+somaLocation presence by status:
+               size   count
+status                     
+<NA>           5472      15
+Anchor          611     208
+Assign         1832       0
+Glia          11864       0
+Orphan        15925    1534
+Traced       165122  140024
+Unimportant   10751       0
+
+tosomaLocation non-null: 995 ; sample: [{'bodyId': 10262, 'type': 'V_ilPN', 'tosomaLocation': array([59041, 40434, 26364])}, {'bodyId': 10973, 'type': 'VP1m+VP5_ilPN', 'tosomaLocation': array([59111, 40346, 26227])}, {'bodyId': 14120, 'type': 'FB2D', 'tosomaLocation': array([40857, 33079, 24534])}]
+  centroid ol_intrinsic       side L: [80081.0, 32207.0, 32433.0]  (n=40246)
+  centroid ol_intrinsic       side R: [16762.0, 34138.0, 33738.0]  (n=40807)
+  centroid descending_neuron  side L: [56598.0, 34593.0, 28784.0]  (n=651)
+  centroid descending_neuron  side R: [40503.0, 35486.0, 28776.0]  (n=647)
+  centroid vnc_motor          side L: [58581.0, 55255.0, 101659.0]  (n=354)
+  centroid vnc_motor          side R: [42349.0, 53072.0, 102060.0]  (n=349)
+  DNp01  n=    2 soma xyz examples: [array([37124, 22258, 36274]), array([58238, 22234, 36276])]  sides {'R': 1, 'L': 1}
+  HSE    n=    2 soma xyz examples: [array([31585, 24676, 38269]), array([69175, 30192, 42149])]  sides {'R': 1, 'L': 1}
+  VS     n=   18 soma xyz examples: [array([69604, 28368, 42459]), array([23402, 27713, 43514])]  sides {'L': 9, 'R': 9}
+  LC4    n=  126 soma xyz examples: [array([67030, 31950, 27092]), array([66566, 31740, 27897])]  sides {'L': 71, 'R': 55}
+  LPLC2  n=  185 soma xyz examples: [array([68710, 20288, 32378]), array([70760, 18644, 32584])]  sides {'L': 94, 'R': 91}
+  T4a    n= 1682 soma xyz examples: [array([79438, 34824, 41092]), array([71552, 35788, 41552])]  sides {'R': 848, 'L': 834}
+  Mi1    n= 1742 soma xyz examples: [array([90640, 41190, 35252]), array([93446, 30654, 33004])]  sides {'R': 873, 'L': 869}
+  L1     n=  301 soma xyz examples: [array([80116, 32882, 24010]), array([93057, 29920, 30354])]  sides {'L': 162, 'R': 139}
+
+somaSide value_counts among ol_intrinsic: {'R': 44795, 'L': 44606, nan: 2}
+rootSide value_counts: {nan: 193638, 'R': 9723, 'L': 7802, 'unknown': 414}

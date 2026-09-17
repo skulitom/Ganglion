@@ -1,0 +1,10 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.ps1 text eol=crlf
+# Preserve printed table output, including its column-padding spaces.
+docs/census/*.out.txt whitespace=-blank-at-eol

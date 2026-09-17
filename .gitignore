@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# recordings, datasets, training runs, checkpoints
+data/
+runs/
+*.pt
+*.log
+
+# agent worktrees
+.claude/worktrees/
