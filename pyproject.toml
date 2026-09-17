@@ -47,4 +47,7 @@ testpaths = ["tests"]
 line-length = 120
 
 [tool.ruff.lint]
-select = ["F", "E9"]
+# Pyflakes, syntax errors, comparison mistakes, bare excepts, mutable defaults and unused loop
+# variables. B023 (closures over loop variables) is left out: the two occurrences call the
+# closure inside the same iteration.
+select = ["F", "E9", "E711", "E712", "E713", "E714", "E721", "E722", "B006", "B007", "B008", "B011", "B018", "B020"]
