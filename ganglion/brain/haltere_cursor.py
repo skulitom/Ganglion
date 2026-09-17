@@ -8,7 +8,7 @@ import hashlib
 from math import hypot, tanh
 from pathlib import Path
 
-MAX_NEURAL_STEPS = 5
+MAX_NEURAL_STEPS = 2     # measured live: three catch-up steps took 40-54 ms and were stale before they finished
 
 
 def neural_steps(elapsed: float | None, dt: float = .01, max_steps: int = MAX_NEURAL_STEPS) -> int:
@@ -16,8 +16,10 @@ def neural_steps(elapsed: float | None, dt: float = .01, max_steps: int = MAX_NE
 
     Observations arrive irregularly (capture at 66 Hz, control at 100 Hz, stalls). Stepping the
     network once per sample would make neural time run at the sampling rate; stepping it by the
-    elapsed wall time keeps its dynamics on the clock the training simulator used. Gaps beyond
-    the reset window are handled by a state reset, so the count is bounded.
+    elapsed wall time keeps its dynamics on the clock the training simulator used. The catch-up
+    is capped: every extra step costs a full network step at the moment the loop is already late,
+    and a proposal that finishes past the evidence budget drives nothing. Gaps beyond the reset
+    window are handled by a state reset.
     """
     if elapsed is None or not (elapsed > 0):
         return 1

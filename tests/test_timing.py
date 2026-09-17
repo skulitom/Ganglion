@@ -64,9 +64,9 @@ def test_neural_steps_track_elapsed_wall_time_and_stay_bounded():
     assert neural_steps(0.004) == 1
     assert neural_steps(0.01) == 1
     assert neural_steps(0.015) == 2
-    assert neural_steps(0.03) == 3
-    assert neural_steps(0.049) == 5
-    assert neural_steps(0.2) == 5                       # beyond this a reset applies, not more steps
+    assert neural_steps(0.03) == 2                      # capped: a late loop cannot afford more
+    assert neural_steps(0.049) == 2
+    assert neural_steps(0.2) == 2                       # beyond the reset window a reset applies
     assert neural_steps(0.03, dt=0.005, max_steps=20) == 6
 
 

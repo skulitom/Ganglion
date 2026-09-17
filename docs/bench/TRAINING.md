@@ -290,6 +290,32 @@ every jump but one, pursuit 28/32 with 7.6 px against 23/32 with 11.9 px (refere
 interventions column (7% on settle, 35–42% on moving targets), so this is a supervised result,
 not autonomy; but it is the first change that moved the number the runtime actually uses.
 
+## Both together: velocity-free inputs, all motor neurons
+
+Refitting the velocity-free DAgger cache plus one fresh round on all 3,913 motor neurons
+([DAgger v3b](results/cursor-dagger-v3b.json)) settles **10/16** fresh held-out static targets
+with 73 px terminal error, against 3/16 for either change alone and 0/16 for the all-motor
+readout with velocity inputs. On the suite ([cursor-suite-v3b](results/cursor-suite-v3b.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 19/32 | 780 | 14.8 | n/a | n/a |
+| settle | supervised | 32/32 | 375 | 3.7 | 1.9% | 98.1% |
+| jump | connectome | 106/256 | 875 | 52.5 | n/a | n/a |
+| jump | supervised | 241/256 | 650 | 22.8 | 6.1% | 93.9% |
+| pursuit | connectome | 10/32 | 280 | 52.6 | n/a | n/a |
+| pursuit | supervised | 24/32 | 215 | 10.1 | 6.1% | 93.9% |
+| camera | connectome | 1/32 (lost 26) | 560 | 77.4 | n/a | n/a |
+| camera | supervised | 18/32 (lost 0) | 550 | 11.4 | 19.0% | 81.0% |
+
+Alone, this is the first readout that settles more than half the static targets (19/32) with a
+tracking error near the tolerance (14.8 px), reaches 106 of 256 jumps and 10 of 32 pursuits.
+Under the envelope it settles fastest of all candidates (375 ms median against the reference's
+285) with 2% interventions, and it trails the velocity-fed all-motor readout only on moving
+targets (pursuit 24/32 at 10.1 px against 28/32 at 7.6 px; camera 18/32 against 27/32), where a
+velocity input evidently helps. Two candidates remain: this one for settling and for acting on
+its own, the velocity-fed all-motor readout for supervised tracking of moving targets.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint

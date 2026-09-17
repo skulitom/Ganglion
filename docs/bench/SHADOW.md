@@ -125,8 +125,11 @@ steps with no proposal fresh enough are counted apart from steps the envelope re
 (`stale_commands`, controller `deterministic_stale`, in intent status and ledger shares). The
 adapter also stepped the network once per consumed sample whatever the wall time between
 samples, so neural time ran at the sampling rate; it now advances the network by
-round(elapsed / 10 ms) steps, at most five, holding the observation, and the ledger records
-`neural_steps`. Regression tests pin both behaviours.
+round(elapsed / 10 ms) steps, holding the observation, and the ledger records `neural_steps`.
+The catch-up is capped at two steps: in the seat, three-step predictions took 40–54 ms at the
+median against 5 ms for one step, because they happen exactly when the machine is stalled, and
+a proposal that finishes past the 50 ms evidence budget drives nothing. Regression tests pin
+both behaviours.
 
 ## First person
 
@@ -152,10 +155,14 @@ stale steps (no proposal fresh enough) and the accepted share.
 | deterministic | 8/8 | 8/8 | 0.42 | 0.29 | 139.5 | n/a | n/a | n/a |
 | connectome | 8/8 | 8/8 | 0.52 | 0.41 | 130.7 | 15.6% | 13.1% | 71.3% |
 | connectome-all-motor | 8/8 | 8/8 | 0.42 | 0.29 | 151.4 | 16.4% | 29.5% | 54.1% |
+| connectome-all-motor-cap2 | 8/8 | 8/8 | 0.46 | 0.33 | 143.0 | 15.7% | 19.9% | 64.4% |
+| connectome-v3b | 8/8 | 8/8 | 0.42 | 0.31 | 136.0 | 21.9% | 27.1% | 51.0% |
 
 Sources: [deterministic](results/transfer-seat-deterministic.json),
 [connectome](results/transfer-seat-connectome.json),
 [connectome, all motor neurons](results/transfer-seat-connectome-all-motor.json),
+[the same readout with the two-step catch-up cap](results/transfer-seat-connectome-all-motor-cap2.json),
+[velocity-free all-motor readout](results/transfer-seat-connectome-v3b.json),
 [comparison](results/transfer-seat.json).
 Inference during the connectome run: p50 5.1 ms, p95 15.7 ms, p99 44.2 ms, with 13% of the
 steps stale under the corrected freshness rule; lost ledger events 0 and 0.
@@ -167,6 +174,20 @@ tracking-error columns say what that cost. The all-motor readout reached toleran
 16.4% interventions and 29.5% stale steps: its inference ran at p50 4.9 ms but p95 30 ms,
 so the corrected freshness rule handed nearly a third of the steps to the reference, and the
 reference's pace is what the table shows.
+
+## Where the live jitter comes from
+
+The all-motor readout's seat run had one-step inference at p50 4.9 ms but p95 30 ms, and
+catch-up predictions of three neural steps took 40–54 ms at the median. Capping the catch-up
+at two steps on the same checkpoint cut the stale share from 29.5% to 19.9% (p95 25.6 ms,
+p99 37.7 ms). The rest is not the model and not the seat: `ganglion.bench.shadow_latency`
+paces the same adapter at 10 ms like the reach loop, and measures p50 2.0 ms, p95 3.6 ms, p99 4.3 ms in the console
+session, p50 1.9 ms, p95 3.1 ms, p99 4.1 ms inside the seat, p50 2.8 ms, p95 4.7 ms, p99 6.9 ms beside a busy Python thread, and p50 1.9 ms, p95 3.2 ms, p99 6.0 ms
+while a separate process runs the desktop capture ([console](results/shadow-latency-console.json),
+[seat](results/shadow-latency-seat.json), [seat with capture](results/shadow-latency-seat-capture.json)).
+So the p95 the ledger records comes from inside the runtime process, where the shadow worker
+thread shares the interpreter with capture, detection, the tick and the service. The remedy
+is inference in its own process behind the same one-item mailbox; that is the next change.
 
 ## Validation and next work
 

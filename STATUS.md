@@ -53,8 +53,9 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 
 - **Timing.** Proposal reuse is bounded by the age of the observation it came from, not by
   when inference finished; steps with no fresh proposal are counted as stale, apart from
-  envelope rejections. The adapter advances neural time by the elapsed wall time (up to five
-  10 ms steps per sample) and the ledger records it. Both are regression-tested.
+  envelope rejections. The adapter advances neural time by the elapsed wall time (capped at two
+  10 ms steps per sample, since live catch-up steps cost 40–54 ms and were stale before they
+  finished) and the ledger records it. Both are regression-tested.
 - **Fixed suite.** `ganglion.train.suite` compares the reference, an MLP, the connectome and the
   supervised connectome on identical settling, jump, pursuit and camera episodes. With the
   DAgger v1 checkpoint the supervised connectome completes every settle episode but takes
@@ -79,9 +80,13 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   supervised).
 - **All motor neurons moved the supervised number.** A readout over all 3,913 motor neurons
   settles nothing on its own but tracks with half the error, and under the envelope it is the
-  best supervised controller so far: settling 460 ms median (reference 285, previous 685),
-  pursuit 28/32 at 7.6 px (reference 5.5, previous 11.9), camera 27/32 at 8.0 px. It is the
-  new supervised candidate; nothing is promoted to autonomy. [Details](docs/bench/TRAINING.md).
+  best supervised tracker so far: settling 460 ms median (reference 285, previous 685),
+  pursuit 28/32 at 7.6 px (reference 5.5, previous 11.9), camera 27/32 at 8.0 px.
+- **Both together is the first controller that mostly settles alone.** The velocity-free
+  all-motor readout settles 19/32 suite targets on its own at 14.8 px (previous best 18/32 at
+  54 px; the original 3/32 at 171 px), 10/16 fresh held-out static targets, and under the
+  envelope settles in 375 ms median with 2% interventions. It trails the velocity-fed all-motor
+  readout only on moving targets. Nothing is promoted to autonomy. [Details](docs/bench/TRAINING.md).
 - **Fly-style motion perception.** A `flow` watch cancels the view's own motion (phase
   correlation, dense flow on the aligned pair, one robust affine fit) and reports what still
   moves, awake during own turns and walks; its wide-field summary (translation, expansion,
@@ -94,7 +99,11 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   15.6%, stale 13.1%); the all-motor readout 8/8 at 0.42 s (0.29 s, interventions 16.4%,
   stale 29.5%), so the live loop runs at the reference's pace with the model acting on about
   half of the steps and inference p95 at 30 ms. [Details](docs/bench/SHADOW.md).
-- The suite passes **148 tests** (four optional checks skipped). Application-specific
+- **Live jitter located.** The model alone runs at p95 3 ms in the seat, with or without a
+  busy thread or the desktop capture beside it; the p95 of 25–30 ms the ledger records comes
+  from interpreter contention inside the runtime process. Capping the neural catch-up at two
+  steps cut the stale share from 29.5% to 19.9%; moving inference into its own process is next.
+- The suite passes **149 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

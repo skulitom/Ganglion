@@ -1,0 +1,47 @@
+{
+  "checkpoint": "runs/cursor-dagger-v1b/round-01/cursor-readout.pt",
+  "session_id": 2,
+  "model": {
+    "neurons": 30000,
+    "edges": 2767698,
+    "device": "cuda:0",
+    "adapter_version": 2
+  },
+  "runs": [
+    {
+      "samples": 999,
+      "spacing_ms": 10.0,
+      "contention": false,
+      "inference_ms": {
+        "p50": 1.8773000010696705,
+        "p90": 2.6834800002689017,
+        "p95": 3.206249999129795,
+        "p99": 5.954624001460615
+      },
+      "max_ms": 15.23059999817633,
+      "within_5ms_fraction": 0.985985985985986,
+      "within_budget_fraction": 1.0,
+      "neural_steps": {
+        "1": 998,
+        "2": 1
+      }
+    },
+    {
+      "samples": 999,
+      "spacing_ms": 10.0,
+      "contention": true,
+      "inference_ms": {
+        "p50": 2.430399999866495,
+        "p90": 3.62743999939994,
+        "p95": 4.393790000176521,
+        "p99": 8.812813999102216
+      },
+      "max_ms": 14.320000002044253,
+      "within_5ms_fraction": 0.965965965965966,
+      "within_budget_fraction": 1.0,
+      "neural_steps": {
+        "1": 999
+      }
+    }
+  ]
+}
