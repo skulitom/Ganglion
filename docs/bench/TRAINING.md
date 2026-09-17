@@ -316,6 +316,25 @@ targets (pursuit 24/32 at 10.1 px against 28/32 at 7.6 px; camera 18/32 against 
 velocity input evidently helps. Two candidates remain: this one for settling and for acting on
 its own, the velocity-fed all-motor readout for supervised tracking of moving targets.
 
+Two more DAgger rounds on that readout with 1,000-tick episodes, kicks every 250 ticks and up
+to 90% model-driven episodes ([DAgger v3c](results/cursor-dagger-v3c.json); validation round 1 5/8 static, 171 px terminal; round 2 5/8 static, 303 px terminal;
+round-01 selected) settle **7/16** fresh held-out static
+targets with 149 px terminal error. On the suite
+([cursor-suite-v3c](results/cursor-suite-v3c.json)):
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 21/32 | 300 | 80.6 | n/a | n/a |
+| settle | supervised | 32/32 | 345 | 4.0 | 2.5% | 97.5% |
+| jump | connectome | 64/256 | 530 | 109.1 | n/a | n/a |
+| jump | supervised | 228/256 | 690 | 23.0 | 6.5% | 93.5% |
+| pursuit | connectome | 1/32 | 230 | 120.1 | n/a | n/a |
+| pursuit | supervised | 22/32 | 230 | 10.6 | 15.0% | 85.0% |
+| camera | connectome | 2/32 (lost 26) | 550 | 91.6 | n/a | n/a |
+| camera | supervised | 18/32 (lost 0) | 440 | 12.1 | 23.4% | 76.6% |
+
+More on-policy data with the stronger readout did not help either: settling alone rose to 21/32 but with 81 px error, moving targets got worse alone (jump 64/256, pursuit 1/32), and under the envelope every task moved by a few percent either way. The single refit (v3b) stays the candidate, and the pattern across v2, v3c and the gradient runs is consistent: with this frozen network, what the readout sees decides more than how much on-policy data it gets.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint

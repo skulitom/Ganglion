@@ -43,9 +43,11 @@ the destination or matching the condition, then verifies that condition from fre
 release. Without `until`, completion establishes only arrival and release. A pre-satisfied condition
 fails before pickup. `condition_verified` does not prove arbitrary application success.
 
-On a core started with `--shadow-checkpoint`, add `controller: "connectome"` to a reach or drag
-spec to let the fly model propose pointer velocity; the core applies a proposal only when it
-brings the cursor closer to the goal and reports `neural_commands` and `overridden_commands`.
+On a core started with `--shadow-checkpoint` (add `--shadow-process` for live runs: it keeps
+inference under the evidence budget), add `controller: "connectome"` to a reach, drag or align
+spec to let the fly model propose the velocity; the core applies a proposal only when it brings
+the cursor closer to the goal and reports `neural_commands`, `overridden_commands` and
+`stale_commands` (steps with no proposal fresh enough).
 
 First person: `ganglion_input` holds keys, sends relative look deltas and holds buttons;
 `ganglion_watch` kinds `motion` and `track` see what moves and follow it, `flow` sees what moves

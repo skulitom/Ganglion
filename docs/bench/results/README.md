@@ -33,10 +33,10 @@ connectome runs are shadow or supervised. Dates are in each file's `measured_at`
 | `cursor-dagger-v1.json` | Three DAgger rounds on that readout; its round 3 is the v2 candidate | [TRAINING.md](../TRAINING.md) |
 | `cursor-dagger-v2.json` | DAgger with 1,000-tick kicked episodes; did not improve | [TRAINING.md](../TRAINING.md) |
 | `cursor-dagger-v1b.json` | Refit on all 3,913 motor neurons; the best supervised controller so far | [TRAINING.md](../TRAINING.md) |
-| `cursor-readout-v3.json`, `cursor-dagger-v3.json`, `cursor-dagger-v3b.json` | Adapter v3 (no own-velocity input) readout, its DAgger rounds, and the refit on all motor neurons | [TRAINING.md](../TRAINING.md) |
+| `cursor-readout-v3.json`, `cursor-dagger-v3.json`, `cursor-dagger-v3b.json`, `cursor-dagger-v3c.json` | Adapter v3 (no own-velocity input) readout, its DAgger rounds, the refit on all motor neurons and its on-policy continuation | [TRAINING.md](../TRAINING.md) |
 | `cursor-finetune-v1.json` to `cursor-finetune-v4.json` | Gradient fine-tuning of encoders, readout and edge gains; none beat their source | [TRAINING.md](../TRAINING.md) |
 | `cursor-parameter-verification.json` | Which tensors a fine-tuned checkpoint changed | [TRAINING.md](../TRAINING.md) |
-| `cursor-suite-v1.json`, `cursor-suite-v1b.json`, `cursor-suite-v2.json`, `cursor-suite-v3.json`, `cursor-suite-v3r3.json`, `cursor-suite-v3b.json` | The fixed suite (settle, jump, pursuit, camera) for each checkpoint, four controllers on identical episodes | [TRAINING.md](../TRAINING.md) |
+| `cursor-suite-v1.json`, `cursor-suite-v1b.json`, `cursor-suite-v2.json`, `cursor-suite-v3.json`, `cursor-suite-v3r3.json`, `cursor-suite-v3b.json`, `cursor-suite-v3c.json` | The fixed suite (settle, jump, pursuit, camera) for each checkpoint, four controllers on identical episodes | [TRAINING.md](../TRAINING.md) |
 
 Checkpoints, feature caches and optimiser states stay under the ignored `runs/` folder; the
 reports above name them by path and SHA-256.
