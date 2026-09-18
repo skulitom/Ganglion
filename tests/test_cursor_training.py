@@ -178,6 +178,22 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
         CursorWorld([1000], sense_version=5)
 
 
+def test_goal_scale_is_shared_by_the_world_and_the_adapter():
+    from ganglion.core.aim import UNBOUNDED
+    seeds = [1000, 1001, 1002, 1003]
+    fine = CursorWorld(seeds, sense_version=3, goal_scale=.1)
+    coarse = CursorWorld(seeds, sense_version=3)
+    assert fine.goal_scale == .1 and coarse.goal_scale == .3
+    assert (np.abs(fine.senses()["goal"][:, :2]) >= np.abs(coarse.senses()["goal"][:, :2])).all()   # a stronger input for the same error
+    for i in range(4):
+        sample = MotorSample("i", "reach", 1, 2, .01, .01, 10, tuple(fine.cursor[i]), tuple(fine.goal[i]),
+                             (0, 0), UNBOUNDED, fine.speed[i], .01)
+        np.testing.assert_allclose(fine.senses()["goal"][i], channels(sample, None, version=3, goal_scale=.1)["goal"], atol=1e-6)
+        np.testing.assert_allclose(coarse.senses()["goal"][i], channels(sample, None, version=3)["goal"], atol=1e-6)
+    with pytest.raises(ValueError):
+        CursorWorld(seeds, sense_version=3, goal_scale=0)
+
+
 def test_slip_robustness_options_drop_scale_and_blank_the_slip():
     seeds = [1000, 1001, 1002, 1003]
     exact = CursorWorld(seeds, sense_version=4, view=True)

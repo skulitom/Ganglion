@@ -69,14 +69,14 @@ def slip_options(args):
 
 
 def harvest(torch, brain, seeds, guard, *, steps, batch, student_fraction=0, jump_every=None, sense_version=2,
-            view_fraction=0.0, slip=None):
+            view_fraction=0.0, slip=None, goal_scale=.3):
     features, inputs, labels = [], [], []
     weights = brain.weight_matrix().detach()
     for offset in range(0, len(seeds), batch):
         chunk = seeds[offset:offset+batch]
         view = np.arange(len(chunk)) < int(round(len(chunk) * view_fraction))   # the first ones are views
         world = CursorWorld(chunk, steps=steps, jump_every=jump_every, sense_version=sense_version, view=view,
-                            **(slip or {}))
+                            goal_scale=goal_scale, **(slip or {}))
         state, previous = brain.init_state(world.B), None
         with torch.inference_mode():
             for _ in range(steps):
@@ -176,8 +176,8 @@ def train_mlp(torch, train, validation, guard, device):
     return model, {"validation_mse": best, "iterations": 600}
 
 
-def evaluate(torch, brain, seeds, guard, *, policy, mlp=None, steps=2000, sense_version=2):
-    world = CursorWorld(seeds, steps=steps, sense_version=sense_version)
+def evaluate(torch, brain, seeds, guard, *, policy, mlp=None, steps=2000, sense_version=2, goal_scale=.3):
+    world = CursorWorld(seeds, steps=steps, sense_version=sense_version, goal_scale=goal_scale)
     state, previous = brain.init_state(world.B), None
     weights = brain.weight_matrix().detach()
     errors = []
@@ -246,31 +246,33 @@ def run(args):
     report = {"experiment": "frozen-connectome cursor readout", "base_checkpoint": str(base),
               "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(), "neurons": brain.N,
               "edges": int(brain.edge_index.shape[1]), "torch": torch.__version__,
-              "adapter_version": version, "view_fraction": args.view_fraction, "slip": slip_options(args), "splits": splits,
+              "adapter_version": version, "view_fraction": args.view_fraction, "slip": slip_options(args), "goal_scale": args.goal_scale, "splits": splits,
               "training_steps": args.steps,
               "plant_version": 2, "reach_radius_px": [2, 400],
               "motion_limit": "min(150, speed*gain/(delay_ticks+1)*0.2) per axis",
               "application_win_verified": False, "promoted": False}
     (args.out/"config.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     train = harvest(torch, brain, splits["train"], guard, steps=args.steps, batch=16, sense_version=version,
-                    view_fraction=args.view_fraction, slip=slip_options(args))
+                    view_fraction=args.view_fraction, slip=slip_options(args), goal_scale=args.goal_scale)
     validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16, sense_version=version,
-                         view_fraction=args.view_fraction, slip=slip_options(args))
+                         view_fraction=args.view_fraction, slip=slip_options(args), goal_scale=args.goal_scale)
     torch.save({"train": train, "validation": validation, "splits": splits}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
     report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
     metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
-                "view_fraction": args.view_fraction, "slip": slip_options(args),
+                "view_fraction": args.view_fraction, "slip": slip_options(args), "goal_scale": args.goal_scale,
                 "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
                 "control_authority": False, "training_seeds": splits["train"],
                 "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
     checkpoint = save_checkpoint(torch, brain, cfg, args.out, metadata)
     print(json.dumps({"stage": "checkpoint", "path": str(checkpoint), "fit": report["readout_fit"]}), flush=True)
     mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, brain.device)
-    torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": version}, args.out/"mlp-baseline.pt")
+    torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": version,
+                "goal_scale": args.goal_scale}, args.out/"mlp-baseline.pt")
     report["held_out"] = []
     for policy in ("teacher", "mlp", "connectome"):
-        score = evaluate(torch, brain, splits["test"], guard, policy=policy, mlp=mlp, sense_version=version)
+        score = evaluate(torch, brain, splits["test"], guard, policy=policy, mlp=mlp, sense_version=version,
+                         goal_scale=args.goal_scale)
         report["held_out"].append(score)
         print(json.dumps({"stage": "evaluate", **score}), flush=True)
     report.update(elapsed_seconds=time.perf_counter()-started, peak_gpu_c=guard.peak,
@@ -293,6 +295,8 @@ def main():
                    help="2: goal error and own velocity; 3: goal error only; 4: goal error and the visual slip of views")
     p.add_argument("--view-fraction", type=float, default=0.0,
                    help="share of harvested episodes that are views (unbounded, capture latency, slip in lptc)")
+    p.add_argument("--goal-scale", type=float, default=0.3,
+                   help="seconds of intent speed the goal error is normalised by (smaller: stronger input near the goal)")
     p.add_argument("--slip-dropout", type=float, default=0.0, help="share of view episodes trained without the slip")
     p.add_argument("--slip-blank", type=float, default=0.0, help="share of ticks where the slip blanks")
     p.add_argument("--slip-gain", type=float, nargs=2, default=(1.0, 1.0), metavar=("LO", "HI"),
@@ -302,6 +306,8 @@ def main():
         p.error("Use a view fraction between 0 and 1")
     if not (0 <= args.slip_dropout <= 1 and 0 <= args.slip_blank <= 1 and 0 < args.slip_gain[0] <= args.slip_gain[1] <= 2):
         p.error("Use slip dropout and blank between 0 and 1 and a slip gain range inside (0, 2]")
+    if not .02 <= args.goal_scale <= 2:
+        p.error("Use a goal scale between 0.02 and 2 seconds of intent speed")
     if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 4096
             and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
         p.error("Use bounded episodes 16–256, steps 80–500, features 32–4096, seconds 10–1800, temperature 50–70")

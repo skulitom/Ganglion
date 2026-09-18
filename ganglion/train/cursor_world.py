@@ -24,9 +24,12 @@ def teacher_points(cursor, goal, speed, rect, dt=.01):
 
 class CursorWorld:
     def __init__(self, seeds, *, steps=160, jump_every=None, sense_version=2, view=False,
-                 slip_dropout=0.0, slip_blank=0.0, slip_gain=(1.0, 1.0)):
+                 slip_dropout=0.0, slip_blank=0.0, slip_gain=(1.0, 1.0), goal_scale=.3):
         if sense_version not in (2, 3, 4):
             raise ValueError("The training world speaks sensory adapter versions 2, 3 and 4")
+        if not .02 <= goal_scale <= 2:
+            raise ValueError("goal_scale is seconds of intent speed, between 0.02 and 2")
+        self.goal_scale = float(goal_scale)
         if not (0 <= slip_dropout <= 1 and 0 <= slip_blank <= 1 and 0 < slip_gain[0] <= slip_gain[1] <= 2):
             raise ValueError("slip_dropout and slip_blank are probabilities; slip_gain is a range inside (0, 2]")
         self.seeds, self.steps, self.sense_version = list(seeds), steps, sense_version
@@ -134,10 +137,11 @@ class CursorWorld:
         return np.where(present[:, None], slip, 0)
 
     def senses(self, previous=None):
-        """The runtime adapter's channels for every episode: goal error scaled by 0.3 s of intent
-        speed; version 2 adds the cursor's own velocity in units of that speed; version 4 feeds
-        the visual slip of view episodes to the lptc channel instead."""
-        delta = (self.goal - self.cursor) / (self.speed[:, None]*.3)
+        """The runtime adapter's channels for every episode: goal error scaled by `goal_scale`
+        seconds of intent speed (0.3 by default); version 2 adds the cursor's own velocity in
+        units of that speed; version 4 feeds the visual slip of view episodes to the lptc channel
+        instead."""
+        delta = (self.goal - self.cursor) / (self.speed[:, None] * self.goal_scale)
         still = previous is None or self.sense_version in (3, 4)
         velocity = np.zeros_like(delta) if still else (self.cursor-previous)/(.01*self.speed[:, None])
         zeros = lambda n: np.zeros((self.B, n), dtype=np.float32)

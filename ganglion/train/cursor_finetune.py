@@ -39,7 +39,7 @@ def parameter_groups(brain, train):
     return groups
 
 
-def suite_scores(torch, brain, guard, seeds_by_task, steps, controllers=("connectome",), sense_version=2):
+def suite_scores(torch, brain, guard, seeds_by_task, steps, controllers=("connectome",), sense_version=2, goal_scale=.3):
     """The fixed suite's tasks with this brain proposing, one fresh network state per run."""
     brain.eval()
     scores = {}
@@ -47,7 +47,7 @@ def suite_scores(torch, brain, guard, seeds_by_task, steps, controllers=("connec
         for controller in controllers:
             scores[f"{task}/{controller}"] = run_task(task, seeds, controller, steps=steps, guard=guard,
                                                      propose=connectome_proposer(torch, brain, len(seeds)),
-                                                     sense_version=sense_version)
+                                                     sense_version=sense_version, goal_scale=goal_scale)
     return scores
 
 

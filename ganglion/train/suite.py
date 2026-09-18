@@ -36,11 +36,11 @@ class SuiteWorld(CursorWorld):
     """CursorWorld with the suite's task variations. The episode depends on the seeds and the
     task only, so every controller meets the same plant, start, target and motion."""
 
-    def __init__(self, seeds, task, *, steps=2000, sense_version=2):
+    def __init__(self, seeds, task, *, steps=2000, sense_version=2, goal_scale=.3):
         if task not in TASKS:
             raise ValueError(f"Unknown suite task {task!r}")
         super().__init__(seeds, steps=steps, jump_every=JUMP_EVERY if task == "jump" else None,
-                         sense_version=sense_version, view=(task == "camera"))
+                         sense_version=sense_version, view=(task == "camera"), goal_scale=goal_scale)
         self.task = task
         rngs = [np.random.default_rng(seed + 1_000_003) for seed in self.seeds]
         if task in ("settle", "jump"):
@@ -111,14 +111,14 @@ def settle_tick(error, tolerance=TOLERANCE_PX):
     return None if bad[-1] + 1 >= len(error) else int(bad[-1] + 1)
 
 
-def run_task(task, seeds, controller, *, propose=None, steps=2000, guard=None, sense_version=2):
+def run_task(task, seeds, controller, *, propose=None, steps=2000, guard=None, sense_version=2, goal_scale=.3):
     """Run one controller over the task's episodes. ``propose(senses) -> (B, 2) velocities`` is
     required for every controller but the teacher and is called once per tick with the same
     sensor channels the runtime adapter builds. A proposer with a ``bind(world)`` method is handed
     the episode state first: for oracles and diagnostics, never for a policy under test."""
     if controller != "teacher" and propose is None:
         raise ValueError(f"{controller} needs a proposer")
-    world = SuiteWorld(seeds, task, steps=steps, sense_version=sense_version)
+    world = SuiteWorld(seeds, task, steps=steps, sense_version=sense_version, goal_scale=goal_scale)
     if hasattr(propose, "bind"):
         propose.bind(world)
     rect = world.bounds
@@ -270,11 +270,14 @@ def run(args):
     version = args.sense_version or provenance.get("adapter_version", 2)
     if version not in (2, 3, 4):
         raise ValueError("The suite speaks sensory adapter versions 2, 3 and 4")
+    goal_scale = float(provenance.get("goal_scale", .3))
     mlp = build_mlp(torch).to(brain.device)
     if args.mlp:
         saved = torch.load(args.mlp, map_location="cpu", weights_only=True)
         if saved.get("adapter_version", 2) != version and not args.sense_version:
             raise ValueError("The MLP baseline was trained on another sensory adapter version than the checkpoint")
+        if abs(float(saved.get("goal_scale", .3)) - goal_scale) > 1e-9:
+            raise ValueError("The MLP baseline was trained with another goal scale than the checkpoint")
         mlp.load_state_dict(saved["model"])
         mlp_source = {"path": str(args.mlp), "sha256": hashlib.sha256(Path(args.mlp).read_bytes()).hexdigest(),
                       "adapter_version": saved.get("adapter_version", 2)}
@@ -283,7 +286,7 @@ def run(args):
         mlp, fit = train_mlp(torch, cache["train"], cache["validation"], guard, brain.device)
         path = args.out / "mlp-baseline.pt"
         torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": version,
-                    "features": str(args.mlp_features)}, path)
+                    "goal_scale": goal_scale, "features": str(args.mlp_features)}, path)
         mlp_source = {"path": str(path), "trained_from": str(args.mlp_features), "fit": fit,
                       "training_samples": int(len(cache["train"][0]))}
     mlp.eval()
@@ -291,6 +294,7 @@ def run(args):
               "checkpoint": {"path": str(checkpoint), "sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
                              "training": provenance}, "mlp": mlp_source,
               "adapter_version": version, "checkpoint_adapter_version": provenance.get("adapter_version", 2),
+              "goal_scale": goal_scale,
               "steps": args.steps, "tick_seconds": TICK, "tolerance_px": TOLERANCE_PX,
               "camera_latency_ticks": CAMERA_LATENCY_TICKS, "jump_every_ticks": JUMP_EVERY,
               "torch": torch.__version__, "gpu": torch.cuda.get_device_name(brain.device),
@@ -305,7 +309,7 @@ def run(args):
             elif controller in ("connectome", "supervised"):
                 propose = connectome_proposer(torch, brain, len(seeds))
             result = run_task(task, seeds, controller, propose=propose, steps=args.steps, guard=guard,
-                              sense_version=version)
+                              sense_version=version, goal_scale=goal_scale)
             report["tasks"][task]["controllers"][controller] = result
             print(json.dumps({k: v for k, v in result.items() if k not in ("per_episode", "seeds")}), flush=True)
             (args.out / "progress.json").write_text(json.dumps(report, indent=2), encoding="utf-8")

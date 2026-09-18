@@ -27,10 +27,11 @@ def neural_steps(elapsed: float | None, dt: float = .01, max_steps: int = MAX_NE
     return max(1, min(max_steps, int(round(elapsed / dt))))
 
 
-def channels(sample, previous=None, *, version=1):
+def channels(sample, previous=None, *, version=1, goal_scale=.3):
     """Versioned, application-independent analogues of Haltere's sensory channels.
 
-    V1 goal is screen error / 400 px; v2 normalises by 0.3 seconds of intent speed.
+    V1 goal is screen error / 400 px; v2 normalises by `goal_scale` seconds of intent speed
+    (0.3 unless the checkpoint was trained with another, recorded as `goal_scale`).
     Cursor velocity is normalised by the intent speed in both versions. V3 is v2 without the
     own-velocity channels: the reference controller it imitates is memoryless, and a copy of
     the recent motion is a shortcut in imitation data rather than evidence about the goal.
@@ -43,7 +44,7 @@ def channels(sample, previous=None, *, version=1):
     """
     if version not in (1, 2, 3, 4):
         raise ValueError("Unknown cursor sensory adapter version")
-    scale = 400 if version == 1 else sample.speed * .3
+    scale = 400 if version == 1 else sample.speed * goal_scale
     dx, dy = (sample.goal[i] - sample.cursor[i] for i in range(2))
     vx = vy = 0.0
     if version in (1, 2) and previous is not None and .001 <= sample.submitted - previous.submitted <= .05:
@@ -71,6 +72,9 @@ class HaltereCursor:
         self.adapter_version = cursor_training.get("adapter_version", 1)
         if self.adapter_version not in (1, 2, 3, 4):
             raise ValueError("Unknown cursor sensory adapter version")
+        self.goal_scale = float(cursor_training.get("goal_scale", .3))
+        if not .02 <= self.goal_scale <= 2:
+            raise ValueError("Checkpoint goal scale out of range")
         self.desktop_trained = bool(cursor_training.get("trained", False))
         self.brain, _, _ = load_checkpoint(checkpoint, "cuda")
         if self.brain.__class__.__name__ != "ConnectomeRNN":
@@ -94,6 +98,7 @@ class HaltereCursor:
             offset += expected[key]
         self.metadata = {"type": "Haltere ConnectomeRNN", "checkpoint": str(checkpoint),
             "sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(), "adapter_version": self.adapter_version,
+            "goal_scale": self.goal_scale,
             "neurons": self.brain.N, "edges": int(self.brain.edge_index.shape[1]),
             "device": str(self.brain.device), "neural_dt_seconds": self.brain.cfg.dt,
             "desktop_trained": self.desktop_trained, "training": cursor_training,
@@ -126,7 +131,7 @@ class HaltereCursor:
         steps = neural_steps(None if self.previous is None else sample.submitted - self.previous.submitted,
                              self.brain.cfg.dt)
         with torch.inference_mode():
-            values = channels(sample, self.previous, version=self.adapter_version)
+            values = channels(sample, self.previous, version=self.adapter_version, goal_scale=self.goal_scale)
             packed = [v for key in self.order for v in values[key]]
             self.host_input.copy_(torch.tensor([packed]))
             self.input.copy_(self.host_input, non_blocking=True)

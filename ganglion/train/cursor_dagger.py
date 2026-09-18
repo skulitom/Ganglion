@@ -29,6 +29,7 @@ def run(args):
     view_fraction = args.view_fraction if args.view_fraction is not None else float(original.get("view_fraction", 0.0))
     slip = dict(original.get("slip") or {})
     slip["slip_gain"] = tuple(slip.get("slip_gain", (1.0, 1.0)))
+    goal_scale = float(original.get("goal_scale", .3))
     brain.eval()
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
@@ -42,23 +43,24 @@ def run(args):
               "neurons": brain.N, "edges": int(brain.edge_index.shape[1]),
               "episode_steps": args.episode_steps, "kick_every": args.kick_every or None,
               "student_max": args.student_max, "seed_base": args.seed_base, "view_fraction": view_fraction,
-              "slip": slip}
+              "slip": slip, "goal_scale": goal_scale}
     best = None
     for round_index in range(1, args.rounds+1):
         new_seeds = list(range(args.seed_base+round_index*100, args.seed_base+round_index*100+32))
         fraction = min(args.student_max, .25+round_index*.15)
         new = harvest(torch, brain, new_seeds, guard, steps=args.episode_steps, batch=16,
                       student_fraction=fraction, jump_every=args.kick_every or None, sense_version=version,
-                      view_fraction=view_fraction, slip=slip)
+                      view_fraction=view_fraction, slip=slip, goal_scale=goal_scale)
         train = tuple(torch.cat((old, added)) for old, added in zip(train, new))
         del new
         seeds.extend(new_seeds)
         fitted = fit(torch, brain, train, validation, guard, args.neurons)
-        score = evaluate(torch, brain, validation_seeds, guard, policy="connectome", sense_version=version)
+        score = evaluate(torch, brain, validation_seeds, guard, policy="connectome", sense_version=version,
+                         goal_scale=goal_scale)
         folder = args.out/f"round-{round_index:02d}"
         folder.mkdir()
         metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
-                    "view_fraction": view_fraction, "slip": slip,
+                    "view_fraction": view_fraction, "slip": slip, "goal_scale": goal_scale,
                     "method": "frozen connectome, DAgger ridge motor readout", "control_authority": False,
                     "training_seeds": seeds.copy(), "validation_seeds": validation_seeds,
                     "readout_fit": fitted, "parent_sha256": report["base_sha256"]}
@@ -78,7 +80,8 @@ def run(args):
     mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, selected.device)
     report["held_out"] = []
     for policy in ("teacher", "mlp", "connectome"):
-        score = evaluate(torch, selected, report["test_seeds"], guard, policy=policy, mlp=mlp, sense_version=version)
+        score = evaluate(torch, selected, report["test_seeds"], guard, policy=policy, mlp=mlp, sense_version=version,
+                         goal_scale=goal_scale)
         report["held_out"].append(score)
         print(json.dumps({"stage": "fresh_test", **score}), flush=True)
     report.update(selected_checkpoint=str(best[1]), peak_gpu_c=guard.peak,
