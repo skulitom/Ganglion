@@ -19,8 +19,8 @@ episodes teach settling. Moving speeds are limited by the sampled plant's capabi
 The plant queues absolute coordinates computed at issue time. Gain is a deliberate
 synthetic disturbance, not a measured model of Windows absolute input.
 
-Adapter v2 normalises goal error by 0.3 seconds of intent speed and observed cursor
-velocity by intent speed. Training and runtime use the same channel values; tests
+Adapter v2 normalises goal error by 0.3 seconds of intent speed (the checkpoint's `goal_scale`
+since v5) and observed cursor velocity by intent speed. Training and runtime use the same channel values; tests
 check their agreement. Fly populations receive these values through Haltere's existing
 encoders. Motor-neuron rates feed the learned readout. Recurrence, signs, neuron gains,
 biases and time constants stay fixed in all experiments below.
@@ -421,6 +421,39 @@ Full rows for v4b with the slip:
 
 The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. A readout trained on a channel it cannot trust learns to discount it; making the live channel worth having is a matter of what the training world shows in it (independent movers, the percept's own failure modes), not of noise on the simulated slip. v4 remains the tracking candidate and v4b is not run live.
 
+## A stronger input near the goal: goal scale 0.1
+
+The adapter normalises the goal error by 0.3 s of intent speed, so at 50 px from a target the
+network's goal input is 0.14 of its range and the readout's proposals fade as the cursor
+closes, which is where the supervised model loses time to the reference (settling 465 to
+490 ms against 285 ms on the suite; acquisition 2.13 s against 1.64 s live). The scale is now a
+checkpoint parameter (`--goal-scale`, recorded and honoured by the runtime, DAgger and the
+suite). **v5** is v3 (goal error only) with all motor neurons and a goal scale of 0.1, so the
+input saturates beyond about 120 px and is three times stronger near the goal.
+
+Readout ([readout v5](results/cursor-readout-v5.json)): 3/16 held-out static targets with
+550 px terminal error (v3b: 10/16 at 63 px). DAgger ([DAgger v5](results/cursor-dagger-v5.json);
+validation 3/8; 2/8; 0/8; round-01 selected): 3/16 with 383 px.
+The suite ([cursor-suite-v5](results/cursor-suite-v5.json)) against v3b and v4 (success at mean
+tracking error, median settling or acquisition):
+
+| Task | Controller | v5 (goal scale 0.1) | v3b (0.3) | v4 (0.3, slip) |
+|---|---|---:|---:|---:|
+| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
+| settle | connectome | 5/32 at 234.1 px, 260 ms | 19/32 at 14.8 px, 780 ms | 18/32 at 60.7 px, 390 ms |
+| settle | supervised | 32/32 at 3.3 px, 340 ms | 32/32 at 3.7 px, 375 ms | 32/32 at 4.2 px, 490 ms |
+| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
+| jump | connectome | 2/256 at 403.7 px, 650 ms | 106/256 at 52.5 px, 875 ms | 51/256 at 159.9 px, 580 ms |
+| jump | supervised | 241/256 at 22.8 px, 680 ms | 241/256 at 22.8 px, 650 ms | 225/256 at 24.1 px, 750 ms |
+| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
+| pursuit | connectome | 0/32 at 339.9 px, 220 ms | 10/32 at 52.6 px, 280 ms | 3/32 at 201.4 px, 230 ms |
+| pursuit | supervised | 28/32 at 8.9 px, 170 ms | 24/32 at 10.1 px, 215 ms | 20/32 at 12.4 px, 225 ms |
+| camera | teacher | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms | 32/32 at 4.0 px, 445 ms |
+| camera | connectome | 0/32 at 135.8 px, 525 ms | 1/32 at 77.4 px, 560 ms | 3/32 at 87.9 px, 575 ms |
+| camera | supervised | 31/32 at 6.6 px, 480 ms | 18/32 at 11.4 px, 550 ms | 30/32 at 7.5 px, 505 ms |
+
+A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. The stronger input makes the readout propose larger steps near the goal, which the envelope keeps in bounds and the model alone cannot. v3b stays the checkpoint that stands on its own and v5 the one that settles fastest under supervision; a middle scale (0.2) is being scored next.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -445,6 +478,9 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v4b/cursor-readout.pt --features runs/cursor-readout-v4b/features.pt --out runs/cursor-dagger-v4b --rounds 3 --neurons 4096 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v4b/round-01/cursor-readout.pt --mlp runs/suite-v4/mlp-baseline.pt --out runs/suite-v4b --seconds 1500
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v4b/round-01/cursor-readout.pt --sense-version 3 --mlp runs/suite-v3/mlp-baseline.pt --out runs/suite-v4b-noslip --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v5 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 3 --goal-scale 0.1
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v5/cursor-readout.pt --features runs/cursor-readout-v5/features.pt --out runs/cursor-dagger-v5 --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v5/round-01/cursor-readout.pt --mlp-features runs/cursor-dagger-v5/features.pt --out runs/suite-v5 --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has

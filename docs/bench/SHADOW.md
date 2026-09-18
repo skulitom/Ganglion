@@ -51,7 +51,8 @@ to the deterministic reference checks; `shadow_score.promoted` remains false.
 - Target error maps to the existing goal population, and cursor velocity maps to the haltere
   and Johnston's-organ channels. Other sensory channels, including optic flow, are zero.
   Flight outputs 0 and 1 are interpreted as hypothetical cursor velocities for comparison.
-  Cursor-trained checkpoints declare adapter v2, scaling goal error by intent speed; old
+  Cursor-trained checkpoints declare their adapter version and, since v5, the goal scale
+  (seconds of intent speed the goal error is normalised by); old
   checkpoints and recordings retain adapter v1. Training provenance is included in the ledger.
   There is no deterministic correction added to those neural proposals.
 - Each consumed sample advances the neural state by one 10 ms step. New intents/stages/layouts

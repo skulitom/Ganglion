@@ -129,7 +129,8 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   Next: a training slip with independent movers in it, and a readout that settles as fast as
   the reference before the channel question is reopened. [Details](docs/bench/HALFLIFE.md).
 - **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).
-- The suite passes **160 tests** (four optional checks skipped). Application-specific
+- **A stronger goal input (goal scale 0.1, v5).** A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. [Details](docs/bench/TRAINING.md).
+- The suite passes **161 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life
