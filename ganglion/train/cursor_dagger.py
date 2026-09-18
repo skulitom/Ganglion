@@ -31,6 +31,7 @@ def run(args):
     slip["slip_gain"] = tuple(slip.get("slip_gain", (1.0, 1.0)))
     goal_scale = float(original.get("goal_scale", .3))
     near_goal_weight = float(args.near_goal_weight if args.near_goal_weight is not None else original.get("near_goal_weight", 1.0))
+    max_lag_steps = args.max_lag_steps if args.max_lag_steps is not None else original.get("max_lag_steps")
     brain.eval()
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
@@ -45,7 +46,7 @@ def run(args):
               "neurons": brain.N, "edges": int(brain.edge_index.shape[1]),
               "episode_steps": args.episode_steps, "kick_every": args.kick_every or None,
               "student_max": args.student_max, "seed_base": args.seed_base, "view_fraction": view_fraction,
-              "slip": slip, "goal_scale": goal_scale, "near_goal_weight": near_goal_weight}
+              "slip": slip, "goal_scale": goal_scale, "near_goal_weight": near_goal_weight, "max_lag_steps": max_lag_steps}
     best = None
     for round_index in range(1, args.rounds+1):
         new_seeds = list(range(args.seed_base+round_index*100, args.seed_base+round_index*100+32))
@@ -56,14 +57,14 @@ def run(args):
         train = tuple(torch.cat((old, added)) for old, added in zip(train, new))
         del new
         seeds.extend(new_seeds)
-        fitted = fit(torch, brain, train, validation, guard, args.neurons, near_goal_weight)
+        fitted = fit(torch, brain, train, validation, guard, args.neurons, near_goal_weight, max_lag_steps)
         score = evaluate(torch, brain, validation_seeds, guard, policy="connectome", sense_version=version,
                          goal_scale=goal_scale)
         folder = args.out/f"round-{round_index:02d}"
         folder.mkdir()
         metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
                     "view_fraction": view_fraction, "slip": slip, "goal_scale": goal_scale,
-                    "near_goal_weight": near_goal_weight,
+                    "near_goal_weight": near_goal_weight, "max_lag_steps": max_lag_steps,
                     "method": "frozen connectome, DAgger ridge motor readout", "control_authority": False,
                     "training_seeds": seeds.copy(), "validation_seeds": validation_seeds,
                     "readout_fit": fitted, "parent_sha256": report["base_sha256"]}
@@ -123,6 +124,7 @@ def main():
     p.add_argument("--rounds", type=int, default=3)
     p.add_argument("--neurons", type=int, default=512)
     p.add_argument("--near-goal-weight", type=float, help="ridge weight of the decelerating samples (default: the checkpoint's)")
+    p.add_argument("--max-lag-steps", type=int, help="lag limit on the motor neurons the readout may use (default: the checkpoint's)")
     p.add_argument("--seconds", type=float, default=600)
     p.add_argument("--max-gpu-temp", type=float, default=65)
     p.add_argument("--episode-steps", type=int, default=400, help="ticks per harvested episode")

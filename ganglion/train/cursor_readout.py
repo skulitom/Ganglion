@@ -113,6 +113,50 @@ def install_head(torch, brain, mean, variance, selected, weights, bias):
     brain.cfg.action_tau = brain.cfg.dt
 
 
+def probe_lags(torch, brain, steps=30):
+    """Each motor neuron's response lag to a reversal of the goal direction, in network steps:
+    the network is driven with a unit goal direction along one axis until it settles, the
+    direction is reversed, and the lag is the first step at which the neuron has covered half of
+    its eventual change. The worst of the four axis reversals is kept; a neuron that does not
+    respond gets the probe length. The goal is fed as adapter version 5 would (a unit direction
+    with the distance slot at 0.5), which every version's network accepts."""
+    weights = brain.weight_matrix().detach()
+    dims = dict(brain.channel_dims)
+
+    def observation(goal):
+        o = {k: torch.zeros(1, d, device=brain.device) for k, d in dims.items()}
+        o["goal"] = torch.tensor([goal], device=brain.device, dtype=torch.float32)
+        return o
+
+    def rates(state):
+        return (brain.cfg.rate_max * torch.sigmoid(state["v"][brain.motor_idx])).reshape(-1)
+
+    worst = None
+    with torch.inference_mode():
+        for axis in (0, 1):
+            for sign in (1.0, -1.0):
+                state = brain.init_state(1)
+                for _ in range(steps):
+                    _, state, _ = brain(observation([0.0, 0.0, 0.0, 0.0]), state, weights)
+                goal = [0.0, 0.0, 0.0, 0.5]
+                goal[axis] = sign
+                for _ in range(steps):
+                    _, state, _ = brain(observation(goal), state, weights)
+                before = rates(state).clone()
+                goal[axis] = -sign
+                trace = []
+                for _ in range(steps):
+                    _, state, _ = brain(observation(goal), state, weights)
+                    trace.append(rates(state).clone())
+                trace = torch.stack(trace)                                   # (steps, motor)
+                change = trace[-1] - before
+                covered = (trace - before).abs() >= .5 * change.abs()
+                lag = torch.where(covered.any(0), covered.float().argmax(0), torch.full_like(change, steps, dtype=torch.long))
+                lag = torch.where(change.abs() < 1e-3 * brain.cfg.rate_max, torch.full_like(lag, steps), lag)
+                worst = lag if worst is None else torch.maximum(worst, lag)
+    return worst.cpu()
+
+
 def near_goal_weights(torch, target, near_goal_weight):
     """Sample weights for the ridge fit: `near_goal_weight` on the samples where the teacher is
     already decelerating (its command shorter than a full step), 1 elsewhere."""
@@ -122,7 +166,7 @@ def near_goal_weights(torch, target, near_goal_weight):
     return weights
 
 
-def fit(torch, brain, train, validation, guard, feature_count, near_goal_weight=1.0):
+def fit(torch, brain, train, validation, guard, feature_count, near_goal_weight=1.0, max_lag_steps=None):
     raw, _, target = train
     val_raw, _, val_target = validation
     mean, variance = raw.mean(0), raw.var(0, unbiased=False)
@@ -132,7 +176,17 @@ def fit(torch, brain, train, validation, guard, feature_count, near_goal_weight=
     # Select responsive motor neurons using training labels only. Validation and
     # test samples never participate in feature selection or normalisation.
     correlation = (x.T @ centered).abs() / centered.square().sum(0).sqrt().clamp_min(1e-6)
-    selected = correlation.amax(1).topk(min(feature_count, x.shape[1])).indices.sort().values
+    score = correlation.amax(1)
+    fast = None
+    if max_lag_steps is not None:
+        # Only neurons that answer a reversal of the goal direction within `max_lag_steps`
+        # network steps: the readout must change sign in time to stop.
+        lags = probe_lags(torch, brain)
+        fast = lags <= max_lag_steps
+        if int(fast.sum()) < 8:
+            raise ValueError(f"Only {int(fast.sum())} motor neurons answer within {max_lag_steps} steps; nothing to fit")
+        score = torch.where(fast, score, torch.full_like(score, -1.0))
+    selected = score.topk(min(feature_count, int((score >= 0).sum()))).indices.sort().values
     x = x[:, selected].to(brain.device, dtype=torch.float64)
     val_x = ((val_raw-mean)/std)[:, selected].to(brain.device)
     y = torch.atanh(target.clamp(-.995, .995)).to(brain.device, dtype=torch.float64)
@@ -150,6 +204,7 @@ def fit(torch, brain, train, validation, guard, feature_count, near_goal_weight=
             best = mse, penalty, weights.cpu(), bias.float().cpu()
     install_head(torch, brain, mean, variance, selected, best[2], best[3])
     return {"selected_motor_neurons": len(selected), "ridge": best[1], "near_goal_weight": float(near_goal_weight),
+            "max_lag_steps": max_lag_steps, "fast_motor_neurons": None if fast is None else int(fast.sum()),
             "validation_mse": best[0], "candidates": trials}
 
 
@@ -270,10 +325,11 @@ def run(args):
                 "provenance": {"adapter_version": version, "goal_scale": args.goal_scale,
                                "view_fraction": args.view_fraction, "slip": slip_options(args)}}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
-    report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features, args.near_goal_weight)
+    report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features, args.near_goal_weight,
+                                args.max_lag_steps)
     metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
                 "view_fraction": args.view_fraction, "slip": slip_options(args), "goal_scale": args.goal_scale,
-                "near_goal_weight": args.near_goal_weight,
+                "near_goal_weight": args.near_goal_weight, "max_lag_steps": args.max_lag_steps,
                 "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
                 "control_authority": False, "training_seeds": splits["train"],
                 "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
@@ -309,6 +365,8 @@ def main():
                         "5: goal direction at full strength plus the distance")
     p.add_argument("--view-fraction", type=float, default=0.0,
                    help="share of harvested episodes that are views (unbounded, capture latency, slip in lptc)")
+    p.add_argument("--max-lag-steps", type=int, default=None,
+                   help="keep only motor neurons that answer a goal reversal within this many network steps")
     p.add_argument("--near-goal-weight", type=float, default=1.0,
                    help="weight of the samples where the teacher is already decelerating in the ridge fit")
     p.add_argument("--goal-scale", type=float, default=0.3,
@@ -326,6 +384,8 @@ def main():
         p.error("Use a goal scale between 0.02 and 2 seconds of intent speed")
     if not 1 <= args.near_goal_weight <= 100:
         p.error("Use a near-goal weight between 1 and 100")
+    if args.max_lag_steps is not None and not 1 <= args.max_lag_steps <= 30:
+        p.error("Use a lag limit between 1 and 30 network steps")
     if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 4096
             and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
         p.error("Use bounded episodes 16–256, steps 80–500, features 32–4096, seconds 10–1800, temperature 50–70")
