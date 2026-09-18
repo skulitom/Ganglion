@@ -134,7 +134,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **The goal as a direction (adapter version 5, v6).** The direction encoding removes the fading but not the stopping: alone the model never settles (0/32; it holds speed through the goal and oscillates around it, 42 px mean error), while under supervision it matches the teacher on every task, settle 32/32 in 335 ms at 2.4 px, jump 256/256 at 22.3 px, pursuit 31/32 at 5.1 px against the teacher's 5.5, camera 32/32 at 3.7 px against 4.0, with the envelope intervening on half the steps of the moving tasks, where it is now the stopping rule. [Details](docs/bench/TRAINING.md).
 - **Stopping samples weighted (v7).** Weighting the stopping samples did not give the model a stop: alone it still never settles (0/32 at 44 px), jump 9/256, pursuit 3/32; under supervision settle 32/32 in 395 ms, jump 254/256, pursuit 29/32 at 7.2 px, camera 31/32 at 5.0 px, with fewer interventions than v6 (27 to 35% against 49 to 58% on the moving tasks). [Details](docs/bench/TRAINING.md).
 - **Fast neurons and an efference copy (v8).** Neither route gives the model a stop. [Details](docs/bench/TRAINING.md).
-- The suite passes **168 tests** (four optional checks skipped). Application-specific
+- The suite passes **167 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life
