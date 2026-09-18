@@ -132,8 +132,33 @@ phase correlation's shift so a large mover cannot drag it, and the runtime hands
 channel only a credible summary (zeros otherwise, the value the cursor episodes trained with).
 The pilot's `engage` op caps the align step at 2,500 px/s of view motion (30 counts a tick at
 its gain) instead of 80 counts (6,700 px/s), inside both the percept's range and the training
-world's speeds. What the channel is worth live is still the open question; the next run is an
-engagement with these changes against the same checkpoint with the channel off.
+world's speeds.
+
+## The channel fed against zeros: repeated engagements
+
+The same night, with these changes, `ganglion.evaluation.halflife.trials` ran blocks of five
+engagements from one quicksave in the corridor outside the elevator: quickload, two grunts
+spawned from the console, a step back, the motion → track → connectome align → fire chain
+armed, fourteen seconds of fight, disarm. The v4 checkpoint ran in its own process with
+`--lptc-from-flow` throughout; the condition was the flow watch (eighth scale over the upper
+view), present for the "fed" blocks and absent for the "zeros" blocks, so the adapter fed the
+channel either the credible live summary or nothing. Blocks alternated; the ledger was sliced
+per trial ([results](results/halflife/channel-trials-2026-09-18.json)).
+
+| Measurement | Channel fed (flow watch) | Channel zeros (no flow watch) |
+|---|---:|---:|
+| Trials | 20 | 20 |
+| View commands | 8,602 | 8,850 |
+| From the model | 68.3% | 88.8% |
+| Overridden | 27.0% | 7.1% |
+| Stale | 4.7% | 4.1% |
+| Align intents, of which fired | 81 of 98 (83%) | 72 of 98 (73%) |
+| Acquisition, median (p75) | 1.88 s (2.64) | 2.13 s (2.78) |
+| Tracking error of align steps, median of trial means (IQR) | 153 px (138 to 165) | 143 px (122 to 183) |
+| Model samples carrying a credible flow | 7,742 | 0 |
+| Inference p95, median over trials | 5.9 ms | 6.3 ms |
+
+Twenty trials each. With the channel fed, the chain fired on 83% of its align intents against 73% with zeros and reached the target 0.25 s sooner at the median, but neither difference is significant at this size (two-sided p 0.12 and 0.11), the tracking error of the align steps was no better (p 0.57), and the model was overridden about four times as often (27% of steps against 7%; per-trial model share p 2e-06). The live channel changes what the model proposes, mostly into disagreement with the envelope, so whatever the outcome gained is as likely the envelope's deterministic steps as the model's. What the calibration and these trials establish is that the channel can be fed faithfully and that the v4 readout does not use it well live; its value for the model is not shown. The next lever is training: a readout that sees the slip present, absent and scaled (slip dropout, blanking and gain in the training world, `--slip-dropout`, `--slip-blank`, `--slip-gain`) so that it neither depends on the channel nor is thrown by it.
 
 ## Limits and next work
 
@@ -153,7 +178,13 @@ Inside Anode with the game running and Steam launched through the seat:
 .venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot "{\"op\":\"engage\",\"response\":\"track\",\"controller\":\"connectome\"}"
 .venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot "{\"op\":\"watch\",\"name\":\"flow\",\"kind\":\"flow\",\"region\":[0,0,1280,560],\"flow_scale\":8}"
 .venv/Scripts/python.exe -m ganglion.evaluation.halflife.pilot do --dir runs/hl/pilot --timeout 90 "{\"op\":\"calibrate\",\"seconds\":0.5}"
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.trials run --dir runs/hl/pilot --label lptc-on-1 --trials 5 --flow-scale 8
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.trials run --dir runs/hl/pilot --label channel-zero-1 --trials 5
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.trials report runs/hl/trials/lptc-on-*.json runs/hl/trials/channel-zero-*.json
 ```
+
+The trials need a quicksave (F6) at the fight's start with the loadout given and god mode on; the
+per-trial files behind the comparison are in [results/halflife/channel-trials/](results/halflife/channel-trials/).
 
 The calibration needs the game in the foreground when the core starts (it halts on a target
 that is not the foreground window) and a scene with texture; `r_fullbright 1` did nothing in

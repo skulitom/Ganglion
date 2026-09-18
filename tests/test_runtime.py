@@ -163,6 +163,11 @@ def test_lptc_feed_hands_over_only_a_credible_flow_summary():
     assert runtime.lptc() == (-800.0, 5.0, .1, -.2)
     runtime.flow["credible"] = False                          # the view outran the percept, or the scene disagreed
     assert runtime.lptc() is None
+    runtime.flow["credible"] = True
+    runtime.flow["captured_mono"] = clock()
+    assert runtime.lptc() is not None
+    clock.advance(.2)                                         # the watch is gone: its last reading must not linger
+    assert runtime.lptc() is None
     quiet = Runtime(clock, MemoryOutput(clock))
     quiet.flow = dict(runtime.flow, credible=True)
     assert quiet.lptc() is None                               # the feed is off by default

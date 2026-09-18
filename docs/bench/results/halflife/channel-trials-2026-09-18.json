@@ -1,0 +1,322 @@
+{
+ "channel-zero-1": {
+  "trials": 5,
+  "view_commands": 2110,
+  "acquisition_s_median": 1.947,
+  "acquisition_s_p75": 2.1555,
+  "acquisitions": 19,
+  "connectome_share": 0.7881516587677725,
+  "override_share": 0.15308056872037915,
+  "stale_share": 0.058767772511848344,
+  "align_intents": 26,
+  "intents_that_fired": 19,
+  "align_outcomes": {
+   "aligned_and_fired": 15,
+   "target_lost_after_fire": 1,
+   "target_lost": 7,
+   "timeout": 3
+  },
+  "reflex_fired": 29,
+  "error_px_mean_median_over_trials": 134.67434768180942,
+  "error_px_mean_iqr": [
+   131.75888434413955,
+   183.23849887583137
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 6.414924999262439
+ },
+ "channel-zero-2": {
+  "trials": 5,
+  "view_commands": 2073,
+  "acquisition_s_median": 1.781,
+  "acquisition_s_p75": 2.711,
+  "acquisitions": 19,
+  "connectome_share": 0.8639652677279306,
+  "override_share": 0.09213699951760733,
+  "stale_share": 0.04389773275446213,
+  "align_intents": 26,
+  "intents_that_fired": 19,
+  "align_outcomes": {
+   "aligned_and_fired": 15,
+   "target_lost": 7,
+   "timeout": 3,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 30,
+  "error_px_mean_median_over_trials": 122.61469687579009,
+  "error_px_mean_iqr": [
+   87.3719266888901,
+   149.28325217584154
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 6.5719449987227545
+ },
+ "channel-zero-3": {
+  "trials": 5,
+  "view_commands": 2267,
+  "acquisition_s_median": 2.3505000000000003,
+  "acquisition_s_p75": 2.974,
+  "acquisitions": 16,
+  "connectome_share": 0.9501543890604323,
+  "override_share": 0.017203352448169385,
+  "stale_share": 0.032642258491398325,
+  "align_intents": 20,
+  "intents_that_fired": 16,
+  "align_outcomes": {
+   "aligned_and_fired": 15,
+   "target_lost": 4,
+   "timeout": 1
+  },
+  "reflex_fired": 24,
+  "error_px_mean_median_over_trials": 180.51817628078845,
+  "error_px_mean_iqr": [
+   135.3054129495915,
+   191.94722502086998
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 6.166415003099246
+ },
+ "channel-zero-4": {
+  "trials": 5,
+  "view_commands": 2400,
+  "acquisition_s_median": 2.08,
+  "acquisition_s_p75": 3.22575,
+  "acquisitions": 18,
+  "connectome_share": 0.9383333333333334,
+  "override_share": 0.03166666666666667,
+  "stale_share": 0.03,
+  "align_intents": 26,
+  "intents_that_fired": 18,
+  "align_outcomes": {
+   "aligned_and_fired": 14,
+   "target_lost": 8,
+   "timeout": 4
+  },
+  "reflex_fired": 30,
+  "error_px_mean_median_over_trials": 147.05435489807797,
+  "error_px_mean_iqr": [
+   139.0921469938106,
+   161.97024558738843
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 6.00412000057986
+ },
+ "lptc-on-1": {
+  "trials": 5,
+  "view_commands": 2193,
+  "acquisition_s_median": 1.587,
+  "acquisition_s_p75": 2.9335,
+  "acquisitions": 23,
+  "connectome_share": 0.6739626082991336,
+  "override_share": 0.2722298221614227,
+  "stale_share": 0.053807569539443684,
+  "align_intents": 24,
+  "intents_that_fired": 23,
+  "align_outcomes": {
+   "aligned_and_fired": 17,
+   "timeout": 3,
+   "target_lost_after_fire": 3,
+   "target_lost": 1
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 153.66856436774853,
+  "error_px_mean_iqr": [
+   126.43874740983462,
+   157.06444619536433
+  ],
+  "samples_with_flow": 1982,
+  "inference_p95_median": 5.842925002070842
+ },
+ "lptc-on-2": {
+  "trials": 5,
+  "view_commands": 2111,
+  "acquisition_s_median": 1.929,
+  "acquisition_s_p75": 2.4935,
+  "acquisitions": 18,
+  "connectome_share": 0.6305068687825675,
+  "override_share": 0.32733301752723826,
+  "stale_share": 0.04216011369019422,
+  "align_intents": 27,
+  "intents_that_fired": 18,
+  "align_outcomes": {
+   "aligned_and_fired": 15,
+   "target_lost": 9,
+   "observation_stale": 1,
+   "timeout": 1,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 32,
+  "error_px_mean_median_over_trials": 152.87930161616939,
+  "error_px_mean_iqr": [
+   152.76047620435727,
+   156.32284086141655
+  ],
+  "samples_with_flow": 1835,
+  "inference_p95_median": 5.93864999973448
+ },
+ "lptc-on-3": {
+  "trials": 5,
+  "view_commands": 2296,
+  "acquisition_s_median": 1.89,
+  "acquisition_s_p75": 2.649,
+  "acquisitions": 21,
+  "connectome_share": 0.7212543554006968,
+  "override_share": 0.23998257839721254,
+  "stale_share": 0.03876306620209059,
+  "align_intents": 24,
+  "intents_that_fired": 21,
+  "align_outcomes": {
+   "aligned_and_fired": 17,
+   "timeout": 4,
+   "target_lost": 2,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 149.002013181253,
+  "error_px_mean_iqr": [
+   144.10783981502757,
+   166.1116330740748
+  ],
+  "samples_with_flow": 2116,
+  "inference_p95_median": 5.726885002513882
+ },
+ "lptc-on-4": {
+  "trials": 5,
+  "view_commands": 2002,
+  "acquisition_s_median": 1.904,
+  "acquisition_s_p75": 2.5115,
+  "acquisitions": 19,
+  "connectome_share": 0.7022977022977023,
+  "override_share": 0.24275724275724275,
+  "stale_share": 0.054945054945054944,
+  "align_intents": 23,
+  "intents_that_fired": 19,
+  "align_outcomes": {
+   "aligned_and_fired": 18,
+   "target_lost": 3,
+   "timeout": 1,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 28,
+  "error_px_mean_median_over_trials": 154.22052992749485,
+  "error_px_mean_iqr": [
+   141.96997730990478,
+   165.21567903570434
+  ],
+  "samples_with_flow": 1809,
+  "inference_p95_median": 6.023200003255624
+ },
+ "channel-zero (all blocks)": {
+  "trials": 20,
+  "view_commands": 8850,
+  "acquisition_s_median": 2.1260000000000003,
+  "acquisition_s_p75": 2.78475,
+  "acquisitions": 72,
+  "connectome_share": 0.888135593220339,
+  "override_share": 0.07107344632768361,
+  "stale_share": 0.0407909604519774,
+  "align_intents": 98,
+  "intents_that_fired": 72,
+  "align_outcomes": {
+   "aligned_and_fired": 59,
+   "target_lost_after_fire": 2,
+   "target_lost": 26,
+   "timeout": 11
+  },
+  "reflex_fired": 113,
+  "error_px_mean_median_over_trials": 143.07325094594427,
+  "error_px_mean_iqr": [
+   122.35890862803613,
+   182.84548717852292
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 6.287120004344613
+ },
+ "lptc-on (all blocks)": {
+  "trials": 20,
+  "view_commands": 8602,
+  "acquisition_s_median": 1.876,
+  "acquisition_s_p75": 2.643,
+  "acquisitions": 81,
+  "connectome_share": 0.6825156940246454,
+  "override_share": 0.2702859800046501,
+  "stale_share": 0.04719832597070449,
+  "align_intents": 98,
+  "intents_that_fired": 81,
+  "align_outcomes": {
+   "aligned_and_fired": 67,
+   "timeout": 9,
+   "target_lost_after_fire": 6,
+   "target_lost": 15,
+   "observation_stale": 1
+  },
+  "reflex_fired": 112,
+  "error_px_mean_median_over_trials": 153.27393299195896,
+  "error_px_mean_iqr": [
+   138.3171322619651,
+   165.43966754529697
+  ],
+  "samples_with_flow": 7742,
+  "inference_p95_median": 5.938590000732802
+ },
+ "statistics": {
+  "fired_share": {
+   "rate_fed": 0.826530612244898,
+   "rate_zeros": 0.7346938775510204,
+   "z": 1.5534261150561492,
+   "p_two_sided": 0.12032136793913728
+  },
+  "acquisition_s": {
+   "u": 2484.5,
+   "z": -1.577256424306335,
+   "p_two_sided": 0.11473653463239741,
+   "n": [
+    81,
+    72
+   ]
+  },
+  "error_px_trial_means": {
+   "u": 221.0,
+   "z": 0.5680518698404823,
+   "p_two_sided": 0.5699997477501184,
+   "n": [
+    20,
+    20
+   ]
+  },
+  "connectome_share_per_trial": {
+   "u": 25.0,
+   "z": -4.733765582004019,
+   "p_two_sided": 2.2039225489045577e-06,
+   "n": [
+    20,
+    20
+   ]
+  },
+  "fired_share_per_trial": {
+   "u": 248.5,
+   "z": 1.3119293184411138,
+   "p_two_sided": 0.189543984158981,
+   "n": [
+    20,
+    20
+   ]
+  }
+ },
+ "blocks": {
+  "channel-zero": [
+   "channel-zero-1.json",
+   "channel-zero-2.json",
+   "channel-zero-3.json",
+   "channel-zero-4.json"
+  ],
+  "lptc-on": [
+   "lptc-on-1.json",
+   "lptc-on-2.json",
+   "lptc-on-3.json",
+   "lptc-on-4.json"
+  ]
+ },
+ "method": "Half-Life c1a3, corridor outside the elevator, one quicksave; per trial: quickload, two grunts from the console, 1.2 s step back, engage (motion -> track -> connectome align -> fire, max turn 2,500 px/s), 14 s, disarm. v4 checkpoint (cursor-dagger-v4 round 2) in its own process with --lptc-from-flow; the flow watch (scale 8, upper 1280x560) present for the fed blocks and absent for the zeros blocks. Blocks of five trials, alternated. The GPU was shared with another session's light bench runs during the night.",
+ "verdict": "Twenty trials each. With the channel fed, the chain fired on 83% of its align intents against 73% with zeros and reached the target 0.25 s sooner at the median, but neither difference is significant at this size (two-sided p 0.12 and 0.11), the tracking error of the align steps was no better (p 0.57), and the model was overridden about four times as often (27% of steps against 7%; per-trial model share p 2e-06). The live channel changes what the model proposes, mostly into disagreement with the envelope, so whatever the outcome gained is as likely the envelope's deterministic steps as the model's. What the calibration and these trials establish is that the channel can be fed faithfully and that the v4 readout does not use it well live; its value for the model is not shown. The next lever is training: a readout that sees the slip present, absent and scaled (slip dropout, blanking and gain in the training world, `--slip-dropout`, `--slip-blank`, `--slip-gain`) so that it neither depends on the channel nor is thrown by it."
+}

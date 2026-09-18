@@ -178,6 +178,25 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
         CursorWorld([1000], sense_version=5)
 
 
+def test_slip_robustness_options_drop_scale_and_blank_the_slip():
+    seeds = [1000, 1001, 1002, 1003]
+    exact = CursorWorld(seeds, sense_version=4, view=True)
+    dropped = CursorWorld(seeds, sense_version=4, view=True, slip_dropout=1.0)
+    halved = CursorWorld(seeds, sense_version=4, view=True, slip_gain=(.5, .5))
+    blank = CursorWorld(seeds, sense_version=4, view=True, slip_blank=1.0)
+    some = CursorWorld(list(range(2000, 2064)), sense_version=4, view=True, slip_dropout=.5)
+    for world in (exact, dropped, halved, blank, some):
+        for _ in range(12):
+            world.step(world.cursor + [500, 0])
+    assert (exact.slip()[:, 0] < 0).all()
+    assert not dropped.slip().any() and not blank.slip().any()
+    np.testing.assert_allclose(halved.slip(), exact.slip() * .5)
+    assert 16 <= some.slip_on.sum() <= 48 and (some.slip()[~some.slip_on] == 0).all() and (some.slip()[some.slip_on, 0] < 0).all()
+    assert some.slip_on.tolist() == CursorWorld(list(range(2000, 2064)), sense_version=4, view=True, slip_dropout=.5).slip_on.tolist()
+    with pytest.raises(ValueError):
+        CursorWorld(seeds, sense_version=4, view=True, slip_gain=(1.5, .5))
+
+
 def test_adapter_version_4_feeds_the_visual_slip_of_view_episodes_and_matches_the_world():
     from ganglion.core.aim import UNBOUNDED
     world = CursorWorld([1000, 1001, 1002, 1003], sense_version=4, view=[True, True, False, False])

@@ -136,7 +136,8 @@ def observe(runtime, frame, captured, seq, layout, *, source="provided", sample_
             watch.captured, watch.observation_id = captured, seq
             watch.sample_started, watch.source = sample_started, source
             if watch.spec.kind == "flow":
-                runtime.flow = watch.state.get("ego")
+                ego = watch.state.get("ego")
+                runtime.flow = None if ego is None else dict(ego, captured_mono=captured)
             ready = runtime.clock()
             if appeared or vanished:
                 runtime.ledger.append("appear" if appeared else "vanish", ready, watch_id=wid,

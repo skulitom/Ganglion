@@ -190,6 +190,18 @@ class Pilot:
         self.watches[c["name"]] = wid
         return {"watch_id": wid, "spec": spec}
 
+    async def cmd_unwatch(self, c):
+        """Remove a named watch and the reflexes armed on it: {"name"}."""
+        wid = self.watches.pop(c["name"], None)
+        if wid is None:
+            return {"removed": False}
+        for name in [n for n in self.reflexes if n.startswith(c["name"] + ":")]:
+            self.reflexes.pop(name)
+            self.armed.pop(name, None)
+            self.armed_at.pop(name, None)
+        await self._call("unwatch", {"watch_id": wid})
+        return {"removed": True, "watch_id": wid}
+
     async def cmd_arm(self, c):
         """Arm a reflex on a named watch: {"watch", "response": "align"|"key"|"notify", ...}."""
         wid = self.watches[c["watch"]]

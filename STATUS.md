@@ -115,9 +115,13 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   the percept itself is sound: it reports 0.8 to 0.9 of a known turn up to 2,500 px/s with the
   timing the training world assumes, and breaks near 7,000 px/s; the fight's shortfall was the
   grunts filling the view. The summary now says when it is credible, the runtime feeds the
-  channel only then, and the pilot caps the turn rate. The channel's live value is still to be
-  measured. [Details](docs/bench/HALFLIFE.md).
-- The suite passes **154 tests** (four optional checks skipped). Application-specific
+  channel only then, and the pilot caps the turn rate. Forty repeated engagements from one
+  quicksave, twenty with the channel fed and twenty with it at zero, found no significant
+  difference in firing (83% against 73%, p 0.12) or
+  acquisition time, and the model overridden four times as often with the channel fed: the
+  readout does not use the live channel well. Next: train the readout with the slip present,
+  absent and scaled. [Details](docs/bench/HALFLIFE.md).
+- The suite passes **160 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

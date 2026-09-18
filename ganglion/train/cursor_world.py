@@ -23,9 +23,12 @@ def teacher_points(cursor, goal, speed, rect, dt=.01):
 
 
 class CursorWorld:
-    def __init__(self, seeds, *, steps=160, jump_every=None, sense_version=2, view=False):
+    def __init__(self, seeds, *, steps=160, jump_every=None, sense_version=2, view=False,
+                 slip_dropout=0.0, slip_blank=0.0, slip_gain=(1.0, 1.0)):
         if sense_version not in (2, 3, 4):
             raise ValueError("The training world speaks sensory adapter versions 2, 3 and 4")
+        if not (0 <= slip_dropout <= 1 and 0 <= slip_blank <= 1 and 0 < slip_gain[0] <= slip_gain[1] <= 2):
+            raise ValueError("slip_dropout and slip_blank are probabilities; slip_gain is a range inside (0, 2]")
         self.seeds, self.steps, self.sense_version = list(seeds), steps, sense_version
         self.B = len(self.seeds)
         rngs = [np.random.default_rng(seed) for seed in self.seeds]
@@ -66,6 +69,14 @@ class CursorWorld:
         self.reach_cap = np.minimum(400, self.speed * self.gain / (self.delay + 1) * 1.5)
         self.jump_every, self.jumps = jump_every, 0
         self.jump_rngs = [np.random.default_rng(seed + 2_000_003) for seed in self.seeds]
+        # The live percept is not the simulated slip: it is absent when it is not credible (a
+        # mover filling the view, a turn beyond its range) and it reports a scene-dependent share
+        # of the true motion. Robustness options: whole episodes without the slip, single ticks
+        # where it blanks, and a per-episode gain.
+        self.slip_rngs = [np.random.default_rng(seed + 3_000_017) for seed in self.seeds]
+        self.slip_on = np.array([r.uniform() >= slip_dropout for r in self.slip_rngs])
+        self.slip_scale = np.array([r.uniform(*slip_gain) for r in self.slip_rngs])
+        self.slip_blank = slip_blank
 
     def jump(self):
         """Move every target 40 px to its reach cap away, inside the area: a fresh reach from
@@ -116,8 +127,11 @@ class CursorWorld:
         if len(self.history) >= needed:
             recent = self.history[-VIEW_LATENCY_TICKS - 1]
             older = self.history[-VIEW_LATENCY_TICKS - 1 - SLIP_WINDOW_TICKS]
-            slip = -(recent - older) / (SLIP_WINDOW_TICKS * .01)
-        return np.where(self.view[:, None], slip, 0)
+            slip = -(recent - older) / (SLIP_WINDOW_TICKS * .01) * self.slip_scale[:, None]
+        present = self.view & self.slip_on
+        if self.slip_blank:
+            present = present & np.array([r.uniform() >= self.slip_blank for r in self.slip_rngs])
+        return np.where(present[:, None], slip, 0)
 
     def senses(self, previous=None):
         """The runtime adapter's channels for every episode: goal error scaled by 0.3 s of intent

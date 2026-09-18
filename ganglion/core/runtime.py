@@ -19,6 +19,8 @@ from .aim import Align, drive_align, align_event
 from .locomotion import Move, drive_move, finish_move
 
 
+FLOW_MAX_AGE = .15      # seconds a flow summary stays fed to the model after its capture
+
 class Runtime:
     def __init__(self, clock, output, *, ledger=None, session_id=0, shadow_predictor=None, shadow_factory=None,
                  lptc_feed=False):
@@ -113,6 +115,7 @@ class Runtime:
                 self.ledger.append("intent_cancelled", self.clock(), critical=True, **self.locomotion.status())
             self.reflexes.clear()
             self.watches.clear()
+            self.flow = None
             self.owner, self.lease_id, self.expires = None, None, 0.0
             self.state = "degraded" if degraded else "halted"
             self.reason = reason
@@ -364,10 +367,13 @@ class Runtime:
         return point
 
     def lptc(self):
-        """Wide-field flow for the model's lptc channel: only when enabled, a flow watch runs and
-        its newest summary is credible (the view within the percept's range, the scene mostly
-        agreeing with one motion); otherwise None, which the adapter feeds as zeros."""
+        """Wide-field flow for the model's lptc channel: only when enabled, a flow watch runs, its
+        newest summary is credible (the view within the percept's range, the scene mostly
+        agreeing with one motion) and fresh (a removed watch must not leave its last reading
+        behind); otherwise None, which the adapter feeds as zeros."""
         if not self.lptc_feed or not self.flow or not self.flow.get("credible", True):
+            return None
+        if self.clock() - self.flow.get("captured_mono", self.clock()) > FLOW_MAX_AGE:
             return None
         f = self.flow
         return (f["tx_px_s"], f["ty_px_s"], f["divergence_s"], f["curl_s"])
