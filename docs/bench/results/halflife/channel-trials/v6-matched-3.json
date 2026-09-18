@@ -1,0 +1,417 @@
+{
+ "label": "v6-matched-3",
+ "controller": "connectome",
+ "grunts": 2,
+ "flow_scale": 0,
+ "max_turn_px_s": 1200.0,
+ "speed_px_s": 1200.0,
+ "trials": [
+  {
+   "first_event": 17904,
+   "last_event": 19530,
+   "seconds": 20.65,
+   "watched": {
+    "reflex_fired": 4,
+    "intents": [
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "target_lost_after_fire",
+      "shots": 1,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "target_lost_after_fire",
+      "shots": 2,
+      "program": "align"
+     },
+     {
+      "kind": "intent_failed",
+      "reason": "target_lost",
+      "shots": 0,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     }
+    ],
+    "seconds": 14.01
+   },
+   "summary": {
+    "view_commands": 504,
+    "controller_shares": {
+     "deterministic_stale": 25,
+     "connectome": 446,
+     "deterministic_override": 33
+    },
+    "acquisition_s": [
+     0.68,
+     2.203,
+     1.496,
+     1.267,
+     1.234
+    ],
+    "engagement_s": [
+     1.307,
+     1.859,
+     3.999,
+     0.915,
+     0.89
+    ],
+    "proposals": {
+     "samples": 488,
+     "cosine_to_goal_mean": 0.8320234424268821,
+     "share_at_goal": 0.9118852459016393,
+     "share_away_from_goal": 0.06147540983606557,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": 0.8849206349206349,
+    "override_share": 0.06547619047619048,
+    "stale_share": 0.0496031746031746,
+    "align_intents": 6,
+    "align_outcomes": {
+     "aligned_and_fired": 2,
+     "target_lost_after_fire": 2,
+     "timeout": 1,
+     "target_lost": 1
+    },
+    "intents_that_fired": 5,
+    "reflex_fired": 6,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": {
+     "p50": 3.352600004291162,
+     "p95": 5.7998300006147465,
+     "p99": 6.874745996319689
+    },
+    "observations_dropped": 0,
+    "error_px": {
+     "mean": 136.1200568097557,
+     "median": 94.60441838334944,
+     "p90": 329.1627575259557,
+     "steps": 504
+    }
+   }
+  },
+  {
+   "first_event": 19536,
+   "last_event": 21848,
+   "seconds": 20.54,
+   "watched": {
+    "reflex_fired": 4,
+    "intents": [
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     }
+    ],
+    "seconds": 14.04
+   },
+   "summary": {
+    "view_commands": 734,
+    "controller_shares": {
+     "deterministic_stale": 44,
+     "deterministic_override": 251,
+     "connectome": 439
+    },
+    "acquisition_s": [
+     0.876,
+     0.947
+    ],
+    "engagement_s": [
+     1.937,
+     0.594
+    ],
+    "proposals": {
+     "samples": 694,
+     "cosine_to_goal_mean": 0.33460320155984385,
+     "share_at_goal": 0.6340057636887608,
+     "share_away_from_goal": 0.33285302593659943,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": 0.5980926430517711,
+    "override_share": 0.3419618528610354,
+    "stale_share": 0.05994550408719346,
+    "align_intents": 4,
+    "align_outcomes": {
+     "timeout": 2,
+     "aligned_and_fired": 2
+    },
+    "intents_that_fired": 2,
+    "reflex_fired": 5,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": {
+     "p50": 2.945000000181608,
+     "p95": 5.7241150076151825,
+     "p99": 6.312777998828098
+    },
+    "observations_dropped": 0,
+    "error_px": {
+     "mean": 121.87679620429434,
+     "median": 77.1977896770201,
+     "p90": 271.69546420198566,
+     "steps": 734
+    }
+   }
+  },
+  {
+   "first_event": 21854,
+   "last_event": 23380,
+   "seconds": 20.71,
+   "watched": {
+    "reflex_fired": 5,
+    "intents": [
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     },
+     {
+      "kind": "intent_failed",
+      "reason": "target_lost",
+      "shots": 0,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     }
+    ],
+    "seconds": 14.05
+   },
+   "summary": {
+    "view_commands": 462,
+    "controller_shares": {
+     "deterministic_stale": 52,
+     "connectome": 370,
+     "deterministic_override": 40
+    },
+    "acquisition_s": [
+     1.084,
+     2.568,
+     1.027
+    ],
+    "engagement_s": [
+     2.918,
+     3.874,
+     1.136
+    ],
+    "proposals": {
+     "samples": 425,
+     "cosine_to_goal_mean": 0.7744014546209221,
+     "share_at_goal": 0.8752941176470588,
+     "share_away_from_goal": 0.08941176470588236,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": 0.8008658008658008,
+    "override_share": 0.08658008658008658,
+    "stale_share": 0.11255411255411256,
+    "align_intents": 4,
+    "align_outcomes": {
+     "aligned_and_fired": 2,
+     "timeout": 1,
+     "target_lost": 1
+    },
+    "intents_that_fired": 3,
+    "reflex_fired": 5,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": {
+     "p50": 3.129699995042756,
+     "p95": 5.993800002033822,
+     "p99": 7.5454279984114665
+    },
+    "observations_dropped": 0,
+    "error_px": {
+     "mean": 121.30755741162709,
+     "median": 101.74877393700989,
+     "p90": 257.03336088681243,
+     "steps": 462
+    }
+   }
+  },
+  {
+   "first_event": 23387,
+   "last_event": 24909,
+   "seconds": 20.69,
+   "watched": {
+    "reflex_fired": 5,
+    "intents": [
+     {
+      "kind": "intent_completed",
+      "reason": "target_lost_after_fire",
+      "shots": 3,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "target_lost_after_fire",
+      "shots": 1,
+      "program": "align"
+     },
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     }
+    ],
+    "seconds": 14.03
+   },
+   "summary": {
+    "view_commands": 463,
+    "controller_shares": {
+     "deterministic_stale": 39,
+     "connectome": 391,
+     "deterministic_override": 33
+    },
+    "acquisition_s": [
+     1.098,
+     1.764,
+     1.231,
+     1.203
+    ],
+    "engagement_s": [
+     1.685,
+     3.448,
+     0.888,
+     0.861
+    ],
+    "proposals": {
+     "samples": 439,
+     "cosine_to_goal_mean": 0.8568981651436007,
+     "share_at_goal": 0.9066059225512528,
+     "share_away_from_goal": 0.05239179954441914,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": 0.8444924406047516,
+    "override_share": 0.07127429805615551,
+    "stale_share": 0.08423326133909287,
+    "align_intents": 4,
+    "align_outcomes": {
+     "target_lost_after_fire": 2,
+     "aligned_and_fired": 2
+    },
+    "intents_that_fired": 4,
+    "reflex_fired": 5,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": {
+     "p50": 3.237600001739338,
+     "p95": 5.854110003565437,
+     "p99": 6.460198002168909
+    },
+    "observations_dropped": 0,
+    "error_px": {
+     "mean": 152.33547281818616,
+     "median": 118.4736257569591,
+     "p90": 344.7915423131219,
+     "steps": 463
+    }
+   }
+  },
+  {
+   "first_event": 24916,
+   "last_event": 26983,
+   "seconds": 20.71,
+   "watched": {
+    "reflex_fired": 3,
+    "intents": [
+     {
+      "kind": "intent_completed",
+      "reason": "aligned_and_fired",
+      "shots": 4,
+      "program": "align"
+     }
+    ],
+    "seconds": 14.01
+   },
+   "summary": {
+    "view_commands": 654,
+    "controller_shares": {
+     "deterministic_stale": 39,
+     "connectome": 520,
+     "deterministic_override": 95
+    },
+    "acquisition_s": [
+     1.036,
+     1.779
+    ],
+    "engagement_s": [
+     1.674,
+     2.065
+    ],
+    "proposals": {
+     "samples": 624,
+     "cosine_to_goal_mean": 0.6550295473893246,
+     "share_at_goal": 0.8125,
+     "share_away_from_goal": 0.15865384615384615,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": 0.7951070336391437,
+    "override_share": 0.1452599388379205,
+    "stale_share": 0.05963302752293578,
+    "align_intents": 4,
+    "align_outcomes": {
+     "target_lost_after_fire": 1,
+     "target_lost": 1,
+     "timeout": 1,
+     "aligned_and_fired": 1
+    },
+    "intents_that_fired": 2,
+    "reflex_fired": 5,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": {
+     "p50": 3.1024999916553497,
+     "p95": 5.672270005743485,
+     "p99": 6.248194998770487
+    },
+    "observations_dropped": 0,
+    "error_px": {
+     "mean": 121.77533213583709,
+     "median": 57.9396237474839,
+     "p90": 335.70550883182153,
+     "steps": 654
+    }
+   }
+  }
+ ]
+}

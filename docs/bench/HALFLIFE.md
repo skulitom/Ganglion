@@ -231,21 +231,25 @@ were rerun with the turn cap at 1,200 px/s for everyone (`--max-turn-px-s 1200`)
 reference and v1b alternating block by block from the same quicksave after a game restart,
 and v4 at zero after them under its own core.
 
-| Measurement | Deterministic reference at 1,200 px/s | v1b at 1,200 px/s | v4 at zero, 1,200 px/s |
-|---|---:|---:|---:|
-| Trials | 20 | 20 | 20 |
-| Align intents, of which fired | 68 of 89 (76%) | 61 of 93 (66%) | 54 of 83 (65%) |
-| Acquisition to the first shot, median (p75) | 0.97 s (1.35) | 1.24 s (1.48) | 0.99 s (1.54) |
-| Engagement to the last align step, median | 1.85 s | 2.14 s | 2.02 s |
-| Tracking error of align steps, median of trial means | 159 px | 138 px | 151 px |
-| From the model / overridden | n/a | 80.3% / 14.3% | 87.2% / 6.2% |
-| Model proposals within 60° of the goal | n/a | 80% | 92% |
+| Measurement | Deterministic reference at 1,200 px/s | v1b at 1,200 px/s | v4 at zero, 1,200 px/s | v6 (goal as a direction), 1,200 px/s |
+|---|---:|---:|---:|---:|
+| Trials | 20 | 20 | 20 | 20 |
+| Align intents, of which fired | 68 of 89 (76%) | 61 of 93 (66%) | 54 of 83 (65%) | 64 of 92 (70%) |
+| Acquisition to the first shot, median (p75) | 0.97 s (1.35) | 1.24 s (1.48) | 0.99 s (1.54) | 1.07 s (1.24) |
+| Engagement to the last align step, median | 1.85 s | 2.14 s | 2.02 s | 1.86 s |
+| Tracking error of align steps, median of trial means | 159 px | 138 px | 151 px | 121 px |
+| From the model / overridden | n/a | 80.3% / 14.3% | 87.2% / 6.2% | 76.2% / 17.8% |
+| Model proposals within 60° of the goal | n/a | 80% | 92% | 78% |
 
 At the same limit the reference still reaches its first shot sooner than v1b (0.97 against
 1.24 s, p 0.01) and fires a similar share (p 0.11); the cap cost the reference
 0.32 s at the median (p 0.000) and v1b 0.31 s (p 0.02), the latter through the override
 steps that had been doing part of its work. v4 at zero against the reference at the same limit: first shot 0.99 against
-0.97 s (p 0.30), firing p 0.10; against itself uncapped, p 0.51. So the earlier gap was mostly the reference's higher step limit: at the
+0.97 s (p 0.30), firing p 0.10; against itself uncapped, p 0.51. The v6 readout (the goal as a direction at full strength, [TRAINING.md](TRAINING.md)),
+run the same way to test the diagnosis that the model's intents time out because its proposals
+fade near the goal: 64 of 92 (70%) intents fired (against the reference p 0.30, against v4 at zero
+p 0.53), first shot at 1.07 s (against the reference p 0.27, against v4 at zero p 0.79),
+18% of steps overridden, 78% of proposals at the goal. So the earlier gap was mostly the reference's higher step limit: at the
 same limit the supervised v4 reaches its first shot as fast as the reference, with a trend
 towards fewer of its intents firing, and v1b stays slower. The model does not yet make the
 chain faster than the reference live, but with the limits matched it no longer makes it slower

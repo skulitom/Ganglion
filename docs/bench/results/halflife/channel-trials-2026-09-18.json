@@ -1395,6 +1395,154 @@
   "samples_with_flow": 2781,
   "inference_p95_median": 5.936450004810467
  },
+ "v6-matched-1": {
+  "trials": 5,
+  "view_commands": 2544,
+  "proposals": {
+   "samples": 2426,
+   "cosine_to_goal_mean": 0.5687641508197688,
+   "share_at_goal": 0.7625721352019785,
+   "share_away_from_goal": 0.20321516900247322,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.0945,
+  "acquisition_s_p75": 1.20175,
+  "acquisitions": 20,
+  "engagement_s_median": 1.36,
+  "connectome_share": 0.735062893081761,
+  "override_share": 0.19929245283018868,
+  "stale_share": 0.06564465408805031,
+  "align_intents": 25,
+  "intents_that_fired": 20,
+  "align_outcomes": {
+   "aligned_and_fired": 14,
+   "target_lost_after_fire": 3,
+   "timeout": 5,
+   "target_lost": 3
+  },
+  "reflex_fired": 29,
+  "error_px_mean_median_over_trials": 113.06082410349691,
+  "error_px_mean_iqr": [
+   110.94182925933336,
+   149.4435408040163
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.956540002807742
+ },
+ "v6-matched-2": {
+  "trials": 5,
+  "view_commands": 2979,
+  "proposals": {
+   "samples": 2887,
+   "cosine_to_goal_mean": 0.6126007488789743,
+   "share_at_goal": 0.797367509525459,
+   "share_away_from_goal": 0.1835815725666782,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.002,
+  "acquisition_s_p75": 1.47975,
+  "acquisitions": 14,
+  "engagement_s_median": 1.9255,
+  "connectome_share": 0.7821416582745888,
+  "override_share": 0.17119838872104734,
+  "stale_share": 0.04665995300436388,
+  "align_intents": 22,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "aligned_and_fired": 9,
+   "target_lost_after_fire": 3,
+   "timeout": 5,
+   "target_lost": 5
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 118.73462026138353,
+  "error_px_mean_iqr": [
+   107.46373606504805,
+   124.73210019807883
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.741700006183237
+ },
+ "v6-matched-3": {
+  "trials": 5,
+  "view_commands": 2817,
+  "proposals": {
+   "samples": 2670,
+   "cosine_to_goal_mean": 0.6562844239961503,
+   "share_at_goal": 0.8097378277153559,
+   "share_away_from_goal": 0.15767790262172285,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.217,
+  "acquisition_s_p75": 1.563,
+  "acquisitions": 16,
+  "engagement_s_median": 1.6795,
+  "connectome_share": 0.7689030883919062,
+  "override_share": 0.16045438409655663,
+  "stale_share": 0.0706425275115371,
+  "align_intents": 22,
+  "intents_that_fired": 16,
+  "align_outcomes": {
+   "aligned_and_fired": 9,
+   "target_lost_after_fire": 5,
+   "timeout": 5,
+   "target_lost": 3
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 121.87679620429434,
+  "error_px_mean_iqr": [
+   121.77533213583709,
+   136.1200568097557
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.7998300006147465
+ },
+ "v6-matched-4": {
+  "trials": 5,
+  "view_commands": 3175,
+  "proposals": {
+   "samples": 3041,
+   "cosine_to_goal_mean": 0.572820083714752,
+   "share_at_goal": 0.7655376520881289,
+   "share_away_from_goal": 0.20388030253206182,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.978,
+  "acquisition_s_p75": 1.094,
+  "acquisitions": 14,
+  "engagement_s_median": 1.9485000000000001,
+  "connectome_share": 0.7584251968503937,
+  "override_share": 0.18456692913385828,
+  "stale_share": 0.057007874015748035,
+  "align_intents": 23,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "target_lost_after_fire": 3,
+   "aligned_and_fired": 7,
+   "target_lost": 6,
+   "timeout": 7
+  },
+  "reflex_fired": 27,
+  "error_px_mean_median_over_trials": 111.79749411640381,
+  "error_px_mean_iqr": [
+   91.04027829268735,
+   121.64463400415022
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.798269998922479
+ },
  "channel-zero (all blocks)": {
   "trials": 20,
   "view_commands": 8850,
@@ -1736,6 +1884,43 @@
   ],
   "samples_with_flow": 10611,
   "inference_p95_median": 5.94227000256069
+ },
+ "v6-matched (all blocks)": {
+  "trials": 20,
+  "view_commands": 11515,
+  "proposals": {
+   "samples": 11024,
+   "cosine_to_goal_mean": 0.6025603663414949,
+   "share_at_goal": 0.7839259796806967,
+   "share_away_from_goal": 0.18722786647314948,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.0670000000000002,
+  "acquisition_s_p75": 1.2422499999999999,
+  "acquisitions": 64,
+  "engagement_s_median": 1.859,
+  "connectome_share": 0.7619626574033869,
+  "override_share": 0.17846287451150672,
+  "stale_share": 0.059574468085106386,
+  "align_intents": 92,
+  "intents_that_fired": 64,
+  "align_outcomes": {
+   "aligned_and_fired": 39,
+   "target_lost_after_fire": 14,
+   "timeout": 22,
+   "target_lost": 17
+  },
+  "reflex_fired": 108,
+  "error_px_mean_median_over_trials": 121.47609570788865,
+  "error_px_mean_iqr": [
+   110.07230596076204,
+   139.45092780832084
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.810442500296631
  },
  "statistics": {
   "lptc-on vs channel-zero": {
@@ -2305,6 +2490,118 @@
     "median_a": 0.8768138772980048,
     "median_b": 0.9334736399031884
    }
+  },
+  "v6-matched vs deterministic-matched": {
+   "fired_share": {
+    "rate_a": 0.6956521739130435,
+    "rate_b": 0.7640449438202247,
+    "z": -1.0352694340812154,
+    "p_two_sided": 0.30054310023624464
+   },
+   "acquisition_s": {
+    "u": 2418.0,
+    "z": 1.1018836150454845,
+    "p_two_sided": 0.27051227274852896,
+    "n": [
+     64,
+     68
+    ],
+    "median_a": 1.0670000000000002,
+    "median_b": 0.9684999999999999
+   },
+   "error_px_trial_means": {
+    "u": 95.0,
+    "z": -2.8402593492024115,
+    "p_two_sided": 0.004507686962720969,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 121.47609570788865,
+    "median_b": 158.72468332098575
+   }
+  },
+  "v6-matched vs channel-zero-matched": {
+   "fired_share": {
+    "rate_a": 0.6956521739130435,
+    "rate_b": 0.6506024096385542,
+    "z": 0.6349888151143194,
+    "p_two_sided": 0.5254357098077369
+   },
+   "acquisition_s": {
+    "u": 1776.5,
+    "z": 0.2619823382689998,
+    "p_two_sided": 0.7933350587826249,
+    "n": [
+     64,
+     54
+    ],
+    "median_a": 1.0670000000000002,
+    "median_b": 0.989
+   },
+   "error_px_trial_means": {
+    "u": 111.0,
+    "z": -2.407457924562044,
+    "p_two_sided": 0.01606401314826922,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 121.47609570788865,
+    "median_b": 151.12431555590672
+   },
+   "connectome_share_per_trial": {
+    "u": 52.0,
+    "z": -4.003413177923399,
+    "p_two_sided": 6.24351207658691e-05,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 0.7944227617551152,
+    "median_b": 0.8768138772980048
+   }
+  },
+  "v6-matched vs v1b-matched": {
+   "fired_share": {
+    "rate_a": 0.6956521739130435,
+    "rate_b": 0.6559139784946236,
+    "z": 0.5772962834707562,
+    "p_two_sided": 0.5637393238873543
+   },
+   "acquisition_s": {
+    "u": 1563.0,
+    "z": -1.921321520630064,
+    "p_two_sided": 0.0546911856509924,
+    "n": [
+     64,
+     61
+    ],
+    "median_a": 1.0670000000000002,
+    "median_b": 1.241
+   },
+   "error_px_trial_means": {
+    "u": 135.0,
+    "z": -1.7582557876014928,
+    "p_two_sided": 0.07870399677767304,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 121.47609570788865,
+    "median_b": 138.37105535465736
+   },
+   "connectome_share_per_trial": {
+    "u": 154.0,
+    "z": -1.2443040958410565,
+    "p_two_sided": 0.21338766418299038,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 0.7944227617551152,
+    "median_b": 0.8113080258330554
+   }
   }
  },
  "blocks": {
@@ -2374,6 +2671,12 @@
    "channel-zero-matched-2.json",
    "channel-zero-matched-3.json",
    "channel-zero-matched-4.json"
+  ],
+  "v6-matched": [
+   "v6-matched-1.json",
+   "v6-matched-2.json",
+   "v6-matched-3.json",
+   "v6-matched-4.json"
   ]
  },
  "method": "Half-Life c1a3, corridor outside the elevator, one quicksave; per trial: quickload, two grunts from the console, 1.2 s step back, engage (motion -> track -> connectome align -> fire, max turn 2,500 px/s), 14 s, disarm. v4 checkpoint (cursor-dagger-v4 round 2) in its own process with --lptc-from-flow; the flow watch (scale 8, upper 1280x560) present for the fed blocks and absent for the zeros blocks. Blocks of five trials, alternated. The GPU was shared with another session's light bench runs during the night.",
@@ -2456,6 +2759,15 @@
    "cosine_to_goal_mean": 0.8596298433620027,
    "share_at_goal": 0.9222639531836841,
    "share_away_from_goal": 0.055113983754039655,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "v6-matched": {
+   "samples": 11024,
+   "cosine_to_goal_mean": 0.6025603663414949,
+   "share_at_goal": 0.7839259796806967,
+   "share_away_from_goal": 0.18722786647314948,
    "flow_samples": 0,
    "cosine_to_flow_mean": null,
    "share_against_flow": null
