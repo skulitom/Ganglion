@@ -1,6 +1,6 @@
 """The Phase 0 bench: capture rate and latency, input-to-pixel latency, brain step time, tick jitter.
 
-Run it on the console and inside an Anode seat; the two JSON files are the Phase 0 deliverable.
+Run it on the console and inside the seat; the two JSON files are the Phase 0 deliverable.
 Everything is measured against the flasher (ganglion.arena.flasher), a fixed-frame-rate window that
 reports when it flipped, so the numbers include what a real application adds.
 """

@@ -25,7 +25,7 @@ On Windows, this opens and operates a temporary Arena window in the current sess
 .venv/Scripts/python.exe -m ganglion.cli demo --seconds 8 --json runs/console-reflex.json
 ```
 
-Run that same command inside an Anode seat for a separate desktop. The demo verifies its Arena
+Run that same command inside the seat for a separate desktop. The demo verifies its Arena
 has focus, scopes each click to that window, then closes its fixtures and restores the prior
 cursor and foreground window. It does not launch a game or modify system configuration.
 
@@ -343,7 +343,7 @@ release; wait for `output_halted` before reusing the pointer.
 Gate C reach, drag-until-condition, quiet-screen capture, and browser-fixture transfer are
 implemented. The [reach comparison](bench/REACH.md) and [drag scorecard](bench/DRAG.md) give
 reproduction commands and bounded claims. A [Solitaire application check](bench/SOLITAIRE.md)
-now demonstrates one accepted move and one rejected drop inside Anode. Application teaching
+now demonstrates one accepted move and one rejected drop inside the seat. Application teaching
 lives in an external profile; the core has no card rules. Broader board recognition remains open.
 Templates, meters, OCR, gamepad input, recording, skill packs, learned vision, and connectome
 controllers remain on the plan. No per-game rules were introduced in the core.

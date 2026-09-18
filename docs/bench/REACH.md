@@ -1,7 +1,7 @@
 # Reach and browser transfer scorecard
 
 Measured 2026-09-17. The same deterministic `reach` primitive and public MCP tools completed
-the moving-target task in pygame and Microsoft Edge, on the console and in Anode session 3.
+the moving-target task in pygame and Microsoft Edge, on the console and in seat session 3.
 This delivers the reach/transfer portion of Gate C. Drag-until-condition and Solitaire remain.
 
 ## Retained measurements
@@ -13,9 +13,9 @@ gaps, a completed halt, and no pending output.
 | Environment | Periodic successes | Periodic false clicks | Reach successes | Reach false clicks | Mean reach completion |
 |---|---:|---:|---:|---:|---:|
 | [Arena, console](results/reach-console.json) | 2/4 | 20 | 4/4 | 0 | 0.364 s |
-| [Arena, Anode seat](results/reach-seat.json) | 1/4 | 23 | 4/4 | 0 | 0.376 s |
+| [Arena, seat](results/reach-seat.json) | 1/4 | 23 | 4/4 | 0 | 0.376 s |
 | [Edge, console](results/reach-browser-console.json) | 0/4 | 24 | 4/4 | 0 | 0.419 s |
-| [Edge, Anode seat](results/reach-browser-seat.json) | 1/4 | 23 | 4/4 | 0 | 0.437 s |
+| [Edge, seat](results/reach-browser-seat.json) | 1/4 | 23 | 4/4 | 0 | 0.437 s |
 | [Synthetic integration](results/reach-synthetic.json) | 3/4 | 15 | 4/4 | 0 | 0.335 s |
 
 All five reports have zero ledger gaps and an empty pending-command list after halt. The final
@@ -60,7 +60,7 @@ uv sync --locked --extra dev
 .venv/Scripts/python.exe -m ganglion.cli reach-demo --environment arena --trials 4 --json runs/reach-arena.json
 ```
 
-The `arena` command opens and operates its own window in the current session. Use Anode
+The `arena` command opens and operates its own window in the current session. Use the seat tool
 `seat_exec` or `seat_run` to execute that same command in the seat. The harness restores the
 prior cursor and foreground window after closing its fixtures.
 

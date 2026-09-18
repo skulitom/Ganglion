@@ -8,7 +8,7 @@ Review date: 2026-09-17. These are proposals, not changes to the agreed project 
 
 ## My assessment
 
-Ganglion is worth building. The strongest idea is the combination of a continuously updated percept ledger and bounded, local motor programs: the agent can reason slowly while its instructions remain responsive to the world. The separation between the MCP client and the in-session runtime is sensible. Reusing Anode and Haltere gives the project a credible starting point.
+Ganglion is worth building. The strongest idea is the combination of a continuously updated percept ledger and bounded, local motor programs: the agent can reason slowly while its instructions remain responsive to the world. The separation between the MCP client and the in-session runtime is sensible. Reusing the seat tool and Haltere gives the project a credible starting point.
 
 The fly connectome is an interesting research direction. Its contribution to computer control still needs to be demonstrated. Keep it central to the research agenda while letting the deterministic runtime deliver useful results independently. The plan already embraces this principle; protect it when implementation gets difficult.
 

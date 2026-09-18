@@ -1,6 +1,6 @@
 """Which Windows session this process runs in, and the screen it sees.
 
-The fast loop must run inside the session where the application lives (console, or an Anode child
+The fast loop must run inside the session where the application lives (console, or an the seat tool child
 session). Everything here is a thin ctypes layer; it never changes anything.
 """
 from __future__ import annotations

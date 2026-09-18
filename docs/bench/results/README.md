@@ -8,7 +8,7 @@ connectome runs are shadow or supervised. Dates are in each file's `measured_at`
 
 | File | What it records | Quoted in |
 |---|---|---|
-| `reflex-synthetic.json`, `reflex-console.json`, `reflex-seat.json` | Pixel-to-click reflex latency in the synthetic Arena, on the console session and inside the Anode seat | [REACH.md](../REACH.md) |
+| `reflex-synthetic.json`, `reflex-console.json`, `reflex-seat.json` | Pixel-to-click reflex latency in the synthetic Arena, on the console session and inside the seat | [REACH.md](../REACH.md) |
 | `reach-synthetic.json`, `reach-console.json`, `reach-seat.json`, `reach-browser-console.json`, `reach-browser-seat.json` | Cursor-feedback reach against a periodic-input baseline, same environments plus the Edge fixture | [REACH.md](../REACH.md) |
 | `drag-synthetic.json`, `drag-console.json`, `drag-seat.json`, `drag-browser-console.json`, `drag-browser-seat.json` | Bounded drag with verified release, same environments | [REACH.md](../REACH.md) |
 | `seat.json` | Capture rate, input-to-pixel latency and tick jitter inside the seat | [REACH.md](../REACH.md) |

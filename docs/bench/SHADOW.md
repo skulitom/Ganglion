@@ -11,7 +11,7 @@ but no candidate has earned input authority. There is no fly visual front-end or
 
 ## Live results and frozen replay
 
-| Measurement | Recorded live Arena, Anode session 3 | Live Arena after packing sensor transfers | Frozen replay |
+| Measurement | Recorded live Arena, seat session 3 | Live Arena after packing sensor transfers | Frozen replay |
 |---|---:|---:|---:|
 | Reference reaches accepted / attempted | 3 / 3 | 3 / 3 | No input |
 | Reference false actions | 0 | 0 | No input |
@@ -65,7 +65,7 @@ The optional environment requires torch with CUDA, the local Haltere package, an
 and checkpoint assets. The measured environment used Python 3.13.2 and torch 2.11.0+cu128.
 The deterministic install and tests continue to work without them.
 
-Run the live command **inside Anode**, using `seat_exec` or `seat_run`:
+Run the live command **inside the seat**, using `seat_exec` or `seat_run`:
 
 ```powershell
 .venv/Scripts/python.exe -m ganglion.cli reach-demo --environment arena --trials 3 --shadow-checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --json runs/shadow-seat.json
@@ -110,7 +110,7 @@ share therefore measures how often the fly model's proposal was acceptable, not 
 have finished the reach unaided. The live runs used the deterministic taught colour perception
 for goals; there is still no fly visual front-end. `promoted` remains false everywhere.
 
-Reproduce (the live command inside Anode):
+Reproduce (the live command inside the seat):
 
 ```powershell
 .venv/Scripts/python.exe -m ganglion.cli reach-demo --environment synthetic --trials 4 --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt --controller connectome --json runs/neural-reach.json
@@ -143,7 +143,7 @@ that strafed fast, where the envelope overrode most proposals.
 ## Controlled transfer in the seat
 
 The Arena reach demo (a target moving on a sinusoid, eight paired trial seeds, 1,200 px/s,
-6 px tolerance, click on arrival) ran inside the Anode seat with the deterministic
+6 px tolerance, click on arrival) ran inside the seat with the deterministic
 controller, with the DAgger v1 checkpoint under supervised authority, and then with the
 all-motor-neuron readout (DAgger v1b) under the same authority, on the same machine and
 Windows session. `ganglion.arena.compare` scores both from the ledger: time to
@@ -219,4 +219,4 @@ performance in Arena before promotion. Fly visual perception remains a separate 
 component. Application transfer, including Solitaire, should evaluate these reusable abilities.
 
 The owned Solitaire, Arena and core processes were closed after testing. Steam and its UI
-helpers were restored to main session 1. All live input in this work stayed in Anode.
+helpers were restored to main session 1. All live input in this work stayed in the seat.

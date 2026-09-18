@@ -1,7 +1,7 @@
 # Ganglion — a fly-brain reflex layer for LLM agents
 
 *Plan v0.1, 2026-09-16. Project directory `C:\DEV\Ganglion`. Builds on
-[Haltere](../Haltere) (the male-CNS fly brain that flies Liftoff) and [Anode](../Anode) (the
+[Haltere](../Haltere) (the male-CNS fly brain that flies Liftoff) and the seat tool (the
 background Windows seat for agents).*
 
 ## 0. In one paragraph
@@ -21,9 +21,9 @@ Two things were measured today that make this concrete rather than hopeful (deta
 | fact | number |
 |---|---|
 | Haltere's 30,000-neuron connectome brain, one step, batch 1, RTX 4090 | **1.82 ms** (550 Hz) |
-| DXGI desktop duplication inside the Anode seat (child session 3, 1280x720) | **66 new frames/s, 0.06 ms per poll** |
+| DXGI desktop duplication inside the seat (child session 3, 1280x720) | **66 new frames/s, 0.06 ms per poll** |
 | DXGI desktop duplication on the console (1920x1080, 75 Hz monitor) | 76 new frames/s, 0.07 ms per poll, 240/s in video mode |
-| GDI capture (what Anode's screenshot uses), any region size | 13.4 ms per frame |
+| GDI capture (what the seat tool's screenshot uses), any region size | 13.4 ms per frame |
 
 So a 100 Hz control loop with a frame-rate visual front-end fits on this machine, on the desktop
 and inside the seat, with most of the tick budget to spare.
@@ -103,16 +103,16 @@ Everything below is from the current code (`C:\DEV\Haltere`, HEAD `22745c0`, 124
   1.817 ms on CUDA (1.890 ms if the weight matrix is rebuilt every step) and 71.98 ms on CPU.
   Training runs at ~3.2 s per iteration at B=256, T=64.
 
-### 2.2 Anode: the seat, and why the fast loop must not go through it
+### 2.2 The seat, and why the fast loop must not go through it
 
-From the current source (`C:\DEV\Anode`, .NET 8, v0.4.0) and docs:
+From the seat tool's current source and docs:
 
 - A **child session** (loopback RDP session of the same user) is a real second seat: own desktop,
   pointer, focus, processes; same files, same Steam library, same network ports. Roles: daemon in
   the user's session, seat host inside the seat (input, capture, launching, gamepad), thin CLI and
-  MCP clients on `\\.\pipe\anode-control`, NDJSON, one request in flight per connection.
+  MCP clients on a named pipe, NDJSON, one request in flight per connection.
 - **Capture is GDI** `Graphics.CopyFromScreen` → PNG/JPEG → base64 → two pipe hops, one frame
-  per request (`src/Anode/Core/Capture/ScreenCapture.cs:23`). There is no streaming path, no
+  per request (its screen capture source). There is no streaming path, no
   DXGI, no Windows.Graphics.Capture anywhere in the repo. Fine for an agent's screenshot, not a
   perception loop.
 - **Input is the right primitive with the wrong transport**: `SendInput` with scan codes
@@ -129,12 +129,12 @@ From the current source (`C:\DEV\Anode`, .NET 8, v0.4.0) and docs:
   telemetry and pad bridge already cross sessions daily); named pipes work cross-session with
   `CurrentUserOnly`.
 - **Seat display facts**: RDP composition is capped by `DWMFRAMEINTERVAL = 15` (about 66 Hz,
-  registry, set by `anode setup --fps 60`); `--gpu` sets `bEnumerateHWBeforeSW` so the seat renders
+  registry, set by the seat tool's fps setup); its GPU option sets `bEnumerateHWBeforeSW` so the seat renders
   on the RTX 4090 (Liftoff's D3D11 loading screen in session 5 was the evidence); exclusive
   fullscreen and protected video do not capture (use borderless); a hidden or minimised viewer can
   suspend RDP rendering, mitigated by `RemoteDesktop_SuppressWhenMinimized = 2`; a foreground
-  `GameInputServiceWindow` blocks all synthetic input (Anode detects it; repair script exists).
-- Anode's own docs are honest that "competitive twitch play is not what this is". Today's
+  `GameInputServiceWindow` blocks all synthetic input (the seat tool detects it; a repair script exists).
+- The seat tool's own docs are honest that "competitive twitch play is not what this is". Today's
   measurement narrows that: the seat delivers 66 fresh frames a second to a DXGI reader with the
   viewer hidden, which is a 60 Hz game's full output.
 
@@ -143,9 +143,9 @@ From the current source (`C:\DEV\Anode`, .NET 8, v0.4.0) and docs:
 Scratch benchmarks (dxcam 0.0.5 for DXGI duplication, windows-capture 2.0.1 for Windows Graphics
 Capture, mss for GDI), an animated window providing fresh frames:
 
-| capture path | console session (1920x1080, 75 Hz monitor) | Anode seat (session 3, 1280x720, viewer hidden) |
+| capture path | console session (1920x1080, 75 Hz monitor) | seat (session 3, 1280x720, viewer hidden) |
 |---|---|---|
-| GDI `BitBlt` (mss) | 13.4 ms per frame regardless of size (vsync-bound) | not measured; Anode's screenshot op uses it |
+| GDI `BitBlt` (mss) | 13.4 ms per frame regardless of size (vsync-bound) | not measured; the seat tool's screenshot op uses it |
 | **DXGI desktop duplication** (dxcam) | **76 changed frames/s; 0.07 ms per poll; 241/s in video mode** | **66 changed frames/s; 0.06 ms per poll; frames 720x1280x3** |
 | Windows Graphics Capture (windows-capture) | 38 fps, 26.6 ms between frames | 34 fps, 30.3 ms between frames |
 
@@ -157,7 +157,7 @@ Capture, mss for GDI), an animated window providing fresh frames:
 | GPU temperature at idle during these tests | 41-45 °C |
 
 Conclusions: DXGI duplication is the capture path everywhere (it works in the child session,
-which the Anode repo had never tested); the seat is capped at the RDP frame interval, the console
+which the seat tool's repository had never tested); the seat is capped at the RDP frame interval, the console
 at the monitor's refresh; the brain step is 18% of a 10 ms tick on the GPU, so the full stack
 (retina sampling, optic lobe, core, readouts) has a realistic budget of ≤ 5 ms per tick.
 
@@ -196,7 +196,7 @@ at the monitor's refresh; the brain step is 18% of a 10 ms tick on the GPU, so t
                  agent turn (seconds)                               fast loop (10 ms tick, frame-rate vision)
   ┌──────────────────────────┐   MCP stdio   ┌───────────────┐  NDJSON/TCP  ┌───────────────────────────────────────┐
   │ Claude Code / Codex      │◄─────────────►│ ganglion mcp  │◄────────────►│ ganglion core   (inside the target      │
-  │  look / watch / teach /  │               │ (thin client, │  loopback,   │  session: console bench or Anode seat)  │
+  │  look / watch / teach /  │               │ (thin client, │  loopback,   │  session: console bench or seat)  │
   │  intent / arm / wait /   │               │ user session) │  cross-      │                                         │
   │  input / halt / skills   │               └───────────────┘  session OK  │  capture ── retina ── optic lobe ─┐     │
   └──────────────────────────┘                                              │  (DXGI)    (hex eyes)  (fly vision)│     │
@@ -222,7 +222,7 @@ at the monitor's refresh; the brain step is 18% of a 10 ms tick on the GPU, so t
   capture (DXGI duplication, newest frame only, like Haltere's telemetry drain), vision (retina
   sampling + optic lobe on the GPU), tick (100 Hz: senses → core brain → readouts → reflex table →
   motor programs → actuators), ledger writer, and a protocol server (NDJSON over loopback TCP,
-  the same shape as Anode's pipe protocol so tooling is familiar). Python 3.13 + torch cu128 like
+  the same shape as the seat tool's pipe protocol so tooling is familiar). Python 3.13 + torch cu128 like
   Haltere, with the capture and sampling stages in native code (dxcam is a thin ctypes wrapper;
   hex sampling is a precomputed gather on the GPU). Rust replaces stages only if `ganglion bench`
   shows jitter the Python loop cannot hold (Haltere's Python pilot holds 100 Hz today).
@@ -231,8 +231,8 @@ at the monitor's refresh; the brain step is 18% of a 10 ms tick on the GPU, so t
   the core; owns nothing. Tool results are small JSON plus at most one image.
 - `ganglion arena` — the project's own sandbox (§9.1): a batched headless simulator for training
   and a real window with a ground-truth telemetry stream for end-to-end tests.
-- Lifecycle in the seat is Anode's job: `seat_start`, `seat_run ganglion core ...`, `seat_stop`;
-  Anode's screenshot/UIA tools remain available to the agent for slow, exact inspection.
+- Lifecycle in the seat is the seat tool's job: `seat_start`, `seat_run ganglion core ...`, `seat_stop`;
+  its screenshot/UIA tools remain available to the agent for slow, exact inspection.
 
 **Per-tick data flow.** Frame (BGRA, GPU-resident when possible) → luminance → per-eye gaze
 window → hexagonal receptor sampling → optic-lobe network → feature maps (motion, looming, small
@@ -376,9 +376,9 @@ Arena's ground truth.
 - Template matchers for taught crops (OpenCV normalised cross-correlation at low resolution,
   GPU when available) → position and confidence streams.
 - Meters: agent-defined bars/regions read as a fill ratio or dominant colour (health, progress).
-- UI Automation focus and element under cursor, rate-limited (Anode's UIA is process-spawn per
+- UI Automation focus and element under cursor, rate-limited (the seat tool's UIA is process-spawn per
   query and 4 s walks; Ganglion keeps a cached, throttled reader for the fast path and leaves
-  deep trees to Anode's `seat_observe`).
+  deep trees to the seat tool's `seat_observe`).
 - Optional OCR of changed regions at low rate (Windows OCR, local), off by default.
 - Telemetry adapters: Liftoff UDP first (reusing `haltere/liftoff/telemetry.py`), a small plugin
   interface for others (a game that exposes state gets an exact extra sense; none is required).
@@ -469,7 +469,7 @@ args = ["-m", "ganglion.mcp"]
 tool_timeout_sec = 90
 ```
 
-Tools (v1; names are `ganglion_*` so they never collide with Anode's `seat_*`):
+Tools (v1; names are `ganglion_*` so they never collide with the seat tool's `seat_*`):
 
 | tool | what it does | returns |
 |---|---|---|
@@ -519,7 +519,7 @@ agent  ganglion_wait {timeout:20}                                 # reads the le
 
 The user's instinct that this needs its own sandbox at first is right, for two reasons: training
 needs a batched, ground-truthed world, and end-to-end tests need a real window whose truth we
-know. Anode remains the deployment target for anything the user wants to keep their desktop
+know. The seat remains the deployment target for anything the user wants to keep their desktop
 during.
 
 ### 9.1 Arena (own sandbox)
@@ -543,7 +543,7 @@ The user's own desktop (a second monitor, or Cathode's virtual monitor) while th
 lowest latency (monitor refresh, 75 Hz measured), exclusive-fullscreen games capture fine, no
 frame cap. Used for measurements and for anything the seat's 66 Hz cap would distort.
 
-### 9.3 Anode seat
+### 9.3 seat
 
 `seat_start` → `seat_run` the core inside the seat (the process survives the seat host; not
 `seat_exec`) → the core captures with DXGI (works, measured 66 fresh frames/s with the viewer
@@ -563,7 +563,7 @@ with the public tools), never through core code. All are installed in the Steam 
 
 | # | target | input | what it exercises | capture / input notes | policy |
 |---|---|---|---|---|---|
-| 1 | Desktop, browser, tabs (Explorer, Settings, Chrome/Edge, editors) | absolute mouse, keys | the base tools: reach/click, drag (sliders, files), scroll-until, typed text with timing, window switching, dialog and toast reflexes, "wait until loaded" for free | UIA and Anode's `seat_observe` as the exact slow sense; Claude in Chrome covers DOM work, Ganglion covers pixels in any app | none |
+| 1 | Desktop, browser, tabs (Explorer, Settings, Chrome/Edge, editors) | absolute mouse, keys | the base tools: reach/click, drag (sliders, files), scroll-until, typed text with timing, window switching, dialog and toast reflexes, "wait until loaded" for free | UIA and the seat tool's `seat_observe` as the exact slow sense; Claude in Chrome covers DOM work, Ganglion covers pixels in any app | none |
 | 2 | The Zachtronics Solitaire Collection | absolute mouse, drag-and-drop | `drag`-until-condition on rule-constrained card moves with visual completion (the card lands or snaps back), taught card percepts (rank, suit, face-down), stack tracking; the Gate C test bed for drag | 2D, static, windowed | none |
 | 3 | Warhammer 40,000: Dawn of War (Definitive Edition first; GOTY/Winter Assault/Dark Crusade/Soulstorm installed too) | absolute mouse, hotkeys | RTS micro at a strategic cadence that suits the agent: drag-select, minimap clicks, edge-scroll camera, build-queue hotkey sequences; change-detection reflexes (minimap alert → notify), meter reflexes (unit health → retreat) | Definitive Edition has modern windowed support; skirmish vs AI | no anti-cheat in skirmish |
 | 4 | Diablo II: Resurrected (Infernal Edition) | absolute mouse click-to-move, hotkeys | meters (health/mana globes) driving the classic reflex "health < 40% → potion key within a frame"; enemies as taught crops; loot labels via OCR; inventory drag-and-drop | windowed mode in options | **offline single-player only**: Blizzard's EULA forbids automation and online play would risk the account; never Battle.net |
@@ -759,7 +759,7 @@ desktop while they are using it.
 | **2. Fly vision front-end** (4-6 days) | hex retina with gaze windows on the GPU; flyvis optic lobe running at capture rate; fly-native percepts (§5.3) exposed in the ledger and as triggers; Arena dodge/pursue modes; percept latency measured | looming-triggered dodge fires within 1 frame + 13 ms; motion-based tracking of an untaught moving sprite; percept maps agree with Arena truth (precision/recall targets set in Phase 0); Diablo II offline: potion reflex from the health globe within a frame, loot labels read; Half-Life: dodge reflex on a looming barnacle/grenade | nothing |
 | **3. Connectome control core** (5-8 days) | headless Arena as a Haltere task; MLP baseline; imitation + fine-tune of the Haltere brain for reach/track/steer; hot-swap per program; Liftoff via the existing telemetry adapter as the first real game | fly-brain `reach`/`track` matches or beats the PID on the Arena window (error, settle time, overshoot); Liftoff hover/lap flown from a Ganglion intent in the seat; Getting Over It: closed-loop hammer control from visual feedback clears the first tree from the pot, deterministic and fly-brain versions compared | approve GPU training runs (paced) |
 | **4. Male-CNS optic lobe, reflex readouts, gaze** (6-10 days) | route B populations through Haltere's build; flyvis as teacher; DN/giant-fiber reflex vector; neck-MN gaze; taught percepts + offline distillation loop; skill packs; body-mode prototype | one connectome (male CNS) runs vision + core + reflexes ≤ 5 ms per tick; Half-Life, Battlefront 2004 and Abiotic Factor played by agent + reflexes (agent chooses targets, sub-brain aims/dodges) with a measured win over agent-only; the full decathlon scored on all eight targets with one held-out game (§9.5) | enable cloud labelling or not |
-| **ongoing** | safety review, `SKILL.md` for agents, README with videos (as Haltere/Anode), publication | | publish decisions |
+| **ongoing** | safety review, `SKILL.md` for agents, README with videos (as Haltere/the seat tool), publication | | publish decisions |
 
 Each phase ends with the memory file updated (`ganglion-project`) and `STATUS.md` in the repo
 brought current (phase, known failures, exact reproduction commands), so a fresh session or a
@@ -788,10 +788,10 @@ Calendar estimates above are guesses; these gates are the reviewable outcomes, i
   scorecard comparing periodic agent input with the local controller, and the same primitive
   working in two environments through the public interface only.
   *2026-09-17 implementation:* deterministic reach and bounded drag now transfer through the same
-  MCP tools between pygame and Edge, on the console and Anode seat. Quiet-screen capture and
+  MCP tools between pygame and Edge, on the console and seat. Quiet-screen capture and
   post-release condition checks are covered by the [drag scorecard](docs/bench/DRAG.md).
   The subsequent [Solitaire check](docs/bench/SOLITAIRE.md) demonstrates one taught legal card
-  move and a rejected drop inside Anode; general card recognition/board tracking remain open.
+  move and a rejected drop inside the seat; general card recognition/board tracking remain open.
 - **Gate D, connectome experiments on a working system**: the visual model and later the
   controllers run in shadow mode first (same observations, logged predictions, no authority), are
   compared on frozen replay sets and live Arena runs, and are promoted per percept or program only
@@ -819,19 +819,19 @@ actuator; perception on replay; capture and input on explicitly selected Windows
 
 | risk | mitigation |
 |---|---|
-| Seat frame cap (66 Hz) and RDP rendering suspension when hidden | measured fine today with the viewer hidden; console bench for higher rates; `DWMFRAMEINTERVAL 10` experiment; `SuppressWhenMinimized` already set by Anode |
+| Seat frame cap (66 Hz) and RDP rendering suspension when hidden | measured fine today with the viewer hidden; console bench for higher rates; `DWMFRAMEINTERVAL 10` experiment; `SuppressWhenMinimized` already set by the seat tool |
 | Python jitter at 100 Hz | dedicated threads, torch releases the GIL, 1 ms timer period, GC tuning, process priority; Haltere holds 100 Hz today; Rust stage-by-stage if the bench says so |
 | GPU contention with the game | tiny kernels on a separate CUDA stream; vision at 60 Hz if needed; ≤ 5 ms budget enforced by the bench |
 | The connectome brain fails to learn a program (Haltere took days of diagnosis) | deterministic path keeps the product useful; decodability probes before training; imitation first; the interface hides which controller runs |
 | Perception floods the agent with tokens | ledger compression, caps, one composite image; `look` budgets tunable |
-| `GameInputServiceWindow` blocks `SendInput` in the seat | Anode's repair script; detection reported in `ganglion_status` |
+| `GameInputServiceWindow` blocks `SendInput` in the seat | the seat tool's repair script; detection reported in `ganglion_status` |
 | Heat | paced training, low temperature guard, one job at a time, never during flights |
 | Privacy | everything local by default; recordings opt-in; API labelling only when enabled by the user |
 | Anti-cheat and terms of service | non-goal: no online competitive or anti-cheat-protected games; `SendInput`/ViGEm only, no driver-level or hardware spoofing. Per target: Diablo II: Resurrected offline single-player only (Blizzard's EULA forbids automation; online play would risk the account); Half-Life and Battlefront single-player / vs bots only (VAC-secured servers off-limits); Abiotic Factor solo worlds |
 | Old games in the seat (2004 Battlefront, original Dawn of War, GoldSrc) | windowed modes are quirky (`/win` locks the cursor, no borderless without a helper); Phase 0 adds a `ganglion doctor --game` check (launches in the seat, verifies capture and input) and the modern editions (Definitive Edition, Classic Collection) are the first choice |
 | flyvis on Python 3.13 / Windows | separate 3.12 venv or re-implement its per-type dynamics in Ganglion (small), keeping their connectome and parameters |
 
-Non-goals: a security sandbox (Anode is desktop isolation, not security; same here), automating
+Non-goals: a security sandbox (the seat is desktop isolation, not security; same here), automating
 purchases or credentials (Claude's rules apply regardless of the sub-brain), replacing the agent's
 judgement.
 
@@ -878,8 +878,8 @@ Decided (routine calls, easy to reverse):
   fallbacks.
 - Language: Python + torch for everything at first (Haltere precedent holds 100 Hz), native stages
   only where the bench demands.
-- Sandbox order: Arena → console bench → Anode seat; the fast loop runs inside the target session
-  as its own process and never through Anode's pipe.
+- Sandbox order: Arena → console bench → seat; the fast loop runs inside the target session
+  as its own process and never through the seat tool's pipe.
 - Fly vision: flyvis to bootstrap, male-CNS optic lobe as the target substrate.
 
 Decided by the user (2026-09-17):
@@ -916,14 +916,12 @@ a game's windowed mode fails the `doctor --game` check.
 - Looming escape pathway: Ache et al., "Neural Basis for Looming Size and Velocity Encoding in the
   Drosophila Giant Fiber Escape Pathway", Current Biology 2019 (LC4 and LPLC2 synapse directly
   onto the giant fiber; size and velocity components).
-- Anode protocol and architecture: `C:\DEV\Anode\docs\PROTOCOL.md`, `ARCHITECTURE.md`; capture
-  `src/Anode/Core/Capture/ScreenCapture.cs`; input `src/Anode/Core/Input/InputInjector.cs`;
-  in-session launch `src/Anode/Core/Launch/SeatLauncher.cs`.
+- The seat tool's protocol, architecture, capture, input injection and in-session launch: its own docs and source.
 - Haltere brain and loop: `haltere/brain/model.py`, `encoders.py`, `sparse.py`;
   `haltere/sim/tasks.py::observe_from_sensors`; `haltere/liftoff/pilot.py`, `commands.py`;
   `haltere/train/bptt.py`, `imitate.py`, `thermal.py`.
 - Capture APIs in RDP sessions: DXGI duplication is commonly reported unavailable or black in RDP;
-  today's measurement shows it working in Anode's child session on this machine (RTX 4090,
+  today's measurement shows it working in the seat's child session on this machine (RTX 4090,
   `bEnumerateHWBeforeSW = 1`), which is the fact this plan relies on and Phase 0 re-verifies.
 - Codex MCP configuration: `~/.codex/config.toml` `[mcp_servers.<name>]` with `command`, `args`,
   `env`, `tool_timeout_sec`; Claude Code: `claude mcp add`.

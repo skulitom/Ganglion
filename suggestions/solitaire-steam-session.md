@@ -1,9 +1,9 @@
-# Preserve main Steam while launching a game in Anode
+# Preserve main Steam while launching a game in the seat
 
 Observed 2026-09-17 with The Zachtronics Solitaire Collection, app 1988540, build 24998607.
 
 The desired behavior is a usable Steam client on the main desktop while the game runs and
-receives input inside the Anode seat. The seat isolates input/capture correctly, but the observed
+receives input inside the seat. The seat isolates input/capture correctly, but the observed
 Steam startup path did not preserve that client arrangement.
 
 1. Main Steam initially ran in session 1. A direct `seat_run` of the installed game started in
@@ -19,7 +19,7 @@ Steam startup path did not preserve that client arrangement.
 See the [scorecard and cleanup record](../docs/bench/SOLITAIRE.md). No authentication settings,
 game binaries, or permanent launch configuration were changed.
 
-Suggested next investigation, confined to Anode's launcher and diagnostics:
+Suggested next investigation, confined to the seat tool's launcher and diagnostics:
 
 - Distinguish launch requests, a usable Steam client/UI, and the actual game session. Verify
   the result after startup; a successful `seat_run` response only locates the initial process.

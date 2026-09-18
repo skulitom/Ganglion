@@ -43,7 +43,7 @@ def run(quick: bool = False) -> list[Check]:
         cls = sess.foreground_window_class()
         if cls == 'GameInputServiceWindow':
             checks.append(Check('foreground', 'FAIL', 'GameInputServiceWindow is in front: SendInput is blocked',
-                                'see Anode scripts/repair-seat-input.ps1'))
+                                'see the seat tool\'s repair-seat-input script'))
         else:
             checks.append(Check('foreground', 'OK', f'class {cls!r}'))
     except Exception as e:
@@ -60,7 +60,7 @@ def run(quick: bool = False) -> list[Check]:
                             '' if fi <= 10 else 'scripts/set-seat-fps.ps1 sets 10 (~100 fps); reboot to apply'))
     hw = _reg(winreg.HKEY_LOCAL_MACHINE, r'SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services', 'bEnumerateHWBeforeSW')
     checks.append(Check('seat GPU policy', 'OK' if hw == 1 else 'WARN', f'bEnumerateHWBeforeSW = {hw}',
-                        '' if hw == 1 else 'anode setup --gpu (child sessions render on the software adapter otherwise)'))
+                        '' if hw == 1 else 'the seat tool\'s GPU setup (child sessions render on the software adapter otherwise)'))
 
     # pointer settings that change how relative mouse deltas land
     try:

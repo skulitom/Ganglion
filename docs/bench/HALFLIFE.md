@@ -1,6 +1,6 @@
 # Half-Life through the reflex layer
 
-First live first-person test, 2026-09-17, inside the Anode seat at 1280×720 (Half-Life, Steam
+First live first-person test, 2026-09-17, inside the seat at 1280×720 (Half-Life, Steam
 app 70, build 15961492, OpenGL, `m_rawinput 1`). The core bound the game window by process id
 and ran with the DAgger cursor checkpoint loaded. An agent-driven pilot
 (`ganglion.evaluation.halflife.pilot`) kept one lease alive and issued high-level commands;
@@ -266,7 +266,7 @@ traversal behaviour with a real sense of open space.
 
 ## Reproduce
 
-Inside Anode with the game running and Steam launched through the seat:
+Inside the seat tool with the game running and Steam launched through the seat:
 
 ```powershell
 .venv/Scripts/python.exe -m ganglion.cli core --pid <game pid> --seconds 1750 --endpoint runs/hl.endpoint.json --shadow-checkpoint runs/cursor-dagger-v1/round-03/cursor-readout.pt

@@ -12,7 +12,7 @@ Drag reaches and holds a source, moves toward a point or watched destination, re
 or a taught condition, and verifies that condition from fresh samples after release. Quiet screens
 use actual GDI acquisitions alongside DXGI, with acquisition source and timestamps retained.
 The same public tools control the synthetic Arena, real pygame window, isolated Edge fixture,
-and an explicitly taught Sawayama Solitaire board inside Anode.
+and an explicitly taught Sawayama Solitaire board inside the seat.
 The runtime contains no application-specific target rules.
 
 The implementation includes exclusive leases, explicit renewal, independent reflex TTLs,
@@ -35,7 +35,7 @@ The deterministic suite passes **103 tests**. Three browser checks and one train
 check are optional; the trained-model check was also run separately and passed.
 Readout DAgger settled 3/16 static targets on one held-out set and 4/16 on a fresh set.
 Two 200-update encoder/readout runs did not beat it on validation. Checkpoints remain local
-and experimental; no model has been released to Hugging Face. Training peaked at 46°C.
+and experimental at this point (the later v6 and v3b readouts are published, see below). Training peaked at 46°C.
 
 The suite now passes **116 tests** (four optional checks skipped). With the DAgger cursor
 checkpoint, the connectome proposed 90.6% of the pointer commands accepted during 33 live
@@ -46,7 +46,7 @@ live in `ganglion/evaluation/solitaire`, outside the core.
 
 Next: make the model earn its share unsupervised (settling, long-horizon stability), measure and
 reduce live inference jitter, and add the fly visual front-end so goals stop coming from taught
-colour components. No checkpoint has been released to Hugging Face; the candidate does not yet
+colour components. At this point no checkpoint had been released; the candidate did not yet
 control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.md).
 
 ## Measuring what the model contributes
@@ -93,7 +93,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   roll) is in every snapshot and can feed the lptc channel behind `--lptc-from-flow`, which
   training has not yet used. About 9 ms per 1280×720 frame at quarter scale. Flyvis is the
   reference for a learned front-end.
-- **Controlled transfer.** The Arena reach demo in the Anode seat on the same trial seeds:
+- **Controlled transfer.** The Arena reach demo in the seat on the same trial seeds:
   the reference completed 8/8 reaches at mean 0.42 s (first within 6 px at median 0.29 s);
   the 512-neuron connectome readout under supervision 8/8 at 0.52 s (0.41 s, interventions
   15.6%, stale 13.1%); the all-motor readout 8/8 at 0.42 s (0.29 s, interventions 16.4%,
@@ -134,6 +134,9 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **The goal as a direction (adapter version 5, v6).** The direction encoding removes the fading but not the stopping: alone the model never settles (0/32; it holds speed through the goal and oscillates around it, 42 px mean error), while under supervision it matches the teacher on every task, settle 32/32 in 335 ms at 2.4 px, jump 256/256 at 22.3 px, pursuit 31/32 at 5.1 px against the teacher's 5.5, camera 32/32 at 3.7 px against 4.0, with the envelope intervening on half the steps of the moving tasks, where it is now the stopping rule. [Details](docs/bench/TRAINING.md).
 - **Stopping samples weighted (v7).** Weighting the stopping samples did not give the model a stop: alone it still never settles (0/32 at 44 px), jump 9/256, pursuit 3/32; under supervision settle 32/32 in 395 ms, jump 254/256, pursuit 29/32 at 7.2 px, camera 31/32 at 5.0 px, with fewer interventions than v6 (27 to 35% against 49 to 58% on the moving tasks). [Details](docs/bench/TRAINING.md).
 - **Fast neurons and an efference copy (v8).** Neither route gives the model a stop. [Details](docs/bench/TRAINING.md).
+- **Published.** The v6 readout (the live configuration) and the v3b readout (the one that stands on
+  its own) are on [Hugging Face](https://huggingface.co/Skulitom/ganglion-haltere-cursor) with their
+  reports and a model card that says what they do and do not do, and attached to a GitHub release.
 - The suite passes **167 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
@@ -143,7 +146,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   template-track watches, an `align` program (view to target, then bursts) that the connectome
   can drive under the supervising envelope, a concurrent `move` program the runtime renews at
   100 Hz, key and align/track reflex responses, and a whole-view change sense. 129 tests pass.
-- Live in Half-Life inside Anode: the motion → track → connectome align → fire chain engaged
+- Live in Half-Life inside the seat: the motion → track → connectome align → fire chain engaged
   console-spawned grunts on its own. Session totals: 58 reflex firings, 15 aligned bursts,
   connectome share 80.4% of view commands, first shot 0.1–3.8 s after acquisition, four grunts
   dead with no damage taken. Alarm lights and doors caused false alarms until the motion percept
@@ -174,7 +177,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   condition verification), then accepted it on a ten of hearts (vacant source, persistent
   destination, fresh post-release verification). Completion took about **0.995 seconds** for
   the accepted move and **1.928 seconds** for the expected rejection/verification timeout.
-- Both attempts used actual MCP tools, DXGI/GDI capture, and Windows input in **Anode session 3**.
+- Both attempts used actual MCP tools, DXGI/GDI capture, and Windows input in **seat session 3**.
   Each recorded one press and release, no input failures, no pending output, and no ledger gaps.
   Saved before/after images were visually checked. No game rules or recognition were added to the core.
 - An opt-in `ganglion.evaluation.transfer` runner validates a taught profile and saves its
@@ -191,7 +194,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 
 - The drag milestone passed **81 tests** with installed-Edge fixture checks and **78 tests** in
   its locked environment without torch, Haltere, ViGEm, or Playwright, with three browser checks skipped.
-- **40/40 live cases pass** across pygame and Edge, each on the console and inside Anode, plus
+- **40/40 live cases pass** across pygame and Edge, each on the console and inside the seat, plus
   **10/10 synthetic cases** through the actual MCP bridge. Cases cover quiet-screen reach, early
   condition release, accepted drops, rejected drops, and cancellation while held. A rejected drop
   passes the evaluation only when the controller reports failed verification and releases input.
@@ -217,7 +220,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   stale evidence, independent intent timeout, cancellation barriers, pointer arbitration,
   ownership, request retries, and snapshot/point validation.
 - The same reach program scored **4/4 hits with zero false clicks in each of four live runs**:
-  Arena and Edge, each on the console and inside Anode. Mean completion was 0.364–0.437 seconds.
+  Arena and Edge, each on the console and inside the seat. Mean completion was 0.364–0.437 seconds.
   Every run ended halted with no pending output or ledger gaps.
 - The periodic baseline uses an explicit 250 ms decision delay / 500 ms minimum cadence. It
   completed 0–2 of four trials per live environment and made 20–24 false clicks. This models a
@@ -237,7 +240,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   real helper process releasing its fake actuator after its parent calls `os._exit`.
 - MCP discovery, structured results, errors, and native JPEG content are tested. Demo runs
   launch the actual stdio bridge as a subprocess, with the agent idle during the scored interval.
-- Console and Anode seat demonstrations pass with no scored misses or false actions.
+- Console and seat demonstrations pass with no scored misses or false actions.
   Retained traces: [console](docs/bench/results/reflex-console.json),
   [seat](docs/bench/results/reflex-seat.json), [synthetic](docs/bench/results/reflex-synthetic.json).
 - The seat run scored **18 hits over eight seconds**, no ledger gaps, and a successful halt.
@@ -263,8 +266,8 @@ uv sync --locked --extra dev
 .venv/Scripts/python.exe -m ganglion.cli drag-demo --environment synthetic --trials 2 --json runs/drag.json
 ```
 
-Inside an Anode seat (the process must run in the seat's session, e.g. through `seat_run` or
-`seat_exec` from the Anode MCP server, or `anode run`):
+Inside the seat (the process must run in the seat's session, e.g. through `seat_run` or
+`seat_exec` from the seat tool's MCP server, or its command line):
 
 ```bash
 C:\DEV\Ganglion\.venv\Scripts\python.exe -m ganglion.cli demo --seconds 8 --json runs/seat-reflex.json

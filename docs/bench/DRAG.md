@@ -1,7 +1,7 @@
 # Quiet-screen capture and bounded drag
 
 Measured 2026-09-17 through the public MCP tools. One deterministic controller transfers between
-pygame and an isolated Edge fixture, on the console (session 1) and Anode seat (session 3).
+pygame and an isolated Edge fixture, on the console (session 1) and seat (session 3).
 There are no application rules in the core. No Solitaire gameplay or learned controller is
 claimed by these results.
 
@@ -87,7 +87,7 @@ uv sync --locked --extra dev
 .venv/Scripts/python.exe -m ganglion.cli drag-demo --environment arena --trials 2 --json runs/drag-arena.json
 ```
 
-Execute the `arena` command through Anode `seat_exec` or `seat_run` to check the seat. The harness
+Execute the `arena` command through the seat's `seat_exec` or `seat_run` to check the seat. The harness
 closes only its own fixtures and restores the prior foreground window and cursor.
 
 For an existing Edge installation:

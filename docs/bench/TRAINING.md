@@ -575,6 +575,6 @@ through the training path and resident adapter, including a state reset. Set
 The ordinary regression suite remains independent of torch, Haltere and model assets.
 
 Before a Hugging Face release, a candidate needs stable held-out control, live shadow
-validation in Anode, measured latency, a portable graph dependency, and a model card
+validation in the seat, measured latency, a portable graph dependency, and a model card
 documenting data provenance, terms and limitations. Source code is MIT; external assets
 retain their own terms. The deterministic runtime remains the only input controller.

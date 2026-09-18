@@ -1,5 +1,5 @@
-# Raise the Remote Desktop composition frame cap that limits an Anode child session ("seat").
-# Windows caps RDP sessions at 30 fps unless DWMFRAMEINTERVAL is set; Anode's `setup --fps 60` writes 15
+# Raise the Remote Desktop composition frame cap that limits a seat (a child session).
+# Windows caps RDP sessions at 30 fps unless DWMFRAMEINTERVAL is set; the seat tool's fps setup writes 15
 # (~66 Hz measured). This writes 10 (~100 Hz expected; `ganglion bench` measures what the seat delivers).
 # Needs administrator rights and a reboot to take effect. Run:  powershell -File scripts\set-seat-fps.ps1
 param([int]$IntervalMs = 10)
@@ -13,5 +13,5 @@ $old = (Get-ItemProperty -Path $key -Name DWMFRAMEINTERVAL -ErrorAction Silently
 if ($null -eq $old) { $old = 'unset (30 fps cap)' }
 New-ItemProperty -Path $key -Name DWMFRAMEINTERVAL -PropertyType DWord -Value $IntervalMs -Force | Out-Null
 $new = (Get-ItemProperty -Path $key -Name DWMFRAMEINTERVAL).DWMFRAMEINTERVAL
-Write-Host "DWMFRAMEINTERVAL: $old -> $new   (takes effect after a reboot; the seat must be restarted afterwards: anode quit; anode start --sign-in)"
+Write-Host "DWMFRAMEINTERVAL: $old -> $new   (takes effect after a reboot; the seat must be restarted afterwards)"
 Read-Host "Press Enter to close"

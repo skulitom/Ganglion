@@ -158,7 +158,7 @@ teacher-solvable episodes with the learned controller alone, plus reported settl
 time and tracking error relative to the baselines. This is a proposed engineering gate,
 not a biological conclusion or a result already achieved.
 
-Then transfer the same trained skill to one controlled live fixture in Anode, keeping
+Then transfer the same trained skill to one controlled live fixture in the seat, keeping
 the supervisor and measuring interventions. In parallel with the motor experiment,
 validate a visual motion front-end on recorded clips. This would advance both halves
 of the project's stated purpose: fast perception and fast response using the fly model.

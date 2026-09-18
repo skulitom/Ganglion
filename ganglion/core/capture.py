@@ -1,7 +1,7 @@
 """Screen capture through DXGI desktop duplication (dxcam), newest-frame semantics.
 
 A thread polls the duplication; `latest()` returns the most recent frame with its time stamp and
-sequence number, never a queue. Works on the console and inside an Anode child session (measured
+sequence number, never a queue. Works on the console and inside a seat (a child session) (measured
 2026-09-16: 66 fresh frames/s in the seat, 0.06 ms per poll).
 """
 from __future__ import annotations

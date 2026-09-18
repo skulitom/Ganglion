@@ -1,7 +1,7 @@
 # Solitaire transfer through MCP
 
 On 2026-09-17, Ganglion's existing drag primitive handled a legal move and a rejected drop in
-**The Zachtronics Solitaire Collection / Sawayama** inside Anode session 3, at 1280×720.
+**The Zachtronics Solitaire Collection / Sawayama** inside seat session 3, at 1280×720.
 The game was build 24998607 (Steam app 1988540). The resident core needed no changes.
 
 ## Real-time play through the reactive loop (second pass, 2026-09-17)
@@ -62,7 +62,7 @@ up as a verification mismatch and the harness continues from what is visible).
 
 ### Reproduce
 
-Start a core bound to the game inside Anode (a `python.exe` job; `pythonw.exe` died on its first
+Start a core bound to the game inside the seat (a `python.exe` job; `pythonw.exe` died on its first
 input command), then run the harness from either session:
 
 ```powershell
@@ -102,7 +102,7 @@ After release and verification:
 ![First column empty; nine of clubs on ten of hearts](results/solitaire-seat/accepted-nine-on-ten-after.jpg)
 
 These JPEGs are the native images returned by `ganglion_look`, scaled to 640 pixels wide. The
-gameplay was also visually checked in a full-size Anode capture. The report retains both
+gameplay was also visually checked in a full-size the seat tool capture. The report retains both
 predicate observations and stage timestamps. There is no application-internal truth hook here.
 
 ## Teaching and execution
@@ -129,7 +129,7 @@ layout visually before using or adapting the profile**. It is not a rank/suit re
 After preparing the intended board and starting a core in the verified seat:
 
 ```powershell
-# Run this core inside Anode; substitute its verified game HWND and a new endpoint path.
+# Run this core inside the seat; substitute its verified game HWND and a new endpoint path.
 .venv/Scripts/python.exe -m ganglion.cli core --window 123456 --seconds 120 --endpoint runs/solitaire.endpoint.json
 ```
 
