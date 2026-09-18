@@ -126,6 +126,8 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   controller fired 82 of 113 (73%) intents at 1.64 s median acquisition, the v1b readout
   69 of 89 (78%) at 1.76 s, the v4 readout 72 of 98 (73%) at 2.13 s (channel at zero): the
   supervised model does not make the chain faster than the reference live, as on the suite.
+  The v5b readout, run live the same night, fired 56 of 93 (60%) at 1.77 s median acquisition
+  (against v4 at zero: p 0.63).
   Next: a training slip with independent movers in it, and a readout that settles as fast as
   the reference before the channel question is reopened. [Details](docs/bench/HALFLIFE.md).
 - **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).

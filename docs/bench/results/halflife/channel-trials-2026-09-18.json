@@ -591,6 +591,146 @@
   "samples_with_flow": 0,
   "inference_p95_median": 5.929959996501566
  },
+ "v5b-1": {
+  "trials": 5,
+  "view_commands": 2889,
+  "proposals": {
+   "samples": 2757,
+   "cosine_to_goal_mean": 0.6976826288771375,
+   "share_at_goal": 0.8193688792165397,
+   "share_away_from_goal": 0.1425462459194777,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "acquisition_s_median": 1.5175,
+  "acquisition_s_p75": 3.7225,
+  "acquisitions": 14,
+  "connectome_share": 0.794392523364486,
+  "override_share": 0.14434060228452752,
+  "stale_share": 0.0612668743509865,
+  "align_intents": 26,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "target_lost": 10,
+   "timeout": 6,
+   "aligned_and_fired": 9,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 31,
+  "error_px_mean_median_over_trials": 174.32088277322694,
+  "error_px_mean_iqr": [
+   163.15608130983142,
+   185.5248635194852
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.671024997354834
+ },
+ "v5b-2": {
+  "trials": 5,
+  "view_commands": 2776,
+  "proposals": {
+   "samples": 2608,
+   "cosine_to_goal_mean": 0.74574688892663,
+   "share_at_goal": 0.8577453987730062,
+   "share_away_from_goal": 0.11733128834355828,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "acquisition_s_median": 1.8245,
+  "acquisition_s_p75": 2.94125,
+  "acquisitions": 14,
+  "connectome_share": 0.8152017291066282,
+  "override_share": 0.10518731988472622,
+  "stale_share": 0.07961095100864553,
+  "align_intents": 23,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "aligned_and_fired": 10,
+   "timeout": 5,
+   "target_lost": 6,
+   "target_lost_after_fire": 2
+  },
+  "reflex_fired": 28,
+  "error_px_mean_median_over_trials": 156.72533393895446,
+  "error_px_mean_iqr": [
+   144.9412797655495,
+   159.5106993835508
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.677099996319157
+ },
+ "v5b-3": {
+  "trials": 5,
+  "view_commands": 3036,
+  "proposals": {
+   "samples": 2889,
+   "cosine_to_goal_mean": 0.8807393591072644,
+   "share_at_goal": 0.9331948771201107,
+   "share_away_from_goal": 0.04361370716510903,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "acquisition_s_median": 1.723,
+  "acquisition_s_p75": 3.6115,
+  "acquisitions": 15,
+  "connectome_share": 0.88866930171278,
+  "override_share": 0.04808959156785244,
+  "stale_share": 0.06324110671936758,
+  "align_intents": 19,
+  "intents_that_fired": 15,
+  "align_outcomes": {
+   "aligned_and_fired": 8,
+   "timeout": 7,
+   "target_lost": 1,
+   "target_lost_after_fire": 3
+  },
+  "reflex_fired": 24,
+  "error_px_mean_median_over_trials": 119.18019717307038,
+  "error_px_mean_iqr": [
+   113.28945750113226,
+   176.43642877222823
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.653940001502633
+ },
+ "v5b-4": {
+  "trials": 5,
+  "view_commands": 2649,
+  "proposals": {
+   "samples": 2500,
+   "cosine_to_goal_mean": 0.5901934883935279,
+   "share_at_goal": 0.7812,
+   "share_away_from_goal": 0.1932,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "acquisition_s_median": 1.974,
+  "acquisition_s_p75": 2.437,
+  "acquisitions": 13,
+  "connectome_share": 0.7508493771234428,
+  "override_share": 0.17667044167610418,
+  "stale_share": 0.072480181200453,
+  "align_intents": 25,
+  "intents_that_fired": 13,
+  "align_outcomes": {
+   "aligned_and_fired": 12,
+   "target_lost": 8,
+   "timeout": 4,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 27,
+  "error_px_mean_median_over_trials": 128.27535421555223,
+  "error_px_mean_iqr": [
+   100.11388549696547,
+   184.76715409928008
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.811799997172783
+ },
  "channel-zero (all blocks)": {
   "trials": 20,
   "view_commands": 8850,
@@ -731,6 +871,41 @@
   ],
   "samples_with_flow": 0,
   "inference_p95_median": 5.82016500266036
+ },
+ "v5b (all blocks)": {
+  "trials": 20,
+  "view_commands": 11350,
+  "proposals": {
+   "samples": 10754,
+   "cosine_to_goal_mean": 0.7335278615937907,
+   "share_at_goal": 0.8503812534870746,
+   "share_away_from_goal": 0.12162916124232843,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "acquisition_s_median": 1.7705000000000002,
+  "acquisition_s_p75": 3.08225,
+  "acquisitions": 56,
+  "connectome_share": 0.8145374449339207,
+  "override_share": 0.11656387665198238,
+  "stale_share": 0.06889867841409691,
+  "align_intents": 93,
+  "intents_that_fired": 56,
+  "align_outcomes": {
+   "target_lost": 25,
+   "timeout": 22,
+   "aligned_and_fired": 39,
+   "target_lost_after_fire": 7
+  },
+  "reflex_fired": 110,
+  "error_px_mean_median_over_trials": 158.11801666125262,
+  "error_px_mean_iqr": [
+   117.70751225508585,
+   184.95658145433134
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 5.674062496836996
  },
  "statistics": {
   "lptc-on vs channel-zero": {
@@ -904,6 +1079,118 @@
     "median_a": 149.78740283829734,
     "median_b": 140.69653762933706
    }
+  },
+  "v5b vs channel-zero": {
+   "fired_share": {
+    "rate_a": 0.6021505376344086,
+    "rate_b": 0.7346938775510204,
+    "z": -1.9473940835898105,
+    "p_two_sided": 0.051487506830532936
+   },
+   "acquisition_s": {
+    "u": 1914.5,
+    "z": -0.4875302283081654,
+    "p_two_sided": 0.6258826265425954,
+    "n": [
+     56,
+     72
+    ],
+    "median_a": 1.7705000000000002,
+    "median_b": 2.1260000000000003
+   },
+   "error_px_trial_means": {
+    "u": 210.0,
+    "z": 0.2705008904002297,
+    "p_two_sided": 0.7867749320074033,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 158.11801666125262,
+    "median_b": 143.07325094594427
+   },
+   "connectome_share_per_trial": {
+    "u": 74.0,
+    "z": -3.408311219042894,
+    "p_two_sided": 0.0006536629671158867,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 0.8511056476928633,
+    "median_b": 0.9334736399031884
+   }
+  },
+  "v5b vs deterministic": {
+   "fired_share": {
+    "rate_a": 0.6021505376344086,
+    "rate_b": 0.7256637168141593,
+    "z": -1.876003339236708,
+    "p_two_sided": 0.06065482137035749
+   },
+   "acquisition_s": {
+    "u": 2903.5,
+    "z": 2.634077602003362,
+    "p_two_sided": 0.008436620333788003,
+    "n": [
+     56,
+     82
+    ],
+    "median_a": 1.7705000000000002,
+    "median_b": 1.639
+   },
+   "error_px_trial_means": {
+    "u": 243.0,
+    "z": 1.1631538287209875,
+    "p_two_sided": 0.24476709560795817,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 158.11801666125262,
+    "median_b": 140.69653762933706
+   }
+  },
+  "v5b vs v1b": {
+   "fired_share": {
+    "rate_a": 0.6021505376344086,
+    "rate_b": 0.7752808988764045,
+    "z": -2.517404316036101,
+    "p_two_sided": 0.011822307614452354
+   },
+   "acquisition_s": {
+    "u": 2200.5,
+    "z": 1.3330028612934421,
+    "p_two_sided": 0.1825308648235926,
+    "n": [
+     56,
+     69
+    ],
+    "median_a": 1.7705000000000002,
+    "median_b": 1.756
+   },
+   "error_px_trial_means": {
+    "u": 202.0,
+    "z": 0.054100178080045934,
+    "p_two_sided": 0.9568553503696526,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 158.11801666125262,
+    "median_b": 149.78740283829734
+   },
+   "connectome_share_per_trial": {
+    "u": 142.0,
+    "z": -1.568905164321332,
+    "p_two_sided": 0.1166700383670416,
+    "n": [
+     20,
+     20
+    ],
+    "median_a": 0.8511056476928633,
+    "median_b": 0.8718451103179341
+   }
   }
  },
  "blocks": {
@@ -931,6 +1218,12 @@
    "v1b-2.json",
    "v1b-3.json",
    "v1b-4.json"
+  ],
+  "v5b": [
+   "v5b-1.json",
+   "v5b-2.json",
+   "v5b-3.json",
+   "v5b-4.json"
   ]
  },
  "method": "Half-Life c1a3, corridor outside the elevator, one quicksave; per trial: quickload, two grunts from the console, 1.2 s step back, engage (motion -> track -> connectome align -> fire, max turn 2,500 px/s), 14 s, disarm. v4 checkpoint (cursor-dagger-v4 round 2) in its own process with --lptc-from-flow; the flow watch (scale 8, upper 1280x560) present for the fed blocks and absent for the zeros blocks. Blocks of five trials, alternated. The GPU was shared with another session's light bench runs during the night.",
@@ -968,6 +1261,15 @@
    "cosine_to_goal_mean": 0.6994706928772548,
    "share_at_goal": 0.8250307503075031,
    "share_away_from_goal": 0.11408364083640836,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "v5b": {
+   "samples": 10754,
+   "cosine_to_goal_mean": 0.7335278615937907,
+   "share_at_goal": 0.8503812534870746,
+   "share_away_from_goal": 0.12162916124232843,
    "flow_samples": 0,
    "cosine_to_flow_mean": null,
    "share_against_flow": null

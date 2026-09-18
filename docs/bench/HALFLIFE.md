@@ -180,15 +180,15 @@ suite) give the comparison the suite could only simulate. All four conditions ra
 night from the same quicksave; the reference and v1b blocks followed the v4 blocks rather than
 alternating with them.
 
-| Measurement | Deterministic reference, no model | v1b readout (velocity and goal) | v4 readout, channel at zero | v4 readout, channel fed |
-|---|---:|---:|---:|---:|
-| Trials | 20 | 20 | 20 | 20 |
-| Align intents, of which fired | 82 of 113 (73%) | 69 of 89 (78%) | 72 of 98 (73%) | 81 of 98 (83%) |
-| Acquisition, median (p75) | 1.64 s (1.99) | 1.76 s (2.32) | 2.13 s (2.78) | 1.88 s (2.64) |
-| Tracking error of align steps, median of trial means | 141 px | 150 px | 143 px | 153 px |
-| From the model / overridden | n/a | 85.2% / 11.2% | 88.8% / 7.1% | 68.3% / 27.0% |
-| Model proposals within 60° of the goal | n/a | 83% | 90% | 56% |
-| Model samples carrying a credible flow | 0 | 0 | 0 | 7,742 |
+| Measurement | Deterministic reference, no model | v1b readout (velocity and goal) | v5b readout (goal scale 0.2) | v4 readout, channel at zero | v4 readout, channel fed |
+|---|---:|---:|---:|---:|---:|
+| Trials | 20 | 20 | 20 | 20 | 20 |
+| Align intents, of which fired | 82 of 113 (73%) | 69 of 89 (78%) | 56 of 93 (60%) | 72 of 98 (73%) | 81 of 98 (83%) |
+| Acquisition, median (p75) | 1.64 s (1.99) | 1.76 s (2.32) | 1.77 s (3.08) | 2.13 s (2.78) | 1.88 s (2.64) |
+| Tracking error of align steps, median of trial means | 141 px | 150 px | 158 px | 143 px | 153 px |
+| From the model / overridden | n/a | 85.2% / 11.2% | 81.5% / 11.7% | 88.8% / 7.1% | 68.3% / 27.0% |
+| Model proposals within 60° of the goal | n/a | 83% | 85% | 90% | 56% |
+| Model samples carrying a credible flow | 0 | 0 | 0 | 0 | 7,742 |
 
 The reference acquires the target faster than the supervised v4 with the channel at zero
 (1.64 against 2.13 s at the median, p 0.000) and fires the same share of its
@@ -198,6 +198,8 @@ reference: acquisition p 0.09, firing p 0.42. This is the live version of the su
 finding that the supervised connectome settles later than the reference: in a point-blank
 fight the envelope keeps the model safe and the model does not make the chain faster. What the
 model adds live is not yet a better outcome; the measurements to beat are now on record.
+
+The v5b readout (goal scale 0.2), the fastest to settle under supervision on the suite, was run the same way after a game restart from the same quicksave: 56 of 93 intents fired (60%), the lowest share of any condition (against the reference p 0.06, against v1b p 0.01); acquisition 1.77 s at the median but 3.08 s at the third quartile, as many of its intents fired only near their four-second timeout (against the reference p 0.008); 85% of its proposals pointed at the goal and 11.7% of steps were overridden. The suite's settling gain did not carry into the fight: a static target's approach is not a point-blank grunt's pursuit, and the live measure to improve is the moving-target one.
 
 ## Limits and next work
 
