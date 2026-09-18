@@ -136,6 +136,16 @@ world's speeds.
 
 ## The channel fed against zeros: repeated engagements
 
+Every live trial from the first fights on the 17th to 15:00 on the 18th ran with a stray
+controller in the seat: a virtual Xbox pad left alive by another session's flight bridge held
+its left stick fully down from 18:28 on the 16th to 15:00 on the 18th (apart from two gaps of
+five and twelve minutes on the evening of the 17th), and Half-Life's config has `joystick "1"`,
+so the game read a continuous move-backward through the calibration and every block above.
+All conditions shared it and the comparisons between them stand; the absolute figures describe
+a fight with the player pushed against the wall behind, not a free-standing one, and a bias of
+this kind need not be an even handicap: a policy that wanted to back off was helped rather
+than hurt. The trials below are the first without it.
+
 The same night, with these changes, `ganglion.evaluation.halflife.trials` ran blocks of five
 engagements from one quicksave in the corridor outside the elevator: quickload, two grunts
 spawned from the console, a step back, the motion → track → connectome align → fire chain
@@ -255,6 +265,28 @@ towards fewer of its intents firing, and v1b stays slower. The model does not ye
 chain faster than the reference live, but with the limits matched it no longer makes it slower
 either; the measurements to beat are on record, and fairness of the comparison is now part of
 the harness (`--max-turn-px-s`, `--speed-px-s`).
+
+## Thirty trials each, one grunt, no stray controller
+
+With the controller gone, one grunt instead of two (fewer early losses of the tracked target),
+the step limit at 1,200 px/s for both sides and blocks alternating under one core, the v6
+readout and the reference were run thirty trials each (the series was cut short of forty when the user reported cursor trouble on the main desktop) ([per-trial files](results/halflife/channel-trials/),
+`v6-one` and `deterministic-one`).
+
+| Measurement (one grunt, step limit 1,200 px/s, no stray controller) | Deterministic reference | v6 readout (the goal as a direction) |
+|---|---:|---:|
+| Trials | 30 | 30 |
+| Align intents, of which fired | 100 of 133 (75%) | 79 of 136 (58%) |
+| Acquisition to the first shot, median (p75) | 0.95 s (1.30) | 1.00 s (1.46) |
+| Engagement to the last align step, median | 1.67 s | 1.79 s |
+| Tracking error of align steps, median of trial means | 140 px | 134 px |
+| From the model / overridden | n/a | 86.1% / 11.1% |
+| Model proposals within 60° of the goal | n/a | 87% |
+
+v6 against the reference: firing p 0.003, first shot 1.00 against 0.95 s (p 0.61),
+tracking error p 0.76. Against the same conditions' two-grunt trials with the controller present,
+the reference's first shot moved from 0.97 to 0.95 s (p 0.75) and v6's from 1.07 to
+1.00 s (p 0.65). With the bias gone and the sample doubled, the picture is plainer than before: the supervised v6 reaches its first shot as fast as the reference and tracks the target as tightly, but fires on fewer of its intents, 58% against 75%, and that gap is now significant. Its earlier tracking advantage (121 against 159 px) does not survive the controller's removal: the backward push had helped the model's condition more than the reference's, as the other session warned it might. On this fight, with the limits matched and the seat clean, the model under supervision equals the reference on speed and tracking and loses on finishing; the measurements to beat are these.
 
 ## Limits and next work
 

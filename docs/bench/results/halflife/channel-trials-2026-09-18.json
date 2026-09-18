@@ -787,6 +787,228 @@
   "samples_with_flow": 0,
   "inference_p95_median": 5.205994995776563
  },
+ "deterministic-one-1": {
+  "trials": 5,
+  "view_commands": 2638,
+  "proposals": {
+   "samples": 2623,
+   "cosine_to_goal_mean": 0.7069731820341151,
+   "share_at_goal": 0.839115516584064,
+   "share_away_from_goal": 0.14105985512771635,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.955,
+  "acquisition_s_p75": 1.2055,
+  "acquisitions": 16,
+  "engagement_s_median": 1.702,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 19,
+  "intents_that_fired": 16,
+  "align_outcomes": {
+   "target_lost": 1,
+   "timeout": 5,
+   "aligned_and_fired": 12,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 24,
+  "error_px_mean_median_over_trials": 163.20468359320026,
+  "error_px_mean_iqr": [
+   107.928646623263,
+   168.29493553085635
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.954834996984573
+ },
+ "deterministic-one-2": {
+  "trials": 5,
+  "view_commands": 2487,
+  "proposals": {
+   "samples": 2473,
+   "cosine_to_goal_mean": 0.7969131741527087,
+   "share_at_goal": 0.8851597250303276,
+   "share_away_from_goal": 0.09340881520420542,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.9969999999999999,
+  "acquisition_s_p75": 1.23775,
+  "acquisitions": 18,
+  "engagement_s_median": 1.915,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 23,
+  "intents_that_fired": 18,
+  "align_outcomes": {
+   "aligned_and_fired": 11,
+   "target_lost_after_fire": 4,
+   "timeout": 5,
+   "target_lost": 3
+  },
+  "reflex_fired": 28,
+  "error_px_mean_median_over_trials": 154.1151836781353,
+  "error_px_mean_iqr": [
+   126.88268392207745,
+   168.16799683780357
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.419434992742021
+ },
+ "deterministic-one-3": {
+  "trials": 5,
+  "view_commands": 2594,
+  "proposals": {
+   "samples": 2577,
+   "cosine_to_goal_mean": 0.7446334033352406,
+   "share_at_goal": 0.8618548700038805,
+   "share_away_from_goal": 0.11602638727202173,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.0025,
+  "acquisition_s_p75": 1.31575,
+  "acquisitions": 16,
+  "engagement_s_median": 1.5150000000000001,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 24,
+  "intents_that_fired": 16,
+  "align_outcomes": {
+   "target_lost": 5,
+   "aligned_and_fired": 10,
+   "timeout": 6,
+   "target_lost_after_fire": 3
+  },
+  "reflex_fired": 29,
+  "error_px_mean_median_over_trials": 144.7070729022436,
+  "error_px_mean_iqr": [
+   129.184705557774,
+   166.6529701857581
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.277460000885178
+ },
+ "deterministic-one-4": {
+  "trials": 5,
+  "view_commands": 2635,
+  "proposals": {
+   "samples": 2619,
+   "cosine_to_goal_mean": 0.7101385064125656,
+   "share_at_goal": 0.8400152730049637,
+   "share_away_from_goal": 0.14127529591447116,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.206,
+  "acquisition_s_p75": 1.4500000000000002,
+  "acquisitions": 15,
+  "engagement_s_median": 1.682,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 23,
+  "intents_that_fired": 15,
+  "align_outcomes": {
+   "aligned_and_fired": 8,
+   "timeout": 6,
+   "target_lost_after_fire": 4,
+   "target_lost": 5
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 152.7354534929465,
+  "error_px_mean_iqr": [
+   116.78924518411442,
+   160.053761203112
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.820490003563465
+ },
+ "deterministic-one-5": {
+  "trials": 5,
+  "view_commands": 2331,
+  "proposals": {
+   "samples": 2303,
+   "cosine_to_goal_mean": 0.8618990036627325,
+   "share_at_goal": 0.9205384281372123,
+   "share_away_from_goal": 0.059921841076856275,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.7635000000000001,
+  "acquisition_s_p75": 1.2775,
+  "acquisitions": 18,
+  "engagement_s_median": 1.617,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 22,
+  "intents_that_fired": 18,
+  "align_outcomes": {
+   "aligned_and_fired": 14,
+   "timeout": 2,
+   "target_lost_after_fire": 3,
+   "target_lost": 3
+  },
+  "reflex_fired": 27,
+  "error_px_mean_median_over_trials": 136.37316552814843,
+  "error_px_mean_iqr": [
+   132.74730478269987,
+   140.06281615706817
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.743079998588652
+ },
+ "deterministic-one-6": {
+  "trials": 5,
+  "view_commands": 2514,
+  "proposals": {
+   "samples": 2453,
+   "cosine_to_goal_mean": 0.6635268561516227,
+   "share_at_goal": 0.8173664900122299,
+   "share_away_from_goal": 0.1646962902568284,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.989,
+  "acquisition_s_p75": 1.294,
+  "acquisitions": 17,
+  "engagement_s_median": 1.656,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 22,
+  "intents_that_fired": 17,
+  "align_outcomes": {
+   "aligned_and_fired": 13,
+   "timeout": 6,
+   "target_lost_after_fire": 2,
+   "target_lost": 1
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 130.16813620471243,
+  "error_px_mean_iqr": [
+   104.28124015070398,
+   140.26764145445082
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.249059997615403
+ },
  "v1b-1": {
   "trials": 5,
   "view_commands": 2440,
@@ -1543,6 +1765,227 @@
   "samples_with_flow": 0,
   "inference_p95_median": 5.798269998922479
  },
+ "v6-one-1": {
+  "trials": 5,
+  "view_commands": 2623,
+  "proposals": {
+   "samples": 2607,
+   "cosine_to_goal_mean": 0.9257706455660951,
+   "share_at_goal": 0.9635596471039509,
+   "share_away_from_goal": 0.02454929037207518,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.297,
+  "acquisition_s_p75": 1.6885,
+  "acquisitions": 15,
+  "engagement_s_median": 1.635,
+  "connectome_share": 0.9443385436523065,
+  "override_share": 0.02706824247045368,
+  "stale_share": 0.0285932138772398,
+  "align_intents": 21,
+  "intents_that_fired": 15,
+  "align_outcomes": {
+   "aligned_and_fired": 12,
+   "target_lost": 3,
+   "timeout": 6
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 170.84384843476894,
+  "error_px_mean_iqr": [
+   142.94659601596442,
+   222.40589130989005
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.254460003285203
+ },
+ "v6-one-2": {
+  "trials": 5,
+  "view_commands": 2948,
+  "proposals": {
+   "samples": 2920,
+   "cosine_to_goal_mean": 0.8446645567835188,
+   "share_at_goal": 0.9171232876712329,
+   "share_away_from_goal": 0.06575342465753424,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.1025,
+  "acquisition_s_p75": 1.3407499999999999,
+  "acquisitions": 14,
+  "engagement_s_median": 1.3885,
+  "connectome_share": 0.899932157394844,
+  "override_share": 0.07293080054274084,
+  "stale_share": 0.027137042062415198,
+  "align_intents": 21,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "aligned_and_fired": 7,
+   "target_lost_after_fire": 6,
+   "timeout": 6,
+   "target_lost": 2
+  },
+  "reflex_fired": 26,
+  "error_px_mean_median_over_trials": 143.39056740916368,
+  "error_px_mean_iqr": [
+   118.73795049752617,
+   184.44770694834907
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.502479994058374
+ },
+ "v6-one-3": {
+  "trials": 5,
+  "view_commands": 2773,
+  "proposals": {
+   "samples": 2753,
+   "cosine_to_goal_mean": 0.8403432876755593,
+   "share_at_goal": 0.9153650563022158,
+   "share_away_from_goal": 0.06865237922266618,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.0339999999999998,
+  "acquisition_s_p75": 1.624,
+  "acquisitions": 12,
+  "engagement_s_median": 2.1685,
+  "connectome_share": 0.9058781103498017,
+  "override_share": 0.06455102776776055,
+  "stale_share": 0.029570861882437793,
+  "align_intents": 23,
+  "intents_that_fired": 12,
+  "align_outcomes": {
+   "aligned_and_fired": 10,
+   "timeout": 5,
+   "target_lost": 7,
+   "target_lost_after_fire": 1
+  },
+  "reflex_fired": 28,
+  "error_px_mean_median_over_trials": 134.27965027688407,
+  "error_px_mean_iqr": [
+   116.81298368673582,
+   148.4482978998793
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.878469988121644
+ },
+ "v6-one-4": {
+  "trials": 5,
+  "view_commands": 3207,
+  "proposals": {
+   "samples": 3197,
+   "cosine_to_goal_mean": 0.40515715144309533,
+   "share_at_goal": 0.6771973725367532,
+   "share_away_from_goal": 0.2880825774163278,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.882,
+  "acquisition_s_p75": 1.2845,
+  "acquisitions": 10,
+  "engagement_s_median": 2.4589999999999996,
+  "connectome_share": 0.7087620829435609,
+  "override_share": 0.27065793576551295,
+  "stale_share": 0.0205799812909261,
+  "align_intents": 24,
+  "intents_that_fired": 10,
+  "align_outcomes": {
+   "target_lost": 10,
+   "target_lost_after_fire": 2,
+   "timeout": 6,
+   "aligned_and_fired": 6
+  },
+  "reflex_fired": 28,
+  "error_px_mean_median_over_trials": 96.3644392178748,
+  "error_px_mean_iqr": [
+   91.87123400340708,
+   127.49815621832538
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.968180003284939
+ },
+ "v6-one-5": {
+  "trials": 5,
+  "view_commands": 2477,
+  "proposals": {
+   "samples": 2461,
+   "cosine_to_goal_mean": 0.8556588592093146,
+   "share_at_goal": 0.9203575782202357,
+   "share_away_from_goal": 0.0625761885412434,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.7264999999999999,
+  "acquisition_s_p75": 1.239,
+  "acquisitions": 14,
+  "engagement_s_median": 1.6595,
+  "connectome_share": 0.8982640290674203,
+  "override_share": 0.07387969317723052,
+  "stale_share": 0.027856277755349212,
+  "align_intents": 23,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "aligned_and_fired": 12,
+   "target_lost_after_fire": 2,
+   "target_lost": 5,
+   "timeout": 4
+  },
+  "reflex_fired": 27,
+  "error_px_mean_median_over_trials": 180.35423653117417,
+  "error_px_mean_iqr": [
+   132.83762005735008,
+   189.25566745742555
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.219269997993251
+ },
+ "v6-one-6": {
+  "trials": 5,
+  "view_commands": 2908,
+  "proposals": {
+   "samples": 2863,
+   "cosine_to_goal_mean": 0.7136341825992678,
+   "share_at_goal": 0.8487600419140762,
+   "share_away_from_goal": 0.13447432762836187,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.9275,
+  "acquisition_s_p75": 1.6225,
+  "acquisitions": 14,
+  "engagement_s_median": 1.7765,
+  "connectome_share": 0.8414718019257221,
+  "override_share": 0.12551581843191198,
+  "stale_share": 0.033012379642365884,
+  "align_intents": 24,
+  "intents_that_fired": 14,
+  "align_outcomes": {
+   "aligned_and_fired": 10,
+   "timeout": 6,
+   "target_lost_after_fire": 2,
+   "target_lost": 6
+  },
+  "reflex_fired": 29,
+  "error_px_mean_median_over_trials": 128.4379681869597,
+  "error_px_mean_iqr": [
+   119.46546402421625,
+   138.2060833933635
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.73824999871431
+ },
  "channel-zero (all blocks)": {
   "trials": 20,
   "view_commands": 8850,
@@ -1733,6 +2176,43 @@
   "samples_with_flow": 0,
   "inference_p95_median": 5.734944998403078
  },
+ "deterministic-one (all blocks)": {
+  "trials": 30,
+  "view_commands": 15199,
+  "proposals": {
+   "samples": 15048,
+   "cosine_to_goal_mean": 0.7453824261310315,
+   "share_at_goal": 0.8596491228070176,
+   "share_away_from_goal": 0.12041467304625199,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 0.9544999999999999,
+  "acquisition_s_p75": 1.2955,
+  "acquisitions": 100,
+  "engagement_s_median": 1.67,
+  "connectome_share": 0.0,
+  "override_share": 0.0,
+  "stale_share": 0.0,
+  "align_intents": 133,
+  "intents_that_fired": 100,
+  "align_outcomes": {
+   "target_lost": 18,
+   "timeout": 30,
+   "aligned_and_fired": 68,
+   "target_lost_after_fire": 17
+  },
+  "reflex_fired": 160,
+  "error_px_mean_median_over_trials": 140.1652288057595,
+  "error_px_mean_iqr": [
+   118.32451068572666,
+   162.3592346952416
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 9.14947000273969
+ },
  "v1b (all blocks)": {
   "trials": 20,
   "view_commands": 9877,
@@ -1921,6 +2401,43 @@
   ],
   "samples_with_flow": 0,
   "inference_p95_median": 5.810442500296631
+ },
+ "v6-one (all blocks)": {
+  "trials": 30,
+  "view_commands": 16936,
+  "proposals": {
+   "samples": 16801,
+   "cosine_to_goal_mean": 0.7521914279048214,
+   "share_at_goal": 0.8672102851020772,
+   "share_away_from_goal": 0.1133861079697637,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "flow_against_applied_turn": null,
+  "acquisition_s_median": 1.0,
+  "acquisition_s_p75": 1.4609999999999999,
+  "acquisitions": 79,
+  "engagement_s_median": 1.792,
+  "connectome_share": 0.8613013698630136,
+  "override_share": 0.1110651865847898,
+  "stale_share": 0.027633443552196504,
+  "align_intents": 136,
+  "intents_that_fired": 79,
+  "align_outcomes": {
+   "aligned_and_fired": 57,
+   "target_lost": 33,
+   "timeout": 33,
+   "target_lost_after_fire": 13
+  },
+  "reflex_fired": 164,
+  "error_px_mean_median_over_trials": 133.55863516711707,
+  "error_px_mean_iqr": [
+   118.61591312550163,
+   183.42433934405534
+  ],
+  "samples_with_flow": 0,
+  "inference_p95_median": 8.868397490368803
  },
  "statistics": {
   "lptc-on vs channel-zero": {
@@ -2602,6 +3119,107 @@
     "median_a": 0.7944227617551152,
     "median_b": 0.8113080258330554
    }
+  },
+  "v6-one vs deterministic-one": {
+   "fired_share": {
+    "rate_a": 0.5808823529411765,
+    "rate_b": 0.7518796992481203,
+    "z": -2.9717550892539557,
+    "p_two_sided": 0.002961027815081785
+   },
+   "acquisition_s": {
+    "u": 4127.0,
+    "z": 0.5141787109901022,
+    "p_two_sided": 0.6071270505403334,
+    "n": [
+     79,
+     100
+    ],
+    "median_a": 1.0,
+    "median_b": 0.9544999999999999
+   },
+   "error_px_trial_means": {
+    "u": 471.0,
+    "z": 0.3104729338009206,
+    "p_two_sided": 0.7562013389413471,
+    "n": [
+     30,
+     30
+    ],
+    "median_a": 133.55863516711707,
+    "median_b": 140.1652288057595
+   }
+  },
+  "v6-one vs v6-matched": {
+   "fired_share": {
+    "rate_a": 0.5808823529411765,
+    "rate_b": 0.6956521739130435,
+    "z": -1.7582515703144195,
+    "p_two_sided": 0.0787047140301973
+   },
+   "acquisition_s": {
+    "u": 2417.0,
+    "z": -0.45063905045775643,
+    "p_two_sided": 0.6522497170153474,
+    "n": [
+     79,
+     64
+    ],
+    "median_a": 1.0,
+    "median_b": 1.0670000000000002
+   },
+   "error_px_trial_means": {
+    "u": 392.0,
+    "z": 1.8218714790770807,
+    "p_two_sided": 0.06847448878990336,
+    "n": [
+     30,
+     20
+    ],
+    "median_a": 133.55863516711707,
+    "median_b": 121.47609570788865
+   },
+   "connectome_share_per_trial": {
+    "u": 476.0,
+    "z": 3.4853193512778935,
+    "p_two_sided": 0.0004915500052020683,
+    "n": [
+     30,
+     20
+    ],
+    "median_a": 0.923072283342984,
+    "median_b": 0.7944227617551152
+   }
+  },
+  "deterministic-one vs deterministic-matched": {
+   "fired_share": {
+    "rate_a": 0.7518796992481203,
+    "rate_b": 0.7640449438202247,
+    "z": -0.20704589994166467,
+    "p_two_sided": 0.8359740120952182
+   },
+   "acquisition_s": {
+    "u": 3500.5,
+    "z": 0.32475726564188073,
+    "p_two_sided": 0.7453647899281841,
+    "n": [
+     100,
+     68
+    ],
+    "median_a": 0.9544999999999999,
+    "median_b": 0.9684999999999999
+   },
+   "error_px_trial_means": {
+    "u": 226.0,
+    "z": -1.465418363605478,
+    "p_two_sided": 0.14280681029778863,
+    "n": [
+     30,
+     20
+    ],
+    "median_a": 140.1652288057595,
+    "median_b": 158.72468332098575
+   }
   }
  },
  "blocks": {
@@ -2630,7 +3248,13 @@
    "deterministic-matched-1.json",
    "deterministic-matched-2.json",
    "deterministic-matched-3.json",
-   "deterministic-matched-4.json"
+   "deterministic-matched-4.json",
+   "deterministic-one-1.json",
+   "deterministic-one-2.json",
+   "deterministic-one-3.json",
+   "deterministic-one-4.json",
+   "deterministic-one-5.json",
+   "deterministic-one-6.json"
   ],
   "v1b": [
    "v1b-1.json",
@@ -2677,6 +3301,22 @@
    "v6-matched-2.json",
    "v6-matched-3.json",
    "v6-matched-4.json"
+  ],
+  "v6-one": [
+   "v6-one-1.json",
+   "v6-one-2.json",
+   "v6-one-3.json",
+   "v6-one-4.json",
+   "v6-one-5.json",
+   "v6-one-6.json"
+  ],
+  "deterministic-one": [
+   "deterministic-one-1.json",
+   "deterministic-one-2.json",
+   "deterministic-one-3.json",
+   "deterministic-one-4.json",
+   "deterministic-one-5.json",
+   "deterministic-one-6.json"
   ]
  },
  "method": "Half-Life c1a3, corridor outside the elevator, one quicksave; per trial: quickload, two grunts from the console, 1.2 s step back, engage (motion -> track -> connectome align -> fire, max turn 2,500 px/s), 14 s, disarm. v4 checkpoint (cursor-dagger-v4 round 2) in its own process with --lptc-from-flow; the flow watch (scale 8, upper 1280x560) present for the fed blocks and absent for the zeros blocks. Blocks of five trials, alternated. The GPU was shared with another session's light bench runs during the night.",
@@ -2768,6 +3408,24 @@
    "cosine_to_goal_mean": 0.6025603663414949,
    "share_at_goal": 0.7839259796806967,
    "share_away_from_goal": 0.18722786647314948,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "v6-one": {
+   "samples": 16801,
+   "cosine_to_goal_mean": 0.7521914279048214,
+   "share_at_goal": 0.8672102851020772,
+   "share_away_from_goal": 0.1133861079697637,
+   "flow_samples": 0,
+   "cosine_to_flow_mean": null,
+   "share_against_flow": null
+  },
+  "deterministic-one": {
+   "samples": 15048,
+   "cosine_to_goal_mean": 0.7453824261310315,
+   "share_at_goal": 0.8596491228070176,
+   "share_away_from_goal": 0.12041467304625199,
    "flow_samples": 0,
    "cosine_to_flow_mean": null,
    "share_against_flow": null
