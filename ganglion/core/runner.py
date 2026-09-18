@@ -97,7 +97,7 @@ def select_window(hwnd=None, pid=None, title=None):
 
 
 def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False, seconds=0, shadow_checkpoint=None,
-             lptc_feed=False, shadow_process=False):
+             lptc_feed=False, shadow_process=False, shadow_warm_steps=0):
     from .output import MemoryOutput, ProcessOutput
     endpoint_path = Path(endpoint_path)
     if endpoint_path.exists():
@@ -108,9 +108,9 @@ def run_core(endpoint_path, *, hwnd=None, pid=None, title=None, synthetic=False,
             from ganglion.brain.haltere_cursor import HaltereCursor
             if shadow_process:
                 from functools import partial
-                factory = partial(HaltereCursor, shadow_checkpoint)
+                factory = partial(HaltereCursor, shadow_checkpoint, warm_steps=shadow_warm_steps)
             else:
-                predictor = HaltereCursor(shadow_checkpoint)
+                predictor = HaltereCursor(shadow_checkpoint, warm_steps=shadow_warm_steps)
         if synthetic:
             from ganglion.arena.target import SyntheticArena
             capture = SyntheticArena()

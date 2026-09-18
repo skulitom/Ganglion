@@ -12,6 +12,14 @@ import time
 MAX_NEURAL_STEPS = 2     # measured live: three catch-up steps took 40-54 ms and were stale before they finished
 
 
+def first_steps(warm_steps: int) -> int:
+    """Neural steps for the first sample after a reset: one, plus the warm-up. The network
+    answers a new goal in about six steps; a readout asked for a proposal on the first of them
+    offers a small step the envelope accepts, and the turn starts slowly. Warming the state on
+    the first observation costs those steps once, while the deterministic reference acts."""
+    return 1 + max(0, int(warm_steps))
+
+
 def neural_steps(elapsed: float | None, dt: float = .01, max_steps: int = MAX_NEURAL_STEPS) -> int:
     """How many fixed neural steps cover the wall time since the previous consumed sample.
 
@@ -70,7 +78,7 @@ def channels(sample, previous=None, *, version=1, goal_scale=.3):
 
 
 class HaltereCursor:
-    def __init__(self, checkpoint, *, spin_sync=True):
+    def __init__(self, checkpoint, *, spin_sync=True, warm_steps=0):
         import torch
         from haltere.train.bptt import load_checkpoint
         if not torch.cuda.is_available():
@@ -95,6 +103,7 @@ class HaltereCursor:
             raise ValueError("Checkpoint sensory/action contract does not match the cursor adapter")
         self.brain.eval()
         self.spin_sync = spin_sync
+        self.warm_steps = int(warm_steps)
         self.weights = self.brain.weight_matrix().detach()
         # One host-to-device copy instead of seven tiny transfers per observation.
         self.order = tuple(expected)
@@ -137,8 +146,8 @@ class HaltereCursor:
 
     def predict(self, sample):
         torch = self.torch
-        steps = neural_steps(None if self.previous is None else sample.submitted - self.previous.submitted,
-                             self.brain.cfg.dt)
+        steps = (first_steps(self.warm_steps) if self.previous is None else
+                 neural_steps(sample.submitted - self.previous.submitted, self.brain.cfg.dt))
         with torch.inference_mode():
             values = channels(sample, self.previous, version=self.adapter_version, goal_scale=self.goal_scale)
             packed = [v for key in self.order for v in values[key]]

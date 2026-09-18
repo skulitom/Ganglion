@@ -34,6 +34,8 @@ def main(argv=None) -> int:
     p.add_argument('--synthetic', action='store_true', help='headless Arena; no desktop input')
     p.add_argument('--seconds', type=float, default=0, help='stop after this many seconds; 0 runs until interrupted')
     p.add_argument('--shadow-checkpoint', help='optional Haltere connectome checkpoint; predictions have no control authority')
+    p.add_argument('--shadow-warm-steps', type=int, default=0,
+                   help='extra neural steps on the first sample after a reset, so the first proposal is a warmed one')
     p.add_argument('--shadow-process', action='store_true',
                    help='run the connectome in its own process, away from the core interpreter')
     p.add_argument('--lptc-from-flow', action='store_true',
@@ -96,7 +98,7 @@ def main(argv=None) -> int:
             sys.stdout = sys.stderr = stream
         return run_core(a.endpoint, hwnd=a.window, pid=a.pid, title=a.title, synthetic=a.synthetic,
                         seconds=a.seconds, shadow_checkpoint=a.shadow_checkpoint, lptc_feed=a.lptc_from_flow,
-                        shadow_process=a.shadow_process)
+                        shadow_process=a.shadow_process, shadow_warm_steps=a.shadow_warm_steps)
     if a.cmd == 'mcp':
         from .mcp.server import build
         build(a.endpoint, observer=a.observer, client_id=a.client_id).run()

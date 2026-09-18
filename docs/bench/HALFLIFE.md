@@ -286,7 +286,88 @@ readout and the reference were run thirty trials each (the series was cut short 
 v6 against the reference: firing p 0.003, first shot 1.00 against 0.95 s (p 0.61),
 tracking error p 0.76. Against the same conditions' two-grunt trials with the controller present,
 the reference's first shot moved from 0.97 to 0.95 s (p 0.75) and v6's from 1.07 to
-1.00 s (p 0.65). With the bias gone and the sample doubled, the picture is plainer than before: the supervised v6 reaches its first shot as fast as the reference and tracks the target as tightly, but fires on fewer of its intents, 58% against 75%, and that gap is now significant. Its earlier tracking advantage (121 against 159 px) does not survive the controller's removal: the backward push had helped the model's condition more than the reference's, as the other session warned it might. On this fight, with the limits matched and the seat clean, the model under supervision equals the reference on speed and tracking and loses on finishing; the measurements to beat are these.
+1.00 s (p 0.65). With the bias gone and the sample doubled, the picture is plainer than before: the supervised v6 reaches its first shot as fast as the reference and tracks the target as tightly, but fires on fewer of its intents, 58% against 75%, and that gap is now significant. Its earlier tracking advantage (121 against 159 px) does not survive the controller's removal: the backward push had helped the model's condition more than the reference's, as the other session warned it might. On this fight, with the limits matched and the seat clean, the model under supervision equals the reference on speed and tracking and loses on finishing; the measurements to beat are these. (The next section withdraws the firing gap: it was one session's, and the limits were not yet matched.)
+
+## Five sessions: the firing gap was a session, and the limits were still not matched
+
+**The main desktop's pointer.** The series above was cut short when the user's own mouse
+misbehaved, and it misbehaved again during these sessions, so the main session's pointer was
+sampled at 250 Hz while the seat ran the fight. The look deltas the core injects do not reach
+it: in 6,038 fifty-millisecond windows with at least 20 injected counts (306,891 counts in all)
+the main pointer did not move by a pixel, and where it did move (the user was working) its
+motion was unrelated to the injected deltas (0.02 px per count, correlation 0.01). What reaches
+it is the game's own cursor. The same 23 minutes hold 61 teleports of the main pointer, half of
+them landing on one point: the seat's centre as the seat's viewer window maps it onto the main
+desktop. SDL moves the game's cursor whenever it leaves or enters relative mouse mode (to its
+last absolute position on leaving, to the window centre on entering); the seat's remote session
+reports each programmatic cursor move to its viewer, and the viewer's Remote Desktop control
+applies it to the real pointer, view-only or not, hidden or not. Every console session and every
+quickload in a trial is such a transition: three quickloads by function key, with no console
+at all, gave six teleports (to the seat's bottom-right corner and back to its centre), and one
+tap of Esc did the same with the viewer hidden. A trial must reload, so the harness cannot
+avoid this; until the seat tool's viewer ignores the server's pointer positions, live blocks
+are not run while someone is using the desktop. Session E below was stopped for it part-way.
+
+**A warm start.** The network answers a new goal in about six steps, and offline the v6
+readout's first proposals after a reset are -0.08, -0.39, 0.61, 0.87 of the intent speed before
+it reaches 0.96: two overridden ticks and two slow ones, twice per intent (the predictor resets
+at the start of an intent and again after the 430 ms a shot and its cooling take). `--shadow-warm-steps 6`
+runs six extra neural steps on the first sample after a reset, so the first proposal is already
+0.96; it costs 18 ms once (20 ms live, p95 32), during which the reference acts. Live it raised
+the view motion in an intent's first 200 ms from 148 to 165 px (the reference: 198) and changed
+no outcome that thirty trials could show (session B against the plain sessions: firing p 0.24,
+first shot 1.04 against 1.04 s).
+
+**The firing gap did not replicate.** Three sessions with the limits as they were, thirty trials a
+side each, the model's blocks alternating with the reference's under one core:
+
+| Session | Core | Model: fired | Reference: fired | p (per trial) | First shot, model / reference | p | Tracking error, model / reference | p | Target lost, model / reference |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| A (15:00-15:24) | v6, no warm start | 79 of 136 (58%) | 100 of 133 (75%) | 0.01 | 1.00 / 0.95 s | 0.61 | 134 / 140 px | 0.76 | 33 / 18 |
+| B (16:29-16:52) | v6, warm start 6 | 79 of 129 (61%) | 83 of 138 (60%) | 0.63 | 1.04 / 0.91 s | 0.17 | 145 / 155 px | 0.93 | 22 / 25 |
+| C (19:22-19:46) | v6, no warm start | 89 of 125 (71%) | 84 of 135 (62%) | 0.17 | 1.09 / 0.95 s | 0.15 | 139 / 140 px | 0.87 | 18 / 28 |
+
+Session A is the series above. In C the same configuration fired on more of its intents than
+the reference, not fewer; pooled, the plain v6 fired 64% against 69% (p 0.30), and
+all ninety model trials against all ninety reference trials 63% against 66% (p 0.23). What moved
+was the reference: it fired 75% in A and 60% and 62% in B and C (A against B p 0.03, A against C
+p 0.05, B against C p 0.93): a difference between sessions of the same controller as large as the gap
+it was supposed to measure. Two corrections follow. The p of 0.003 above came from a test that
+counts align intents as independent, and the intents of one trial are not; the tests here are
+on per-trial shares (A's gap is p 0.01 by that measure: real inside that session). And one session is one sample of
+whatever differs between sessions (the machine's other load, the game's state): a claim needs
+the comparison repeated across sessions, which this one did not survive. The one difference
+with the same sign in all three was the first shot, the model later by 0.05 to 0.14 s (pooled
+1.04 against 0.92 s, p 0.06).
+
+**The limits were still not matched.** That difference has a plain cause. Far from the target
+(150 px or more of error) the reference turned 19.8 counts a command and the model 14.6: the
+reference clamped each axis of its step to `max_step`, a box, so on a diagonal error it turned
+14 * sqrt(2) counts, while the model's envelope bounds the length of the step. The "matched"
+1,200 px/s allowed the reference up to 41% more speed, and nearly every error in this fight is
+diagonal. The reference's step (and the override's, and the model's accepted step) is now
+limited in length (`bounded_step` in `ganglion/core/aim.py`); measured after the change, all
+three step 13.9 to 14.1 counts a command, 754 px/s for the model's steps and 753 px/s for the reference's. Two more sessions, thirty
+trials a side and then fifteen reference trials and twelve of the model's (the second was stopped
+mid-block), with the order inside a pair of blocks reversed in the second:
+
+| Session | Core | Model: fired | Reference: fired | p (per trial) | First shot, model / reference | p | Tracking error, model / reference | p | Target lost, model / reference |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| D (19:47-20:10) | v6, no warm start | 83 of 133 (62%) | 88 of 128 (69%) | 0.19 | 0.95 / 1.16 s | 0.12 | 151 / 156 px | 0.82 | 26 / 21 |
+| E (20:12-20:23, stopped early) | v6, no warm start | 29 of 51 (57%) | 41 of 62 (66%) | 0.16 | 0.88 / 0.98 s | 0.72 | 161 / 171 px | 0.81 | 11 / 9 |
+
+| Pooled, step limited in length (D and E) | Deterministic reference | v6 readout |
+|---|---:|---:|
+| Trials | 45 | 42 |
+| Align intents, of which fired | 129 of 190 (68%) | 112 of 184 (61%) |
+| Acquisition to the first shot, median (p75) | 1.14 s (1.63) | 0.94 s (1.64) |
+| Tracking error of align steps, median of trial means | 161 px | 152 px |
+| From the model / overridden / stale | n/a | 86.2% / 7.9% / 5.9% |
+
+v6 against the reference with the limits matched: first shot 0.94 against 1.14 s (p 0.28),
+firing p 0.08 per trial, tracking error p 0.70. The change slowed the reference's first shot from
+0.92 to 1.14 s (p 0.005) and left the model's where it was (1.04 to 0.94 s, p 0.63).
+With the step limits the same shape, forty-two model trials against forty-five of the reference show no difference between the supervised v6 and the reference that these sessions can resolve: the model's first shot is the earlier one at the median in both sessions, the reference fires on a few more of its intents (as it did in four sessions of the five), and neither survives a test. That is the honest state of the live comparison: under the envelope the connectome readout does the reference's job on this fight, no better and not measurably worse, and every earlier gap in either direction was a mismatch in the limits or one session's luck. The fight itself limits what more trials could say: the grunt is spawned at the player, so every engagement is a point-blank turn that either controller finishes in about a second.
 
 ## Limits and next work
 

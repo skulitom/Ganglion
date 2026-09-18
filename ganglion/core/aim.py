@@ -22,6 +22,18 @@ from .reach import Reach, supervise
 UNBOUNDED = (-10 ** 6, -10 ** 6, 2 * 10 ** 6, 2 * 10 ** 6)
 
 
+def bounded_step(ex, ey, limit):
+    """The reference's step toward an error: the error itself, shortened to `limit` in length.
+
+    The limit is on the step's length, as the envelope's is on the model's proposals. Clamping
+    each axis on its own (as this did until the live comparison exposed it) allows a diagonal
+    step of limit * sqrt(2) and turned the view up to 41% faster than the model was allowed to."""
+    length = hypot(ex, ey)
+    if length <= limit or length == 0:
+        return ex, ey
+    return ex * limit / length, ey * limit / length
+
+
 @dataclass
 class Align(Reach):
     stage: str = "aligning"          # aligning, firing, cooling
@@ -84,7 +96,7 @@ def _step(runtime, intent, watch, error, now, dt):
     spec = intent.spec
     ex, ey = error
     limit = spec.max_step / spec.gain          # pixels of view motion allowed per tick
-    ref = (max(-limit, min(limit, ex)), max(-limit, min(limit, ey)))
+    ref = bounded_step(ex, ey, limit)
     controller = "deterministic"
     step_px = ref
     if runtime.shadow is not None:
@@ -98,8 +110,7 @@ def _step(runtime, intent, watch, error, now, dt):
             candidate = None if velocity is None else supervise(cursor, goal, velocity, dt, spec.speed_px_s,
                                                                 UNBOUNDED, spec.tolerance_px)
             if candidate is not None:
-                step_px = (max(-limit, min(limit, candidate[0] - cursor[0])),
-                           max(-limit, min(limit, candidate[1] - cursor[1])))
+                step_px = bounded_step(candidate[0] - cursor[0], candidate[1] - cursor[1], limit)
                 controller = "connectome"
                 intent.neural_commands += 1
             elif velocity is None:

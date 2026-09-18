@@ -82,3 +82,8 @@ def test_predictor_reported_steps_reach_the_ledger():
         assert event["neural_steps"] == 3
     finally:
         worker.close()
+
+
+def test_the_first_sample_after_a_reset_can_be_warmed():
+    from ganglion.brain.haltere_cursor import first_steps
+    assert first_steps(0) == 1 and first_steps(6) == 7 and first_steps(-3) == 1

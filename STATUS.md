@@ -134,6 +134,14 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   describe a free-standing fight. Clean and powered: the reference fired 100 of 133 (75%) at 0.95 s to the
   first shot, v6 79 of 136 (58%) at 1.00 s (firing p 0.003, acquisition p 0.61, tracking error
   134 against 140 px, p 0.76). [Details](docs/bench/HALFLIFE.md).
+- **Five sessions: the firing gap was a session, and the limits were not matched.** Repeated, the gap
+  reversed (C: model 71%, reference 62%); the reference alone moved from 75% to 60% between sessions. The
+  reference clamped its step per axis and so turned up to 41% faster than the model's envelope allows; with the
+  step limited in length for both (42 model trials, 45 reference): first shot 0.94 s (v6) against 1.14 s (p 0.28),
+  fired 112 of 184 (61%) against 129 of 190 (68%) (p 0.08), tracking 152 against 161 px: no difference these sessions can
+  resolve. The user's pointer glitches were traced: injected look deltas do not reach the main desktop, but the
+  game's own cursor moves (every console session and quickload) do, through the seat's viewer; live blocks wait
+  for a viewer that ignores them, or an empty desk. [Details](docs/bench/HALFLIFE.md).
 - **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes 1.5 to 3.4 times as often (12 to 37% of steps against v4's 3 to 25%), so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).
 - **A stronger goal input (goal scale 0.1, v5).** A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the fastest supervised pursuit acquisition (28/32 at 8.9 px, 170 ms; v1b tracks at 7.6 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 19%. At 0.2 (v5b) the settling gain survives with the model standing on its own: alone 22/32 settled, the most of any checkpoint, and 345 ms under supervision with the envelope intervening on 3.4% of steps. [Details](docs/bench/TRAINING.md).
 - **The goal as a direction (adapter version 5, v6).** The direction encoding removes the fading but not the stopping: alone the model never settles (0/32; it holds speed through the goal and oscillates around it, 42 px mean error), while under supervision it matches the teacher on every task, settle 32/32 in 335 ms at 2.4 px, jump 256/256 at 22.3 px, pursuit 31/32 at 5.1 px against the teacher's 5.5, camera 32/32 at 3.7 px against 4.0, with the envelope intervening on half the steps of the moving tasks, where it is now the stopping rule. [Details](docs/bench/TRAINING.md).
@@ -142,7 +150,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **Published.** The v6 readout (the live configuration) and the v3b readout (the one that stands on
   its own) are on [Hugging Face](https://huggingface.co/Skulitom/ganglion-haltere-cursor) with their
   reports and a model card that says what they do and do not do, and attached to a GitHub release.
-- The suite passes **167 tests** (four optional checks skipped). Application-specific
+- The suite passes **169 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

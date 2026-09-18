@@ -146,6 +146,9 @@ the service. The ordinary deterministic install does not import torch or require
 `reach-demo --shadow-checkpoint PATH` measures the model alongside the existing controller.
 `--shadow-process` on `core` and `reach-demo` runs the model in its own process behind the same
 one-item mailbox, which is what keeps live inference under the evidence budget.
+`--shadow-warm-steps N` runs N extra neural steps on the first sample after a state reset: the
+network answers a new goal in about six steps, so without it the first proposals of an intent
+are wrong-signed or slow (the envelope covers them); six steps cost about 18 ms once per reset.
 
 The model receives each eligible reach/drag correction's cursor, goal, rectangle, speed,
 observation timestamp and reference point. A separate worker retains at most one pending

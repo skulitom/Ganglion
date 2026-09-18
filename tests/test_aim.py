@@ -170,6 +170,23 @@ def test_align_turns_the_view_until_the_target_is_centred():
     assert intent.status()["applied_delta"][0] > 0 and intent.commands == len(looks)
 
 
+def test_the_reference_step_is_limited_in_length_not_per_axis():
+    from math import hypot, isclose
+    from ganglion.core.aim import bounded_step
+    assert bounded_step(3, -4, 10) == (3, -4) and bounded_step(0, 0, 10) == (0, 0)
+    x, y = bounded_step(300, 300, 10)
+    assert isclose(hypot(x, y), 10) and isclose(x, y)
+    x, y = bounded_step(-300, 40, 10)
+    assert isclose(hypot(x, y), 10) and isclose(y / x, 40 / -300)      # the direction is the error's
+    # On a diagonal error the align program's deltas stay within max_step in length (one count of rounding).
+    camera = Camera(560, 330)
+    runtime, output = run_align(camera, gain=1.0, max_step=20, tolerance_px=4, settle_ms=30)
+    looks = [c for c in output.commands if "dx" in c]
+    assert runtime.intent.reason == "aligned" and looks
+    assert max(hypot(c["dx"], c["dy"]) for c in looks) <= 20 + 1
+    assert hypot(looks[0]["dx"], looks[0]["dy"]) >= 19                   # and uses the limit while far away
+
+
 def test_align_fires_repeatedly_while_the_target_stays_and_reports_loss_after_fire():
     camera = Camera(340, 190)
     runtime, output = run_align(camera, gain=1.0, tolerance_px=30, settle_ms=20,
