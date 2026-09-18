@@ -498,6 +498,32 @@ readout is fitted to rather than a sliver of the harvest ([readout v7](results/c
 1/16 held-out at 452 px; [DAgger v7](results/cursor-dagger-v7.json), validation 0/8; 0/8; 0/8,
 round-03 selected: 1/16 at 90 px; [cursor-suite-v7](results/cursor-suite-v7.json)). Weighting the stopping samples did not give the model a stop: alone it still never settles (0/32 at 44 px), jump 9/256, pursuit 3/32; under supervision settle 32/32 in 395 ms, jump 254/256, pursuit 29/32 at 7.2 px, camera 31/32 at 5.0 px, with fewer interventions than v6 (27 to 35% against 49 to 58% on the moving tasks). A step-response probe says why: fed a reversal of the goal direction, the v6 and v3b readouts take 6 to 7 network steps (60 to 70 ms) to change sign and the selected v7 readout 5, so a direction-encoded model must overshoot by that many steps of travel plus the plant's delay and then oscillate, while a proportional zone near the goal (the tanh encoding of versions 2 to 4) trades the overshoot for fading. The network's response lag, not the fit, is what keeps the readout from stopping on its own; under supervision the envelope is the brake and the live result stands with v6.
 
+## Attacking the lag: fast motor neurons and an efference copy
+
+A reversal probe (`probe_lags`) drives the network with a unit goal direction, reverses it and
+records for every motor neuron the step at which it has covered half of its eventual change.
+Of the 3,913 motor neurons 470 answer the goal at all: 16 within two steps, 67 within three,
+165 within four, 395 within six. `--max-lag-steps` keeps the readout fit to neurons under a
+lag limit. Readout-stage results (before DAgger; the v3b readout at this stage settled 10/16
+held-out targets at 73 px, the v6 one 1/16 at 460 px):
+
+| Readout (stopping samples weighted 10×) | Validation MSE | Held-out settled | Terminal error |
+|---|---:|---:|---:|
+| direction, goal scale 0.1, lag ≤ 3 (67 neurons) | 0.0289 | 0/16 | 424 px |
+| direction, 0.1, lag ≤ 4 (165) | 0.0166 | 0/16 | 469 px |
+| direction, 0.1, lag ≤ 5 (301) | 0.0144 | 1/16 | 455 px |
+| tanh, 0.05, lag ≤ 4 | 0.0146 | 3/16 | 551 px |
+| tanh, 0.05, lag ≤ 6 (395) | 0.0140 | 3/16 | 559 px |
+| tanh, 0.1, lag ≤ 4 | 0.0118 | 5/16 | 471 px |
+| tanh, 0.1, lag ≤ 6 | 0.0112 | 5/16 | 441 px |
+| tanh, 0.2, lag ≤ 6 | 0.0186 | 5/16 | 381 px |
+| tanh, 0.3, lag ≤ 6 | 0.0246 | 5/16 | 207 px |
+| tanh, 0.2, all neurons | 0.0143 | 5/16 | 372 px |
+| tanh, 0.3, all neurons | 0.0231 | 4/16 | 195 px |
+| direction plus own velocity (version 6), 0.1, all neurons | 0.0165 | 1/16 | 331 px |
+
+Neither route gives the model a stop. Fitted on fast neurons, the direction-encoded readouts change sign within one or two steps but still never settle: at the goal they keep a command of magnitude 0.6 to 1.0 with no component toward it, an orbit, because after a fast approach the network's state is not distinguishable, linearly, from its state during the approach. Fast neurons on the tanh encoding at scales 0.05 to 0.2 orbit the same way; at 0.3 they are quiet at the goal (magnitude 0.01 to 0.2) but settle worse than the full readout (5/16 at 207 px against 10/16 at 73 px), and weighting the stopping samples costs the far field (0.3, all neurons: 4/16 at 195 px). An efference copy of the last step (adapter version 6) hands the readout the imitation shortcut again: it copies its own motion and at the goal moves on (1/16 at 331 px). A linear readout of this network can have speed or a stop, not both; under supervision the envelope is the brake and v6 stays the live configuration. What would change this is a nonlinear readout, or training the network itself with the stop in its loss, and both change what the connectome is being credited with.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint

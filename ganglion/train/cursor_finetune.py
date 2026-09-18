@@ -80,7 +80,7 @@ def run(args):
     view_fraction = float(source.get("view_fraction", 0.0))
     slip = dict(source.get("slip") or {})
     slip["slip_gain"] = tuple(slip.get("slip_gain", (1.0, 1.0)))
-    if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN" or version not in (2, 3, 4, 5):
+    if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN" or version not in (2, 3, 4, 5, 6):
         raise ValueError("Requires an adapter version 2, 3 or 4 cursor ConnectomeRNN on CUDA")
     # Keep whitening fixed while learning, so batch composition never subtracts
     # the signal. Structure and signs stay those of the connectome.

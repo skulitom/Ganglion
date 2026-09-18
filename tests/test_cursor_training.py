@@ -175,7 +175,7 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
             np.testing.assert_allclose(observed[key][i], expected[key], atol=1e-7)
         np.testing.assert_allclose(expected["goal"], channels(current, old, version=2)["goal"])
     with pytest.raises(ValueError):
-        CursorWorld([1000], sense_version=6)
+        CursorWorld([1000], sense_version=7)
 
 
 def test_feature_cache_provenance_must_match_the_checkpoint():
@@ -219,8 +219,21 @@ def test_adapter_version_5_keeps_the_goal_direction_at_full_strength_and_matches
     assert channels(at_goal, None, version=5)["goal"][:2] == [0.0, 0.0]            # inside a pixel: no direction
     far = MotorSample("i", "reach", 1, 2, .01, .01, 10, (0.0, 0.0), (300.0, -400.0), (0, 0), UNBOUNDED, 1000.0, .01)
     np.testing.assert_allclose(channels(far, None, version=5)["goal"][:2], [.6, -.8], atol=1e-9)
+    both = CursorWorld(seeds, sense_version=6, goal_scale=.1)
+    for _ in range(8):                                        # past every plant's delay, so the cursor has moved
+        before = both.cursor.copy()
+        both.step(both.teacher())
+    senses6 = both.senses(before)
+    np.testing.assert_allclose(np.linalg.norm(senses6["goal"][:, :2], axis=1), 1.0, atol=1e-6)
+    assert senses6["haltere"].any() and (senses6["haltere"] == senses6["jo"]).all()   # version 6 adds the own velocity
+    for i in range(4):
+        old = MotorSample("i", "reach", 1, 1, 0, 0, 10, tuple(before[i]), tuple(both.goal[i]), (0, 0), UNBOUNDED, both.speed[i], .01)
+        now = MotorSample("i", "reach", 1, 2, .01, .01, 10, tuple(both.cursor[i]), tuple(both.goal[i]), (0, 0), UNBOUNDED, both.speed[i], .01)
+        expected = channels(now, old, version=6, goal_scale=.1)
+        np.testing.assert_allclose(senses6["goal"][i], expected["goal"], atol=1e-6)
+        np.testing.assert_allclose(senses6["haltere"][i], expected["haltere"], atol=1e-6)
     with pytest.raises(ValueError):
-        CursorWorld(seeds, sense_version=6)
+        CursorWorld(seeds, sense_version=7)
 
 
 def test_goal_scale_is_shared_by_the_world_and_the_adapter():

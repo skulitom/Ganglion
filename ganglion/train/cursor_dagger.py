@@ -24,7 +24,7 @@ def run(args):
         raise ValueError("Requires the actual CUDA connectome")
     original = torch.load(base, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
     version = original.get("adapter_version")
-    if version not in (2, 3, 4, 5):
+    if version not in (2, 3, 4, 5, 6):
         raise ValueError("DAgger requires a cursor adapter version 2, 3 or 4 checkpoint")
     view_fraction = args.view_fraction if args.view_fraction is not None else float(original.get("view_fraction", 0.0))
     slip = dict(original.get("slip") or {})
