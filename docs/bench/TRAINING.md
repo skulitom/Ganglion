@@ -376,6 +376,51 @@ against its own rows above:
 
 Training with the slip gives the best supervised camera tracking so far (30/32 at 7.5 px, with the model acting on three quarters of the steps) at a cost on the cursor tasks alone, where half the harvest is now view episodes (settle 18/32 at 61 px against v3b's 19/32 at 15 px). The untrained network has no usable innate response to slip through the readout: fed to v3b, the slip makes it lose every camera target alone and the envelope rejects 96% of its proposals, so the near-reference row there is the reference's work. Both of the fly's self-motion channels now exist in training and at runtime; which one a task should get, and whether the live flow matches the simulated slip, is the next measurement, on a turning view in the seat.
 
+## Slip robustness: adapter v4b
+
+The live channel is not the simulated slip: it is absent when the percept finds it not credible
+and it reports a scene-dependent share of the true motion, and in forty Half-Life engagements
+the v4 readout was overridden four times as often with the channel fed than with zeros
+([HALFLIFE.md](HALFLIFE.md)). The training world therefore gained three options: a share of
+view episodes without the slip (`--slip-dropout`), single ticks where it blanks
+(`--slip-blank`), and a per-episode gain drawn from a range (`--slip-gain`). **v4b** is v4
+trained with dropout 0.3, blanking 0.05 and gain
+0.7 to 1.0, the same harvest and DAgger schedule otherwise.
+
+Readout ([readout v4b](results/cursor-readout-v4b.json)): 5/16
+held-out static targets with 203 px terminal error (v4: 8/16 at 159 px).
+DAgger ([DAgger v4b](results/cursor-dagger-v4b.json); validation 4/8; 3/8; 3/8; round-01 selected):
+3/16 with 376 px.
+The suite with the slip fed as trained ([cursor-suite-v4b](results/cursor-suite-v4b.json)), and the
+same checkpoint scored with the channel absent (`--sense-version 3`,
+[cursor-suite-v4b-noslip](results/cursor-suite-v4b-noslip.json)), against v4 with the slip:
+
+| Task | Controller | v4b, slip fed | v4b, channel absent | v4, slip fed |
+|---|---|---:|---:|---:|
+| settle | connectome | 13/32 at 211.9 px | 13/32 at 211.3 px | 18/32 at 60.7 px |
+| settle | supervised | 32/32 at 3.7 px | 32/32 at 3.7 px | 32/32 at 4.2 px |
+| jump | connectome | 26/256 at 416.7 px | 26/256 at 410.3 px | 51/256 at 159.9 px |
+| jump | supervised | 238/256 at 23.8 px | 239/256 at 23.8 px | 225/256 at 24.1 px |
+| pursuit | connectome | 3/32 at 405.6 px | 3/32 at 405.6 px | 3/32 at 201.4 px |
+| pursuit | supervised | 23/32 at 9.8 px | 25/32 at 9.8 px | 20/32 at 12.4 px |
+| camera | connectome | 1/32 at 131.8 px | 0/32 at 131.5 px | 3/32 at 87.9 px |
+| camera | supervised | 30/32 at 6.6 px | 28/32 at 8.1 px | 30/32 at 7.5 px |
+
+Full rows for v4b with the slip:
+
+| Task | Controller | Success | Settling / acquisition (median ms) | Tracking error (mean px) | Interventions | Accepted |
+|---|---|---:|---:|---:|---:|---:|
+| settle | connectome | 13/32 | 255 | 211.9 | n/a | n/a |
+| settle | supervised | 32/32 | 465 | 3.7 | 11.6% | 88.4% |
+| jump | connectome | 26/256 | 425 | 416.7 | n/a | n/a |
+| jump | supervised | 238/256 | 750 | 23.8 | 14.5% | 85.5% |
+| pursuit | connectome | 3/32 | 220 | 405.6 | n/a | n/a |
+| pursuit | supervised | 23/32 | 205 | 9.8 | 28.4% | 71.6% |
+| camera | connectome | 1/32 (lost 31) | 510 | 131.8 | n/a | n/a |
+| camera | supervised | 30/32 (lost 0) | 455 | 6.6 | 37.5% | 62.5% |
+
+The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. A readout trained on a channel it cannot trust learns to discount it; making the live channel worth having is a matter of what the training world shows in it (independent movers, the percept's own failure modes), not of noise on the simulated slip. v4 remains the tracking candidate and v4b is not run live.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -396,6 +441,10 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v4 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 4 --view-fraction 0.5
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v4/cursor-readout.pt --features runs/cursor-readout-v4/features.pt --out runs/cursor-dagger-v4 --rounds 3 --neurons 4096 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v3b/round-01/cursor-readout.pt --sense-version 4 --mlp runs/suite-v3/mlp-baseline.pt --out runs/suite-v3b-slip --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v4b --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 4 --view-fraction 0.5 --slip-dropout 0.3 --slip-blank 0.05 --slip-gain 0.7 1.0
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v4b/cursor-readout.pt --features runs/cursor-readout-v4b/features.pt --out runs/cursor-dagger-v4b --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v4b/round-01/cursor-readout.pt --mlp runs/suite-v4/mlp-baseline.pt --out runs/suite-v4b --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v4b/round-01/cursor-readout.pt --sense-version 3 --mlp runs/suite-v3/mlp-baseline.pt --out runs/suite-v4b-noslip --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has

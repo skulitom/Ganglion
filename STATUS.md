@@ -121,6 +121,7 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
   acquisition time, and the model overridden four times as often with the channel fed: the
   readout does not use the live channel well. Next: train the readout with the slip present,
   absent and scaled. [Details](docs/bench/HALFLIFE.md).
+- **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).
 - The suite passes **160 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
