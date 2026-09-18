@@ -369,10 +369,65 @@ firing p 0.08 per trial, tracking error p 0.70. The change slowed the reference'
 0.92 to 1.14 s (p 0.005) and left the model's where it was (1.04 to 0.94 s, p 0.63).
 With the step limits the same shape, forty-two model trials against forty-five of the reference show no difference between the supervised v6 and the reference that these sessions can resolve: the model's first shot is the earlier one at the median in both sessions, the reference fires on a few more of its intents (as it did in four sessions of the five), and neither survives a test. That is the honest state of the live comparison: under the envelope the connectome readout does the reference's job on this fight, no better and not measurably worse, and every earlier gap in either direction was a mismatch in the limits or one session's luck. The fight itself limits what more trials could say: the grunt is spawned at the player, so every engagement is a point-blank turn that either controller finishes in about a second.
 
+## Encounters at range: the harness and what its first probes say
+
+The point-blank fight cannot separate two controllers, and it had a second flaw nobody had looked
+for: the quicksave behind every trial above was made at the easy skill, where the game's autoaim
+is on (`sv_aim 1`, allowed in single player below the hard skill) and steers every bullet fired
+within about five degrees of a body onto it. Inside some 50 px of the crosshair the game did
+the aiming. The published comparisons stand as comparisons (both sides had it), but none of
+them measured where the bullets would have gone.
+
+`ganglion.evaluation.halflife.encounters` replaces the spawned grunt with saves staged once at
+real encounters: hard skill (no autoaim, grunts at 80 health), god mode and notarget on, the
+submachine gun in hand, the enemies in view and unaware. A trial opens no console: a function
+key loads the save, the engage chain is armed, a second key turns notarget off (the enemies
+see the player within a tenth of a second: a sharp onset in the ledger), the chain runs for
+the window, and a third key saves the game. The outcome is read from that save
+(`saves.py`): a GoldSrc save is an uncompressed field stream, so every monster's health is in
+it, and the fall in the enemies' total health is the damage dealt, the dead are the kills. The
+same file proves the trial was the staged one (god mode still on, notarget off, the player
+where the save put him) and a trial is invalid, for reasons fixed in advance, when it was not,
+or when a shot went out before the onset. Trials run in pairs, one per condition in a seeded
+random order under one core; the analysis takes the difference inside each pair, the median of
+those per session and a sign-flip test across sessions, because one session is one sample. A
+scenario whose engage settings are not yet frozen from reference-only trials runs the
+reference alone. `maps.py` reads the enemies' positions out of the maps' entity lumps; an
+offline sight trace of the 24 maps with grunts near their start found them visible from it in
+three, two of those scripted scenes, so every encounter worth staging needs a walk.
+
+Two scenes are staged ([scenarios.json](../../ganglion/evaluation/halflife/scenarios.json)
+holds how, and the probes; [results](results/halflife/encounters/)):
+
+| Scenario | Scene | Reference-only probe |
+|---|---|---|
+| `ledge-trio` (c2a2d) | Three grunts on a ledge behind a railing, 700 to 750 units away, each about 30 by 60 px, facing the player; still until the onset, then a real firefight | Ten trials: first detection 0.72 to 1.10 s after the onset, first shot 1.20 to 1.96 s, 7 to 16 bursts a trial, damage 0 of 240 in nine trials and 35 in one |
+| `lobby-patrol` (c2a4e) | Two grunts patrolling along the line of sight at 520 to 1,260 units and one on a balcony, notarget left on: moving targets, nothing shoots back | No detection in the window at any lag or threshold tried |
+
+The harness works end to end (every trial valid, onset found, damage read), and what it
+measures first is not the controllers. On the ledge the first lock is a real grunt, a 14 by
+16 px blob; then the grunts open fire, every hit kicks the view by two degrees (about 22 px,
+god mode does not stop that), the 32 px template cut around so small a body is mostly railing
+and wall and slides onto them, and the chain goes on to align and fire, to tolerance, at
+scenery. Restricting the watch to the ledge band and capping the blob size removed the locks on
+the striped beams a kick lights up and did not rescue the track. In the lobby the grunts walk
+toward or away from the camera at 830 units and more, which changes too few pixels for the
+frame-difference motion watch; what it sees in that band is the sway of the weapon model.
+Until the percepts hold a small target (through a view kick, and without lateral motion),
+damage is at the floor for any controller, so neither scenario is frozen and no model trial
+has been run. The work these scenes ask for is perception at range: compensating the view's
+own motion before differencing frames and matching templates (the job the flow percept's
+wide-field estimate was built for), a template that fits the body, and a mask for the weapon
+model.
+
 ## Limits and next work
 
 No level was completed. Cheats supplied the loadout and the test enemies; the fights are a
-reflex test, not a playthrough. The perception is motion plus tracking, with no notion of
+reflex test, not a playthrough. The point-blank trials spawn the enemy on the player, so each is a
+turn of about 300 px that either controller ends within a second or so, with the game's autoaim
+on; both sides face the same fight, which keeps those comparisons fair and keeps them narrow.
+Encounters at range are staged in the section above, and what they ask for first is perception
+that reaches them. The perception is motion plus tracking, with no notion of
 friend or foe. The next steps are a looming/approach percept for dodging, a settle-free burst
 rule for close targets, weapon/ammo cues taught as templates rather than colours, and a
 traversal behaviour with a real sense of open space.
@@ -401,3 +456,16 @@ this build.
 
 `valve/ganglion.cfg` in the game folder sets raw input, fast weapon switching and a `level`
 alias bound to End. The grave key must be sent by scan code on non-US layouts.
+
+The encounters at range: install the binds (this copies `valve/SAVE` aside first), launch the
+game with `+sv_cheats 1 +exec ganglion.cfg`, stage each scenario once as its entry in
+`scenarios.json` says, then check and run it. The seat's desktop lease has to be kept renewed
+for as long as the core and the pilot run; their jobs end with it.
+
+```powershell
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.maps "<game>/valve/maps" c2a2d c2a4e
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.encounters install --game "<game>"
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.encounters check --game "<game>" --scenario ledge-trio
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.encounters run --dir runs/hl/pilot --game "<game>" --scenario ledge-trio --label ledge-probe-1 --pairs 2 --seed 0 --conditions ref-a=deterministic,ref-b=deterministic
+.venv/Scripts/python.exe -m ganglion.evaluation.halflife.saves "<game>/valve/SAVE/gltrial.sav"
+```

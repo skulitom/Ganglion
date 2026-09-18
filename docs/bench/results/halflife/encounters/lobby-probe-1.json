@@ -1,0 +1,100 @@
+{
+ "label": "lobby-probe-1",
+ "scenario": "lobby-patrol",
+ "spec": {
+  "map": "c2a4e",
+  "save": "glc2a4e",
+  "load_key": "f2",
+  "stimulus_key": null,
+  "enemy": "monster_human_grunt",
+  "enemies": 3,
+  "settle_s": 3.0,
+  "window_s": 12.0,
+  "primary": "damage",
+  "engage": {
+   "region": [
+    360,
+    240,
+    520,
+    200
+   ],
+   "min_pixels": 150,
+   "max_pixels": 5000
+  },
+  "frozen": false,
+  "staging": [
+   "Two grunts patrol a 688 unit path at 520 to 1260 units, a third stands on a balcony; notarget stays on, so nothing shoots back.",
+   "skill 3, then map c2a4e; god, notarget; tap i three times, then m.",
+   "Walk to the vantage over the lobby (four short legs, about 430 units, no triggers on the way); level the pitch.",
+   "save glc2a4e. Accept it with `encounters check`: skill 3, god and notarget on, three grunts alive at 80."
+  ]
+ },
+ "conditions": {
+  "ref-a": "deterministic",
+  "ref-b": "deterministic"
+ },
+ "seed": 2,
+ "max_turn_px_s": 1200.0,
+ "speed_px_s": 1200.0,
+ "staged_enemy_health": [
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0,
+  80.0
+ ],
+ "staged_skill": 3,
+ "trials": [
+  {
+   "pair": 0,
+   "order": 0,
+   "condition": "ref-b",
+   "controller": "deterministic",
+   "start_byte": 9459409,
+   "end_byte": 9461330,
+   "saved": true,
+   "valid": true,
+   "why": [],
+   "enemies": 10,
+   "damage": 0.0,
+   "kills": 0,
+   "detect_s": null,
+   "first_shot_s": null,
+   "bursts": 0,
+   "intents_before_onset": 0,
+   "near_model_share": null,
+   "summary": {
+    "view_commands": 0,
+    "controller_shares": {},
+    "acquisition_s": [],
+    "engagement_s": [],
+    "proposals": {
+     "samples": 0,
+     "cosine_to_goal_mean": null,
+     "share_at_goal": null,
+     "share_away_from_goal": null,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
+    "connectome_share": null,
+    "override_share": null,
+    "stale_share": null,
+    "align_intents": 0,
+    "align_outcomes": {},
+    "intents_that_fired": 0,
+    "reflex_fired": 0,
+    "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
+    "inference_ms": null,
+    "observations_dropped": 5,
+    "error_px": null
+   }
+  }
+ ]
+}

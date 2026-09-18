@@ -1,0 +1,68 @@
+{
+ "ledge-trio": {
+  "map": "c2a2d",
+  "save": "glc2a2d",
+  "load_key": "f1",
+  "stimulus_key": "f11",
+  "enemy": "monster_human_grunt",
+  "enemies": 3,
+  "settle_s": 3.0,
+  "window_s": 12.0,
+  "primary": "damage",
+  "engage": {
+   "region": [
+    380,
+    250,
+    560,
+    190
+   ],
+   "min_pixels": 150,
+   "max_pixels": 3000
+  },
+  "frozen": false,
+  "staging": [
+   "Three grunts on a ledge behind a railing, 700 to 750 units from the vantage and 28 units above the eye, facing it; still until the stimulus.",
+   "skill 3, then map c2a2d. Tap g (god) the moment the map shows: the grunt 414 units ahead attacks from the start. Tap i three times, then m.",
+   "The near pair hunts the player and then runs for cover; under notarget walk up to each (positions from a key-triggered save) and shoot it point-blank.",
+   "Walk east along the corridor; a pillar blocks y 3048 at x 2496, pass it on the north side (y 3110). Vantage: about (2814, 3038), yaw -87, pitch level. A trigger 66 units further south starts an ambush: no trial moves the player.",
+   "Reload, notarget on, save glc2a2d. Accept it with `encounters check`."
+  ],
+  "probe": [
+   "Reference only, ten trials (2026-09-19): first detection 0.72 to 1.10 s after the stimulus, first shot 1.20 to 1.96 s, 7 to 16 bursts a trial, damage 0 in nine trials and 35 in one.",
+   "The first lock is a real grunt (a 14 by 16 px blob). Once the grunts fire, every hit kicks the view about 22 px; the 32 px template around so small a body is mostly background and slides onto it, and the chain aligns and fires at scenery.",
+   "Not frozen: until the tracker holds a small target through a view kick, damage is at the floor for any controller."
+  ]
+ },
+ "lobby-patrol": {
+  "map": "c2a4e",
+  "save": "glc2a4e",
+  "load_key": "f2",
+  "stimulus_key": null,
+  "enemy": "monster_human_grunt",
+  "enemies": 3,
+  "settle_s": 3.0,
+  "window_s": 12.0,
+  "primary": "damage",
+  "engage": {
+   "region": [
+    360,
+    240,
+    520,
+    200
+   ],
+   "min_pixels": 150,
+   "max_pixels": 5000
+  },
+  "frozen": false,
+  "staging": [
+   "Two grunts patrol side by side along the line of sight at 520 to 1260 units, a third stands on a balcony to the right; notarget stays on, so nothing shoots back.",
+   "skill 3, then map c2a4e (nothing sees the start); tap g, f11, i three times, m.",
+   "Walk (664,-416), (584,-496), (552,-496), (440,-608); vantage about (450, -600), yaw 160, pitch level: the lobby through a doorway.",
+   "Reload, save glc2a4e. Accept it with `encounters check`."
+  ],
+  "probe": [
+   "Reference only (2026-09-19): no detection in a 12 s window. Grunts walking toward or away from the camera at 830 units and more change too few pixels for the frame-difference motion watch, at any lag or threshold tried; what it does see in that band is the sway of the weapon model.",
+   "Not frozen: needs a motion percept that reaches this range, or a vantage that puts the patrol across the view."
+  ]
+ }
+}

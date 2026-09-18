@@ -39,6 +39,7 @@ include = ["ganglion*"]
 [tool.setuptools.package-data]
 "ganglion.arena" = ["*.html"]
 "ganglion.evaluation.solitaire" = ["pack/*.json", "pack/*/*.png"]
+"ganglion.evaluation.halflife" = ["scenarios.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
