@@ -46,6 +46,11 @@
      "connectome": 396
     },
     "acquisition_s": [
+     0.798,
+     1.366,
+     0.638
+    ],
+    "engagement_s": [
      1.959,
      2.891,
      1.535
@@ -71,6 +76,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.983500002301298,
      "p95": 5.659569997078506,
@@ -127,6 +133,11 @@
      "connectome": 533
     },
     "acquisition_s": [
+     0.576,
+     1.578,
+     1.225
+    ],
+    "engagement_s": [
      1.593,
      3.978,
      0.87
@@ -153,6 +164,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.380549998837523,
      "p95": 5.677099996319157,
@@ -191,6 +203,9 @@
      "deterministic_override": 111
     },
     "acquisition_s": [
+     0.621
+    ],
+    "engagement_s": [
      1.818
     ],
     "proposals": {
@@ -214,6 +229,7 @@
     "intents_that_fired": 1,
     "reflex_fired": 4,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.9621000030601863,
      "p95": 5.35827500243613,
@@ -258,6 +274,12 @@
      "connectome": 475
     },
     "acquisition_s": [
+     0.577,
+     2.013,
+     1.672,
+     1.101
+    ],
+    "engagement_s": [
      1.641,
      1.659,
      3.708,
@@ -284,6 +306,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.0937999981688336,
      "p95": 5.684499999915715,
@@ -346,6 +369,11 @@
      "connectome": 251
     },
     "acquisition_s": [
+     0.687,
+     1.814,
+     0.976
+    ],
+    "engagement_s": [
      1.831,
      3.057,
      1.204
@@ -370,6 +398,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.252749997045612,
      "p95": 6.698050001796225,

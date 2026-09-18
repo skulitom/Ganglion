@@ -40,6 +40,11 @@
      "deterministic_override": 49
     },
     "acquisition_s": [
+     0.599,
+     0.895,
+     1.731
+    ],
+    "engagement_s": [
      1.155,
      1.974,
      3.467
@@ -64,6 +69,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.719699994486291,
      "p95": 5.811799997172783,
@@ -120,6 +126,11 @@
      "deterministic_override": 186
     },
     "acquisition_s": [
+     0.57,
+     1.141,
+     0.944
+    ],
+    "engagement_s": [
      1.129,
      2.437,
      2.152
@@ -145,6 +156,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.6644999961717986,
      "p95": 5.90431999735301,
@@ -195,6 +207,11 @@
      "connectome": 397
     },
     "acquisition_s": [
+     0.583,
+     1.235,
+     1.63
+    ],
+    "engagement_s": [
      1.232,
      2.969,
      3.448
@@ -220,6 +237,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 4,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.5521500028844457,
      "p95": 5.161185000542899,
@@ -270,6 +288,9 @@
      "deterministic_override": 15
     },
     "acquisition_s": [
+     0.628
+    ],
+    "engagement_s": [
      1.648
     ],
     "proposals": {
@@ -293,6 +314,7 @@
     "intents_that_fired": 1,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.1692999982624315,
      "p95": 5.3501399990636855,
@@ -343,6 +365,11 @@
      "deterministic_override": 15
     },
     "acquisition_s": [
+     0.704,
+     0.764,
+     0.616
+    ],
+    "engagement_s": [
      0.799,
      2.249,
      0.273
@@ -368,6 +395,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.967300002637785,
      "p95": 6.125059998885262,

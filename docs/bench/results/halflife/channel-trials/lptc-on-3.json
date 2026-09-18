@@ -46,6 +46,13 @@
      "connectome": 247
     },
     "acquisition_s": [
+     0.678,
+     0.875,
+     0.944,
+     1.214,
+     1.124
+    ],
+    "engagement_s": [
      2.025,
      1.89,
      0.6,
@@ -71,6 +78,13 @@
     "intents_that_fired": 5,
     "reflex_fired": 5,
     "samples_with_flow": 256,
+    "flow_against_applied_turn": {
+     "samples": 214,
+     "slope_flow_per_expected": 0.5965803218085741,
+     "correlation": 0.9691053446035695,
+     "expected_px_s_median": 666.6666666666667,
+     "flow_px_s_median": 438.48074664011426
+    },
     "inference_ms": {
      "p50": 3.225899999961257,
      "p95": 5.677560000913217,
@@ -121,6 +135,13 @@
      "deterministic_override": 204
     },
     "acquisition_s": [
+     0.763,
+     1.175,
+     0.857,
+     2.079,
+     0.715
+    ],
+    "engagement_s": [
      1.902,
      1.696,
      0.512,
@@ -147,6 +168,13 @@
     "intents_that_fired": 5,
     "reflex_fired": 5,
     "samples_with_flow": 362,
+    "flow_against_applied_turn": {
+     "samples": 342,
+     "slope_flow_per_expected": 0.3933229752464355,
+     "correlation": 0.7772834979753136,
+     "expected_px_s_median": 1333.3333333333335,
+     "flow_px_s_median": 509.138677790609
+    },
     "inference_ms": {
      "p50": 3.0141000024741516,
      "p95": 5.662359997222664,
@@ -197,6 +225,12 @@
      "deterministic_override": 77
     },
     "acquisition_s": [
+     0.785,
+     0.866,
+     1.922,
+     0.746
+    ],
+    "engagement_s": [
      1.625,
      2.201,
      3.988,
@@ -223,6 +257,13 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 466,
+    "flow_against_applied_turn": {
+     "samples": 429,
+     "slope_flow_per_expected": 0.46327505269846225,
+     "correlation": 0.933381319789385,
+     "expected_px_s_median": 763.8888888888889,
+     "flow_px_s_median": 270.36947392165473
+    },
     "inference_ms": {
      "p50": 3.311800002848031,
      "p95": 6.81642499694135,
@@ -279,6 +320,12 @@
      "connectome": 421
     },
     "acquisition_s": [
+     1.368,
+     1.062,
+     2.001,
+     0.964
+    ],
+    "engagement_s": [
      2.649,
      3.991,
      1.626,
@@ -306,6 +353,13 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 509,
+    "flow_against_applied_turn": {
+     "samples": 469,
+     "slope_flow_per_expected": 0.27227041052533557,
+     "correlation": 0.7791289605583045,
+     "expected_px_s_median": 694.4444444444446,
+     "flow_px_s_median": 161.65421029145983
+    },
     "inference_ms": {
      "p50": 3.4021999999822583,
      "p95": 5.938530001731123,
@@ -356,6 +410,11 @@
      "deterministic_override": 138
     },
     "acquisition_s": [
+     0.829,
+     1.976,
+     0.76
+    ],
+    "engagement_s": [
      0.949,
      2.99,
      2.643
@@ -380,6 +439,13 @@
     "intents_that_fired": 3,
     "reflex_fired": 4,
     "samples_with_flow": 523,
+    "flow_against_applied_turn": {
+     "samples": 485,
+     "slope_flow_per_expected": 0.32702450078959416,
+     "correlation": 0.7216630108187911,
+     "expected_px_s_median": 750.0,
+     "flow_px_s_median": 254.2152242339334
+    },
     "inference_ms": {
      "p50": 3.2588999965810217,
      "p95": 5.726885002513882,

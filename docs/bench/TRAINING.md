@@ -388,9 +388,9 @@ trained with dropout 0.3, blanking 0.05 and gain
 0.7 to 1.0, the same harvest and DAgger schedule otherwise.
 
 Readout ([readout v4b](results/cursor-readout-v4b.json)): 5/16
-held-out static targets with 203 px terminal error (v4: 8/16 at 159 px).
+held-out static targets with 203 px terminal error (v4 at the same stage: 6/16 at 213 px).
 DAgger ([DAgger v4b](results/cursor-dagger-v4b.json); validation 4/8; 3/8; 3/8; round-01 selected):
-3/16 with 376 px.
+3/16 with 376 px (v4 after DAgger: 8/16 at 159 px).
 The suite with the slip fed as trained ([cursor-suite-v4b](results/cursor-suite-v4b.json)), and the
 same checkpoint scored with the channel absent (`--sense-version 3`,
 [cursor-suite-v4b-noslip](results/cursor-suite-v4b-noslip.json)), against v4 with the slip:
@@ -419,7 +419,7 @@ Full rows for v4b with the slip:
 | camera | connectome | 1/32 (lost 31) | 510 | 131.8 | n/a | n/a |
 | camera | supervised | 30/32 (lost 0) | 455 | 6.6 | 37.5% | 62.5% |
 
-The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. A readout trained on a channel it cannot trust learns to discount it; making the live channel worth having is a matter of what the training world shows in it (independent movers, the percept's own failure modes), not of noise on the simulated slip. v4 remains the tracking candidate and v4b is not run live.
+The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes 1.5 to 3.4 times as often (settle 11.6% against 3.4%, jump 14.5% against 7.2%, pursuit 28.4% against 17.1%, camera 37.5% against 25.0%), so the outcomes are the envelope's more than the model's. A readout trained on a channel it cannot trust learns to discount it; making the live channel worth having is a matter of what the training world shows in it (independent movers, the percept's own failure modes), not of noise on the simulated slip. v4 remains the tracking candidate and v4b is not run live.
 
 ## A stronger input near the goal: goal scale 0.1
 
@@ -432,7 +432,7 @@ suite). **v5** is v3 (goal error only) with all motor neurons and a goal scale o
 input saturates beyond about 120 px and is three times stronger near the goal.
 
 Readout ([readout v5](results/cursor-readout-v5.json)): 3/16 held-out static targets with
-550 px terminal error (v3b: 10/16 at 63 px). DAgger ([DAgger v5](results/cursor-dagger-v5.json);
+550 px terminal error (v3b after DAgger: 10/16 at 73 px). DAgger ([DAgger v5](results/cursor-dagger-v5.json);
 validation 3/8; 2/8; 0/8; round-01 selected): 3/16 with 383 px.
 The suite ([cursor-suite-v5](results/cursor-suite-v5.json)) against v3b and v4 (success at mean
 tracking error, median settling or acquisition):
@@ -452,11 +452,11 @@ tracking error, median settling or acquisition):
 | camera | connectome | 0/32 at 135.8 px, 525 ms | 0/32 at 114.6 px, 465 ms | 1/32 at 77.4 px, 560 ms | 3/32 at 87.9 px, 575 ms |
 | camera | supervised | 31/32 at 6.6 px, 480 ms | 24/32 at 9.4 px, 450 ms | 18/32 at 11.4 px, 550 ms | 30/32 at 7.5 px, 505 ms |
 
-A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. The stronger input makes the readout propose larger steps near the goal, which the envelope keeps in bounds and the model alone cannot. v3b stays the checkpoint that stands on its own and v5 the one that settles fastest under supervision.
+A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the fastest supervised pursuit acquisition (28/32 at 8.9 px in 170 ms; v1b matches the 28/32 at 7.6 px in 210 ms) and the best supervised camera row that is the model's own work (31/32 at 6.6 px; v3b fed the slip reached 31/32 at 4.4 px with the envelope on 96.5% of steps), but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 19%. The stronger input makes the readout propose larger steps near the goal, which the envelope keeps in bounds and the model alone cannot. v3b stays the checkpoint that stands on its own and v5 the one that settles fastest under supervision.
 
 **v5b** is the same recipe at a goal scale of 0.2 ([readout v5b](results/cursor-readout-v5b.json):
 7/16 held-out at 433 px; [DAgger v5b](results/cursor-dagger-v5b.json), validation 2/8; 3/8; 4/8,
-round-03 selected: 7/16 at 137 px; [cursor-suite-v5b](results/cursor-suite-v5b.json)). At 0.2 the model keeps its feet: alone it settles 22/32 at 450 ms (v3b 19/32 at 780 ms, the most settled of any checkpoint), and under supervision it settles in 345 ms with the envelope intervening on 3.4% of steps (v5: 340 ms at 12.7%; v3b: 375 ms at 1.9%), so the settling gain of the stronger input survives at a scale where the readout still stands on its own. Pursuit and camera sit between v3b and v5 (22/32 at 11.3 px and 24/32 at 9.4 px under supervision). v5b is the settling candidate, v5 the tracking candidate under supervision, v3b the most autonomous on the moving tasks.
+round-03 selected: 7/16 at 137 px; [cursor-suite-v5b](results/cursor-suite-v5b.json)). At 0.2 the model keeps its feet: alone it settles 22/32 at 450 ms (v3b 19/32 at 780 ms, the most settled of any checkpoint), and under supervision it settles in 345 ms with the envelope intervening on 3.4% of steps (v5: 340 ms at 12.7%; v3b: 375 ms at 1.9%), so the settling gain of the stronger input survives at a scale where the readout still stands on its own. Camera sits between v3b and v5 (24/32 at 9.4 px under supervision); pursuit does not: 22/32 at 11.3 px is below both v3b (24/32 at 10.1 px) and v5 (28/32 at 8.9 px), though it acquires faster than v3b (190 ms against 215 ms). v5b is the settling candidate, v5 the tracking candidate under supervision, v3b the most autonomous on the moving tasks.
 
 ## Reproduce
 

@@ -108,34 +108,28 @@ control a cursor on its own. See [the connectome experiment](docs/bench/SHADOW.m
 - **The fly's motion channel is fed.** Adapter v4 trains with view episodes whose visual slip
   goes to the lptc channel, and the runtime feeds that channel from the flow watch for v4
   checkpoints. Training with the slip gives the best supervised camera tracking so far (30/32 at 7.5 px, with the model acting on three quarters of the steps) at a cost on the cursor tasks alone, where half the harvest is now view episodes (settle 18/32 at 61 px against v3b's 19/32 at 15 px). [Details](docs/bench/TRAINING.md).
-- **The motion channel fed live, once.** In a second Half-Life engagement with the v4
-  checkpoint and the flow watch feeding lptc, inference stayed at p99 10 ms through
-  4,686 view commands (out-of-process worker, polling wait), but the live flow
-  measured 0.22 of the applied turn in a dark point-blank scene. A calibration turn then showed
-  the percept itself is sound: it reports 0.8 to 0.9 of a known turn up to 2,500 px/s with the
-  timing the training world assumes, and breaks near 7,000 px/s; the fight's shortfall was the
-  grunts filling the view. The summary now says when it is credible, the runtime feeds the
-  channel only then, and the pilot caps the turn rate. Forty repeated engagements from one
-  quicksave, twenty with the channel fed and twenty with it at zero, found no significant
-  difference in firing (83% against 73%, p 0.12) or
-  acquisition time, and the model overridden four times as often with the channel fed. The
-  proposals show why: fed the flow, the readout turns against it (62% of proposals), which in
-  training is continuing its own turn (the slip handed back the own-velocity shortcut), and
-  only 56% point at the goal against 90% with the channel at zero.
-  Keeping the tracked target out of the flow's ego-motion (now the percept's behaviour) changed
-  nothing live: the flow was already faithful in those trials (per-trial correlation 0.92) and
-  the readout turned against it just the same. The shortcut is the readout's, not the percept's.
-- **The model against the reference, live.** On the same trials the deterministic align
-  controller fired 82 of 113 (73%) intents at 1.64 s median acquisition, the v1b readout
-  69 of 89 (78%) at 1.76 s, the v4 readout 72 of 98 (73%) at 2.13 s (channel at zero): the
-  supervised model does not make the chain faster than the reference live, as on the suite.
-  The v5b readout, run live the same night, fired 56 of 93 (60%) at 1.77 s median acquisition
-  (against v4 at zero: p 0.63).
-  Next: a training slip with independent movers in it, and a readout that settles as fast as
-  the reference before the channel question is reopened. [Details](docs/bench/HALFLIFE.md).
-- **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes two to four times as often, so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).
-- **A stronger goal input (goal scale 0.1, v5).** A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. At 0.2 (v5b) the settling gain survives with the model standing on its own: alone 22/32 settled, the most of any checkpoint, and 345 ms under supervision with the envelope intervening on 3.4% of steps. [Details](docs/bench/TRAINING.md).
-- The suite passes **162 tests** (four optional checks skipped). Application-specific
+- **The motion channel fed live.** A calibration turn showed the flow percept reports 0.8 to 0.9 of a
+  known turn up to 2,500 px/s with the training world's timing and breaks near 7,000 px/s; the
+  summary says when it is credible, the runtime feeds the channel only then, known movers are kept
+  out of its ego-motion, and the pilot caps the turn rate. Forty repeated engagements, twenty with
+  the channel fed and twenty at zero, found no significant difference in firing (83% against
+  73%, p 0.12) or in the time to the first shot, and the model overridden four times as
+  often with the channel fed: fed the flow, the readout turns against it (62% of proposals),
+  which in training is continuing its own turn (the slip handed back the own-velocity shortcut),
+  and only 56% of its proposals point at the goal against 90% at zero. The shortcut is the
+  readout's, not the percept's. [Details](docs/bench/HALFLIFE.md).
+- **The model against the reference, live.** Time to the first shot, median over twenty trials each:
+  the deterministic align controller 0.65 s (82 of 113 (73%) intents fired), v1b 0.94 s
+  (69 of 89 (78%)), v4 at zero 0.94 s (72 of 98 (73%)), v5b 0.86 s (56 of 93 (60%)). At a
+  step limit matched at 1,200 px/s the reference takes 0.97 s and v1b 1.24 s (p 0.01), v4 at zero 0.99 s.
+  The earlier gap was mostly the reference's higher step limit: matched, the supervised v4 reaches its
+  first shot as fast as the reference (p 0.30) with a trend towards fewer fires (p 0.10), and
+  v1b stays slower. The model does not make the chain faster than the reference live, and no longer
+  slower. Next: a readout that beats the reference on moving targets before the channel question is
+  reopened. [Details](docs/bench/HALFLIFE.md).
+- **Slip robustness tried (v4b).** The robustness options made the readout indifferent to the channel, not better at using it: under supervision the camera task scores 30/32 at 6.6 px with the slip and 28/32 at 8.1 px without, jump and pursuit match or edge past v4, but the model alone is weaker than v4 everywhere (settle 13/32 at 212 px against 18/32 at 61 px) and the envelope intervenes 1.5 to 3.4 times as often (12 to 37% of steps against v4's 3 to 25%), so the outcomes are the envelope's more than the model's. [Details](docs/bench/TRAINING.md).
+- **A stronger goal input (goal scale 0.1, v5).** A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the fastest supervised pursuit acquisition (28/32 at 8.9 px, 170 ms; v1b tracks at 7.6 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 19%. At 0.2 (v5b) the settling gain survives with the model standing on its own: alone 22/32 settled, the most of any checkpoint, and 345 ms under supervision with the envelope intervening on 3.4% of steps. [Details](docs/bench/TRAINING.md).
+- The suite passes **165 tests** (four optional checks skipped). Application-specific
   work is capped until the model's contribution moves on these measures.
 
 ## First-person control in Half-Life

@@ -46,6 +46,12 @@
      "deterministic_override": 168
     },
     "acquisition_s": [
+     0.809,
+     0.57,
+     1.025,
+     0.911
+    ],
+    "engagement_s": [
      2.007,
      3.216,
      1.122,
@@ -129,6 +135,11 @@
      "deterministic_override": 151
     },
     "acquisition_s": [
+     0.822,
+     1.144,
+     0.838
+    ],
+    "engagement_s": [
      1.91,
      2.891,
      2.107
@@ -216,6 +227,13 @@
      "deterministic_override": 183
     },
     "acquisition_s": [
+     0.857,
+     1.861,
+     0.524,
+     1.064,
+     0.547
+    ],
+    "engagement_s": [
      0.96,
      2.118,
      3.989,
@@ -300,6 +318,12 @@
      "deterministic_override": 174
     },
     "acquisition_s": [
+     0.721,
+     1.263,
+     1.298,
+     1.678
+    ],
+    "engagement_s": [
      1.359,
      0.92,
      3.996,
@@ -378,6 +402,11 @@
      "deterministic_override": 101
     },
     "acquisition_s": [
+     0.777,
+     1.57,
+     0.947
+    ],
+    "engagement_s": [
      0.871,
      3.998,
      2.046

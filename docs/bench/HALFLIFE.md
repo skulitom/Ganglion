@@ -110,7 +110,7 @@ counts should produce at 1.067 counts per pixel, the figure the pilot's aim uses
 Three things follow. **Timing matches training.** The flow at a sample time is best explained
 by a 60 ms box of view motion ending 20 ms before the sample (correlation
 0.994), which is exactly the training world's model of the percept (a 60 ms window seen
-two ticks late). Half the response arrives 92 ms after the command
+two ticks late). Over the twenty sweeps at or below 2,500 px/s, half the response arrives 92 ms after the command
 (p90 107 ms), the box's half width plus the command's own dispatch.
 **Scale is the projection, not the percept.** The reported motion is 0.8 to 0.9 of "applied"
 at the rates that matter, and the shortfall is in the applied figure: 1.067 counts per pixel
@@ -143,65 +143,114 @@ armed, fourteen seconds of fight, disarm. The v4 checkpoint ran in its own proce
 `--lptc-from-flow` throughout; the condition was the flow watch (eighth scale over the upper
 view), present for the "fed" blocks and absent for the "zeros" blocks, so the adapter fed the
 channel either the credible live summary or nothing. Blocks alternated; the ledger was sliced
-per trial ([results](results/halflife/channel-trials-2026-09-18.json)).
+per trial ([results](results/halflife/channel-trials-2026-09-18.json), per-trial files under
+[results/halflife/channel-trials/](results/halflife/channel-trials/)). Acquisition is the time
+from an align intent's start to its first shot's release; engagement runs to the intent's last
+align step, which includes the re-alignment between shots and any tracking after the last one.
 
 | Measurement | Channel fed (flow watch) | Channel zeros (no flow watch) |
 |---|---:|---:|
 | Trials | 20 | 20 |
-| View commands | 8,602 | 8,850 |
-| From the model | 68.3% | 88.8% |
-| Overridden | 27.0% | 7.1% |
-| Stale | 4.7% | 4.1% |
 | Align intents, of which fired | 81 of 98 (83%) | 72 of 98 (73%) |
-| Acquisition, median (p75) | 1.88 s (2.64) | 2.13 s (2.78) |
-| Tracking error of align steps, median of trial means (IQR) | 153 px (138 to 165) | 143 px (122 to 183) |
+| Acquisition to the first shot, median (p75) | 0.92 s (1.31) | 0.94 s (1.16) |
+| Engagement to the last align step, median | 1.88 s | 2.13 s |
+| Tracking error of align steps, median of trial means | 153 px | 143 px |
+| From the model / overridden | 68.3% / 27.0% | 88.8% / 7.1% |
+| Model proposals within 60° of the goal | 56% | 90% |
 | Model samples carrying a credible flow | 7,742 | 0 |
-| Inference p95, median over trials | 5.9 ms | 6.3 ms |
 
-Twenty trials each. With the channel fed, the chain fired on 83% of its align intents against 73% with zeros and reached the target 0.25 s sooner at the median, but neither difference is significant at this size (two-sided p 0.12 and 0.11), the tracking error of the align steps was no better (p 0.57), and the model was overridden about four times as often (27% of steps against 7%; per-trial model share p 2e-06). The live channel changes what the model proposes, mostly into disagreement with the envelope, so whatever the outcome gained is as likely the envelope's deterministic steps as the model's. What the calibration and these trials establish is that the channel can be fed faithfully and that the v4 readout does not use it well live; its value for the model is not shown. The next lever is training: a readout that sees the slip present, absent and scaled (slip dropout, blanking and gain in the training world, `--slip-dropout`, `--slip-blank`, `--slip-gain`) so that it neither depends on the channel nor is thrown by it.
+Twenty trials each. With the channel fed, the chain fired on 83% of its align intents
+against 73% with zeros (two-sided p 0.12) and reached its first shot in
+0.92 against 0.94 s at the median (p 0.82); the tracking error of
+the align steps was no better (p 0.57), and the model was overridden about four times as
+often (27% of steps against 7%; per-trial model share p 2e-06). The
+live channel changes what the model proposes, mostly into disagreement with the envelope, so
+whatever the outcome gained is as likely the envelope's deterministic steps as the model's. In
+these trials the flow itself followed the applied turn (per-trial median slope 0.50,
+correlation 0.92); the 0.22 of the first engagement was the uncapped turns and the
+ungated summary.
 
-Where the proposals point says why. Over every align step the model was asked for, its proposal's
-cosine with the goal error averaged +0.82 with the channel at zero (90% of proposals
-within 60° of the goal, 7% pointing away) and +0.37 with it fed (56% and
-26%); and against the flow it was given, the fed proposals averaged a cosine of
--0.46, 62% of them within 60° of *opposite* to the flow. The readout turns
+Where the proposals point says why. Over every align step the model was asked for, its
+proposal's cosine with the goal error averaged +0.82 with the channel at zero
+(90% of proposals within 60° of the goal, 7% pointing away) and +0.37 with it
+fed (56% and 26%); and against the flow it was given, the fed proposals averaged a
+cosine of -0.46, 62% of them within 60° of *opposite* to the flow. The readout turns
 against the slip, which in the training world is the same as continuing its own turn: the slip
 there is minus the view's own motion and nothing else, so the channel handed back the
 own-velocity shortcut that adapter v3 had removed from the haltere channel. Live, the flow also
 carries the grunt's motion at point blank, the two cues disagree, and the readout follows the
-slip off the goal until the envelope overrides it. The training world's slip needs what the
-percept actually reports when something else moves, before this channel can help.
+slip off the goal until the envelope overrides it.
 
-A day later the flow percept learned to keep known movers out of its ego-motion: what the track and motion watches follow is windowed out of the phase correlation and kept out of the fit. Twenty more fed trials with that in place, after a game restart from the same quicksave ([per-trial files](results/halflife/channel-trials/), `lptc-excl`): the flow followed the applied turn about as it had (per-trial median slope 0.50, correlation 0.77, against 0.50 and 0.92 in the fed trials above, which were already faithful; the 0.22 of the first engagement was the uncapped turns and the ungated summary), and the readout behaved as before: 54% of its proposals against the flow, 46% at the goal, 35% of steps overridden, 65 of 92 intents fired (against the fed trials above p 0.05; acquisition 1.91 s, p 0.38). So the percept was not the problem in these trials, and the readout's turning against the slip is its own: a memoryless teacher imitated with any own-motion signal in view, in whatever channel, leaves the readout the same shortcut, and the slip is that signal. Between-session variation (fed trials on two days: firing 83% and 71%) is of the same size as the differences between conditions, which bounds what twenty trials can show.
+A day later the flow percept learned to keep known movers out of its ego-motion: what the track
+and motion watches follow is windowed out of the phase correlation and kept out of the fit.
+Twenty more fed trials with that in place, after a game restart from the same quicksave
+(`lptc-excl`): the flow followed the applied turn about as before (slope 0.50, correlation
+0.77) and the readout behaved as before, 54% of its proposals against the flow,
+46% at the goal, 35% of steps overridden, 65 of 92 (71%) intents fired (against the fed
+trials above p 0.05; first shot at 0.92 s, p 0.45). The percept was not the
+problem in these trials, and the readout's turning against the slip is its own: a memoryless
+teacher imitated with any own-motion signal in view, in whatever channel, leaves the readout
+the same shortcut, and the slip is that signal. Between-session variation (fed trials on two
+days: firing 83% and 71%) is of the same size as the differences between conditions, which
+bounds what twenty trials can show.
 
 ## The model against the reference, live
 
 The same trials with the deterministic align controller (no model in the loop) and with the
 v1b readout (velocity and goal error, all motor neurons, the best supervised tracker on the
-suite) give the comparison the suite could only simulate. All four conditions ran the same
-night from the same quicksave; the reference and v1b blocks followed the v4 blocks rather than
-alternating with them.
+suite) give the comparison the suite could only simulate. The reference and v1b blocks ran the
+same night from the same quicksave, after the v4 blocks rather than alternating with them; the
+v5b blocks (goal scale 0.2, the suite's settling candidate among the checkpoints that stand on
+their own; v5 settles faster under supervision but was not run live) came last, after a game
+restart.
 
 | Measurement | Deterministic reference, no model | v1b readout (velocity and goal) | v5b readout (goal scale 0.2) | v4 readout, channel at zero | v4 readout, channel fed |
 |---|---:|---:|---:|---:|---:|
 | Trials | 20 | 20 | 20 | 20 | 20 |
 | Align intents, of which fired | 82 of 113 (73%) | 69 of 89 (78%) | 56 of 93 (60%) | 72 of 98 (73%) | 81 of 98 (83%) |
-| Acquisition, median (p75) | 1.64 s (1.99) | 1.76 s (2.32) | 1.77 s (3.08) | 2.13 s (2.78) | 1.88 s (2.64) |
+| Acquisition to the first shot, median (p75) | 0.65 s (0.78) | 0.94 s (1.26) | 0.86 s (1.53) | 0.94 s (1.16) | 0.92 s (1.31) |
+| Engagement to the last align step, median | 1.64 s | 1.76 s | 1.77 s | 2.13 s | 1.88 s |
 | Tracking error of align steps, median of trial means | 141 px | 150 px | 158 px | 143 px | 153 px |
 | From the model / overridden | n/a | 85.2% / 11.2% | 81.5% / 11.7% | 88.8% / 7.1% | 68.3% / 27.0% |
 | Model proposals within 60° of the goal | n/a | 83% | 85% | 90% | 56% |
 | Model samples carrying a credible flow | 0 | 0 | 0 | 0 | 7,742 |
 
-The reference acquires the target faster than the supervised v4 with the channel at zero
-(1.64 against 2.13 s at the median, p 0.000) and fires the same share of its
-intents (p 0.88); against v4 with the channel fed the acquisition gap is p 0.03 and the firing gap
-p 0.08. v1b against v4 at zero: acquisition p 0.03, firing p 0.52; v1b against the
-reference: acquisition p 0.09, firing p 0.42. This is the live version of the suite's
-finding that the supervised connectome settles later than the reference: in a point-blank
-fight the envelope keeps the model safe and the model does not make the chain faster. What the
-model adds live is not yet a better outcome; the measurements to beat are now on record.
+The reference reaches its first shot sooner than the supervised v4 with the channel at zero
+(0.65 against 0.94 s at the median, p 0.000) and fires the same share of its
+intents (p 0.88); against v4 with the channel fed the acquisition gap is p 0.000 and the firing
+gap p 0.08. v1b against v4 at zero: acquisition p 0.72, firing p 0.52; v1b against the
+reference: acquisition p 0.000, firing p 0.42. v5b fired the fewest of its intents (56 of 93 (60%);
+against v4 at zero firing p 0.05, acquisition p 0.56), with many late first shots (third quartile
+1.53 s): the suite's settling gain did not carry into the point-blank fight.
 
-The v5b readout (goal scale 0.2), the fastest to settle under supervision on the suite, was run the same way after a game restart from the same quicksave: 56 of 93 intents fired (60%), the lowest share of any condition (against the reference p 0.06, against v1b p 0.01); acquisition 1.77 s at the median but 3.08 s at the third quartile, as many of its intents fired only near their four-second timeout (against the reference p 0.008); 85% of its proposals pointed at the goal and 11.7% of steps were overridden. The suite's settling gain did not carry into the fight: a static target's approach is not a point-blank grunt's pursuit, and the live measure to improve is the moving-target one.
+The comparison so far was not at matched limits, though. The reference and the override step at
+`max_step` counts a command (30 at the engage op's gain, 25 px, a command every 11 ms: about
+2,500 px/s), while the model's accepted step is bounded by the intent speed, 1,200 px/s, and
+its proposals sat at a median 11 counts; the suite gives both sides the same speed. The trials
+were rerun with the turn cap at 1,200 px/s for everyone (`--max-turn-px-s 1200`), the
+reference and v1b alternating block by block from the same quicksave after a game restart,
+and v4 at zero after them under its own core.
+
+| Measurement | Deterministic reference at 1,200 px/s | v1b at 1,200 px/s | v4 at zero, 1,200 px/s |
+|---|---:|---:|---:|
+| Trials | 20 | 20 | 20 |
+| Align intents, of which fired | 68 of 89 (76%) | 61 of 93 (66%) | 54 of 83 (65%) |
+| Acquisition to the first shot, median (p75) | 0.97 s (1.35) | 1.24 s (1.48) | 0.99 s (1.54) |
+| Engagement to the last align step, median | 1.85 s | 2.14 s | 2.02 s |
+| Tracking error of align steps, median of trial means | 159 px | 138 px | 151 px |
+| From the model / overridden | n/a | 80.3% / 14.3% | 87.2% / 6.2% |
+| Model proposals within 60° of the goal | n/a | 80% | 92% |
+
+At the same limit the reference still reaches its first shot sooner than v1b (0.97 against
+1.24 s, p 0.01) and fires a similar share (p 0.11); the cap cost the reference
+0.32 s at the median (p 0.000) and v1b 0.31 s (p 0.02), the latter through the override
+steps that had been doing part of its work. v4 at zero against the reference at the same limit: first shot 0.99 against
+0.97 s (p 0.30), firing p 0.10; against itself uncapped, p 0.51. So the earlier gap was mostly the reference's higher step limit: at the
+same limit the supervised v4 reaches its first shot as fast as the reference, with a trend
+towards fewer of its intents firing, and v1b stays slower. The model does not yet make the
+chain faster than the reference live, but with the limits matched it no longer makes it slower
+either; the measurements to beat are on record, and fairness of the comparison is now part of
+the harness (`--max-turn-px-s`, `--speed-px-s`).
 
 ## Limits and next work
 

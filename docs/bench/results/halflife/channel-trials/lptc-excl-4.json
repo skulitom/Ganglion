@@ -28,6 +28,11 @@
      "connectome": 435
     },
     "acquisition_s": [
+     0.501,
+     2.777,
+     1.173
+    ],
+    "engagement_s": [
      1.116,
      3.987,
      2.047
@@ -110,6 +115,11 @@
      "deterministic_override": 346
     },
     "acquisition_s": [
+     0.693,
+     1.159,
+     1.251
+    ],
+    "engagement_s": [
      0.805,
      2.481,
      2.746
@@ -191,6 +201,11 @@
      "deterministic_override": 399
     },
     "acquisition_s": [
+     0.779,
+     1.201,
+     1.004
+    ],
+    "engagement_s": [
      2.202,
      3.991,
      0.66
@@ -280,6 +295,13 @@
      "deterministic_override": 94
     },
     "acquisition_s": [
+     0.592,
+     0.783,
+     0.885,
+     0.962,
+     0.833
+    ],
+    "engagement_s": [
      1.156,
      0.888,
      2.77,
@@ -363,6 +385,11 @@
      "deterministic_override": 158
     },
     "acquisition_s": [
+     0.75,
+     1.796,
+     1.204
+    ],
+    "engagement_s": [
      1.785,
      3.607,
      1.662

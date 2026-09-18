@@ -40,6 +40,11 @@
      "deterministic_override": 24
     },
     "acquisition_s": [
+     0.837,
+     0.721,
+     1.191
+    ],
+    "engagement_s": [
      1.373,
      1.919,
      0.837
@@ -65,6 +70,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.935500000603497,
      "p95": 5.662880004820181,
@@ -121,6 +127,12 @@
      "deterministic_override": 27
     },
     "acquisition_s": [
+     0.798,
+     1.619,
+     0.35,
+     1.72
+    ],
+    "engagement_s": [
      1.365,
      1.864,
      0.516,
@@ -145,6 +157,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.6442999951541424,
      "p95": 5.357419999199919,
@@ -201,6 +214,12 @@
      "deterministic_override": 24
     },
     "acquisition_s": [
+     0.62,
+     0.703,
+     1.517,
+     0.479
+    ],
+    "engagement_s": [
      1.268,
      2.045,
      2.491,
@@ -226,6 +245,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.7926999973715283,
      "p95": 5.6239400000777096,
@@ -276,6 +296,11 @@
      "deterministic_override": 24
     },
     "acquisition_s": [
+     0.936,
+     0.561,
+     1.146
+    ],
+    "engagement_s": [
      2.156,
      1.684,
      0.802
@@ -300,6 +325,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.7816000001621433,
      "p95": 5.94709999859333,
@@ -344,6 +370,12 @@
      "deterministic_override": 33
     },
     "acquisition_s": [
+     0.671,
+     1.002,
+     1.35,
+     0.372
+    ],
+    "engagement_s": [
      1.315,
      2.186,
      1.011,
@@ -371,6 +403,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.507199998944998,
      "p95": 5.731370001012691,

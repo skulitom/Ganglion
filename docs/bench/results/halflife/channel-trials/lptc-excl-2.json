@@ -34,6 +34,9 @@
      "connectome": 367
     },
     "acquisition_s": [
+     0.944
+    ],
+    "engagement_s": [
      1.103
     ],
     "proposals": {
@@ -102,6 +105,11 @@
      "deterministic_override": 199
     },
     "acquisition_s": [
+     0.855,
+     1.214,
+     1.251
+    ],
+    "engagement_s": [
      1.864,
      3.526,
      3.759
@@ -178,6 +186,10 @@
      "deterministic_override": 221
     },
     "acquisition_s": [
+     0.549,
+     1.553
+    ],
+    "engagement_s": [
      1.599,
      2.967
     ],
@@ -253,6 +265,11 @@
      "deterministic_override": 276
     },
     "acquisition_s": [
+     0.998,
+     1.308,
+     0.741
+    ],
+    "engagement_s": [
      2.411,
      3.994,
      0.396
@@ -336,6 +353,12 @@
      "deterministic_override": 92
     },
     "acquisition_s": [
+     0.693,
+     1.76,
+     0.916,
+     0.367
+    ],
+    "engagement_s": [
      1.204,
      3.622,
      1.929,

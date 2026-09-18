@@ -40,6 +40,10 @@
      "connectome": 576
     },
     "acquisition_s": [
+     0.354,
+     0.68
+    ],
+    "engagement_s": [
      3.993,
      3.992
     ],
@@ -63,6 +67,7 @@
     "intents_that_fired": 2,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.8957499998796266,
      "p95": 5.475374999514314,
@@ -101,6 +106,10 @@
      "deterministic_override": 103
     },
     "acquisition_s": [
+     0.635,
+     0.749
+    ],
+    "engagement_s": [
      1.648,
      3.995
     ],
@@ -125,6 +134,7 @@
     "intents_that_fired": 2,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.10525000168127,
      "p95": 5.82734999989043,
@@ -187,6 +197,11 @@
      "deterministic_override": 44
     },
     "acquisition_s": [
+     0.689,
+     1.56,
+     1.102
+    ],
+    "engagement_s": [
      1.228,
      2.92,
      2.151
@@ -212,6 +227,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.851699999155244,
      "p95": 5.671024997354834,
@@ -268,6 +284,11 @@
      "deterministic_override": 153
     },
     "acquisition_s": [
+     0.641,
+     0.898,
+     1.237
+    ],
+    "engagement_s": [
      0.744,
      3.99,
      0.893
@@ -293,6 +314,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.7621000008366536,
      "p95": 5.565909997676498,
@@ -349,6 +371,12 @@
      "deterministic_override": 23
     },
     "acquisition_s": [
+     0.673,
+     1.526,
+     1.184,
+     0.693
+    ],
+    "engagement_s": [
      1.245,
      1.171,
      1.387,
@@ -375,6 +403,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.086000004259404,
      "p95": 5.873540001630317,

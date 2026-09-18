@@ -50,6 +50,13 @@
      "deterministic": 270
     },
     "acquisition_s": [
+     1.06,
+     0.565,
+     0.778,
+     0.798,
+     0.519
+    ],
+    "engagement_s": [
      2.046,
      1.382,
      1.854,
@@ -77,6 +84,7 @@
     "intents_that_fired": 5,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.8187999996589497,
      "p95": 5.6319700026506325,
@@ -131,6 +139,12 @@
      "deterministic": 337
     },
     "acquisition_s": [
+     0.641,
+     0.82,
+     0.474,
+     0.591
+    ],
+    "engagement_s": [
      1.879,
      1.974,
      0.638,
@@ -157,6 +171,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.0889999979990534,
      "p95": 5.6737999999313615,
@@ -211,6 +226,11 @@
      "deterministic": 342
     },
     "acquisition_s": [
+     0.634,
+     0.491,
+     1.046
+    ],
+    "engagement_s": [
      0.763,
      1.709,
      2.236
@@ -235,6 +255,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 7,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.60800000251038,
      "p95": 5.376799995428882,
@@ -283,6 +304,11 @@
      "deterministic": 497
     },
     "acquisition_s": [
+     0.57,
+     0.537,
+     1.351
+    ],
+    "engagement_s": [
      0.702,
      0.819,
      2.628
@@ -308,6 +334,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.162199995131232,
      "p95": 5.608474999462487,
@@ -380,6 +407,12 @@
      "deterministic": 359
     },
     "acquisition_s": [
+     0.583,
+     0.628,
+     0.601,
+     0.61
+    ],
+    "engagement_s": [
      1.627,
      3.989,
      0.248,
@@ -407,6 +440,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 9,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.549400000134483,
      "p95": 5.4840599979797835,

@@ -50,6 +50,12 @@
      "deterministic": 359
     },
     "acquisition_s": [
+     0.522,
+     0.774,
+     0.732,
+     0.707
+    ],
+    "engagement_s": [
      1.788,
      1.583,
      1.409,
@@ -75,6 +81,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.839000000676606,
      "p95": 5.477880001853917,
@@ -123,6 +130,12 @@
      "deterministic": 270
     },
     "acquisition_s": [
+     0.539,
+     0.78,
+     0.667,
+     0.807
+    ],
+    "engagement_s": [
      0.666,
      2.521,
      1.37,
@@ -148,6 +161,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.00654999591643,
      "p95": 5.4047749981691595,

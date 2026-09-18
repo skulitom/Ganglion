@@ -44,6 +44,12 @@
      "deterministic": 509
     },
     "acquisition_s": [
+     0.542,
+     2.153,
+     0.509,
+     0.353
+    ],
+    "engagement_s": [
      1.675,
      1.819,
      2.108,
@@ -70,6 +76,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.081199996813666,
      "p95": 5.581039999378845,
@@ -136,6 +143,12 @@
      "deterministic": 212
     },
     "acquisition_s": [
+     0.531,
+     0.783,
+     1.098,
+     0.738
+    ],
+    "engagement_s": [
      0.67,
      1.302,
      1.183,
@@ -162,6 +175,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 8,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.703099999052938,
      "p95": 5.354509996686827,
@@ -216,6 +230,11 @@
      "deterministic": 528
     },
     "acquisition_s": [
+     0.564,
+     0.78,
+     0.781
+    ],
+    "engagement_s": [
      1.641,
      1.988,
      2.972
@@ -240,6 +259,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 2.791100003378233,
      "p95": 5.5257000003621215,

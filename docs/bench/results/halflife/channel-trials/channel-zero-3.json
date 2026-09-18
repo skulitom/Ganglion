@@ -46,6 +46,11 @@
      "deterministic_override": 9
     },
     "acquisition_s": [
+     0.862,
+     1.398,
+     0.488
+    ],
+    "engagement_s": [
      2.087,
      3.16,
      0.866
@@ -70,6 +75,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 6,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.64015000013751,
      "p95": 6.092850000641192,
@@ -114,6 +120,11 @@
      "deterministic_override": 10
     },
     "acquisition_s": [
+     0.942,
+     0.94,
+     2.371
+    ],
+    "engagement_s": [
      2.26,
      3.539,
      3.843
@@ -139,6 +150,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.6038999969605356,
      "p95": 6.545540002116466,
@@ -189,6 +201,11 @@
      "deterministic_override": 7
     },
     "acquisition_s": [
+     0.932,
+     1.201,
+     1.093
+    ],
+    "engagement_s": [
      2.19,
      3.374,
      2.218
@@ -213,6 +230,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 5,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.346050001709955,
      "p95": 5.815524995705346,
@@ -257,6 +275,11 @@
      "connectome": 360
     },
     "acquisition_s": [
+     1.155,
+     0.95,
+     0.743
+    ],
+    "engagement_s": [
      2.161,
      2.302,
      2.399
@@ -280,6 +303,7 @@
     "intents_that_fired": 3,
     "reflex_fired": 4,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.5004499986825977,
      "p95": 6.166415003099246,
@@ -318,6 +342,12 @@
      "deterministic_override": 7
     },
     "acquisition_s": [
+     0.943,
+     1.111,
+     1.101,
+     1.534
+    ],
+    "engagement_s": [
      2.467,
      2.718,
      0.758,
@@ -342,6 +372,7 @@
     "intents_that_fired": 4,
     "reflex_fired": 4,
     "samples_with_flow": 0,
+    "flow_against_applied_turn": null,
     "inference_ms": {
      "p50": 3.278700001828838,
      "p95": 6.344140003056962,
