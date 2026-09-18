@@ -45,6 +45,15 @@
      1.365,
      1.323
     ],
+    "proposals": {
+     "samples": 349,
+     "cosine_to_goal_mean": 0.8215670748761965,
+     "share_at_goal": 0.9111747851002865,
+     "share_away_from_goal": 0.0659025787965616,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
     "connectome_share": 0.8882521489971347,
     "override_share": 0.0659025787965616,
     "stale_share": 0.045845272206303724,
@@ -103,6 +112,15 @@
      3.987,
      3.992
     ],
+    "proposals": {
+     "samples": 528,
+     "cosine_to_goal_mean": 0.5194789184969901,
+     "share_at_goal": 0.7215909090909091,
+     "share_away_from_goal": 0.2215909090909091,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
     "connectome_share": 0.716390423572744,
     "override_share": 0.23204419889502761,
     "stale_share": 0.05156537753222836,
@@ -170,6 +188,15 @@
      2.659,
      0.635
     ],
+    "proposals": {
+     "samples": 376,
+     "cosine_to_goal_mean": 0.921366202724513,
+     "share_at_goal": 0.9601063829787234,
+     "share_away_from_goal": 0.015957446808510637,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
     "connectome_share": 0.9388297872340425,
     "override_share": 0.02127659574468085,
     "stale_share": 0.0398936170212766,
@@ -253,6 +280,15 @@
      2.193,
      1.095
     ],
+    "proposals": {
+     "samples": 427,
+     "cosine_to_goal_mean": 0.9219636247024436,
+     "share_at_goal": 0.9578454332552693,
+     "share_away_from_goal": 0.01873536299765808,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
     "connectome_share": 0.9508196721311475,
     "override_share": 0.02107728337236534,
     "stale_share": 0.02810304449648712,
@@ -326,6 +362,15 @@
      1.081,
      0.461
     ],
+    "proposals": {
+     "samples": 378,
+     "cosine_to_goal_mean": 0.8187923100514728,
+     "share_at_goal": 0.9021164021164021,
+     "share_away_from_goal": 0.06613756613756613,
+     "flow_samples": 0,
+     "cosine_to_flow_mean": null,
+     "share_against_flow": null
+    },
     "connectome_share": 0.8809523809523809,
     "override_share": 0.06613756613756613,
     "stale_share": 0.05291005291005291,

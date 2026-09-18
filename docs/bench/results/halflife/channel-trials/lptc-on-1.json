@@ -46,6 +46,15 @@
      0.702,
      1.876
     ],
+    "proposals": {
+     "samples": 413,
+     "cosine_to_goal_mean": 0.3260576622274069,
+     "share_at_goal": 0.5907990314769975,
+     "share_away_from_goal": 0.2784503631961259,
+     "flow_samples": 372,
+     "cosine_to_flow_mean": -0.5477155256180922,
+     "share_against_flow": 0.6586021505376344
+    },
     "connectome_share": 0.6443914081145584,
     "override_share": 0.2863961813842482,
     "stale_share": 0.06921241050119331,
@@ -126,6 +135,15 @@
      0.539,
      0.383
     ],
+    "proposals": {
+     "samples": 406,
+     "cosine_to_goal_mean": 0.533406449997891,
+     "share_at_goal": 0.7093596059113301,
+     "share_away_from_goal": 0.16748768472906403,
+     "flow_samples": 287,
+     "cosine_to_flow_mean": -0.5574695880420885,
+     "share_against_flow": 0.6829268292682927
+    },
     "connectome_share": 0.7796610169491526,
     "override_share": 0.17191283292978207,
     "stale_share": 0.048426150121065374,
@@ -205,6 +223,15 @@
      1.587,
      2.398
     ],
+    "proposals": {
+     "samples": 287,
+     "cosine_to_goal_mean": 0.3950509685896387,
+     "share_at_goal": 0.554006968641115,
+     "share_away_from_goal": 0.20557491289198607,
+     "flow_samples": 248,
+     "cosine_to_flow_mean": -0.6169279974292478,
+     "share_against_flow": 0.7137096774193549
+    },
     "connectome_share": 0.6966666666666667,
     "override_share": 0.21666666666666667,
     "stale_share": 0.08666666666666667,
@@ -277,6 +304,15 @@
      0.957,
      1.439
     ],
+    "proposals": {
+     "samples": 407,
+     "cosine_to_goal_mean": 0.21368654645051402,
+     "share_at_goal": 0.43734643734643736,
+     "share_away_from_goal": 0.3464373464373464,
+     "flow_samples": 366,
+     "cosine_to_flow_mean": -0.3717618997625804,
+     "share_against_flow": 0.6420765027322405
+    },
     "connectome_share": 0.5951807228915663,
     "override_share": 0.3493975903614458,
     "stale_share": 0.05542168674698795,
@@ -332,6 +368,15 @@
      2.183,
      3.557
     ],
+    "proposals": {
+     "samples": 646,
+     "cosine_to_goal_mean": 0.37172064483049605,
+     "share_at_goal": 0.5835913312693498,
+     "share_away_from_goal": 0.3111455108359133,
+     "flow_samples": 590,
+     "cosine_to_flow_mean": -0.38149672102466226,
+     "share_against_flow": 0.5677966101694916
+    },
     "connectome_share": 0.6656346749226006,
     "override_share": 0.30340557275541796,
     "stale_share": 0.030959752321981424,

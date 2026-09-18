@@ -160,6 +160,45 @@ per trial ([results](results/halflife/channel-trials-2026-09-18.json)).
 
 Twenty trials each. With the channel fed, the chain fired on 83% of its align intents against 73% with zeros and reached the target 0.25 s sooner at the median, but neither difference is significant at this size (two-sided p 0.12 and 0.11), the tracking error of the align steps was no better (p 0.57), and the model was overridden about four times as often (27% of steps against 7%; per-trial model share p 2e-06). The live channel changes what the model proposes, mostly into disagreement with the envelope, so whatever the outcome gained is as likely the envelope's deterministic steps as the model's. What the calibration and these trials establish is that the channel can be fed faithfully and that the v4 readout does not use it well live; its value for the model is not shown. The next lever is training: a readout that sees the slip present, absent and scaled (slip dropout, blanking and gain in the training world, `--slip-dropout`, `--slip-blank`, `--slip-gain`) so that it neither depends on the channel nor is thrown by it.
 
+Where the proposals point says why. Over every align step the model was asked for, its proposal's
+cosine with the goal error averaged +0.82 with the channel at zero (90% of proposals
+within 60° of the goal, 7% pointing away) and +0.37 with it fed (56% and
+26%); and against the flow it was given, the fed proposals averaged a cosine of
+-0.46, 62% of them within 60° of *opposite* to the flow. The readout turns
+against the slip, which in the training world is the same as continuing its own turn: the slip
+there is minus the view's own motion and nothing else, so the channel handed back the
+own-velocity shortcut that adapter v3 had removed from the haltere channel. Live, the flow also
+carries the grunt's motion at point blank, the two cues disagree, and the readout follows the
+slip off the goal until the envelope overrides it. The training world's slip needs what the
+percept actually reports when something else moves, before this channel can help.
+
+## The model against the reference, live
+
+The same trials with the deterministic align controller (no model in the loop) and with the
+v1b readout (velocity and goal error, all motor neurons, the best supervised tracker on the
+suite) give the comparison the suite could only simulate. All four conditions ran the same
+night from the same quicksave; the reference and v1b blocks followed the v4 blocks rather than
+alternating with them.
+
+| Measurement | Deterministic reference, no model | v1b readout (velocity and goal) | v4 readout, channel at zero | v4 readout, channel fed |
+|---|---:|---:|---:|---:|
+| Trials | 20 | 20 | 20 | 20 |
+| Align intents, of which fired | 82 of 113 (73%) | 69 of 89 (78%) | 72 of 98 (73%) | 81 of 98 (83%) |
+| Acquisition, median (p75) | 1.64 s (1.99) | 1.76 s (2.32) | 2.13 s (2.78) | 1.88 s (2.64) |
+| Tracking error of align steps, median of trial means | 141 px | 150 px | 143 px | 153 px |
+| From the model / overridden | n/a | 85.2% / 11.2% | 88.8% / 7.1% | 68.3% / 27.0% |
+| Model proposals within 60° of the goal | n/a | 83% | 90% | 56% |
+| Model samples carrying a credible flow | 0 | 0 | 0 | 7,742 |
+
+The reference acquires the target faster than the supervised v4 with the channel at zero
+(1.64 against 2.13 s at the median, p 0.000) and fires the same share of its
+intents (p 0.88); against v4 with the channel fed the acquisition gap is p 0.03 and the firing gap
+p 0.08. v1b against v4 at zero: acquisition p 0.03, firing p 0.52; v1b against the
+reference: acquisition p 0.09, firing p 0.42. This is the live version of the suite's
+finding that the supervised connectome settles later than the reference: in a point-blank
+fight the envelope keeps the model safe and the model does not make the chain faster. What the
+model adds live is not yet a better outcome; the measurements to beat are now on record.
+
 ## Limits and next work
 
 No level was completed. Cheats supplied the loadout and the test enemies; the fights are a

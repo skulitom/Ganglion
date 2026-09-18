@@ -103,6 +103,33 @@ def acquisition(rows, intents):
     return [round(t, 3) for t in times if t >= 0]
 
 
+def proposals(rows):
+    """Where the model's align proposals point: the cosine with the goal error and, for samples
+    that carried a flow, with the flow. A readout that follows the slip against the goal shows
+    here before it shows in the override share."""
+    to_goal, to_flow = [], []
+    for e in rows:
+        if e["kind"] != "shadow_prediction" or e.get("stage") != "align" or "raw_actions" not in e:
+            continue
+        si = e.get("sensor_input", {})
+        goal = np.array(si.get("goal", [0, 0]), float) - np.array(si.get("cursor", [0, 0]), float)
+        raw = np.array(e["raw_actions"][:2], float)
+        if np.linalg.norm(goal) < 1 or np.linalg.norm(raw) < 1e-6:
+            continue
+        to_goal.append(float(raw @ goal / np.linalg.norm(raw) / np.linalg.norm(goal)))
+        flow = si.get("flow")
+        if flow and np.linalg.norm(flow[:2]) > 50:
+            f = np.array(flow[:2], float)
+            to_flow.append(float(raw @ f / np.linalg.norm(raw) / np.linalg.norm(f)))
+    return {"samples": len(to_goal),
+            "cosine_to_goal_mean": float(np.mean(to_goal)) if to_goal else None,
+            "share_at_goal": float(np.mean(np.array(to_goal) > .5)) if to_goal else None,
+            "share_away_from_goal": float(np.mean(np.array(to_goal) < 0)) if to_goal else None,
+            "flow_samples": len(to_flow),
+            "cosine_to_flow_mean": float(np.mean(to_flow)) if to_flow else None,
+            "share_against_flow": float(np.mean(np.array(to_flow) < -.5)) if to_flow else None}
+
+
 def slice_summary(rows):
     s = summarise(rows)
     looks = [e for e in rows if e["kind"] == "look_done" and "error_px" in e]
@@ -111,7 +138,7 @@ def slice_summary(rows):
     fired = sum(1 for e in intents if e.get("shots"))
     acquired = acquisition(rows, intents)
     return {"view_commands": s["view_commands"], "controller_shares": s["controller_shares"],
-            "acquisition_s": acquired,
+            "acquisition_s": acquired, "proposals": proposals(rows),
             "connectome_share": s["connectome_share"], "override_share": s["override_share"], "stale_share": s["stale_share"],
             "align_intents": len(intents), "align_outcomes": s["align_outcomes"], "intents_that_fired": fired,
             "reflex_fired": s["reflex_fired"], "samples_with_flow": s["samples_with_flow"],
@@ -158,7 +185,20 @@ def pooled(report):
             outcomes[k] = outcomes.get(k, 0) + v
     errors = [x["error_px"]["mean"] for x in s if x["error_px"]]
     acquired = [t for x in s for t in x.get("acquisition_s", [])]
+    props = [x["proposals"] for x in s if x.get("proposals") and x["proposals"]["samples"]]
+    weighted = lambda key: (float(sum(p[key] * p["samples"] for p in props if p[key] is not None)
+                                  / max(1, sum(p["samples"] for p in props if p[key] is not None)))
+                            if any(p[key] is not None for p in props) else None)
+    flow_props = [p for p in props if p["cosine_to_flow_mean"] is not None]
     return {"trials": len(s), "view_commands": sum(x["view_commands"] for x in s),
+            "proposals": {"samples": sum(p["samples"] for p in props),
+                          "cosine_to_goal_mean": weighted("cosine_to_goal_mean"),
+                          "share_at_goal": weighted("share_at_goal"), "share_away_from_goal": weighted("share_away_from_goal"),
+                          "flow_samples": sum(p["flow_samples"] for p in flow_props),
+                          "cosine_to_flow_mean": (float(sum(p["cosine_to_flow_mean"] * p["flow_samples"] for p in flow_props)
+                                                        / max(1, sum(p["flow_samples"] for p in flow_props))) if flow_props else None),
+                          "share_against_flow": (float(sum(p["share_against_flow"] * p["flow_samples"] for p in flow_props)
+                                                       / max(1, sum(p["flow_samples"] for p in flow_props))) if flow_props else None)},
             "acquisition_s_median": float(np.median(acquired)) if acquired else None,
             "acquisition_s_p75": float(np.percentile(acquired, 75)) if acquired else None, "acquisitions": len(acquired),
             "connectome_share": shares.get("connectome", 0) / total, "override_share": shares.get("deterministic_override", 0) / total,
