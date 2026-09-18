@@ -172,6 +172,8 @@ carries the grunt's motion at point blank, the two cues disagree, and the readou
 slip off the goal until the envelope overrides it. The training world's slip needs what the
 percept actually reports when something else moves, before this channel can help.
 
+A day later the flow percept learned to keep known movers out of its ego-motion: what the track and motion watches follow is windowed out of the phase correlation and kept out of the fit. Twenty more fed trials with that in place, after a game restart from the same quicksave ([per-trial files](results/halflife/channel-trials/), `lptc-excl`): the flow followed the applied turn about as it had (per-trial median slope 0.50, correlation 0.77, against 0.50 and 0.92 in the fed trials above, which were already faithful; the 0.22 of the first engagement was the uncapped turns and the ungated summary), and the readout behaved as before: 54% of its proposals against the flow, 46% at the goal, 35% of steps overridden, 65 of 92 intents fired (against the fed trials above p 0.05; acquisition 1.91 s, p 0.38). So the percept was not the problem in these trials, and the readout's turning against the slip is its own: a memoryless teacher imitated with any own-motion signal in view, in whatever channel, leaves the readout the same shortcut, and the slip is that signal. Between-session variation (fed trials on two days: firing 83% and 71%) is of the same size as the differences between conditions, which bounds what twenty trials can show.
+
 ## The model against the reference, live
 
 The same trials with the deterministic align controller (no model in the loop) and with the

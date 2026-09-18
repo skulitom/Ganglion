@@ -142,6 +142,7 @@ def slice_summary(rows):
             "connectome_share": s["connectome_share"], "override_share": s["override_share"], "stale_share": s["stale_share"],
             "align_intents": len(intents), "align_outcomes": s["align_outcomes"], "intents_that_fired": fired,
             "reflex_fired": s["reflex_fired"], "samples_with_flow": s["samples_with_flow"],
+            "flow_against_applied_turn": s["flow_against_applied_turn"],
             "inference_ms": s["inference_ms"], "observations_dropped": s["observations_dropped"],
             "error_px": {"mean": float(err.mean()), "median": float(np.median(err)), "p90": float(np.percentile(err, 90)),
                          "steps": int(len(err))} if len(err) else None}
@@ -190,6 +191,7 @@ def pooled(report):
                                   / max(1, sum(p["samples"] for p in props if p[key] is not None)))
                             if any(p[key] is not None for p in props) else None)
     flow_props = [p for p in props if p["cosine_to_flow_mean"] is not None]
+    fits = [x["flow_against_applied_turn"] for x in s if x.get("flow_against_applied_turn")]
     return {"trials": len(s), "view_commands": sum(x["view_commands"] for x in s),
             "proposals": {"samples": sum(p["samples"] for p in props),
                           "cosine_to_goal_mean": weighted("cosine_to_goal_mean"),
@@ -199,6 +201,10 @@ def pooled(report):
                                                         / max(1, sum(p["flow_samples"] for p in flow_props))) if flow_props else None),
                           "share_against_flow": (float(sum(p["share_against_flow"] * p["flow_samples"] for p in flow_props)
                                                        / max(1, sum(p["flow_samples"] for p in flow_props))) if flow_props else None)},
+            "flow_against_applied_turn": {"trials": len(fits),
+                                          "slope_median": float(np.median([f["slope_flow_per_expected"] for f in fits])),
+                                          "correlation_median": float(np.median([f["correlation"] for f in fits if f["correlation"] is not None]))
+                                          if any(f["correlation"] is not None for f in fits) else None} if fits else None,
             "acquisition_s_median": float(np.median(acquired)) if acquired else None,
             "acquisition_s_p75": float(np.percentile(acquired, 75)) if acquired else None, "acquisitions": len(acquired),
             "connectome_share": shares.get("connectome", 0) / total, "override_share": shares.get("deterministic_override", 0) / total,
