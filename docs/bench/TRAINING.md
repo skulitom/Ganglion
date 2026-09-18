@@ -475,22 +475,28 @@ Readout ([readout v6](results/cursor-readout-v6.json)): 1/16 held-out static tar
 460 px terminal error. DAgger ([DAgger v6](results/cursor-dagger-v6.json); validation 0/8; 0/8; 0/8; round-03
 selected): 0/16 with 75 px. The suite ([cursor-suite-v6](results/cursor-suite-v6.json)) against v5b and v3b:
 
-| Task | Controller | v6 (direction, adapter 5) | v5b (goal scale 0.2) | v3b |
-|---|---|---:|---:|---:|
-| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
-| settle | connectome | 0/32 at 41.7 px, 19970 ms | 22/32 at 56.2 px, 450 ms | 19/32 at 14.8 px, 780 ms |
-| settle | supervised | 32/32 at 2.4 px, 335 ms, 6% overridden | 32/32 at 3.6 px, 345 ms, 3% overridden | 32/32 at 3.7 px, 375 ms, 2% overridden |
-| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
-| jump | connectome | 2/256 at 76.9 px, 2195 ms | 86/256 at 93.5 px, 630 ms | 106/256 at 52.5 px, 875 ms |
-| jump | supervised | 256/256 at 22.3 px, 665 ms, 20% overridden | 227/256 at 23.2 px, 660 ms, 10% overridden | 241/256 at 22.8 px, 650 ms, 6% overridden |
-| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
-| pursuit | connectome | 2/32 at 65.7 px, 240 ms | 6/32 at 110.6 px, 225 ms | 10/32 at 52.6 px, 280 ms |
-| pursuit | supervised | 31/32 at 5.1 px, 200 ms, 49% overridden | 22/32 at 11.3 px, 190 ms, 21% overridden | 24/32 at 10.1 px, 215 ms, 6% overridden |
-| camera | teacher | 32/32 at 4.0 px, 445 ms | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms |
-| camera | connectome | 2/32 at 98.4 px, 540 ms | 0/32 at 114.6 px, 465 ms | 1/32 at 77.4 px, 560 ms |
-| camera | supervised | 32/32 at 3.7 px, 530 ms, 58% overridden | 24/32 at 9.4 px, 450 ms, 31% overridden | 18/32 at 11.4 px, 550 ms, 19% overridden |
+| Task | Controller | v6 (direction, adapter 5) | v7 (v6, stopping samples weighted 10×) | v5b (goal scale 0.2) | v3b |
+|---|---|---:|---:|---:|---:|
+| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
+| settle | connectome | 0/32 at 41.7 px, 19970 ms | 0/32 at 44.3 px, 19980 ms | 22/32 at 56.2 px, 450 ms | 19/32 at 14.8 px, 780 ms |
+| settle | supervised | 32/32 at 2.4 px, 335 ms, 6% overridden | 32/32 at 2.5 px, 395 ms, 7% overridden | 32/32 at 3.6 px, 345 ms, 3% overridden | 32/32 at 3.7 px, 375 ms, 2% overridden |
+| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
+| jump | connectome | 2/256 at 76.9 px, 2195 ms | 9/256 at 59.7 px, 1820 ms | 86/256 at 93.5 px, 630 ms | 106/256 at 52.5 px, 875 ms |
+| jump | supervised | 256/256 at 22.3 px, 665 ms, 20% overridden | 254/256 at 22.6 px, 690 ms, 18% overridden | 227/256 at 23.2 px, 660 ms, 10% overridden | 241/256 at 22.8 px, 650 ms, 6% overridden |
+| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
+| pursuit | connectome | 2/32 at 65.7 px, 240 ms | 3/32 at 58.5 px, 235 ms | 6/32 at 110.6 px, 225 ms | 10/32 at 52.6 px, 280 ms |
+| pursuit | supervised | 31/32 at 5.1 px, 200 ms, 49% overridden | 29/32 at 7.2 px, 225 ms, 27% overridden | 22/32 at 11.3 px, 190 ms, 21% overridden | 24/32 at 10.1 px, 215 ms, 6% overridden |
+| camera | teacher | 32/32 at 4.0 px, 445 ms | 32/32 at 4.0 px, 445 ms | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms |
+| camera | connectome | 2/32 at 98.4 px, 540 ms | 1/32 at 99.8 px, 565 ms | 0/32 at 114.6 px, 465 ms | 1/32 at 77.4 px, 560 ms |
+| camera | supervised | 32/32 at 3.7 px, 530 ms, 58% overridden | 31/32 at 5.0 px, 535 ms, 35% overridden | 24/32 at 9.4 px, 450 ms, 31% overridden | 18/32 at 11.4 px, 550 ms, 19% overridden |
 
 The direction encoding removes the fading but not the stopping: alone the model never settles (0/32; it holds speed through the goal and oscillates around it, 42 px mean error), while under supervision it matches the teacher on every task, settle 32/32 in 335 ms at 2.4 px, jump 256/256 at 22.3 px, pursuit 31/32 at 5.1 px against the teacher's 5.5, camera 32/32 at 3.7 px against 4.0, with the envelope intervening on half the steps of the moving tasks, where it is now the stopping rule. Under supervision the model's contribution is the full-speed direction and the deceleration is the envelope's; a readout that stops on its own needs the distance to act on the magnitude, which a linear readout of this network does not give it.
+
+**v7** is v6 with the decelerating samples (a teacher command shorter than one step) weighted
+ten times in the ridge fit (`--near-goal-weight 10`), so that stopping is part of what the
+readout is fitted to rather than a sliver of the harvest ([readout v7](results/cursor-readout-v7.json):
+1/16 held-out at 452 px; [DAgger v7](results/cursor-dagger-v7.json), validation 0/8; 0/8; 0/8,
+round-03 selected: 1/16 at 90 px; [cursor-suite-v7](results/cursor-suite-v7.json)). Weighting the stopping samples did not give the model a stop: alone it still never settles (0/32 at 44 px), jump 9/256, pursuit 3/32; under supervision settle 32/32 in 395 ms, jump 254/256, pursuit 29/32 at 7.2 px, camera 31/32 at 5.0 px, with fewer interventions than v6 (27 to 35% against 49 to 58% on the moving tasks). A step-response probe says why: fed a reversal of the goal direction, the v6 and v3b readouts take 6 to 7 network steps (60 to 70 ms) to change sign and the selected v7 readout 5, so a direction-encoded model must overshoot by that many steps of travel plus the plant's delay and then oscillate, while a proportional zone near the goal (the tanh encoding of versions 2 to 4) trades the overshoot for fading. The network's response lag, not the fit, is what keeps the readout from stopping on its own; under supervision the envelope is the brake and the live result stands with v6.
 
 ## Reproduce
 
@@ -525,6 +531,9 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v6 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 5 --goal-scale 0.1
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v6/cursor-readout.pt --features runs/cursor-readout-v6/features.pt --out runs/cursor-dagger-v6 --rounds 3 --neurons 4096 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v6/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v6/features.pt --out runs/suite-v6 --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v7 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 5 --goal-scale 0.1 --near-goal-weight 10
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v7/cursor-readout.pt --features runs/cursor-readout-v7/features.pt --out runs/cursor-dagger-v7 --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v7/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v7/features.pt --out runs/suite-v7 --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has
