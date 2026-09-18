@@ -193,7 +193,7 @@ def test_feature_cache_provenance_must_match_the_checkpoint():
 
 
 def test_near_goal_weights_mark_the_decelerating_samples():
-    import torch
+    torch = pytest.importorskip("torch")
     from ganglion.train.cursor_readout import near_goal_weights
     target = torch.tensor([[1.0, 0.0], [.6, .8], [.3, 0.0], [0.0, 0.0], [-.5, .5]])
     w = near_goal_weights(torch, target, 8.0)
