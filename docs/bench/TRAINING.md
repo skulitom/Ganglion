@@ -458,6 +458,40 @@ A goal scale of 0.1 gives the fastest supervised settling on the suite so far (3
 7/16 held-out at 433 px; [DAgger v5b](results/cursor-dagger-v5b.json), validation 2/8; 3/8; 4/8,
 round-03 selected: 7/16 at 137 px; [cursor-suite-v5b](results/cursor-suite-v5b.json)). At 0.2 the model keeps its feet: alone it settles 22/32 at 450 ms (v3b 19/32 at 780 ms, the most settled of any checkpoint), and under supervision it settles in 345 ms with the envelope intervening on 3.4% of steps (v5: 340 ms at 12.7%; v3b: 375 ms at 1.9%), so the settling gain of the stronger input survives at a scale where the readout still stands on its own. Camera sits between v3b and v5 (24/32 at 9.4 px under supervision); pursuit does not: 22/32 at 11.3 px is below both v3b (24/32 at 10.1 px) and v5 (28/32 at 8.9 px), though it acquires faster than v3b (190 ms against 215 ms). v5b is the settling candidate, v5 the tracking candidate under supervision, v3b the most autonomous on the moving tasks.
 
+## The goal as a direction: adapter version 5
+
+Live at matched speed ([HALFLIFE.md](HALFLIFE.md)) the supervised v4 reaches its first shot as
+fast as the reference but fires on fewer of its intents: its unfired intents time out hovering
+about 40 px from a moving target. Every readout's proposal magnitude shrinks with the
+distance, from the intent speed far away to about half at 15 to 30 px and a fifth inside 15 px
+(v4 0.20, v1b 0.48, v5b 0.36 in units of the intent speed), because the goal input, the tanh
+of the error over 0.3 s of intent speed, is 0.05 there and a ridge readout cannot make a full
+step from it. Adapter **version 5** encodes the goal as a unit direction at every distance
+and puts the tanh distance (over `goal_scale` seconds of speed) in the fourth slot, so the
+readout can hold speed to the goal and use the distance to stop. **v6** is version 5 with all
+motor neurons and a goal scale of 0.1, the same harvest and DAgger schedule as before.
+
+Readout ([readout v6](results/cursor-readout-v6.json)): 1/16 held-out static targets with
+460 px terminal error. DAgger ([DAgger v6](results/cursor-dagger-v6.json); validation 0/8; 0/8; 0/8; round-03
+selected): 0/16 with 75 px. The suite ([cursor-suite-v6](results/cursor-suite-v6.json)) against v5b and v3b:
+
+| Task | Controller | v6 (direction, adapter 5) | v5b (goal scale 0.2) | v3b |
+|---|---|---:|---:|---:|
+| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
+| settle | connectome | 0/32 at 41.7 px, 19970 ms | 22/32 at 56.2 px, 450 ms | 19/32 at 14.8 px, 780 ms |
+| settle | supervised | 32/32 at 2.4 px, 335 ms, 6% overridden | 32/32 at 3.6 px, 345 ms, 3% overridden | 32/32 at 3.7 px, 375 ms, 2% overridden |
+| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
+| jump | connectome | 2/256 at 76.9 px, 2195 ms | 86/256 at 93.5 px, 630 ms | 106/256 at 52.5 px, 875 ms |
+| jump | supervised | 256/256 at 22.3 px, 665 ms, 20% overridden | 227/256 at 23.2 px, 660 ms, 10% overridden | 241/256 at 22.8 px, 650 ms, 6% overridden |
+| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
+| pursuit | connectome | 2/32 at 65.7 px, 240 ms | 6/32 at 110.6 px, 225 ms | 10/32 at 52.6 px, 280 ms |
+| pursuit | supervised | 31/32 at 5.1 px, 200 ms, 49% overridden | 22/32 at 11.3 px, 190 ms, 21% overridden | 24/32 at 10.1 px, 215 ms, 6% overridden |
+| camera | teacher | 32/32 at 4.0 px, 445 ms | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms |
+| camera | connectome | 2/32 at 98.4 px, 540 ms | 0/32 at 114.6 px, 465 ms | 1/32 at 77.4 px, 560 ms |
+| camera | supervised | 32/32 at 3.7 px, 530 ms, 58% overridden | 24/32 at 9.4 px, 450 ms, 31% overridden | 18/32 at 11.4 px, 550 ms, 19% overridden |
+
+The direction encoding removes the fading but not the stopping: alone the model never settles (0/32; it holds speed through the goal and oscillates around it, 42 px mean error), while under supervision it matches the teacher on every task, settle 32/32 in 335 ms at 2.4 px, jump 256/256 at 22.3 px, pursuit 31/32 at 5.1 px against the teacher's 5.5, camera 32/32 at 3.7 px against 4.0, with the envelope intervening on half the steps of the moving tasks, where it is now the stopping rule. Under supervision the model's contribution is the full-speed direction and the deceleration is the envelope's; a readout that stops on its own needs the distance to act on the magnitude, which a linear readout of this network does not give it.
+
 ## Reproduce
 
 Use a CUDA-enabled Python environment with Haltere installed and its graph/checkpoint
@@ -488,6 +522,9 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v5b --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 3 --goal-scale 0.2
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v5b/cursor-readout.pt --features runs/cursor-readout-v5b/features.pt --out runs/cursor-dagger-v5b --rounds 3 --neurons 4096 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v5b/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v5b/features.pt --out runs/suite-v5b --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v6 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 5 --goal-scale 0.1
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v6/cursor-readout.pt --features runs/cursor-readout-v6/features.pt --out runs/cursor-dagger-v6 --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v6/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v6/features.pt --out runs/suite-v6 --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has
