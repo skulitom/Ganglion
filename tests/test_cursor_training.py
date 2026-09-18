@@ -192,6 +192,15 @@ def test_feature_cache_provenance_must_match_the_checkpoint():
         check_provenance({"adapter_version": 3, "goal_scale": .3, "slip": {"slip_dropout": .3}}, version=3, goal_scale=.3, slip=slip)
 
 
+def test_near_goal_weights_mark_the_decelerating_samples():
+    import torch
+    from ganglion.train.cursor_readout import near_goal_weights
+    target = torch.tensor([[1.0, 0.0], [.6, .8], [.3, 0.0], [0.0, 0.0], [-.5, .5]])
+    w = near_goal_weights(torch, target, 8.0)
+    assert w.tolist() == [1.0, 1.0, 8.0, 8.0, 8.0]              # a command shorter than a step is a stopping sample
+    assert near_goal_weights(torch, target, 1.0).tolist() == [1.0] * 5
+
+
 def test_adapter_version_5_keeps_the_goal_direction_at_full_strength_and_matches_the_world():
     from ganglion.core.aim import UNBOUNDED
     seeds = [1000, 1001, 1002, 1003]

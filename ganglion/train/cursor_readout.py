@@ -113,7 +113,16 @@ def install_head(torch, brain, mean, variance, selected, weights, bias):
     brain.cfg.action_tau = brain.cfg.dt
 
 
-def fit(torch, brain, train, validation, guard, feature_count):
+def near_goal_weights(torch, target, near_goal_weight):
+    """Sample weights for the ridge fit: `near_goal_weight` on the samples where the teacher is
+    already decelerating (its command shorter than a full step), 1 elsewhere."""
+    weights = torch.ones(len(target), dtype=torch.float64)
+    if near_goal_weight != 1:
+        weights[target.norm(dim=1) < .98] = float(near_goal_weight)
+    return weights
+
+
+def fit(torch, brain, train, validation, guard, feature_count, near_goal_weight=1.0):
     raw, _, target = train
     val_raw, _, val_target = validation
     mean, variance = raw.mean(0), raw.var(0, unbiased=False)
@@ -127,8 +136,9 @@ def fit(torch, brain, train, validation, guard, feature_count):
     x = x[:, selected].to(brain.device, dtype=torch.float64)
     val_x = ((val_raw-mean)/std)[:, selected].to(brain.device)
     y = torch.atanh(target.clamp(-.995, .995)).to(brain.device, dtype=torch.float64)
-    bias = y.mean(0)
-    gram, rhs = x.T @ x / len(x), x.T @ (y-bias) / len(x)
+    w = near_goal_weights(torch, target, near_goal_weight).to(brain.device)
+    bias = (w[:, None] * y).sum(0) / w.sum()
+    gram, rhs = x.T @ (w[:, None] * x) / w.sum(), x.T @ (w[:, None] * (y-bias)) / w.sum()
     trials, best = [], None
     for penalty in (1e-5, 1e-4, 1e-3, 1e-2, 1e-1):
         guard.check(force=True)
@@ -139,7 +149,7 @@ def fit(torch, brain, train, validation, guard, feature_count):
         if best is None or mse < best[0]:
             best = mse, penalty, weights.cpu(), bias.float().cpu()
     install_head(torch, brain, mean, variance, selected, best[2], best[3])
-    return {"selected_motor_neurons": len(selected), "ridge": best[1],
+    return {"selected_motor_neurons": len(selected), "ridge": best[1], "near_goal_weight": float(near_goal_weight),
             "validation_mse": best[0], "candidates": trials}
 
 
@@ -260,9 +270,10 @@ def run(args):
                 "provenance": {"adapter_version": version, "goal_scale": args.goal_scale,
                                "view_fraction": args.view_fraction, "slip": slip_options(args)}}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
-    report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
+    report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features, args.near_goal_weight)
     metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
                 "view_fraction": args.view_fraction, "slip": slip_options(args), "goal_scale": args.goal_scale,
+                "near_goal_weight": args.near_goal_weight,
                 "method": "frozen connectome, ridge motor readout", "base_sha256": report["base_sha256"],
                 "control_authority": False, "training_seeds": splits["train"],
                 "validation_seeds": splits["validation"], "readout_fit": report["readout_fit"]}
@@ -298,6 +309,8 @@ def main():
                         "5: goal direction at full strength plus the distance")
     p.add_argument("--view-fraction", type=float, default=0.0,
                    help="share of harvested episodes that are views (unbounded, capture latency, slip in lptc)")
+    p.add_argument("--near-goal-weight", type=float, default=1.0,
+                   help="weight of the samples where the teacher is already decelerating in the ridge fit")
     p.add_argument("--goal-scale", type=float, default=0.3,
                    help="seconds of intent speed the goal error is normalised by (smaller: stronger input near the goal)")
     p.add_argument("--slip-dropout", type=float, default=0.0, help="share of view episodes trained without the slip")
@@ -311,6 +324,8 @@ def main():
         p.error("Use slip dropout and blank between 0 and 1 and a slip gain range inside (0, 2]")
     if not .02 <= args.goal_scale <= 2:
         p.error("Use a goal scale between 0.02 and 2 seconds of intent speed")
+    if not 1 <= args.near_goal_weight <= 100:
+        p.error("Use a near-goal weight between 1 and 100")
     if not (16 <= args.episodes <= 256 and 80 <= args.steps <= 500 and 32 <= args.features <= 4096
             and 10 <= args.seconds <= 1800 and 50 <= args.max_gpu_temp <= 70):
         p.error("Use bounded episodes 16–256, steps 80–500, features 32–4096, seconds 10–1800, temperature 50–70")
