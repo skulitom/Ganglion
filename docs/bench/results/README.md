@@ -34,6 +34,7 @@ connectome runs are shadow or supervised. Dates are in each file's `measured_at`
 | `cursor-dagger-v2.json` | DAgger with 1,000-tick kicked episodes; did not improve | [TRAINING.md](../TRAINING.md) |
 | `cursor-dagger-v1b.json` | Refit on all 3,913 motor neurons; the best supervised controller so far | [TRAINING.md](../TRAINING.md) |
 | `cursor-readout-v5.json`, `cursor-dagger-v5.json`, `cursor-suite-v5.json` | Goal scale 0.1 (v5) readout, DAgger and the suite | [TRAINING.md](../TRAINING.md) |
+| `cursor-readout-v5b.json`, `cursor-dagger-v5b.json`, `cursor-suite-v5b.json` | Goal scale 0.2 (v5b) readout, DAgger and the suite | [TRAINING.md](../TRAINING.md) |
 | `cursor-readout-v4b.json`, `cursor-dagger-v4b.json`, `cursor-suite-v4b.json`, `cursor-suite-v4b-noslip.json` | Adapter v4b (slip dropout, blanking and gain) readout, DAgger, and the suite with the slip and with the channel absent | [TRAINING.md](../TRAINING.md) |
 | `cursor-readout-v4.json`, `cursor-dagger-v4.json` | Adapter v4 (visual slip in lptc) readout and DAgger rounds | [TRAINING.md](../TRAINING.md) |
 | `cursor-suite-v4.json`, `cursor-suite-v3b-slip.json` | The suite for the v4 candidate, and the v3b checkpoint scored with the slip fed in | [TRAINING.md](../TRAINING.md) |

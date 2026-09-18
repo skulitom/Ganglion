@@ -437,22 +437,26 @@ validation 3/8; 2/8; 0/8; round-01 selected): 3/16 with 383 px.
 The suite ([cursor-suite-v5](results/cursor-suite-v5.json)) against v3b and v4 (success at mean
 tracking error, median settling or acquisition):
 
-| Task | Controller | v5 (goal scale 0.1) | v3b (0.3) | v4 (0.3, slip) |
-|---|---|---:|---:|---:|
-| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
-| settle | connectome | 5/32 at 234.1 px, 260 ms | 19/32 at 14.8 px, 780 ms | 18/32 at 60.7 px, 390 ms |
-| settle | supervised | 32/32 at 3.3 px, 340 ms | 32/32 at 3.7 px, 375 ms | 32/32 at 4.2 px, 490 ms |
-| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
-| jump | connectome | 2/256 at 403.7 px, 650 ms | 106/256 at 52.5 px, 875 ms | 51/256 at 159.9 px, 580 ms |
-| jump | supervised | 241/256 at 22.8 px, 680 ms | 241/256 at 22.8 px, 650 ms | 225/256 at 24.1 px, 750 ms |
-| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
-| pursuit | connectome | 0/32 at 339.9 px, 220 ms | 10/32 at 52.6 px, 280 ms | 3/32 at 201.4 px, 230 ms |
-| pursuit | supervised | 28/32 at 8.9 px, 170 ms | 24/32 at 10.1 px, 215 ms | 20/32 at 12.4 px, 225 ms |
-| camera | teacher | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms | 32/32 at 4.0 px, 445 ms |
-| camera | connectome | 0/32 at 135.8 px, 525 ms | 1/32 at 77.4 px, 560 ms | 3/32 at 87.9 px, 575 ms |
-| camera | supervised | 31/32 at 6.6 px, 480 ms | 18/32 at 11.4 px, 550 ms | 30/32 at 7.5 px, 505 ms |
+| Task | Controller | v5 (goal scale 0.1) | v5b (0.2) | v3b (0.3) | v4 (0.3, slip) |
+|---|---|---:|---:|---:|---:|
+| settle | teacher | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms | 32/32 at 2.2 px, 285 ms |
+| settle | connectome | 5/32 at 234.1 px, 260 ms | 22/32 at 56.2 px, 450 ms | 19/32 at 14.8 px, 780 ms | 18/32 at 60.7 px, 390 ms |
+| settle | supervised | 32/32 at 3.3 px, 340 ms | 32/32 at 3.6 px, 345 ms | 32/32 at 3.7 px, 375 ms | 32/32 at 4.2 px, 490 ms |
+| jump | teacher | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms | 256/256 at 20.3 px, 510 ms |
+| jump | connectome | 2/256 at 403.7 px, 650 ms | 86/256 at 93.5 px, 630 ms | 106/256 at 52.5 px, 875 ms | 51/256 at 159.9 px, 580 ms |
+| jump | supervised | 241/256 at 22.8 px, 680 ms | 227/256 at 23.2 px, 660 ms | 241/256 at 22.8 px, 650 ms | 225/256 at 24.1 px, 750 ms |
+| pursuit | teacher | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms | 31/32 at 5.5 px, 160 ms |
+| pursuit | connectome | 0/32 at 339.9 px, 220 ms | 6/32 at 110.6 px, 225 ms | 10/32 at 52.6 px, 280 ms | 3/32 at 201.4 px, 230 ms |
+| pursuit | supervised | 28/32 at 8.9 px, 170 ms | 22/32 at 11.3 px, 190 ms | 24/32 at 10.1 px, 215 ms | 20/32 at 12.4 px, 225 ms |
+| camera | teacher | 32/32 at 4.0 px, 445 ms | 32/32 at 4.0 px, 445 ms | 30/32 at 6.2 px, 490 ms | 32/32 at 4.0 px, 445 ms |
+| camera | connectome | 0/32 at 135.8 px, 525 ms | 0/32 at 114.6 px, 465 ms | 1/32 at 77.4 px, 560 ms | 3/32 at 87.9 px, 575 ms |
+| camera | supervised | 31/32 at 6.6 px, 480 ms | 24/32 at 9.4 px, 450 ms | 18/32 at 11.4 px, 550 ms | 30/32 at 7.5 px, 505 ms |
 
-A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. The stronger input makes the readout propose larger steps near the goal, which the envelope keeps in bounds and the model alone cannot. v3b stays the checkpoint that stands on its own and v5 the one that settles fastest under supervision; a middle scale (0.2) is being scored next.
+A goal scale of 0.1 gives the fastest supervised settling on the suite so far (340 ms against 375 ms for v3b and 490 ms for v4, the reference at 285 ms), the best supervised pursuit (28/32 at 8.9 px) and camera (31/32 at 6.6 px) rows, but the model alone falls apart (settle 5/32 at 234 px against v3b's 19/32 at 14.8 px, jump and pursuit near zero) and the envelope intervenes on 13 to 35% of steps against v3b's 2 to 6%. The stronger input makes the readout propose larger steps near the goal, which the envelope keeps in bounds and the model alone cannot. v3b stays the checkpoint that stands on its own and v5 the one that settles fastest under supervision.
+
+**v5b** is the same recipe at a goal scale of 0.2 ([readout v5b](results/cursor-readout-v5b.json):
+7/16 held-out at 433 px; [DAgger v5b](results/cursor-dagger-v5b.json), validation 2/8; 3/8; 4/8,
+round-03 selected: 7/16 at 137 px; [cursor-suite-v5b](results/cursor-suite-v5b.json)). At 0.2 the model keeps its feet: alone it settles 22/32 at 450 ms (v3b 19/32 at 780 ms, the most settled of any checkpoint), and under supervision it settles in 345 ms with the envelope intervening on 3.4% of steps (v5: 340 ms at 12.7%; v3b: 375 ms at 1.9%), so the settling gain of the stronger input survives at a scale where the readout still stands on its own. Pursuit and camera sit between v3b and v5 (22/32 at 11.3 px and 24/32 at 9.4 px under supervision). v5b is the settling candidate, v5 the tracking candidate under supervision, v3b the most autonomous on the moving tasks.
 
 ## Reproduce
 
@@ -481,6 +485,9 @@ standalone downloads. The base flight checkpoint SHA-256 appears in each report.
 .venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v5 --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 3 --goal-scale 0.1
 .venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v5/cursor-readout.pt --features runs/cursor-readout-v5/features.pt --out runs/cursor-dagger-v5 --rounds 3 --neurons 4096 --seconds 900
 .venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v5/round-01/cursor-readout.pt --mlp-features runs/cursor-dagger-v5/features.pt --out runs/suite-v5 --seconds 1500
+.venv/Scripts/python.exe -m ganglion.train.cursor_readout --checkpoint C:/DEV/Haltere/artifacts/ftPath2_best.pt --out runs/cursor-readout-v5b --episodes 64 --steps 200 --features 4096 --seconds 900 --adapter-version 3 --goal-scale 0.2
+.venv/Scripts/python.exe -m ganglion.train.cursor_dagger --checkpoint runs/cursor-readout-v5b/cursor-readout.pt --features runs/cursor-readout-v5b/features.pt --out runs/cursor-dagger-v5b --rounds 3 --neurons 4096 --seconds 900
+.venv/Scripts/python.exe -m ganglion.train.suite --checkpoint runs/cursor-dagger-v5b/round-03/cursor-readout.pt --mlp-features runs/cursor-dagger-v5b/features.pt --out runs/suite-v5b --seconds 1500
 ```
 
 Output directories must not already exist. Run one GPU job at a time. Each command has
