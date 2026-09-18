@@ -283,6 +283,8 @@ def run(args):
                       "adapter_version": saved.get("adapter_version", 2)}
     else:
         cache = torch.load(args.mlp_features, map_location="cpu", weights_only=True)
+        from .cursor_dagger import check_provenance
+        check_provenance(cache.get("provenance"), version=version, goal_scale=goal_scale)
         mlp, fit = train_mlp(torch, cache["train"], cache["validation"], guard, brain.device)
         path = args.out / "mlp-baseline.pt"
         torch.save({"model": mlp.state_dict(), "channels": brain.channel_dims, "adapter_version": version,

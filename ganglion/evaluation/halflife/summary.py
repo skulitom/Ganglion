@@ -15,14 +15,18 @@ from pathlib import Path
 import numpy as np
 
 
-def load(path):
+def load(path, first=None, last=None):
+    """The ledger's events sorted by time. `first` and `last` slice the file's non-blank lines
+    before decoding, the space a trial's event counts are taken in."""
+    lines = [line for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+    if first is not None or last is not None:
+        lines = lines[first:last]
     rows = []
-    for line in Path(path).read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            try:
-                rows.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
+    for line in lines:
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
     return sorted(rows, key=lambda e: e.get("t_mono", 0))
 
 

@@ -23,6 +23,7 @@ def test_summary_counts_shares_outcomes_and_relates_flow_to_turns(tmp_path):
     rows.append({"kind": "observation_dropped", "t_mono": t + .5})
     path = tmp_path / "events.jsonl"
     path.write_text("\n".join(json.dumps(r) for r in rows) + "\nnot json\n", encoding="utf-8")
+    assert len(load(path, 0, 3)) == 3 and load(path, 10, 12)[0]["kind"] == "look_done"   # slices are file lines, not sorted rows
     report = summarise(load(path), counts_per_px=1.2)
     assert report["view_commands"] == 11 and report["controller_shares"] == {"connectome": 6, "deterministic_override": 4, "deterministic_stale": 1}
     assert abs(report["connectome_share"] - 6 / 11) < 1e-9 and abs(report["stale_share"] - 1 / 11) < 1e-9

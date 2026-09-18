@@ -256,7 +256,9 @@ def run(args):
                     view_fraction=args.view_fraction, slip=slip_options(args), goal_scale=args.goal_scale)
     validation = harvest(torch, brain, splits["validation"], guard, steps=args.steps, batch=16, sense_version=version,
                          view_fraction=args.view_fraction, slip=slip_options(args), goal_scale=args.goal_scale)
-    torch.save({"train": train, "validation": validation, "splits": splits}, args.out/"features.pt")
+    torch.save({"train": train, "validation": validation, "splits": splits,
+                "provenance": {"adapter_version": version, "goal_scale": args.goal_scale,
+                               "view_fraction": args.view_fraction, "slip": slip_options(args)}}, args.out/"features.pt")
     print(json.dumps({"stage": "fit", "training_samples": len(train[0])}), flush=True)
     report["readout_fit"] = fit(torch, brain, train, validation, guard, args.features)
     metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",

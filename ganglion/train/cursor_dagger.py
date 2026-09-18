@@ -34,6 +34,7 @@ def run(args):
     for parameter in brain.parameters():
         parameter.requires_grad_(False)
     cache = torch.load(args.features, map_location="cpu", weights_only=True)
+    check_provenance(cache.get("provenance"), version=version, goal_scale=goal_scale, view_fraction=view_fraction, slip=slip)
     train, validation = cache["train"], cache["validation"]
     seeds = list(cache["splits"]["train"])
     validation_seeds = list(cache["splits"]["validation"])
@@ -75,7 +76,9 @@ def run(args):
         (args.out/"progress.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     # Keep raw motor-learning features local under the ignored output directory.
     torch.save({"train": train, "validation": validation,
-                "splits": {"train": seeds, "validation": validation_seeds}}, args.out/"features.pt")
+                "splits": {"train": seeds, "validation": validation_seeds},
+                "provenance": {"adapter_version": version, "goal_scale": goal_scale,
+                               "view_fraction": view_fraction, "slip": slip}}, args.out/"features.pt")
     selected, _, _ = load_checkpoint(best[1], "cuda")
     mlp, report["mlp_fit"] = train_mlp(torch, train, validation, guard, selected.device)
     report["held_out"] = []
@@ -88,6 +91,26 @@ def run(args):
                   elapsed_seconds=time.perf_counter()-started, selection="validation static success, then terminal error")
     (args.out/"report.json").write_text(json.dumps(report, indent=2, allow_nan=False), encoding="utf-8")
     print(json.dumps({"finished": True, "report": str(args.out/"report.json"), "peak_gpu_c": guard.peak}), flush=True)
+
+
+def check_provenance(provenance, *, version, goal_scale, view_fraction=None, slip=None):
+    """A feature cache harvested under another sensory contract than the checkpoint's would
+    train a readout on features the runtime never produces; refuse it. Caches from before
+    provenance was recorded pass with a warning."""
+    if provenance is None:
+        print(json.dumps({"stage": "features", "provenance": "unrecorded"}), flush=True)
+        return
+    if provenance.get("adapter_version") != version:
+        raise ValueError(f"The feature cache was harvested with adapter version {provenance.get('adapter_version')}, not {version}")
+    if abs(float(provenance.get("goal_scale", .3)) - goal_scale) > 1e-9:
+        raise ValueError(f"The feature cache was harvested with goal scale {provenance.get('goal_scale')}, not {goal_scale}")
+    if view_fraction is not None and abs(float(provenance.get("view_fraction", 0.0)) - view_fraction) > 1e-9:
+        raise ValueError("The feature cache was harvested with another view fraction than the checkpoint's")
+    if slip is not None:
+        recorded = dict(provenance.get("slip") or {})
+        recorded["slip_gain"] = tuple(recorded.get("slip_gain", (1.0, 1.0)))
+        if recorded != slip:
+            raise ValueError("The feature cache was harvested with other slip options than the checkpoint's")
 
 
 def main():

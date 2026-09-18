@@ -183,7 +183,7 @@ def detect_flow(frame: np.ndarray, spec, state: dict, *, captured: float, moving
     flow = dense_flow(state, aligned, small)
     flow[..., 0] += np.float32(dx)
     flow[..., 1] += np.float32(dy)
-    model = fit_ego_motion(flow, seed=(dx, dy), known=known)
+    model = fit_ego_motion(flow, seed=(dx, dy) if trusted else None, known=known)
     ego = wide_field(model, scale, captured - reference_time, aligned=trusted)
     ego["phase_response"] = response
     state["ego"] = ego

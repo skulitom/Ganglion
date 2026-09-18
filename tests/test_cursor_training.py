@@ -178,6 +178,20 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
         CursorWorld([1000], sense_version=5)
 
 
+def test_feature_cache_provenance_must_match_the_checkpoint():
+    from ganglion.train.cursor_dagger import check_provenance
+    slip = {"slip_dropout": 0.0, "slip_blank": 0.0, "slip_gain": (1.0, 1.0)}
+    check_provenance(None, version=3, goal_scale=.3)                                   # a cache from before the record
+    check_provenance({"adapter_version": 3, "goal_scale": .1, "view_fraction": 0.0, "slip": slip}, version=3, goal_scale=.1,
+                     view_fraction=0.0, slip=slip)
+    with pytest.raises(ValueError):
+        check_provenance({"adapter_version": 4, "goal_scale": .3}, version=3, goal_scale=.3)
+    with pytest.raises(ValueError):
+        check_provenance({"adapter_version": 3, "goal_scale": .3}, version=3, goal_scale=.1)
+    with pytest.raises(ValueError):
+        check_provenance({"adapter_version": 3, "goal_scale": .3, "slip": {"slip_dropout": .3}}, version=3, goal_scale=.3, slip=slip)
+
+
 def test_goal_scale_is_shared_by_the_world_and_the_adapter():
     from ganglion.core.aim import UNBOUNDED
     seeds = [1000, 1001, 1002, 1003]

@@ -36,21 +36,29 @@ def step(directory, command, timeout=30):
 
 
 def console_open(frame_path):
-    """Whether the game's console box is on screen in a saved look frame: its text area is a flat
-    olive with grey text, unlike any scene. The grave key toggles the console, so a trial must
-    know the state before it types."""
+    """Whether the game's console box is on screen in a saved look frame: a flat olive text area
+    with grey text, a lighter title strip above it and a near-white input box below it, at the
+    console's fixed place. The grave key toggles the console, so a trial must know the state
+    before it types; an olive wall alone must not pass."""
     import cv2
     frame = cv2.imread(str(frame_path))
     if frame is None:
         return False
     scale = frame.shape[1] / 1280
-    x0, x1, y0, y1 = (int(round(v * scale)) for v in (60, 500, 90, 300))
-    patch = frame[y0:y1, x0:x1].astype(float)
-    if patch.size == 0:
+
+    def region(x0, x1, y0, y1):
+        a, b, c, d = (int(round(v * scale)) for v in (x0, x1, y0, y1))
+        return frame[c:d, a:b].astype(float)
+    text, title, box = region(60, 500, 90, 300), region(60, 500, 44, 60), region(60, 480, 410, 424)
+    if text.size == 0 or title.size == 0 or box.size == 0:
         return False
-    b, g, r = patch.mean(axis=(0, 1))
-    spread = patch.std(axis=(0, 1))
-    return bool(55 <= g <= 110 and 5 <= g - b <= 30 and 0 <= g - r <= 25 and spread.max() - spread.min() < 4)
+    b, g, r = text.mean(axis=(0, 1))
+    spread = text.std(axis=(0, 1))
+    olive = 55 <= g <= 110 and 5 <= g - b <= 30 and 0 <= g - r <= 25 and spread.max() - spread.min() < 4
+    tb, tg, tr = title.mean(axis=(0, 1))
+    strip = tg > g + 5 and 5 <= tg - tb <= 35 and title.std(axis=(0, 1)).max() < 25
+    bright = box.mean(axis=(0, 1)).min() > 150 and box.std(axis=(0, 1)).max() < 40
+    return bool(olive and strip and bright)
 
 
 def console_commands(directory, lines):
@@ -71,7 +79,8 @@ def event_count(directory):
     return sum(1 for line in path.read_text(encoding="utf-8").splitlines() if line.strip()) if path.exists() else 0
 
 
-def run_trial(directory, *, grunts=2, back_ms=1200, watch_s=14.0, controller="connectome", max_turn_px_s=2500.0):
+def run_trial(directory, *, grunts=2, back_ms=1200, watch_s=14.0, controller="connectome", max_turn_px_s=2500.0,
+              speed_px_s=1200.0):
     step(directory, {"op": "tap", "key": "f7"})                     # quickload
     time.sleep(3.0)
     step(directory, {"op": "look"})
@@ -81,7 +90,8 @@ def run_trial(directory, *, grunts=2, back_ms=1200, watch_s=14.0, controller="co
     step(directory, {"op": "tap", "key": "3"})                      # the submachine gun, whatever the loadout left in hand
     if back_ms:
         step(directory, {"op": "walk", "keys": ["s"], "ms": int(back_ms)})
-    step(directory, {"op": "engage", "response": "track", "controller": controller, "max_turn_px_s": max_turn_px_s})
+    step(directory, {"op": "engage", "response": "track", "controller": controller, "max_turn_px_s": max_turn_px_s,
+                     "speed_px_s": speed_px_s})
     watched = step(directory, {"op": "wait", "s": watch_s}, timeout=watch_s + 10)
     step(directory, {"op": "disarm"})
     step(directory, {"op": "cancel"})
@@ -92,8 +102,20 @@ def run_trial(directory, *, grunts=2, back_ms=1200, watch_s=14.0, controller="co
 
 
 def acquisition(rows, intents):
-    """Seconds from each firing intent's start to its last align step: the time the target took
-    to reach the crosshair. Intents that never fired have no acquisition."""
+    """Seconds from each firing intent's start to its first shot's release: the time the target
+    took to reach the crosshair. Intents that never fired have no acquisition."""
+    first_fire = {}
+    for e in rows:
+        if e["kind"] == "input_released" and e.get("action") == "fire" and "intent_id" in e:
+            first_fire[e["intent_id"]] = min(first_fire.get(e["intent_id"], float("inf")), e["t_mono"])
+    times = [first_fire[e["intent_id"]] - e["started_mono"] for e in intents
+             if e.get("shots") and e.get("intent_id") in first_fire and "started_mono" in e]
+    return [round(t, 3) for t in times if t >= 0]
+
+
+def engagement(rows, intents):
+    """Seconds from each firing intent's start to its last align step, which includes the
+    re-alignment between shots and any tracking after the last one."""
     last_step = {}
     for e in rows:
         if e["kind"] == "look_done" and "intent_id" in e:
@@ -138,7 +160,7 @@ def slice_summary(rows):
     fired = sum(1 for e in intents if e.get("shots"))
     acquired = acquisition(rows, intents)
     return {"view_commands": s["view_commands"], "controller_shares": s["controller_shares"],
-            "acquisition_s": acquired, "proposals": proposals(rows),
+            "acquisition_s": acquired, "engagement_s": engagement(rows, intents), "proposals": proposals(rows),
             "connectome_share": s["connectome_share"], "override_share": s["override_share"], "stale_share": s["stale_share"],
             "align_intents": len(intents), "align_outcomes": s["align_outcomes"], "intents_that_fired": fired,
             "reflex_fired": s["reflex_fired"], "samples_with_flow": s["samples_with_flow"],
@@ -160,13 +182,14 @@ def run(args):
     trials = []
     for i in range(args.trials):
         trial = run_trial(directory, grunts=args.grunts, back_ms=args.back_ms, watch_s=args.watch_s,
-                          controller=args.controller, max_turn_px_s=args.max_turn_px_s)
-        rows = load(directory / "events.jsonl")[trial["first_event"]:trial["last_event"]]
+                          controller=args.controller, max_turn_px_s=args.max_turn_px_s, speed_px_s=args.speed_px_s)
+        rows = load(directory / "events.jsonl", trial["first_event"], trial["last_event"])
         trial["summary"] = slice_summary(rows)
         trials.append(trial)
         print(json.dumps({"trial": i, **trial["summary"]})[:400], flush=True)
         out.write_text(json.dumps({"label": args.label, "controller": args.controller, "grunts": args.grunts,
-                                   "flow_scale": args.flow_scale, "trials": trials}, indent=1), encoding="utf-8")
+                                   "flow_scale": args.flow_scale, "max_turn_px_s": args.max_turn_px_s,
+                                   "speed_px_s": args.speed_px_s, "trials": trials}, indent=1), encoding="utf-8")
     print(f"wrote {out}")
 
 
@@ -186,6 +209,7 @@ def pooled(report):
             outcomes[k] = outcomes.get(k, 0) + v
     errors = [x["error_px"]["mean"] for x in s if x["error_px"]]
     acquired = [t for x in s for t in x.get("acquisition_s", [])]
+    engaged = [t for x in s for t in x.get("engagement_s", [])]
     props = [x["proposals"] for x in s if x.get("proposals") and x["proposals"]["samples"]]
     weighted = lambda key: (float(sum(p[key] * p["samples"] for p in props if p[key] is not None)
                                   / max(1, sum(p["samples"] for p in props if p[key] is not None)))
@@ -207,6 +231,7 @@ def pooled(report):
                                           if any(f["correlation"] is not None for f in fits) else None} if fits else None,
             "acquisition_s_median": float(np.median(acquired)) if acquired else None,
             "acquisition_s_p75": float(np.percentile(acquired, 75)) if acquired else None, "acquisitions": len(acquired),
+            "engagement_s_median": float(np.median(engaged)) if engaged else None,
             "connectome_share": shares.get("connectome", 0) / total, "override_share": shares.get("deterministic_override", 0) / total,
             "stale_share": shares.get("deterministic_stale", 0) / total,
             "align_intents": sum(x["align_intents"] for x in s), "intents_that_fired": sum(x["intents_that_fired"] for x in s),
@@ -246,7 +271,10 @@ def main():
     r.add_argument("--back-ms", type=int, default=1200)
     r.add_argument("--watch-s", type=float, default=14.0)
     r.add_argument("--controller", default="connectome")
-    r.add_argument("--max-turn-px-s", type=float, default=2500.0)
+    r.add_argument("--max-turn-px-s", type=float, default=2500.0,
+                   help="cap on the view motion of every align step, the reference's and the override's")
+    r.add_argument("--speed-px-s", type=float, default=1200.0,
+                   help="the intent speed: the model's own step limit and the scale of its goal input")
     r.add_argument("--flow-scale", type=int, default=0, help="run a flow watch at this scale for the block (0: none)")
     s = sub.add_parser("report")
     s.add_argument("reports", nargs="+")

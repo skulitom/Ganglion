@@ -16,9 +16,13 @@ def rows_for(controller_pattern, errors, outcomes, flow=None):
                      "raw_actions": [1.0, 0.0, 0.0, 0.0],
                      "sensor_input": {"submitted": t + i * .01, "flow": flow, "cursor": [0, 0], "goal": [100, 0]}})
     for j, reason in enumerate(outcomes):
+        intent = "i1" if reason.startswith("aligned") else f"i{j + 2}"
         rows.append({"kind": "intent_completed" if reason.startswith("aligned") else "intent_failed", "program": "align",
                      "t_mono": t + 1 + j, "reason": reason, "shots": 4 if "fire" in reason else 0,
-                     "intent_id": "i1" if reason.startswith("aligned") else f"i{j + 2}", "started_mono": t - .2})
+                     "intent_id": intent, "started_mono": t - .2})
+        if "fire" in reason:                                     # the first shot's release, then a later one
+            rows.append({"kind": "input_released", "action": "fire", "intent_id": intent, "t_mono": t - .05})
+            rows.append({"kind": "input_released", "action": "fire", "intent_id": intent, "t_mono": t + .3})
         rows.append({"kind": "reflex_fired", "t_mono": t + .5 + j})
     return rows
 
@@ -33,8 +37,13 @@ def test_console_box_is_recognised_in_a_look_frame(tmp_path):
     with_console[12:220, 12:300] = (63, 78, 70)                 # the console's olive box (BGR)
     text = rng.random((208, 288)) < .08                          # grey text speckle
     with_console[12:220, 12:300][text] = (120, 135, 127)
+    olive_wall = with_console.copy()                             # an olive wall alone: no title strip, no input box
+    with_console[20:31, 12:300] = (71, 91, 79)                   # the title strip
+    with_console[204:213, 20:250] = (225, 232, 228)              # the input box
     cv2.imwrite(str(tmp_path / "console.jpg"), with_console)
+    cv2.imwrite(str(tmp_path / "wall.jpg"), olive_wall)
     assert console_open(tmp_path / "console.jpg") is True
+    assert console_open(tmp_path / "wall.jpg") is False
     assert console_open(tmp_path / "missing.jpg") is False
 
 
@@ -46,7 +55,8 @@ def test_slice_summary_reduces_a_trial_and_pooled_merges_trials():
     assert a["align_intents"] == 2 and a["intents_that_fired"] == 1 and a["align_outcomes"] == {"target_lost": 1, "aligned_and_fired": 1}
     assert a["reflex_fired"] == 2 and a["samples_with_flow"] == 6
     assert a["error_px"]["steps"] == 6 and abs(a["error_px"]["mean"] - 160 / 6) < 1e-9 and a["error_px"]["median"] == 15
-    assert a["acquisition_s"] == [.25]                        # from the intent's start to its last step
+    assert a["acquisition_s"] == [.15]                        # from the intent's start to its first shot's release
+    assert a["engagement_s"] == [.25]                         # to its last align step, re-alignment between shots included
     assert a["proposals"]["samples"] == 6 and a["proposals"]["cosine_to_goal_mean"] == 1.0 and a["proposals"]["share_at_goal"] == 1.0
     assert a["proposals"]["flow_samples"] == 6 and a["proposals"]["cosine_to_flow_mean"] == -1.0 and a["proposals"]["share_against_flow"] == 1.0
     b = slice_summary(rows_for(["deterministic_stale"], [200, 100], ["timeout"]))
@@ -60,7 +70,7 @@ def test_slice_summary_reduces_a_trial_and_pooled_merges_trials():
     assert abs(p["connectome_share"] - 4 / 8) < 1e-9 and abs(p["stale_share"] - 2 / 8) < 1e-9
     assert p["align_outcomes"] == {"target_lost": 1, "aligned_and_fired": 1, "timeout": 1}
     assert p["error_px_mean_median_over_trials"] == (160 / 6 + 150) / 2 and p["samples_with_flow"] == 6
-    assert p["acquisitions"] == 1 and p["acquisition_s_median"] == .25
+    assert p["acquisitions"] == 1 and p["acquisition_s_median"] == .15 and p["engagement_s_median"] == .25
     assert p["proposals"]["samples"] == 8 and p["proposals"]["cosine_to_goal_mean"] == 1.0 and p["proposals"]["flow_samples"] == 6
     assert p["proposals"]["cosine_to_flow_mean"] == -1.0
     assert pooled({"label": "none", "trials": []}) == {"trials": 0}

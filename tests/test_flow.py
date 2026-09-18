@@ -138,6 +138,25 @@ def test_known_movers_are_kept_out_of_the_ego_motion_even_when_they_fill_the_vie
     assert wide_field(model, scale=2, lag_seconds=.06)["credible"] is False
 
 
+def test_an_untrusted_alignment_leaves_the_fit_to_the_dense_field(monkeypatch):
+    """When the phase correlation's shift is beyond the credible range the fit must follow the
+    field's majority motion, not lock onto the static part of the picture around a zero seed."""
+    import ganglion.percepts.flow as flow_module
+    rng = np.random.default_rng(7)
+    background = textured(rng, 200, 320)
+    s = spec()
+    monkeypatch.setattr(flow_module, "global_shift", lambda state, reference, current, known=None: (160.0, 0.0, 0.05))
+    state = {}
+    for i in range(8):
+        frame = scene(background, (4 * i, 0), (-100, -100))
+        frame[150:, :] = frame[150:, :] * 0 + np.repeat(background[150:, :, None], 3, axis=2).astype(np.uint8)   # a static band
+        detect_flow(frame, s, state, captured=i * .015, moving=True)
+    ego = state["ego"]
+    assert not ego["credible"]                                # the alignment was not trusted
+    assert ego["tx_px_s"] > 150                               # yet the fit followed the pan, not the static band
+    assert ego["inlier_fraction"] > .5
+
+
 def test_persistence_and_size_limits_apply_and_a_missing_region_is_ignored():
     rng = np.random.default_rng(4)
     background = textured(rng, 200, 320)

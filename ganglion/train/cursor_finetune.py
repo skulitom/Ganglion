@@ -76,6 +76,10 @@ def run(args):
     brain, cfg, _ = load_checkpoint(base, "cuda")
     source = torch.load(base, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
     version = source.get("adapter_version")
+    goal_scale = float(source.get("goal_scale", .3))
+    view_fraction = float(source.get("view_fraction", 0.0))
+    slip = dict(source.get("slip") or {})
+    slip["slip_gain"] = tuple(slip.get("slip_gain", (1.0, 1.0)))
     if brain.device.type != "cuda" or brain.__class__.__name__ != "ConnectomeRNN" or version not in (2, 3, 4):
         raise ValueError("Requires an adapter version 2, 3 or 4 cursor ConnectomeRNN on CUDA")
     # Keep whitening fixed while learning, so batch composition never subtracts
@@ -96,7 +100,8 @@ def run(args):
     weights = None if recurrent else brain.weight_matrix().detach()   # recomputed each step when it learns
     report = {"experiment": "connectome cursor fine-tuning selected on the fixed suite",
               "base_checkpoint": str(base), "base_sha256": hashlib.sha256(base.read_bytes()).hexdigest(),
-              "adapter_version": version, "plant_version": 2, "neurons": brain.N,
+              "adapter_version": version, "goal_scale": goal_scale, "view_fraction": view_fraction, "slip": slip,
+              "plant_version": 2, "neurons": brain.N,
               "edges": int(brain.edge_index.shape[1]), "trained_groups": train,
               "trainable_parameters": {g: int(sum(p.numel() for p in groups[g])) for g in train},
               "recurrent_structure_and_signs_frozen": True, "recurrent_magnitudes_trained": "edges" in train,
@@ -109,7 +114,8 @@ def run(args):
               "test_seeds": SEEDS, "history": [], "validation": [], "promoted": False}
     (args.out/"config.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     # The unchanged source is a candidate, so training cannot silently replace it with worse.
-    baseline_scores = suite_scores(torch, brain, guard, VALIDATION, args.validation_steps, sense_version=version)
+    baseline_scores = suite_scores(torch, brain, guard, VALIDATION, args.validation_steps, sense_version=version,
+                                   goal_scale=goal_scale)
     best = (selection_key(baseline_scores), base, baseline_scores)
     report["validation"].append({"iteration": 0, "checkpoint": str(base), "scores": brief(baseline_scores),
                                  "key": list(best[0])})
@@ -121,7 +127,8 @@ def run(args):
         if world is None or world.tick >= args.episode_ticks:
             episode += 1
             world = CursorWorld(range(100000+episode*16, 100000+(episode+1)*16),
-                                jump_every=args.kick_every or None, sense_version=version)
+                                jump_every=args.kick_every or None, sense_version=version, goal_scale=goal_scale,
+                                view=np.arange(16) < int(round(16 * view_fraction)), **slip)
             state, previous = brain.init_state(16), None
         student_fraction = min(args.student_max, max(0, (iteration-20)/max(1, args.iterations-20))*args.student_max)
         students = int(16*student_fraction)
@@ -159,10 +166,12 @@ def run(args):
         if iteration % 10 == 0:
             print(json.dumps(row), flush=True)
         if iteration % args.validate_every == 0 or iteration == args.iterations:
-            scores = suite_scores(torch, brain, guard, VALIDATION, args.validation_steps, sense_version=version)
+            scores = suite_scores(torch, brain, guard, VALIDATION, args.validation_steps, sense_version=version,
+                                  goal_scale=goal_scale)
             folder = args.out/f"iteration-{iteration:04d}"
             folder.mkdir()
             metadata = {"adapter_version": version, "trained": True, "training_domain": "synthetic cursor episodes",
+                        "goal_scale": goal_scale, "view_fraction": view_fraction, "slip": slip,
                         "method": "truncated-BPTT DAgger on " + "+".join(train) + ", selected on the fixed suite",
                         "control_authority": False, "recurrent_structure_and_signs_frozen": True,
                         "recurrent_magnitudes_trained": "edges" in train, "neuron_parameters_trained": "neurons" in train,
@@ -186,7 +195,8 @@ def run(args):
         report["suite"][task] = {}
         for controller in ("connectome", "supervised"):
             score = run_task(task, SEEDS[task], controller, steps=args.test_steps, guard=guard,
-                             propose=connectome_proposer(torch, selected, len(SEEDS[task])), sense_version=version)
+                             propose=connectome_proposer(torch, selected, len(SEEDS[task])), sense_version=version,
+                             goal_scale=goal_scale)
             report["suite"][task][controller] = score
             print(json.dumps({"stage": "suite", **{k: v for k, v in score.items() if k not in ("per_episode", "seeds")}}), flush=True)
     report.update(selected_checkpoint=str(best[1]), selected_key=list(best[0]),

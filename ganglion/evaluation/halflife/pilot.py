@@ -185,7 +185,7 @@ class Pilot:
         spec["name"] = c["name"]
         if c["name"] in self.watches:
             await self._call("unwatch", {"watch_id": self.watches[c["name"]]})
-            self.reflexes = {n: r for n, r in self.reflexes.items() if not n.startswith(c["name"] + ":")}
+            self._forget_reflexes(c["name"], self.watches[c["name"]])
         wid = (await self._call("watch", {"spec": spec}))["watch_id"]
         self.watches[c["name"]] = wid
         return {"watch_id": wid, "spec": spec}
@@ -195,12 +195,18 @@ class Pilot:
         wid = self.watches.pop(c["name"], None)
         if wid is None:
             return {"removed": False}
-        for name in [n for n in self.reflexes if n.startswith(c["name"] + ":")]:
-            self.reflexes.pop(name)
-            self.armed.pop(name, None)
-            self.armed_at.pop(name, None)
+        self._forget_reflexes(c["name"], wid)
         await self._call("unwatch", {"watch_id": wid})
         return {"removed": True, "watch_id": wid}
+
+    def _forget_reflexes(self, watch_name, wid):
+        """Drop every reflex armed on a watch that is going away, whatever it was named."""
+        gone = {n for n, s in self.armed.items() if s.get("watch_id") == wid}
+        gone |= {n for n in self.reflexes if n.startswith(watch_name + ":")}
+        for name in gone:
+            self.reflexes.pop(name, None)
+            self.armed.pop(name, None)
+            self.armed_at.pop(name, None)
 
     async def cmd_arm(self, c):
         """Arm a reflex on a named watch: {"watch", "response": "align"|"key"|"notify", ...}."""
@@ -226,8 +232,14 @@ class Pilot:
                     await self._call("disarm", {"reflex_id": self.reflexes[name]})
                 except PilotError:
                     pass
-                self.reflexes[name] = (await self._call("arm", {"spec": spec}))["reflex_id"]
-                self.armed_at[name] = time.perf_counter()
+                try:
+                    self.reflexes[name] = (await self._call("arm", {"spec": spec}))["reflex_id"]
+                    self.armed_at[name] = time.perf_counter()
+                except PilotError as exc:
+                    print(f"rearm {name}: {exc}", flush=True)   # a watch gone under it: the reflex is dropped
+                    self.reflexes.pop(name, None)
+                    self.armed.pop(name, None)
+                    self.armed_at.pop(name, None)
 
     async def cmd_engage(self, c):
         """Watch motion in a region and arm an align-and-fire reflex on it in one step.
@@ -399,7 +411,7 @@ class Pilot:
         """Sweep the view at known rates and sample the flow watch: the percept's scale, lag and
         valid range against the turn the runtime applied.
 
-        {"rates": [300, 600, 1000, 1500, 2500], "seconds": 0.6, "counts_per_px": 1.067, "pause": 0.4}
+        {"rates": [300, 600, 1000, 1500, 2500], "seconds": 0.5, "counts_per_px": 1.067, "pause": 0.4}
         Each rate is swept right then left as one spread `look`; the snapshot's flow summary is
         sampled about every 20 ms during the sweep and for a while after it. Writes
         calibration.json beside the events and returns a per-sweep summary.
@@ -407,7 +419,9 @@ class Pilot:
         import numpy as np
         await self._pointer_free()
         rates = [float(r) for r in c.get("rates", [300, 600, 1000, 1500, 2500])]
-        seconds = float(c.get("seconds", 0.6))
+        seconds = float(c.get("seconds", 0.5))
+        if not 0.05 <= seconds <= 0.5:
+            raise PilotError("calibrate: seconds must be between 0.05 and 0.5, the spread a look accepts")
         cpp = float(c.get("counts_per_px", 1.067))
         pause = float(c.get("pause", 0.4))
         samples, sweeps = [], []
