@@ -38,14 +38,22 @@ def channels(sample, previous=None, *, version=1, goal_scale=.3):
     V4 is v3 plus the wide-field flow in the lptc channel when the sample carries one: the
     image translation in units of intent speed and the expansion and roll rates, which for a
     turning view is the visual slip the fly's lobula-plate cells report.
+    V5 is v3 with the goal encoded as a unit direction (full strength at every distance) plus
+    the tanh distance in the fourth slot, so the input does not fade as the cursor closes.
     Attitude, compass and load channels remain zero. The lptc (wide-field flow) channel is zero
     unless the sample carries a flow summary, in which case it holds the view translation in
     units of intent speed and the expansion and roll rates; training so far fed zeros here.
     """
-    if version not in (1, 2, 3, 4):
+    if version not in (1, 2, 3, 4, 5):
         raise ValueError("Unknown cursor sensory adapter version")
     scale = 400 if version == 1 else sample.speed * goal_scale
     dx, dy = (sample.goal[i] - sample.cursor[i] for i in range(2))
+    distance = hypot(dx, dy)
+    if version == 5:
+        ux, uy = (dx / distance, dy / distance) if distance >= 1 else (0.0, 0.0)
+        goal = [ux, uy, 0.0, tanh(distance / scale)]
+    else:
+        goal = [tanh(dx/scale), tanh(dy/scale), 0.0, tanh(distance/scale)]
     vx = vy = 0.0
     if version in (1, 2) and previous is not None and .001 <= sample.submitted - previous.submitted <= .05:
         dt = sample.submitted - previous.submitted
@@ -55,8 +63,7 @@ def channels(sample, previous=None, *, version=1, goal_scale=.3):
     flow = getattr(sample, "flow", None)
     if version == 4 and flow is not None:
         lptc = [tanh(flow[0]/sample.speed), tanh(flow[1]/sample.speed), tanh(flow[2]), tanh(flow[3]), 0.0, 0.0]
-    return {"goal": [tanh(dx/scale), tanh(dy/scale), 0.0, tanh(hypot(dx, dy)/scale)],
-            "haltere": velocity, "jo": velocity, "lptc": lptc,
+    return {"goal": goal, "haltere": velocity, "jo": velocity, "lptc": lptc,
             "ocelli": [0.0]*3, "wing_cs": [0.0]*3, "compass": [0.0]*2}
 
 
@@ -70,7 +77,7 @@ class HaltereCursor:
         checkpoint = Path(checkpoint).resolve()
         cursor_training = torch.load(checkpoint, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
         self.adapter_version = cursor_training.get("adapter_version", 1)
-        if self.adapter_version not in (1, 2, 3, 4):
+        if self.adapter_version not in (1, 2, 3, 4, 5):
             raise ValueError("Unknown cursor sensory adapter version")
         self.goal_scale = float(cursor_training.get("goal_scale", .3))
         if not .02 <= self.goal_scale <= 2:

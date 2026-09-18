@@ -293,8 +293,9 @@ def main():
     p.add_argument("--features", type=int, default=512)
     p.add_argument("--seconds", type=float, default=600)
     p.add_argument("--max-gpu-temp", type=float, default=65)
-    p.add_argument("--adapter-version", type=int, default=2, choices=(2, 3, 4),
-                   help="2: goal error and own velocity; 3: goal error only; 4: goal error and the visual slip of views")
+    p.add_argument("--adapter-version", type=int, default=2, choices=(2, 3, 4, 5),
+                   help="2: goal error and own velocity; 3: goal error only; 4: goal error and the visual slip of views; "
+                        "5: goal direction at full strength plus the distance")
     p.add_argument("--view-fraction", type=float, default=0.0,
                    help="share of harvested episodes that are views (unbounded, capture latency, slip in lptc)")
     p.add_argument("--goal-scale", type=float, default=0.3,

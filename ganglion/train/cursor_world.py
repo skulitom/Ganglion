@@ -25,8 +25,8 @@ def teacher_points(cursor, goal, speed, rect, dt=.01):
 class CursorWorld:
     def __init__(self, seeds, *, steps=160, jump_every=None, sense_version=2, view=False,
                  slip_dropout=0.0, slip_blank=0.0, slip_gain=(1.0, 1.0), goal_scale=.3):
-        if sense_version not in (2, 3, 4):
-            raise ValueError("The training world speaks sensory adapter versions 2, 3 and 4")
+        if sense_version not in (2, 3, 4, 5):
+            raise ValueError("The training world speaks sensory adapter versions 2 to 5")
         if not .02 <= goal_scale <= 2:
             raise ValueError("goal_scale is seconds of intent speed, between 0.02 and 2")
         self.goal_scale = float(goal_scale)
@@ -140,15 +140,22 @@ class CursorWorld:
         """The runtime adapter's channels for every episode: goal error scaled by `goal_scale`
         seconds of intent speed (0.3 by default); version 2 adds the cursor's own velocity in
         units of that speed; version 4 feeds the visual slip of view episodes to the lptc channel
-        instead."""
+        instead; version 5 encodes the goal as a unit direction plus the tanh distance."""
         delta = (self.goal - self.cursor) / (self.speed[:, None] * self.goal_scale)
-        still = previous is None or self.sense_version in (3, 4)
+        still = previous is None or self.sense_version in (3, 4, 5)
         velocity = np.zeros_like(delta) if still else (self.cursor-previous)/(.01*self.speed[:, None])
         zeros = lambda n: np.zeros((self.B, n), dtype=np.float32)
         motion = np.concatenate((np.tanh(velocity), zeros(1)), axis=1).astype(np.float32)
         lptc = zeros(6)
         if self.sense_version == 4 and self.view.any():
             lptc[:, :2] = np.tanh(self.slip() / self.speed[:, None])
-        return {"goal": np.concatenate((np.tanh(delta), zeros(1), np.tanh(np.linalg.norm(delta, axis=1))[:, None]), axis=1).astype(np.float32),
+        distance = np.linalg.norm(delta, axis=1)[:, None]
+        if self.sense_version == 5:
+            pixels = np.linalg.norm(self.goal - self.cursor, axis=1)[:, None]
+            unit = np.where(pixels >= 1, (self.goal - self.cursor) / np.maximum(pixels, 1e-9), 0.0)
+            goal = np.concatenate((unit, zeros(1), np.tanh(distance)), axis=1)
+        else:
+            goal = np.concatenate((np.tanh(delta), zeros(1), np.tanh(distance)), axis=1)
+        return {"goal": goal.astype(np.float32),
                 "haltere": motion, "jo": motion, "lptc": lptc, "ocelli": zeros(3),
                 "wing_cs": zeros(3), "compass": zeros(2)}

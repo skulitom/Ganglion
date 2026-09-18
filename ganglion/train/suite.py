@@ -268,8 +268,8 @@ def run(args):
         parameter.requires_grad_(False)
     provenance = torch.load(checkpoint, map_location="cpu", weights_only=True).get("ganglion_cursor", {})
     version = args.sense_version or provenance.get("adapter_version", 2)
-    if version not in (2, 3, 4):
-        raise ValueError("The suite speaks sensory adapter versions 2, 3 and 4")
+    if version not in (2, 3, 4, 5):
+        raise ValueError("The suite speaks sensory adapter versions 2 to 5")
     goal_scale = float(provenance.get("goal_scale", .3))
     mlp = build_mlp(torch).to(brain.device)
     if args.mlp:
@@ -330,7 +330,7 @@ def main():
     p.add_argument("--mlp", type=Path, help="MLP baseline state to load (else trained from --mlp-features)")
     p.add_argument("--mlp-features", type=Path, help="feature cache to train the MLP baseline from")
     p.add_argument("--steps", type=int, default=2000)
-    p.add_argument("--sense-version", type=int, choices=(2, 3, 4),
+    p.add_argument("--sense-version", type=int, choices=(2, 3, 4, 5),
                    help="feed the world's channels of this adapter version instead of the checkpoint's own")
     p.add_argument("--seconds", type=float, default=900)
     p.add_argument("--max-gpu-temp", type=float, default=65)

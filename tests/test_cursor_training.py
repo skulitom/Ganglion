@@ -175,7 +175,7 @@ def test_adapter_version_3_drops_own_velocity_and_matches_the_world():
             np.testing.assert_allclose(observed[key][i], expected[key], atol=1e-7)
         np.testing.assert_allclose(expected["goal"], channels(current, old, version=2)["goal"])
     with pytest.raises(ValueError):
-        CursorWorld([1000], sense_version=5)
+        CursorWorld([1000], sense_version=6)
 
 
 def test_feature_cache_provenance_must_match_the_checkpoint():
@@ -190,6 +190,28 @@ def test_feature_cache_provenance_must_match_the_checkpoint():
         check_provenance({"adapter_version": 3, "goal_scale": .3}, version=3, goal_scale=.1)
     with pytest.raises(ValueError):
         check_provenance({"adapter_version": 3, "goal_scale": .3, "slip": {"slip_dropout": .3}}, version=3, goal_scale=.3, slip=slip)
+
+
+def test_adapter_version_5_keeps_the_goal_direction_at_full_strength_and_matches_the_world():
+    from ganglion.core.aim import UNBOUNDED
+    seeds = [1000, 1001, 1002, 1003]
+    world = CursorWorld(seeds, sense_version=5, goal_scale=.1)
+    world.step(world.teacher())
+    senses = world.senses(world.cursor.copy())
+    assert not senses["haltere"].any() and not senses["lptc"].any()
+    direction = senses["goal"][:, :2]
+    np.testing.assert_allclose(np.linalg.norm(direction, axis=1), 1.0, atol=1e-6)   # a unit vector at every distance
+    assert (0 < senses["goal"][:, 3]).all() and (senses["goal"][:, 3] < 1).all()   # the distance, saturating
+    for i in range(4):
+        sample = MotorSample("i", "reach", 1, 2, .01, .01, 10, tuple(world.cursor[i]), tuple(world.goal[i]),
+                             (0, 0), UNBOUNDED, world.speed[i], .01)
+        np.testing.assert_allclose(senses["goal"][i], channels(sample, None, version=5, goal_scale=.1)["goal"], atol=1e-6)
+    at_goal = MotorSample("i", "reach", 1, 2, .01, .01, 10, (100.0, 100.0), (100.4, 100.0), (0, 0), UNBOUNDED, 1000.0, .01)
+    assert channels(at_goal, None, version=5)["goal"][:2] == [0.0, 0.0]            # inside a pixel: no direction
+    far = MotorSample("i", "reach", 1, 2, .01, .01, 10, (0.0, 0.0), (300.0, -400.0), (0, 0), UNBOUNDED, 1000.0, .01)
+    np.testing.assert_allclose(channels(far, None, version=5)["goal"][:2], [.6, -.8], atol=1e-9)
+    with pytest.raises(ValueError):
+        CursorWorld(seeds, sense_version=6)
 
 
 def test_goal_scale_is_shared_by_the_world_and_the_adapter():
