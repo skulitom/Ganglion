@@ -250,7 +250,10 @@ at `template_region` of the newest frame, followed by correlation within `search
 (the largest region whose optic flow disagrees with the view's own motion). A flow watch is not
 blinded by own turns and walks: a phase correlation finds the translation that moves most of the
 picture, dense flow on the aligned pair and one global affine fit explain the rest, and what
-still disagrees by more than `flow_threshold` px over the lag is reported. Its ego-motion summary
+still disagrees by more than `flow_threshold` px over the lag is reported. What track and motion
+watches followed on the last frame is a known mover: its box, grown a little, is kept out of the
+alignment and the fit, so a target filling the view cannot pass for the view's own motion (the
+summary's `excluded_fraction` says how much of the field that was). Its ego-motion summary
 (translation in px/s, expansion and roll rates) rides along in the detection and in every
 snapshot as `flow`, with `credible` false when the alignment was outside the percept's range
 (about a third of the field over the lag) or fewer than half the sampled vectors agreed with

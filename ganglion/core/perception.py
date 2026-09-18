@@ -62,8 +62,9 @@ class ChangeSense:
         return float(abs(small - previous).mean())
 
 
-def detect(watch, frame, captured, moving):
-    """Run the watch's detector on a frame; pure apart from the watch's own state."""
+def detect(watch, frame, captured, moving, exclude=()):
+    """Run the watch's detector on a frame; pure apart from the watch's own state. `exclude`
+    lists the boxes of movers other watches already follow, for the flow percept's ego-motion."""
     if watch.spec.kind == "motion":
         from ganglion.percepts.motion import detect_motion
         return detect_motion(frame, watch.spec, watch.state, captured=captured, moving=moving)
@@ -72,7 +73,7 @@ def detect(watch, frame, captured, moving):
         return detect_track(frame, watch.spec, watch.state)
     if watch.spec.kind == "flow":
         from ganglion.percepts.flow import detect_flow
-        return detect_flow(frame, watch.spec, watch.state, captured=captured, moving=moving)
+        return detect_flow(frame, watch.spec, watch.state, captured=captured, moving=moving, exclude=exclude)
     from ganglion.percepts.color import detect as detect_color
     return detect_color(frame, watch.spec, was_present=watch.present)
 
@@ -117,7 +118,11 @@ def observe(runtime, frame, captured, seq, layout, *, source="provided", sample_
         watches = list(runtime.watches.items())
         revision = runtime.layout_rev
         moving = runtime.clock() < runtime.motion_until
-    observations = [(wid, watch, detect(watch, frame, captured, moving)) for wid, watch in watches]
+    # What track and motion watches followed on the last frame is a known mover for the flow
+    # percept: its ego-motion is fitted to the rest of the picture.
+    exclude = [tuple(w.detection["bbox"]) for _, w in watches
+               if w.spec.kind in ("track", "motion") and w.present and w.detection and "bbox" in w.detection]
+    observations = [(wid, watch, detect(watch, frame, captured, moving, exclude)) for wid, watch in watches]
     with runtime.lock:
         runtime.tick(drive=False)
         if revision != runtime.layout_rev or seq != runtime.frame_seq:

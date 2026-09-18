@@ -24,6 +24,8 @@ import numpy as np
 
 FIT_STRIDE = 2      # the affine fit uses every second row and column of the flow field
 MIN_INLIERS = .5    # below this share of agreeing vectors the ego-motion summary is not credible
+MAX_EXCLUDED = .75  # with more of the field given over to known movers there is too little background
+EXCLUSION_MARGIN = .15   # a known mover's box is grown by this share of its size on every side
 
 
 def _reduce(frame, region, scale):
@@ -36,15 +38,35 @@ def _reduce(frame, region, scale):
     return cv2.resize(gray, (max(16, w // scale), max(16, h // scale)), interpolation=cv2.INTER_AREA)
 
 
-def global_shift(state, reference, current):
-    """The translation that aligns most of `reference` with `current`, by phase correlation."""
+def global_shift(state, reference, current, known=None):
+    """The translation that aligns most of `reference` with `current`, by phase correlation.
+    `known` is a boolean mask of pixels that belong to known independent movers; they are
+    windowed out so the peak comes from the background."""
     import cv2
     window = state.get("window")
     if window is None or window.shape != reference.shape:
         window = cv2.createHanningWindow(reference.shape[::-1], cv2.CV_32F)
         state["window"] = window
+    if known is not None and known.any():
+        window = window * (~known).astype(np.float32)
     (dx, dy), response = cv2.phaseCorrelate(reference.astype(np.float32), current.astype(np.float32), window)
     return float(dx), float(dy), float(response)
+
+
+def known_movers(shape, region, scale, boxes):
+    """A boolean (h, w) mask of the reduced field covered by the given screen boxes [x, y, w, h],
+    each grown by EXCLUSION_MARGIN of its size on every side."""
+    h, w = shape
+    mask = np.zeros((h, w), dtype=bool)
+    rx, ry = region[0], region[1]
+    for bx, by, bw, bh in boxes or ():
+        gx, gy = bw * EXCLUSION_MARGIN, bh * EXCLUSION_MARGIN
+        x0 = int(np.floor((bx - gx - rx) / scale))
+        y0 = int(np.floor((by - gy - ry) / scale))
+        x1 = int(np.ceil((bx + bw + gx - rx) / scale))
+        y1 = int(np.ceil((by + bh + gy - ry) / scale))
+        mask[max(0, y0):max(0, min(h, y1)), max(0, x0):max(0, min(w, x1))] = True
+    return mask
 
 
 def dense_flow(state, reference, current):
@@ -59,7 +81,7 @@ def dense_flow(state, reference, current):
     return cv2.calcOpticalFlowFarneback(reference, current, None, 0.5, 3, 9, 2, 5, 1.1, 0)
 
 
-def fit_ego_motion(flow, iterations=3, stride=FIT_STRIDE, seed=None):
+def fit_ego_motion(flow, iterations=3, stride=FIT_STRIDE, seed=None, known=None):
     """One affine motion for the whole field, re-fitted on the vectors that agree with it.
 
     Returns the model (u, v) = (a0 + a1 x + a2 y, b0 + b1 x + b2 y) about the field centre, the
@@ -69,7 +91,9 @@ def fit_ego_motion(flow, iterations=3, stride=FIT_STRIDE, seed=None):
     `seed` is a translation (dx, dy) the first inlier set is chosen around, normally the phase
     correlation's shift: the motion most of the picture shares. Without it the first fit is a
     plain least-squares average, which a large mover drags towards itself so that the re-fit
-    never separates the two motions.
+    never separates the two motions. `known` is a boolean (h, w) mask of pixels that belong to
+    known independent movers (what a track or motion watch already follows); they never enter
+    the fit, and `inlier_fraction` is the share of the remaining vectors that agree with it.
     """
     h, w = flow.shape[:2]
     ys, xs = np.mgrid[0:h, 0:w]
@@ -78,13 +102,14 @@ def fit_ego_motion(flow, iterations=3, stride=FIT_STRIDE, seed=None):
     sx, sy = x[::stride, ::stride].ravel(), y[::stride, ::stride].ravel()
     basis = np.stack((np.ones_like(sx), sx, sy), axis=1)
     u, v = flow[::stride, ::stride, 0].ravel(), flow[::stride, ::stride, 1].ravel()
-    weights = np.ones(len(sx), dtype=bool)
+    allowed = np.ones(len(sx), dtype=bool) if known is None else ~known[::stride, ::stride].ravel()
+    weights = allowed.copy()
     a = b = np.zeros(3, dtype=np.float32)
-    if seed is not None:
+    if seed is not None and allowed.any():
         # The seed's supporters, even when they are a minority of the field: the tolerance comes
         # from the closest quarter of the vectors, not from a median a large mover would own.
         sampled = np.hypot(u - seed[0], v - seed[1])
-        weights = sampled <= max(0.5, 2.5 * float(np.quantile(sampled, .25)))
+        weights = allowed & (sampled <= max(0.5, 2.5 * float(np.quantile(sampled[allowed], .25))))
     for _ in range(iterations):
         if weights.sum() < 12:
             break
@@ -95,10 +120,11 @@ def fit_ego_motion(flow, iterations=3, stride=FIT_STRIDE, seed=None):
         sampled = np.hypot(u - basis @ a, v - basis @ b)
         # The tolerance is set by the current inliers' own spread, so the set can take in what
         # agrees with the fit and shed what does not without a disagreeing majority widening it.
-        weights = sampled <= max(0.5, 2.5 * float(np.median(sampled[weights])))
+        weights = allowed & (sampled <= max(0.5, 2.5 * float(np.median(sampled[weights]))))
     residual = np.hypot(flow[..., 0] - (a[0] + a[1] * x + a[2] * y), flow[..., 1] - (b[0] + b[1] * x + b[2] * y))
     return {"a": a.astype(float).tolist(), "b": b.astype(float).tolist(),
-            "inlier_fraction": float(weights.mean()), "residual": residual}
+            "inlier_fraction": float(weights.sum() / max(1, allowed.sum())),
+            "excluded_fraction": float(1 - allowed.mean()), "residual": residual}
 
 
 def wide_field(model, scale, lag_seconds, *, aligned=True):
@@ -114,16 +140,20 @@ def wide_field(model, scale, lag_seconds, *, aligned=True):
     per_second = 1 / max(lag_seconds, 1e-3)
     return {"tx_px_s": a[0] * scale * per_second, "ty_px_s": b[0] * scale * per_second,
             "divergence_s": (a[1] + b[2]) * per_second, "curl_s": (b[1] - a[2]) * per_second,
-            "inlier_fraction": model["inlier_fraction"],
-            "credible": bool(aligned and model["inlier_fraction"] >= MIN_INLIERS)}
+            "inlier_fraction": model["inlier_fraction"], "excluded_fraction": model.get("excluded_fraction", 0.0),
+            "credible": bool(aligned and model["inlier_fraction"] >= MIN_INLIERS
+                             and model.get("excluded_fraction", 0.0) <= MAX_EXCLUDED)}
 
 
-def detect_flow(frame: np.ndarray, spec, state: dict, *, captured: float, moving: bool):
+def detect_flow(frame: np.ndarray, spec, state: dict, *, captured: float, moving: bool, exclude=()):
     """The largest thing moving against the view's own motion, or None.
 
     `moving` is recorded, never used to suppress: a flow watch is meant to see through self-motion.
-    The detection carries the ego-motion summary; `state["ego"]` keeps the newest one even when
-    nothing independent is moving.
+    `exclude` lists screen boxes [x, y, w, h] of movers the reflex layer already follows (a
+    tracked target, a motion blob); they are kept out of the alignment and the ego-motion fit,
+    so a target filling the view cannot pass for the view's own motion. The detection carries
+    the ego-motion summary; `state["ego"]` keeps the newest one even when nothing independent
+    is moving.
     """
     import cv2
     scale = spec.flow_scale
@@ -143,7 +173,8 @@ def detect_flow(frame: np.ndarray, spec, state: dict, *, captured: float, moving
         return None
     reference_time, reference = history[0]
     h, w = small.shape
-    dx, dy, response = global_shift(state, reference, small)
+    known = known_movers((h, w), spec.region, scale, exclude) if exclude else None
+    dx, dy, response = global_shift(state, reference, small, known)
     trusted = abs(dx) <= w / 3 and abs(dy) <= h / 3
     if not trusted:
         dx = dy = 0.0                     # no credible alignment: fall back to the dense field alone
@@ -152,7 +183,7 @@ def detect_flow(frame: np.ndarray, spec, state: dict, *, captured: float, moving
     flow = dense_flow(state, aligned, small)
     flow[..., 0] += np.float32(dx)
     flow[..., 1] += np.float32(dy)
-    model = fit_ego_motion(flow, seed=(dx, dy))
+    model = fit_ego_motion(flow, seed=(dx, dy), known=known)
     ego = wide_field(model, scale, captured - reference_time, aligned=trusted)
     ego["phase_response"] = response
     state["ego"] = ego

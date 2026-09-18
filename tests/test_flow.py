@@ -2,7 +2,7 @@
 import numpy as np
 
 from ganglion.core.schema import WatchSpec
-from ganglion.percepts.flow import detect_flow, fit_ego_motion, wide_field
+from ganglion.percepts.flow import detect_flow, fit_ego_motion, known_movers, wide_field
 
 
 def textured(rng, h, w):
@@ -102,6 +102,40 @@ def test_the_summary_is_not_credible_beyond_the_alignment_range_or_without_agree
     steady = np.full((60, 100, 2), (3.0, 0.0), dtype=np.float32)
     assert wide_field(fit_ego_motion(steady), scale=2, lag_seconds=.06)["credible"] is True
     assert wide_field(fit_ego_motion(steady), scale=2, lag_seconds=.06, aligned=False)["credible"] is False
+
+
+def test_known_movers_are_kept_out_of_the_ego_motion_even_when_they_fill_the_view():
+    rng = np.random.default_rng(6)
+    background = textured(rng, 200, 320)
+    s = spec()
+    # A textured mover covering 45 % of the field walks left while the view pans right: with its
+    # box excluded the alignment and the fit follow the pan on the background alone.
+    mover = textured(rng, 200, 144)
+    def frame_at(i):
+        f = scene(background, (6 * i, 0), (-100, -100))
+        x0 = 100 - 3 * i
+        f[:, x0:x0 + 144] = np.repeat(mover[..., None], 3, axis=2).astype(np.uint8)
+        return f, [x0, 0, 144, 200]
+    plain, excluded = {}, {}
+    for i in range(8):
+        f, box = frame_at(i)
+        detect_flow(f, s, plain, captured=i * .015, moving=True)
+        detect_flow(f, s, excluded, captured=i * .015, moving=True, exclude=[box])
+    assert plain["ego"]["inlier_fraction"] < .8                              # the mover sits in the fit's field
+    ego = excluded["ego"]
+    assert ego["tx_px_s"] > 250 and abs(ego["ty_px_s"]) < 60 and ego["credible"]   # the pan: 6 px per 15 ms = 400 px/s
+    assert .45 <= ego["excluded_fraction"] <= .75 and ego["inlier_fraction"] > .6
+    # The mask itself: screen boxes to the reduced grid, grown by a margin, clipped to the field.
+    mask = known_movers((100, 160), [0, 0, 320, 200], 2, [[40, 20, 80, 40]])
+    assert mask[10:30, 20:60].all() and not mask[:, 80:].any() and not mask[40:, :].any()
+    assert not known_movers((100, 160), [0, 0, 320, 200], 2, []).any()
+    # Too little background left: not credible even when what remains agrees.
+    field = np.full((60, 100, 2), (3.0, 0.0), dtype=np.float32)
+    known = np.zeros((60, 100), dtype=bool)
+    known[:, :80] = True
+    model = fit_ego_motion(field, seed=(3.0, 0.0), known=known)
+    assert abs(model["a"][0] - 3) < .05 and model["inlier_fraction"] > .9 and model["excluded_fraction"] > .75
+    assert wide_field(model, scale=2, lag_seconds=.06)["credible"] is False
 
 
 def test_persistence_and_size_limits_apply_and_a_missing_region_is_ignored():
