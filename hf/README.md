@@ -35,7 +35,7 @@ The network is frozen. The readout is a ridge regression from the motor neurons'
 two-dimensional velocity in units of the intent's speed, fitted on synthetic cursor episodes
 (random plants with input delay, gain and speed) to the commands of a memoryless proportional
 controller, then refined with DAgger on the student's own rollouts. The runtime feeds the
-network the goal error and, for version 6 checkpoints, nothing else; the readout's proposal
+network the goal error and, for the v6 checkpoint (adapter version 5), nothing else; the readout's proposal
 is accepted by a supervising envelope only if it moves the cursor toward the goal within the
 intent's speed limit, otherwise the deterministic reference acts for that tick.
 
