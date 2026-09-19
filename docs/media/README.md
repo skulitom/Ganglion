@@ -14,16 +14,16 @@ sample the model was given (`shadow_prediction` and `shadow_discarded` events ca
 the reset flag and the number of neural steps), so `ganglion.viz.brainvideo` runs the same
 checkpoint over the same samples again and reads the firing rates out. It checks itself: the
 proposals of the second run are compared with the logged ones, and the largest difference is
-printed (0.0005 for the reach clip, in units of the intent speed). Each neuron is drawn at its
+printed (0.0007 for the reach clip, in units of the intent speed). Each neuron is drawn at its
 soma position in the male CNS (Haltere's layout: brain on top, nerve cord below), coloured by
 population, and brightened by how far its rate is above its own mean over the clip. While no
 motor program runs the model does not run either, and the panel shows the brain at rest.
 
 ```powershell
 # the headless reach clip: needs Haltere, torch with CUDA, Pillow and ffmpeg, but no desktop
-.venv/Scripts/python.exe -m ganglion.cli reach-demo --environment synthetic --trials 6 --controller connectome --shadow-checkpoint <checkpoint> --shadow-process --json runs/video/reach.json
+.venv/Scripts/python.exe -m ganglion.cli reach-demo --environment synthetic --trials 6 --controller connectome --shadow-checkpoint <checkpoint> --shadow-process --no-home --json runs/video/reach.json
 .venv/Scripts/python.exe -m ganglion.viz.reachclip runs/video/reach.json --out runs/video/reach
-.venv/Scripts/python.exe -m ganglion.viz.brainvideo --events runs/video/reach/events.jsonl --frames runs/video/reach --checkpoint <checkpoint> --out docs/media/reach --title "fly brain moving a cursor to a moving target" --start 4.6 --seconds 13.6 --height 360
+.venv/Scripts/python.exe -m ganglion.viz.brainvideo --events runs/video/reach/events.jsonl --frames runs/video/reach --checkpoint <checkpoint> --out docs/media/reach --title "fly brain moving a cursor to a moving target" --start 0.1 --seconds 13 --height 360
 
 # a live application: record beside the core, then compose from the pilot's or the client's ledger
 .venv/Scripts/python.exe -m ganglion.viz.screenrec --out runs/video/fight --seconds 25 --fps 20 --region 0,0,1280,720

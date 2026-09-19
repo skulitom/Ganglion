@@ -438,6 +438,7 @@ class MemoryOutput:
             return
         self.events.append({"kind": "input_submitted", "command_id": command["command_id"],
                             "t_mono": self.clock()})
+        self.cursor = (command["x"], command["y"])       # a click leaves the pointer where it clicked, as on a desktop
         if self.on_click:
             self.on_click(command["x"], command["y"])
         self.events.append({"kind": "input_released", "command_id": command["command_id"],

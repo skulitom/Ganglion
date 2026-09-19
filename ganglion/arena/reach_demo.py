@@ -26,7 +26,7 @@ def neural_share(events):
             "note": "share of commands that used the model; a diagnostic, not task performance"}
 
 
-async def exercise(endpoint, reset, trials, controller="deterministic"):
+async def exercise(endpoint, reset, trials, controller="deterministic", home=True):
     from mcp import Client
     from mcp.client.stdio import StdioServerParameters
     spec = StdioServerParameters(command=sys.executable, args=["-m", "ganglion.mcp", "--endpoint", str(endpoint)])
@@ -70,10 +70,13 @@ async def exercise(endpoint, reset, trials, controller="deterministic"):
         for seed in range(1, trials + 1):
             for mode in ("periodic", "reach"):
                 await call("renew", {"seconds": 30})
-                x, y, _, _ = snapshot["target"]["rect"]
-                await call("input", {"spec": {"action": "move", "snapshot_id": snapshot["id"],
-                                              "point": [x + 30, y + 100]}})
-                await asyncio.sleep(.06)
+                # Every trial starts from the same point so trials compare; with home off only the
+                # first does, and each later one starts where the pointer was left.
+                if home or not records:
+                    x, y, _, _ = snapshot["target"]["rect"]
+                    await call("input", {"spec": {"action": "move", "snapshot_id": snapshot["id"],
+                                                  "point": [x + 30, y + 100]}})
+                    await asyncio.sleep(.06)
                 trial = {"id": f"{mode}-{seed}", "seed": seed}
                 await asyncio.to_thread(reset, trial)
                 # Fixture setup is outside the policy: allow its reset to reach the display.
@@ -153,7 +156,7 @@ def summarize(result, truth):
 
 
 def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None, controller="deterministic",
-        process=False):
+        process=False, home=True):
     if not 1 <= trials <= 8:
         raise ValueError("Use 1–8 trials per policy")
     if controller == "connectome" and not shadow_checkpoint:
@@ -168,13 +171,14 @@ def run(*, environment="synthetic", trials=4, path=None, shadow_checkpoint=None,
         else:
             predictor = HaltereCursor(shadow_checkpoint)
     with experiment(environment, ReachWorld, shadow_predictor=predictor, shadow_factory=factory) as host:
-        result = asyncio.run(exercise(host.endpoint, host.reset, trials, controller))
+        result = asyncio.run(exercise(host.endpoint, host.reset, trials, controller, home))
         result.update({"environment": environment, "session_id": host.session_id,
             "measured_at": datetime.now(timezone.utc).isoformat(), "dependencies": dependency_versions(),
             "python": sys.version.split()[0],
             "controller": {"mode": controller, "gain_per_second": 35, "speed_px_s": 1200, "tolerance_px": 6,
                            "settle_ms": 30, "timeout_seconds": 3},
             "baseline": {"decision_delay_ms": 250, "minimum_cadence_ms": 500, "max_attempts": 6},
+            "pointer_homed_before_each_trial": home,
             "browser_version": host.browser_version})
         result = summarize(result, host.finish())
         result["shadow"] = host.shadow_status()

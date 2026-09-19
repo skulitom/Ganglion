@@ -60,6 +60,8 @@ def main(argv=None) -> int:
     p.add_argument('--shadow-process', action='store_true', help='run the connectome in its own process')
     p.add_argument('--controller', choices=['deterministic', 'connectome'], default='deterministic',
                    help='connectome: its proposals drive the cursor when they pass the supervising envelope')
+    p.add_argument('--no-home', action='store_true',
+                   help='start each trial where the pointer was left instead of returning it to a fixed start')
 
     sub.add_parser('version')
     p = sub.add_parser('drag-demo', help='Static-screen reach and bounded drag through MCP')
@@ -112,7 +114,7 @@ def main(argv=None) -> int:
         from .arena.reach_demo import run
         result = run(environment=a.environment, trials=a.trials, path=a.json,
                      shadow_checkpoint=a.shadow_checkpoint, controller=a.controller,
-                     process=a.shadow_process)
+                     process=a.shadow_process, home=not a.no_home)
         print(json.dumps({k: v for k, v in result.items() if k not in ('events', 'truth', 'trials')}, indent=2))
         return 0 if result['passed'] else 1
     if a.cmd == 'drag-demo':

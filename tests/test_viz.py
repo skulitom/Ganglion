@@ -71,3 +71,16 @@ def test_the_brain_panel_is_dim_at_rest_and_brighter_where_neurons_fire():
     assert rest.shape == firing.shape == (200, 180, 3) and rest.dtype == np.uint8
     body = slice(20, 150)
     assert firing[body].mean() > 2 * rest[body].mean() > 0
+
+
+def test_the_simulated_pointer_stays_where_a_click_put_it():
+    from ganglion.core.output import MemoryOutput
+    clicked = []
+    output = MemoryOutput(lambda: 1.0, on_click=lambda x, y: clicked.append((x, y)))
+    output.pointer({"command_id": "a", "deadline": 2.0, "point": (30, 100)})
+    output.submit({"command_id": "b", "deadline": 2.0, "x": 400, "y": 120})
+    output.pointer({"command_id": "c", "deadline": 2.0, "point": None})              # a reach measuring where it starts
+    feedback = [e for e in output.poll() if e["kind"] == "pointer_feedback"]
+    assert clicked == [(400, 120)] and [e["cursor"] for e in feedback] == [[30, 100], [400, 120]]
+    output.submit({"command_id": "d", "deadline": .5, "x": 9, "y": 9})               # expired: nothing happened, nothing moved
+    assert output.cursor == (400, 120)

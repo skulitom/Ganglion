@@ -14,8 +14,9 @@ motor neurons propose and the line above it who made the step: the fly brain, or
 deterministic reference when the supervisor turned a proposal down. Right: the headless reach
 demo. The same target is first clicked by a client that looks, takes a quarter of a second to
 decide and clicks, twice a second, which is how an agent's turns arrive: the clicks land where
-the target was. Then Ganglion's closed-loop reach follows it at 100 Hz with the fly brain
-proposing each step, and hits it in 0.4 to 0.5 s. The brain is at rest between reaches because
+the target was. Then Ganglion's closed-loop reach takes over from wherever the pointer was
+left, follows the target at 100 Hz with the fly brain proposing each step, and hits it in
+0.3 to 0.6 s. The brain is at rest between reaches because
 the model runs only while a motor program does. The rates are not an animation: the ledger
 records every input the model was given, and the panel is the same checkpoint run over them
 again, its proposals agreeing with the logged ones to 0.001
