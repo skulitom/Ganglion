@@ -6,6 +6,21 @@ The fast loop runs inside a seat (a second, isolated Windows session provided by
 tool) or on the console; the brain comes from [Haltere](https://github.com/skulitom/haltere),
 the male-CNS fly connectome that flies a drone in Liftoff.
 
+![The fly brain moving a cursor onto a moving target, beside clicks paced like an agent's turns](docs/media/reach.gif)
+
+*Left: the 30,000 neurons of the fly connectome drawn at their real positions in the male CNS
+(brain on top, nerve cord below), brightening as they fire; the dial shows the velocity the
+motor neurons propose and the line above it who made the step: the fly brain, or the
+deterministic reference when the supervisor turned a proposal down. Right: the headless reach
+demo. The same target is first clicked by a client that looks, takes a quarter of a second to
+decide and clicks, twice a second, which is how an agent's turns arrive: the clicks land where
+the target was. Then Ganglion's closed-loop reach follows it at 100 Hz with the fly brain
+proposing each step, and hits it in 0.4 to 0.5 s. The brain is at rest between reaches because
+the model runs only while a motor program does. The rates are not an animation: the ledger
+records every input the model was given, and the panel is the same checkpoint run over them
+again, its proposals agreeing with the logged ones to 0.001
+([how the clips are made](docs/media/README.md), [video](docs/media/reach.mp4)).*
+
 Status: Gate C demonstrated; Gate D connectome experiments running on a working system. See
 [STATUS.md](STATUS.md). The control path uses deterministic colour perception and cursor-feedback
 reach/drag. Haltere's actual 30,000-neuron model receives the same motor observations in a
